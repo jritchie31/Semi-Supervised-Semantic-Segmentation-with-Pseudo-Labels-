@@ -1,5 +1,6 @@
 import logging
 import os
+import os.path as osp
 import time
 from argparse import ArgumentParser
 
@@ -23,6 +24,11 @@ from u2pl.utils.utils import (
     intersectionAndUnion,
 )
 
+device = torch.device("mps")
+
+# Get the absolute path of the current file
+current_dir = osp.dirname(osp.abspath(__file__))
+experiment_config_dir = osp.join(current_dir, r"experiments/cityscapes/744/ours/config.yaml")
 
 # Setup Parser
 def get_parser():
@@ -33,7 +39,7 @@ def get_parser():
     parser.add_argument(
         "--scales", type=float, default=[1.0], nargs="+", help="evaluation scales"
     )
-    parser.add_argument("--config", type=str, default="config.yaml")
+    parser.add_argument("--config", type=str, default=experiment_config_dir)
     parser.add_argument(
         "--model_path",
         type=str,
@@ -54,6 +60,12 @@ def get_parser():
     )
     parser.add_argument(
         "--crop", action="store_true", default=False, help="whether use crop evaluation"
+    )
+    parser.add_argument(
+        "--distributed",
+        action="store_true",
+        default=False,
+        help="Enable distributed training",
     )
     return parser
 
@@ -125,7 +137,7 @@ def main():
 
     saved_state_dict = convert_state_dict(checkpoint[key])
     model.load_state_dict(saved_state_dict, strict=False)
-    model.cuda()
+    model.to(device)
     logger.info("Load Model Done!")
     if "cityscapes" in cfg["dataset"]["type"]:
         validate_city(
@@ -160,7 +172,7 @@ def net_process(model, image):
     b, c, h, w = image.shape
     # num_classes = cfg['net']['num_classes']
     # output_all = torch.zeros((6, b, num_classes, h, w)).cuda()
-    input = image.cuda()
+    input = image.to(device)
     output = model(input)["pred"]
     output = F.interpolate(output, (h, w), mode="bilinear", align_corners=True)
     # output_all[0] = F.softmax(output, dim=1)
@@ -195,8 +207,8 @@ def scale_crop_process(model, image, classes, crop_h, crop_w, h, w, stride_rate=
     stride_w = int(np.ceil(crop_w * stride_rate))
     grid_h = int(np.ceil(float(new_h - crop_h) / stride_h) + 1)
     grid_w = int(np.ceil(float(new_w - crop_w) / stride_w) + 1)
-    prediction_crop = torch.zeros((1, classes, new_h, new_w), dtype=torch.float).cuda()
-    count_crop = torch.zeros((new_h, new_w), dtype=torch.float).cuda()
+    prediction_crop = torch.zeros((1, classes, new_h, new_w), dtype=torch.float).to(device)
+    count_crop = torch.zeros((new_h, new_w), dtype=torch.float).to(device)
     for index_h in range(0, grid_h):
         for index_w in range(0, grid_w):
             s_h = index_h * stride_h

@@ -15,12 +15,14 @@ __all__ = [
 
 # Get the absolute path of the current file
 current_dir = osp.dirname(osp.abspath(__file__))
+resnet18_dir = osp.join(current_dir, r"resnet18.pth")
+resnet50_dir = osp.join(current_dir, r"resnet50.pth")
 resnet101_dir = osp.join(current_dir, r"resnet101.pth")
 
 model_urls = {
-    'resnet18': 'https://download.pytorch.org/models/resnet18-5c106cde.pth',
+    'resnet18': resnet18_dir,
     'resnet34': 'https://download.pytorch.org/models/resnet34-333f7ec4.pth',
-    'resnet50': 'https://download.pytorch.org/models/resnet50-19c8e357.pth',
+    'resnet50': resnet50_dir,
     'resnet101': resnet101_dir,
     'resnet152': 'https://download.pytorch.org/models/resnet152-b121ed2d.pth',
 }

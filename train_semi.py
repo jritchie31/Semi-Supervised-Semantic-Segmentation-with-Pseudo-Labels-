@@ -48,7 +48,7 @@ parser.add_argument("--port", default=None, type=int)
 # Add a new command line argument for distributed training
 parser.add_argument("--distributed", action="store_true", help="Enable distributed training")
 
-device = torch.device("cuda")  # Default to the CUDA device
+device = torch.device("mps")  # Default to the CUDA device
 
 def to_device(tensor):
     return tensor.to(device)
@@ -531,8 +531,8 @@ def train(
                             rep_all_teacher.detach(),
                             prototype,
                         )
-
-                dist.all_reduce(contra_loss)
+                if distributed:
+                    dist.all_reduce(contra_loss)
                 contra_loss = (
                     contra_loss
                     / world_size

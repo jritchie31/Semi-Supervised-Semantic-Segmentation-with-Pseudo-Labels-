@@ -15,11 +15,15 @@ from skimage.measure import label, regionprops
 
 @torch.no_grad()
 def gather_together(data):
-    dist.barrier()
+    if dist.is_available() and dist.is_initialized():
+        dist.barrier()
 
-    world_size = dist.get_world_size()
-    gather_data = [None for _ in range(world_size)]
-    dist.all_gather_object(gather_data, data)
+        world_size = dist.get_world_size()
+        gather_data = [None for _ in range(world_size)]
+        dist.all_gather_object(gather_data, data)
+    else:
+        # For single-machine training, just wrap data in a list
+        gather_data = [data]
 
     return gather_data
 
@@ -29,7 +33,16 @@ def dequeue_and_enqueue(keys, queue, queue_ptr, queue_size):
     # gather keys before updating queue
     keys = keys.detach().clone().cpu()
     gathered_list = gather_together(keys)
-    keys = torch.cat(gathered_list, dim=0).cuda()
+    # Check for available device: CUDA or MPS (or default to CPU)
+    if torch.cuda.is_available():
+        device = torch.device("cuda")
+    elif torch.has_mps:
+        device = torch.device("mps")
+    else:
+        device = torch.device("cpu")
+
+    # Concatenate gathered_list and move the resulting tensor to the available device
+    keys = torch.cat(gathered_list, dim=0).to(device)
 
     batch_size = keys.shape[0]
 
@@ -49,7 +62,14 @@ def dequeue_and_enqueue(keys, queue, queue_ptr, queue_size):
 
 def label_onehot(inputs, num_segments):
     batch_size, im_h, im_w = inputs.shape
-    outputs = torch.zeros((num_segments, batch_size, im_h, im_w)).cuda()
+        # Check for available device: CUDA or MPS (or default to CPU)
+    if torch.cuda.is_available():
+        device = torch.device("cuda")
+    elif torch.has_mps:
+        device = torch.device("mps")
+    else:
+        device = torch.device("cpu")
+    outputs = torch.zeros((num_segments, batch_size, im_h, im_w)).to(device)
 
     inputs_temp = inputs.clone()
     inputs_temp[inputs == 255] = 0
@@ -301,7 +321,14 @@ def generate_cutmix_mask(
         )
     y0, x0, y1, x1 = rectangles
     valid_mask[int(y0) : int(y1), int(x0) : int(x1)] = 1
-    valid_mask = torch.from_numpy(valid_mask).long().cuda()
+        # Check for available device: CUDA or MPS (or default to CPU)
+    if torch.cuda.is_available():
+        device = torch.device("cuda")
+    elif torch.has_mps:
+        device = torch.device("mps")
+    else:
+        device = torch.device("cpu")
+    valid_mask = torch.from_numpy(valid_mask).long().to(device)
 
     return valid_mask
 
@@ -582,9 +609,16 @@ def intersectionAndUnion(output, target, K, ignore_index=255):
 
 def load_state(path, model, optimizer=None, key="state_dict"):
     rank = dist.get_rank()
-
+    # Check for available device: CUDA or MPS (or default to CPU)
+    if torch.cuda.is_available():
+        device = torch.device("cuda")
+    elif torch.has_mps:
+        device = torch.device("mps")
+    else:
+        device = torch.device("cpu")
     def map_func(storage, location):
-        return storage.cuda()
+        
+        return storage.to(device)
 
     if os.path.isfile(path):
         if rank == 0:

@@ -8,7 +8,13 @@ from .utils import dequeue_and_enqueue
 
 
 def compute_rce_loss(predict, target):
-    from einops import rearrange
+    # Check for available device: CUDA or MPS (or default to CPU)
+    if torch.cuda.is_available():
+        device = torch.device("cuda")
+    elif torch.has_mps:
+        device = torch.device("mps")
+    else:
+        device = torch.device("cpu")
 
     predict = F.softmax(predict, dim=1)
 
@@ -18,7 +24,7 @@ def compute_rce_loss(predict, target):
         temp_tar[target == 255] = 0
 
         label = (
-            F.one_hot(temp_tar.clone().detach(), num_cls).float().cuda()
+            F.one_hot(temp_tar.clone().detach(), num_cls).float().to(device)
         )  # (batch, h, w, num_cls)
         label = rearrange(label, "b h w c -> b c h w")
         label = torch.clamp(label, min=1e-4, max=1.0)
@@ -162,13 +168,20 @@ def compute_contra_memobank_loss(
             return momentum_prototype, new_keys, torch.tensor(0.0) * rep.sum()
 
     else:
-        reco_loss = torch.tensor(0.0).cuda()
+            # Check for available device: CUDA or MPS (or default to CPU)
+        if torch.cuda.is_available():
+            device = torch.device("cuda")
+        elif torch.has_mps:
+            device = torch.device("mps")
+        else:
+            device = torch.device("cpu")
+        reco_loss = torch.tensor(0.0).to(device)
         seg_proto = torch.cat(seg_proto_list)  # shape: [valid_seg, 256]
         valid_seg = len(seg_num_list)  # number of valid classes
 
         prototype = torch.zeros(
             (prob_indices_l.shape[-1], num_queries, 1, num_feat)
-        ).cuda()
+        ).to(device)
 
         for i in range(valid_seg):
             if (
@@ -180,7 +193,7 @@ def compute_contra_memobank_loss(
                     len(seg_feat_low_entropy_list[i]), size=(num_queries,)
                 )
                 anchor_feat = (
-                    seg_feat_low_entropy_list[i][seg_low_entropy_idx].clone().cuda()
+                    seg_feat_low_entropy_list[i][seg_low_entropy_idx].clone().to(device)
                 )
             else:
                 # in some rare cases, all queries in the current query class are easy
@@ -189,7 +202,7 @@ def compute_contra_memobank_loss(
 
             # apply negative key sampling from memory bank (with no gradients)
             with torch.no_grad():
-                negative_feat = memobank[valid_classes[i]][0].clone().cuda()
+                negative_feat = memobank[valid_classes[i]][0].clone().to(device)
 
                 high_entropy_idx = torch.randint(
                     len(negative_feat), size=(num_queries * num_negatives,)
@@ -203,7 +216,7 @@ def compute_contra_memobank_loss(
                     .unsqueeze(0)
                     .unsqueeze(0)
                     .repeat(num_queries, 1, 1)
-                    .cuda()
+                    .to(device)
                 )  # (num_queries, 1, num_feat)
 
                 if momentum_prototype is not None:
@@ -226,7 +239,7 @@ def compute_contra_memobank_loss(
             )
 
             reco_loss = reco_loss + F.cross_entropy(
-                seg_logits / temp, torch.zeros(num_queries).long().cuda()
+                seg_logits / temp, torch.zeros(num_queries).long().to(device)
             )
 
         if momentum_prototype is None:
@@ -402,6 +415,14 @@ class OhemCrossEntropy2d(nn.Module):
         return threshold
 
     def generate_new_target(self, predict, target):
+        # Check for available device: CUDA or MPS (or default to CPU)
+        if torch.cuda.is_available():
+            device = torch.device("cuda")
+        elif torch.has_mps:
+            device = torch.device("mps")
+        else:
+            device = torch.device("cpu")
+
         np_predict = predict.data.cpu().numpy()
         np_target = target.data.cpu().numpy()
         n, c, h, w = np_predict.shape
@@ -428,7 +449,7 @@ class OhemCrossEntropy2d(nn.Module):
         new_target = (
             torch.from_numpy(input_label.reshape(target.size()))
             .long()
-            .cuda(target.get_device())
+            .to(device)
         )
 
         return new_target
@@ -456,6 +477,13 @@ class OhemCrossEntropy2dTensor(nn.Module):
     def __init__(
         self, ignore_index=255, thresh=0.7, min_kept=256, use_weight=False, reduce=False
     ):
+        # Check for available device: CUDA or MPS (or default to CPU)
+        if torch.cuda.is_available():
+            device = torch.device("cuda")
+        elif torch.has_mps:
+            device = torch.device("mps")
+        else:
+            device = torch.device("cpu")
         super(OhemCrossEntropy2dTensor, self).__init__()
         self.ignore_index = ignore_index
         self.thresh = float(thresh)
@@ -483,7 +511,7 @@ class OhemCrossEntropy2dTensor(nn.Module):
                     1.1529,
                     1.0507,
                 ]
-            ).cuda()
+            ).to(device)
             # weight = torch.FloatTensor(
             #    [0.4762, 0.5, 0.4762, 1.4286, 1.1111, 0.4762, 0.8333, 0.5, 0.5, 0.8333, 0.5263, 0.5882,
             #    1.4286, 0.5, 3.3333,5.0, 10.0, 2.5, 0.8333]).cuda()

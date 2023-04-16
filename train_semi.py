@@ -221,9 +221,9 @@ def main():
                 logger.info("start evaluation")
 
             if epoch < cfg["trainer"].get("sup_only_epoch", 1):
-                prec = validate(model, val_loader, epoch, logger)
+                prec = validate(model, val_loader, epoch, logger, device)
             else:
-                prec = validate(model_teacher, val_loader, epoch, logger)
+                prec = validate(model_teacher, val_loader, epoch, logger, device)
 
             if rank == 0:
                 state = {

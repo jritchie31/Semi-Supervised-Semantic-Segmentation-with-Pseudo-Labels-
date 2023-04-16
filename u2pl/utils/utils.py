@@ -497,25 +497,38 @@ class AverageMeter(object):
 
 logs = set()
 
-
-def init_log(name, level=logging.INFO):
+def init_log(name, level=logging.INFO, log_file_path="training_logs.txt"):
     if (name, level) in logs:
         return
     logs.add((name, level))
     logger = logging.getLogger(name)
     logger.setLevel(level)
+
+    # StreamHandler for console logging
     ch = logging.StreamHandler()
     ch.setLevel(level)
+
+    # FileHandler for file logging
+    fh = logging.FileHandler(log_file_path)
+    fh.setLevel(level)
+
     if "SLURM_PROCID" in os.environ:
         rank = int(os.environ["SLURM_PROCID"])
         logger.addFilter(lambda record: rank == 0)
     else:
         rank = 0
+
     format_str = "[%(asctime)s][%(levelname)8s] %(message)s"
     formatter = logging.Formatter(format_str)
+
     ch.setFormatter(formatter)
+    fh.setFormatter(formatter)
+
     logger.addHandler(ch)
+    logger.addHandler(fh)
+
     return logger
+
 
 
 def convert_state_dict(state_dict):

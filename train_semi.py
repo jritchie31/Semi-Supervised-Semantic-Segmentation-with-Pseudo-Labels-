@@ -7,6 +7,7 @@ import pprint
 import random
 import time
 from datetime import datetime
+from torch.utils.tensorboard import SummaryWriter
 
 import numpy as np
 import torch
@@ -36,6 +37,7 @@ from u2pl.utils.utils import (
     load_state,
     set_random_seed,
 )
+
 # Get the absolute path of the current file
 current_dir = osp.dirname(osp.abspath(__file__))
 experiment_config_dir = osp.join(current_dir, r"experiments/cityscapes/744/ours/config.yaml")
@@ -48,7 +50,7 @@ parser.add_argument("--port", default=None, type=int)
 # Add a new command line argument for distributed training
 parser.add_argument("--distributed", action="store_true", help="Enable distributed training")
 
-device = torch.device("mps")  # Default to the CUDA device
+device = torch.device("cuda")  # Default to the CUDA device
 
 def to_device(tensor):
     return tensor.to(device)

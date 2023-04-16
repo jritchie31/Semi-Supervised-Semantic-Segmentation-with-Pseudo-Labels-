@@ -1,22 +1,22 @@
 dataset: # Required.
   type: cityscapes_semi
   train:
-    data_root: /Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data/cityscapes
-    data_list: /Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data/splits/cityscapes/744/labeled.txt
+    data_root: /home/ubuntu/U2PL-8813/data/cityscapes
+    data_list: /home/ubuntu/U2PL-8813/data/splits/cityscapes/744/labeled.txt
     flip: True
     GaussianBlur: False
     rand_resize: [0.5, 2.0]
     #rand_rotation: [-10.0, 10.0]
     crop:
       type: rand
-      size: [769, 769] # crop image with HxW size
+      size: [500, 500] # crop image with HxW size
   val:
-    data_root: /Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data/cityscapes
-    data_list: /Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data/splits/cityscapes/val.txt
+    data_root: /home/ubuntu/U2PL-8813/data/cityscapes
+    data_list: /home/ubuntu/U2PL-8813/data/splits/cityscapes/val.txt
     crop:
       type: center
-      size: [769, 769] # crop image with HxW size
-  batch_size: 2
+      size: [500, 500] # crop image with HxW size
+  batch_size: 4
   n_sup: 744
   noise_std: 0.1
   workers: 2
@@ -25,7 +25,7 @@ dataset: # Required.
   ignore_label: 255
 
 trainer: # Required.
-  epochs: 200
+  epochs: 10 #200
   eval_on: True
   sup_only_epoch: 0
   optimizer:

@@ -627,13 +627,13 @@ def validate(
     distributed=False,
 ):
     model.eval()
-    data_loader.sampler.set_epoch(epoch)
 
     num_classes, ignore_label = (
         cfg["net"]["num_classes"],
         cfg["dataset"]["ignore_label"],
     )
     if distributed:
+        data_loader.sampler.set_epoch(epoch)
         rank, world_size = dist.get_rank(), dist.get_world_size()
     else:
         rank, world_size = 0, 1

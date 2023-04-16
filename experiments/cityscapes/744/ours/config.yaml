@@ -25,13 +25,13 @@ dataset: # Required.
   ignore_label: 255
 
 trainer: # Required.
-  epochs: 10 #200
+  epochs: 5 #200
   eval_on: True
   sup_only_epoch: 0
   optimizer:
     type: SGD
     kwargs:
-      lr: 0.01  # 8GPUs
+      lr: 0.002  # 0.01 8GPUs
       momentum: 0.9
       weight_decay: 0.0005
   lr_scheduler:

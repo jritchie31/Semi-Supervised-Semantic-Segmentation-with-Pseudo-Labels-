@@ -43,13 +43,13 @@ def get_parser():
     parser.add_argument(
         "--model_path",
         type=str,
-        default="checkpoints/psp_best.pth",
+        default=osp.join(current_dir, r"checkpoints/psp_best.pth"),
         help="evaluation model path",
     )
     parser.add_argument(
         "--save_folder",
         type=str,
-        default="checkpoints/results/",
+        default=osp.join(current_dir, r"checkpoints/results/"),
         help="results save folder",
     )
     parser.add_argument(

@@ -24,7 +24,7 @@ from u2pl.utils.utils import (
     intersectionAndUnion,
 )
 
-device = torch.device("mps")
+device = torch.device("cuda")
 
 # Get the absolute path of the current file
 current_dir = osp.dirname(osp.abspath(__file__))
@@ -43,7 +43,7 @@ def get_parser():
     parser.add_argument(
         "--model_path",
         type=str,
-        default=osp.join(current_dir, r"checkpoints/psp_best.pth"),
+        default=osp.join(current_dir, r"checkpoints/ckpt_best.pth"),
         help="evaluation model path",
     )
     parser.add_argument(

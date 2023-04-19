@@ -1,6 +1,6 @@
 dataset: # Required.
-  type: cityscapes_semi
-  train:
+  type: cityscapes_semi #Semi-supervised dataset
+  train: # 744 labeled images with data augmentation (flip, random resize, random crop)
     data_root: /home/ubuntu/U2PL-8813/data/cityscapes
     data_list: /home/ubuntu/U2PL-8813/data/splits/cityscapes/744/labeled.txt
     flip: True
@@ -9,39 +9,45 @@ dataset: # Required.
     #rand_rotation: [-10.0, 10.0]
     crop:
       type: rand
-      size: [500, 500] # crop image with HxW size
+      size: [500, 500] # random crop image with HxW size
   val:
     data_root: /home/ubuntu/U2PL-8813/data/cityscapes
     data_list: /home/ubuntu/U2PL-8813/data/splits/cityscapes/val.txt
     crop:
       type: center
-      size: [500, 500] # crop image with HxW size
+      size: [500, 500] # central crop image with HxW size
   batch_size: 4
   n_sup: 744
-  noise_std: 0.1
-  workers: 2
-  mean: [123.675, 116.28, 103.53]
-  std: [58.395, 57.12, 57.375]
-  ignore_label: 255
+  noise_std: 0.1 # Standard deviation of Gaussian noise added
+  workers: 2 # Data loading workers
+  # Normalization: mean and standard deviation values provided
+  mean: [123.675, 116.28, 103.53] # R G B
+  std: [58.395, 57.12, 57.375] # R G B
+  ignore_label: 255 # Ignored label (cancel for crack)
 
 trainer: # Required.
   epochs: 5 #200
   eval_on: True
-  sup_only_epoch: 0
+  sup_only_epoch: 1 # warm up epoch is helpful
   optimizer:
-    type: SGD
+    type: SGD # stochastic gradient descent
     kwargs:
       lr: 0.002  # 0.01 8GPUs
       momentum: 0.9
       weight_decay: 0.0005
   lr_scheduler:
-    mode: poly
+    mode: poly # polinomial decay
     kwargs:
       power: 0.9
   unsupervised:
-    TTA: False
+    TTA: False # Test-Time Augmentation
+    """
+    The idea behind TTA is to apply various data augmentation methods, such as flipping, rotation, scaling,
+    or cropping, to the input test samples and then average or combine the model's predictions for these augmented samples.
+    """
     drop_percent: 80
     apply_aug: cutmix
+  # Various parameters for contralling the selection of positive and negative examples
   contrastive:
     negative_high_entropy: True
     low_rank: 3
@@ -59,6 +65,7 @@ saver:
   snapshot_dir: checkpoints
   pretrain: ''
 
+# Loss function configuration
 criterion:
   type: ohem
   kwargs:

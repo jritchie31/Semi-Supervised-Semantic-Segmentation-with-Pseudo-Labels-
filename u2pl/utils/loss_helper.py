@@ -277,6 +277,13 @@ class Criterion(nn.Module):
         if not use_weight:
             self._criterion = nn.CrossEntropyLoss(ignore_index=ignore_index)
         else:
+            # Check for available device: CUDA or MPS (or default to CPU)
+            if torch.cuda.is_available():
+                device = torch.device("cuda")
+            elif torch.has_mps:
+                device = torch.device("mps")
+            else:
+                device = torch.device("cpu")
             weights = torch.FloatTensor(
                 [
                     0.0,
@@ -299,7 +306,7 @@ class Criterion(nn.Module):
                     1.0,
                     1.0,
                 ]
-            ).cuda()
+            ).to(device)
             self._criterion = nn.CrossEntropyLoss(ignore_index=ignore_index)
             self._criterion1 = nn.CrossEntropyLoss(
                 ignore_index=ignore_index, weight=weights

@@ -28,6 +28,14 @@ class BaseDataset(Dataset):
                 ]
                 for line in open(d_list, "r")
             ]
+        elif "crack" or "data" in d_list:
+            self.list_sample = [
+                [
+                    line.strip(),
+                    "gtFine/" + line.strip()[12:-15] + "gtFine_labelTrainIds.png",
+                ]
+                for line in open(d_list, "r")
+            ]
         else:
             raise "unknown dataset!"
 

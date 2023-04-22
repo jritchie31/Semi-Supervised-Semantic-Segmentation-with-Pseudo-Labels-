@@ -84,8 +84,9 @@ pip install pip install torch==1.8.1+cu102 torchvision==0.9.1+cu102 -f https://d
 
 ## Usage
 
-U<sup>2</sup>PL is evaluated on both Cityscapes and PASCAL VOC 2012 dataset.
+U<sup>2</sup>PL is evaluated on the crack dataset, cityscapes and PASCAL VOC.
 ### Prepare Data
+
 
 <details>
   <summary>For Cityscapes</summary>
@@ -129,10 +130,45 @@ data/VOC2012
 ```
 </details>
 
+<details>
+  <summary>For Crack dataset</summary>
+
+Refer to [this link](https://drive.google.com/drive/folders/1MHFEwdvpVYmJw2wi9qRBrdXnPSZv2-_m?usp=share_link) and download ```data_crack``` dataset.
+
+And unzip the files to folder ```data``` and make the dictionary structures as follows:
+
+```angular2html
+data/Crack_Dataset/data_crack
+├── Data_train
+    ├──split 1
+        ├──Unlabeled_Range_crop
+        ├──labeled_Segmentation_crop
+        ├──labeled_Segmentation_rough
+    ├──split 2 
+        ├──Unlabeled_Range_crop
+        ├──labeled_Segmentation_crop
+        ├──labeled_Segmentation_rough
+    ├──hard cases
+├── Data_test
+    ├──val_data
+        ├──Segmentation_crop
+        ├──Range_crop
+    ├──test data
+        ├──labeled_Segmentation_crop
+        ├──Unlabeled_Range_crop
+
+```
+</details>
+
+
 Finally, the structure of dictionary ```data``` should be as follows:
 
 ```angular2html
 data
+├── Crack_Dataset
+    ├── data_crack
+        ├── Data_test
+        ├── Data_train
 ├── cityscapes
 │   ├── gtFine
 │   └── leftImg8bit
@@ -185,6 +221,15 @@ sh eval.sh
 We can train a model on PASCAL VOC 2012 with ```1464``` labeled data and ```9118``` unlabeled data for supervision by:
 ```bash
 cd experiments/pascal/1464/ours
+# use torch.distributed.launch
+sh train.sh <num_gpu> <port>
+
+# or use slurm
+# sh slurm_train.sh <num_gpu> <port> <partition>
+```
+We can train a model on crack_data with ```80``` labeled data and ```80``` unlabeled data for supervision by:
+```bash
+cd experiments/data_crack/train_data/Range_crop
 # use torch.distributed.launch
 sh train.sh <num_gpu> <port>
 
@@ -269,7 +314,7 @@ Thanks a lot for their great work!
 
 ## Contact
 
-- Yuchao Wang, 44442222@sjtu.edu.cn
-- Haochen Wang, wanghaochen2022@ia.ac.cn
-- Jingjing Fei, feijingjing1@sensetime.com
-- Wei Li, liwei1@sensetime.com
+- Jayda Ritchie, jritchie31@gatech.edu
+- Haolin Wang, hlwang98@gatech.edu
+- Xiaoyue Wang, xzhang3067@gatech.edu
+

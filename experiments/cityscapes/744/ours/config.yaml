@@ -2,6 +2,7 @@ dataset: # Required.
   type: cityscapes_semi #Semi-supervised dataset
   train: # 744 labeled images with data augmentation (flip, random resize, random crop)
     data_root: /home/ubuntu/U2PL-8813/data/cityscapes
+    #data_root: /home/ubuntu/U2PL-8813/data/train
     data_list: /home/ubuntu/U2PL-8813/data/splits/cityscapes/744/labeled.txt
     flip: True
     GaussianBlur: False

@@ -193,7 +193,15 @@ Before training, please download ResNet101 pretrained on ImageNet-1K from one of
 After that, modify ```model_urls``` in ```semseg/models/resnet.py``` to ```</path/to/resnet101.pth>```
 
 ### Train a Fully-Supervised Model
+For instance, we can train a model on crack data with only ```50``` labeled data for supervision by:
+```bash
+cd experiments/data_crack/suponly
+# use torch.distributed.launch
+sh train.sh <num_gpu> <port>
 
+# or use slurm
+# sh slurm_train.sh <num_gpu> <port> <partition>
+```
 For instance, we can train a model on PASCAL VOC 2012 with only ```1464``` labeled data for supervision by:
 ```bash
 cd experiments/pascal/1464/suponly
@@ -229,7 +237,7 @@ sh train.sh <num_gpu> <port>
 ```
 We can train a model on crack_data with ```80``` labeled data and ```80``` unlabeled data for supervision by:
 ```bash
-cd experiments/data_crack/train_data/Range_crop
+cd experiments/data_crack/ours
 # use torch.distributed.launch
 sh train.sh <num_gpu> <port>
 

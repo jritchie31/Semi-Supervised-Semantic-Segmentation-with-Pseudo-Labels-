@@ -35,7 +35,7 @@ class crackData(BaseDataset):
         # load image and its label
         image_path = os.path.join(self.data_root, self.list_sample_new[index][0])
         label_path = os.path.join(self.data_root, self.list_sample_new[index][1])
-        image = self.img_loader(image_path, "RGB")
+        image = self.img_loader(image_path, "L")
         label = self.img_loader(label_path, "L")
         image, label = self.transform(image, label)
         return image[0], label[0, 0].long()
@@ -46,7 +46,7 @@ class crackData(BaseDataset):
 
 def build_transfrom(cfg):
     trs_form = []
-    mean, std, ignore_label = cfg["mean"], cfg["std"], cfg["ignore_label"]
+    mean, std = cfg["mean"], cfg["std"]
     trs_form.append(psp_trsform.ToTensor())
     trs_form.append(psp_trsform.Normalize(mean=mean, std=std))
     if cfg.get("resize", False):
@@ -56,7 +56,7 @@ def build_transfrom(cfg):
     if cfg.get("rand_rotation", False):
         rand_rotation = cfg["rand_rotation"]
         trs_form.append(
-            psp_trsform.RandRotate(rand_rotation, ignore_label=ignore_label)
+            psp_trsform.RandRotate(rand_rotation)
         )
     if cfg.get("GaussianBlur", False) and cfg["GaussianBlur"]:
         trs_form.append(psp_trsform.RandomGaussianBlur())
@@ -65,7 +65,7 @@ def build_transfrom(cfg):
     if cfg.get("crop", False):
         crop_size, crop_type = cfg["crop"]["size"], cfg["crop"]["type"]
         trs_form.append(
-            psp_trsform.Crop(crop_size, crop_type=crop_type, ignore_label=ignore_label)
+            psp_trsform.Crop(crop_size, crop_type=crop_type)
         )
     if cfg.get("cutout", False):
         n_holes, length = cfg["cutout"]["n_holes"], cfg["cutout"]["length"]
@@ -117,8 +117,8 @@ def build_crack_semi_loader(split, all_cfg, seed=0, distributed=False):
 
     workers = cfg.get("workers", 2)
     batch_size = cfg.get("batch_size", 1)
-    n_sup = 2975 - cfg.get("n_sup", 2975)
-
+    n_sup = cfg.get("n_sup", 1132)
+    n_unsup = cfg.get("n_unsup", 3284)
     # build transform
     trs_form = build_transfrom(cfg)
     trs_form_unsup = build_transfrom(cfg)
@@ -145,7 +145,7 @@ def build_crack_semi_loader(split, all_cfg, seed=0, distributed=False):
         # build sampler for unlabeled set
         data_list_unsup = cfg["data_list"].replace("labeled.txt", "unlabeled.txt")
         dset_unsup = crackData(
-            cfg["data_root"], data_list_unsup, trs_form_unsup, seed, n_sup, split
+            cfg["data_root"], data_list_unsup, trs_form_unsup, seed, n_unsup, split
         )
 
         if distributed:

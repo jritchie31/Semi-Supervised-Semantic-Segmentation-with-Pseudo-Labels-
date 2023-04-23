@@ -181,6 +181,17 @@ class ResNet(nn.Module):
         self.groups = groups
         self.base_width = width_per_group
         self.fpn = fpn
+
+        self.conv1 = nn.Sequential(
+            conv3x3(1, 64, stride=2),
+            norm_layer(64),
+            nn.ReLU(inplace=True),
+            conv3x3(64, 64),
+            norm_layer(64),
+            nn.ReLU(inplace=True),
+            conv3x3(64, self.inplanes),
+        )
+        """
         self.conv1 = nn.Sequential(
             conv3x3(3, 64, stride=2),
             norm_layer(64),
@@ -190,6 +201,7 @@ class ResNet(nn.Module):
             nn.ReLU(inplace=True),
             conv3x3(64, self.inplanes),
         )
+        """
         self.bn1 = norm_layer(self.inplanes)
         self.relu = nn.ReLU(inplace=True)
         self.maxpool = nn.MaxPool2d(

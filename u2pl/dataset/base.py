@@ -29,14 +29,23 @@ class BaseDataset(Dataset):
                 for line in open(d_list, "r")
             ]
         elif "Crack_Dataset" in d_list:
-            self.list_sample = [
-                [
-                    line.strip(),
-                    "Crack_Dataset/" + line.strip()[14:-3] + "crack_labelTrainIds.png",
+            if "unlabeled.txt" in d_list:
+                self.list_sample = [
+                    [
+                        line.strip(),
+                        line.strip()[:44] + "labeled_Segmentation_rough" + line.strip()[-33:],
+                    ]
+                    for line in open(d_list, "r")
+                ]            
+            else:
+                self.list_sample = [
+                    [
+                        line.strip(),
+                        line.strip()[:52] + "Segmentation" + line.strip()[-38:],
 
+                    ]
+                    for line in open(d_list, "r")
                 ]
-                for line in open(d_list, "r")
-            ]
         else:
             raise "unknown dataset!"
 

@@ -49,7 +49,7 @@ def compute_unsupervised_loss(predict, target, percent, pred_teacher):
         target[thresh_mask] = 255
         weight = batch_size * h * w / torch.sum(target != 255)
 
-    loss = weight * F.cross_entropy(predict, target, ignore_index=255)  # [10, 321, 321]
+    loss = weight * F.cross_entropy(predict, target)  # [10, 321, 321]
 
     return loss
 
@@ -255,27 +255,25 @@ def get_criterion(cfg):
         if cfg["net"].get("aux_loss", False)
         else 0
     )
-    ignore_index = cfg["dataset"]["ignore_label"]
     if cfg_criterion["type"] == "ohem":
         criterion = CriterionOhem(
-            aux_weight, ignore_index=ignore_index, **cfg_criterion["kwargs"]
+            aux_weight, **cfg_criterion["kwargs"]
         )
     else:
         criterion = Criterion(
-            aux_weight, ignore_index=ignore_index, **cfg_criterion["kwargs"]
+            aux_weight, **cfg_criterion["kwargs"]
         )
 
     return criterion
 
 
 class Criterion(nn.Module):
-    def __init__(self, aux_weight, ignore_index=255, use_weight=False):
+    def __init__(self, aux_weight, use_weight=False):
         super(Criterion, self).__init__()
         self._aux_weight = aux_weight
-        self._ignore_index = ignore_index
         self.use_weight = use_weight
         if not use_weight:
-            self._criterion = nn.CrossEntropyLoss(ignore_index=ignore_index)
+            self._criterion = nn.CrossEntropyLoss()
         else:
             # Check for available device: CUDA or MPS (or default to CPU)
             if torch.cuda.is_available():
@@ -307,9 +305,9 @@ class Criterion(nn.Module):
                     1.0,
                 ]
             ).to(device)
-            self._criterion = nn.CrossEntropyLoss(ignore_index=ignore_index)
+            self._criterion = nn.CrossEntropyLoss()
             self._criterion1 = nn.CrossEntropyLoss(
-                ignore_index=ignore_index, weight=weights
+                weight=weights
             )
 
     def forward(self, preds, target):
@@ -346,15 +344,14 @@ class CriterionOhem(nn.Module):
         aux_weight,
         thresh=0.7,
         min_kept=100000,
-        ignore_index=255,
         use_weight=False,
     ):
         super(CriterionOhem, self).__init__()
         self._aux_weight = aux_weight
         self._criterion1 = OhemCrossEntropy2dTensor(
-            ignore_index, thresh, min_kept, use_weight
+            thresh, min_kept, use_weight
         )
-        self._criterion2 = OhemCrossEntropy2dTensor(ignore_index, thresh, min_kept)
+        self._criterion2 = OhemCrossEntropy2dTensor(thresh, min_kept)
 
     def forward(self, preds, target):
         h, w = target.size(1), target.size(2)
@@ -381,13 +378,12 @@ class CriterionOhem(nn.Module):
 
 
 class OhemCrossEntropy2d(nn.Module):
-    def __init__(self, ignore_label=255, thresh=0.7, min_kept=100000, factor=8):
+    def __init__(self, thresh=0.7, min_kept=100000, factor=8):
         super(OhemCrossEntropy2d, self).__init__()
-        self.ignore_label = ignore_label
         self.thresh = float(thresh)
         self.min_kept = int(min_kept)
         self.factor = factor
-        self.criterion = torch.nn.CrossEntropyLoss(ignore_index=ignore_label)
+        self.criterion = torch.nn.CrossEntropyLoss()
 
     def find_threshold(self, np_predict, np_target):
         # downsample 1/8
@@ -403,7 +399,7 @@ class OhemCrossEntropy2d(nn.Module):
         input_label = target.ravel().astype(np.int32)
         input_prob = np.rollaxis(predict, 1).reshape((c, -1))
 
-        valid_flag = input_label != self.ignore_label
+        valid_flag = input_label
         valid_inds = np.where(valid_flag)[0]
         label = input_label[valid_flag]
         num_valid = valid_flag.sum()
@@ -439,7 +435,7 @@ class OhemCrossEntropy2d(nn.Module):
         input_label = np_target.ravel().astype(np.int32)
         input_prob = np.rollaxis(np_predict, 1).reshape((c, -1))
 
-        valid_flag = input_label != self.ignore_label
+        valid_flag = input_label
         valid_inds = np.where(valid_flag)[0]
         label = input_label[valid_flag]
         num_valid = valid_flag.sum()
@@ -451,7 +447,7 @@ class OhemCrossEntropy2d(nn.Module):
             valid_inds = valid_inds[kept_flag]
 
         label = input_label[valid_inds].copy()
-        input_label.fill(self.ignore_label)
+        input_label.fill(0.0)
         input_label[valid_inds] = label
         new_target = (
             torch.from_numpy(input_label.reshape(target.size()))
@@ -482,7 +478,7 @@ class OhemCrossEntropy2dTensor(nn.Module):
     """
 
     def __init__(
-        self, ignore_index=255, thresh=0.7, min_kept=256, use_weight=False, reduce=False
+        self, thresh=0.7, min_kept=256, use_weight=False, reduce=False
     ):
         # Check for available device: CUDA or MPS (or default to CPU)
         if torch.cuda.is_available():
@@ -492,7 +488,6 @@ class OhemCrossEntropy2dTensor(nn.Module):
         else:
             device = torch.device("cpu")
         super(OhemCrossEntropy2dTensor, self).__init__()
-        self.ignore_index = ignore_index
         self.thresh = float(thresh)
         self.min_kept = int(min_kept)
         if use_weight:
@@ -523,23 +518,21 @@ class OhemCrossEntropy2dTensor(nn.Module):
             #    [0.4762, 0.5, 0.4762, 1.4286, 1.1111, 0.4762, 0.8333, 0.5, 0.5, 0.8333, 0.5263, 0.5882,
             #    1.4286, 0.5, 3.3333,5.0, 10.0, 2.5, 0.8333]).cuda()
             self.criterion = torch.nn.CrossEntropyLoss(
-                reduction="mean", weight=weight, ignore_index=ignore_index
+                reduction="mean", weight=weight
             )
         elif reduce:
             self.criterion = torch.nn.CrossEntropyLoss(
-                reduction="none", ignore_index=ignore_index
+                reduction="none"
             )
         else:
             self.criterion = torch.nn.CrossEntropyLoss(
-                reduction="mean", ignore_index=ignore_index
+                reduction="mean"
             )
 
     def forward(self, pred, target):
         b, c, h, w = pred.size()
         target = target.view(-1)
-        valid_mask = target.ne(self.ignore_index)
-        target = target * valid_mask.long()
-        num_valid = valid_mask.sum()
+        num_valid = target.numel()
 
         prob = F.softmax(pred, dim=1)
         prob = (prob.transpose(0, 1)).reshape(c, -1)
@@ -548,7 +541,6 @@ class OhemCrossEntropy2dTensor(nn.Module):
             pass
             # print('Labels: {}'.format(num_valid))
         elif num_valid > 0:
-            prob = prob.masked_fill_(~valid_mask, 1)
             mask_prob = prob[target, torch.arange(len(target), dtype=torch.long)]
             threshold = self.thresh
             if self.min_kept > 0:
@@ -558,9 +550,7 @@ class OhemCrossEntropy2dTensor(nn.Module):
                     threshold = mask_prob[threshold_index]
                 kept_mask = mask_prob.le(threshold)
                 target = target * kept_mask.long()
-                valid_mask = valid_mask * kept_mask
 
-        target = target.masked_fill_(~valid_mask, self.ignore_index)
         target = target.view(b, h, w)
 
         return self.criterion(pred, target)

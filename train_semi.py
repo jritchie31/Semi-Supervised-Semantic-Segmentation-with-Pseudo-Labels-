@@ -7,7 +7,9 @@ import pprint
 import random
 import time
 from datetime import datetime
+import matplotlib.pyplot as plt
 from torch.utils.tensorboard import SummaryWriter
+from PIL import Image
 
 import numpy as np
 import torch
@@ -40,7 +42,7 @@ from u2pl.utils.utils import (
 
 # Get the absolute path of the current file
 current_dir = osp.dirname(osp.abspath(__file__))
-experiment_config_dir = osp.join(current_dir, r"experiments/data_crack/Data_test/config.yaml") #Need to change this to crack
+experiment_config_dir = osp.join(current_dir, r"experiments/data_crack/ours/config.yaml") #Need to change this to crack
 
 parser = argparse.ArgumentParser(description="Semi-Supervised Semantic Segmentation")
 parser.add_argument("--config", type=str, default=experiment_config_dir)
@@ -425,26 +427,24 @@ def train(
                     prob = torch.softmax(pred_u_large_teacher, dim=1)
                     entropy = -torch.sum(prob * torch.log(prob + 1e-10), dim=1)
 
-                    ignore_label = cfg["dataset"].get("ignore_label", 255)
-
                     low_thresh = np.percentile(
-                        entropy[label_u_aug != ignore_label].cpu().numpy().flatten(), alpha_t
+                        entropy.cpu().numpy().flatten(), alpha_t
                     )
                     low_entropy_mask = (
-                        entropy.le(low_thresh).float() * (label_u_aug != ignore_label).bool()
+                        entropy.le(low_thresh).float()
                     )
 
                     high_thresh = np.percentile(
-                        entropy[label_u_aug != ignore_label].cpu().numpy().flatten(),
+                        entropy.cpu().numpy().flatten(),
                         100 - alpha_t,
                     )
                     high_entropy_mask = (
-                        entropy.ge(high_thresh).float() * (label_u_aug != ignore_label).bool()
+                        entropy.ge(high_thresh).float()
                     )
 
                     low_mask_all = torch.cat(
                         (
-                            (label_l.unsqueeze(1) != ignore_label).float(),
+                            (label_l.unsqueeze(1)).float(),
                             low_entropy_mask.unsqueeze(1),
                         )
                     )
@@ -458,7 +458,7 @@ def train(
                         contra_flag += " high"
                         high_mask_all = torch.cat(
                             (
-                                (label_l.unsqueeze(1) != ignore_label).float(),
+                                (label_l.unsqueeze(1)).float(),
                                 high_entropy_mask.unsqueeze(1),
                             )
                         )
@@ -466,7 +466,7 @@ def train(
                         contra_flag += " low"
                         high_mask_all = torch.cat(
                             (
-                                (label_l.unsqueeze(1) != ignore_label).float(),
+                                (label_l.unsqueeze(1)).float(),
                                 torch.ones(logits_u_aug.shape)
                                 .float()
                                 .unsqueeze(1)
@@ -630,10 +630,7 @@ def validate(
 ):
     model.eval()
 
-    num_classes, ignore_label = (
-        cfg["net"]["num_classes"],
-        cfg["dataset"]["ignore_label"],
-    )
+    num_classes = cfg["net"]["num_classes"]
     if distributed:
         data_loader.sampler.set_epoch(epoch)
         rank, world_size = dist.get_rank(), dist.get_world_size()
@@ -661,7 +658,7 @@ def validate(
 
         # start to calculate miou
         intersection, union, target = intersectionAndUnion(
-            output, target_origin, num_classes, ignore_label
+            output, target_origin, num_classes
         )
 
         # gather all validation information

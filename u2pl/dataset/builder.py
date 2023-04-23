@@ -45,13 +45,13 @@ def get_loader(cfg, seed=0, distributed=False):
         train_loader_sup, train_loader_unsup = build_crack_semi_loader(
             "train", cfg, seed=seed, distributed=distributed
         )
-        val_loader = build_vocloader("val", cfg, distributed=distributed)
+        val_loader = build_crackloader("val", cfg, distributed=distributed)
         logger.info("Get loader Done...")
         return train_loader_sup, train_loader_unsup, val_loader
 
     elif cfg_dataset["type"] == "crack":
         train_loader_sup = build_crackloader("train", cfg, seed=seed, distributed=distributed)
-        val_loader = build_vocloader("val", cfg, distributed=distributed)
+        val_loader = build_crackloader("val", cfg, distributed=distributed)
         logger.info("Get loader Done...")
         return train_loader_sup, val_loader
 

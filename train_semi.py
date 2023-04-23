@@ -425,24 +425,26 @@ def train(
                     prob = torch.softmax(pred_u_large_teacher, dim=1)
                     entropy = -torch.sum(prob * torch.log(prob + 1e-10), dim=1)
 
+                    ignore_label = cfg["dataset"].get("ignore_label", 255)
+
                     low_thresh = np.percentile(
-                        entropy[label_u_aug != 255].cpu().numpy().flatten(), alpha_t
+                        entropy[label_u_aug != ignore_label].cpu().numpy().flatten(), alpha_t
                     )
                     low_entropy_mask = (
-                        entropy.le(low_thresh).float() * (label_u_aug != 255).bool()
+                        entropy.le(low_thresh).float() * (label_u_aug != ignore_label).bool()
                     )
 
                     high_thresh = np.percentile(
-                        entropy[label_u_aug != 255].cpu().numpy().flatten(),
+                        entropy[label_u_aug != ignore_label].cpu().numpy().flatten(),
                         100 - alpha_t,
                     )
                     high_entropy_mask = (
-                        entropy.ge(high_thresh).float() * (label_u_aug != 255).bool()
+                        entropy.ge(high_thresh).float() * (label_u_aug != ignore_label).bool()
                     )
 
                     low_mask_all = torch.cat(
                         (
-                            (label_l.unsqueeze(1) != 255).float(),
+                            (label_l.unsqueeze(1) != ignore_label).float(),
                             low_entropy_mask.unsqueeze(1),
                         )
                     )
@@ -456,7 +458,7 @@ def train(
                         contra_flag += " high"
                         high_mask_all = torch.cat(
                             (
-                                (label_l.unsqueeze(1) != 255).float(),
+                                (label_l.unsqueeze(1) != ignore_label).float(),
                                 high_entropy_mask.unsqueeze(1),
                             )
                         )
@@ -464,11 +466,11 @@ def train(
                         contra_flag += " low"
                         high_mask_all = torch.cat(
                             (
-                                (label_l.unsqueeze(1) != 255).float(),
+                                (label_l.unsqueeze(1) != ignore_label).float(),
                                 torch.ones(logits_u_aug.shape)
                                 .float()
                                 .unsqueeze(1)
-                                .cuda(),
+                                .to(device),
                             ),
                         )
                     high_mask_all = F.interpolate(

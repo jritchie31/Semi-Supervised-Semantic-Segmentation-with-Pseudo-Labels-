@@ -33,7 +33,15 @@ class BaseDataset(Dataset):
                 self.list_sample = [
                     [
                         line.strip(),
-                        line.strip()[:44] + "labeled_Segmentation_rough" + line.strip()[-33:],
+                        line.strip(),
+                    ]
+                    for line in open(d_list, "r")
+                ]
+            elif "val_label.txt" in d_list:
+                self.list_sample = [
+                    [
+                        line.strip(),
+                        line.strip()[:44] + "Segmentation" + line.strip()[49:],
                     ]
                     for line in open(d_list, "r")
                 ]            

@@ -21,14 +21,20 @@ from u2pl.utils.utils import (
     convert_state_dict,
     create_cityscapes_label_colormap,
     create_pascal_label_colormap,
+    create_crack_label_colormap,
     intersectionAndUnion,
 )
 
-device = torch.device("cuda")
+if torch.cuda.is_available():
+    device = torch.device("cuda")
+elif torch.backends.mps.is_available():  # macOS
+    device = torch.device("mps")
+else:
+    device = torch.device("cpu")
 
 # Get the absolute path of the current file
 current_dir = osp.dirname(osp.abspath(__file__))
-experiment_config_dir = osp.join(current_dir, r"experiments/cityscapes/744/ours/config.yaml")
+experiment_config_dir = osp.join(current_dir, r"experiments/data_crack/ours/config.yaml")
 
 # Setup Parser
 def get_parser():
@@ -105,25 +111,15 @@ def main():
     data_root, f_data_list = cfg_dset["val"]["data_root"], cfg_dset["val"]["data_list"]
     data_list = []
 
-    if "cityscapes" in data_root:
-        colormap = create_cityscapes_label_colormap()
-        for line in open(f_data_list, "r"):
-            arr = [
-                line.strip(),
-                "gtFine/" + line.strip()[12:-15] + "gtFine_labelTrainIds.png",
-            ]
-            arr = [os.path.join(data_root, item) for item in arr]
-            data_list.append(arr)
 
-    else:
-        colormap = create_pascal_label_colormap()
-        for line in open(f_data_list, "r"):
-            arr = [
-                "JPEGImages/{}.jpg".format(line.strip()),
-                "SegmentationClassAug/{}.png".format(line.strip()),
-            ]
-            arr = [os.path.join(data_root, item) for item in arr]
-            data_list.append(arr)
+    colormap = create_crack_label_colormap()
+    for line in open(f_data_list, "r"):
+        arr = [
+            line.strip(),
+            line.strip()[:44] + "Segmentation" + line.strip()[49:],
+        ]
+        arr = [os.path.join(data_root, item) for item in arr]
+        data_list.append(arr)
 
     # Create network.
     args.use_auxloss = True if cfg["net"].get("aux_loss", False) else False
@@ -139,31 +135,17 @@ def main():
     model.load_state_dict(saved_state_dict, strict=False)
     model.to(device)
     logger.info("Load Model Done!")
-    if "cityscapes" in cfg["dataset"]["type"]:
-        validate_city(
-            model,
-            num_classes,
-            data_list,
-            mean,
-            std,
-            args.base_size,
-            crop_h,
-            crop_w,
-            args.scales,
-            gray_folder,
-            color_folder,
-        )
-    else:
-        valiadte_whole(
-            model,
-            num_classes,
-            data_list,
-            mean,
-            std,
-            args.scales,
-            gray_folder,
-            color_folder,
-        )
+
+    valiadte_whole(
+        model,
+        num_classes,
+        data_list,
+        mean,
+        std,
+        args.scales,
+        gray_folder,
+        color_folder,
+    )
     # cal_acc(data_list, gray_folder, num_classes)
 
 
@@ -244,84 +226,6 @@ def scale_whole_process(model, image, h, w):
     return prediction[0]
 
 
-def validate_city(
-    model,
-    classes,
-    data_list,
-    mean,
-    std,
-    base_size,
-    crop_h,
-    crop_w,
-    scales,
-    gray_folder,
-    color_folder,
-):
-    global colormap
-    logger.info(">>>>>>>>>>>>>>>> Start Crop Evaluation >>>>>>>>>>>>>>>>")
-    data_time = AverageMeter()
-    batch_time = AverageMeter()
-    intersection_meter = AverageMeter()
-    union_meter = AverageMeter()
-
-    model.eval()
-    end = time.time()
-    for i, (input_pth, label_path) in enumerate(data_list):
-        data_time.update(time.time() - end)
-        image = Image.open(input_pth).convert("RGB")
-        image = np.asarray(image).astype(np.float32)
-        label = Image.open(label_path).convert("L")
-        label = np.asarray(label).astype(np.uint8)
-
-        image = (image - mean) / std
-        image = torch.Tensor(image).permute(2, 0, 1)
-        image = image.contiguous().unsqueeze(dim=0)
-        h, w = image.size()[-2:]
-        prediction = torch.zeros((classes, h, w), dtype=torch.float).cuda()
-        for scale in scales:
-            long_size = round(scale * base_size)
-            new_h = long_size
-            new_w = long_size
-            if h > w:
-                new_w = round(long_size / float(h) * w)
-            else:
-                new_h = round(long_size / float(w) * h)
-            image_scale = F.interpolate(
-                image, size=(new_h, new_w), mode="bilinear", align_corners=True
-            )
-            prediction += scale_crop_process(
-                model, image_scale, classes, crop_h, crop_w, h, w
-            )
-        prediction = torch.max(prediction, dim=0)[1].cpu().numpy()
-        batch_time.update(time.time() - end)
-        end = time.time()
-        if (i + 1) % 10 == 0:
-            logger.info(
-                "Test: [{}/{}] "
-                "Data {data_time.val:.3f} ({data_time.avg:.3f}) "
-                "Batch {batch_time.val:.3f} ({batch_time.avg:.3f}).".format(
-                    i + 1, len(data_list), data_time=data_time, batch_time=batch_time
-                )
-            )
-        gray = np.uint8(prediction)
-        color = colorize(gray, colormap)
-
-        image_path, _ = data_list[i]
-        image_name = image_path.split("/")[-1].split(".")[0]
-        color_path = os.path.join(color_folder, image_name + ".png")
-        color.save(color_path)
-
-        intersection, union, target = intersectionAndUnion(gray, label, classes)
-        intersection_meter.update(intersection)
-        union_meter.update(union)
-
-    iou_class = intersection_meter.sum / (union_meter.sum + 1e-10)
-    for i, iou in enumerate(iou_class):
-        logger.info(" * class [{}] IoU {:.2f}".format(i, iou * 100))
-    logger.info(" * mIoU {:.2f}".format(np.mean(iou_class) * 100))
-    logger.info("<<<<<<<<<<<<<<<<< End Crop Evaluation <<<<<<<<<<<<<<<<<")
-
-
 def valiadte_whole(
     model, classes, data_list, mean, std, scales, gray_folder, color_folder
 ):
@@ -332,13 +236,13 @@ def valiadte_whole(
     end = time.time()
     for i, (input_pth, _) in enumerate(data_list):
         data_time.update(time.time() - end)
-        image = Image.open(input_pth).convert("RGB")
+        image = Image.open(input_pth).convert("L")
         image = np.asarray(image).astype(np.float32)
         image = (image - mean) / std
         image = torch.Tensor(image).permute(2, 0, 1)
         image = image.contiguous().unsqueeze(dim=0)
         h, w = image.size()[-2:]
-        prediction = torch.zeros((classes, h, w), dtype=torch.float).cuda()
+        prediction = torch.zeros((classes, h, w), dtype=torch.float).to(device)
         for scale in scales:
             new_h = round(h * scale)
             new_w = round(w * scale)

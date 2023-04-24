@@ -52,7 +52,12 @@ parser.add_argument("--port", default=None, type=int)
 # Add a new command line argument for distributed training
 parser.add_argument("--distributed", action="store_true", help="Enable distributed training")
 
-device = torch.device("cuda")  # Default to the CUDA device
+if torch.cuda.is_available():
+    device = torch.device("cuda")
+elif torch.backends.mps.is_available():  # macOS
+    device = torch.device("mps")
+else:
+    device = torch.device("cpu")
 
 def to_device(tensor):
     return tensor.to(device)

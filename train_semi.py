@@ -42,7 +42,7 @@ from u2pl.utils.utils import (
 
 # Get the absolute path of the current file
 current_dir = osp.dirname(osp.abspath(__file__))
-experiment_config_dir = osp.join(current_dir, r"experiments/data_crack/ours/config.yaml") #Need to change this to crack
+experiment_config_dir = osp.join(current_dir, r"experiments/data_crack/ours/config_local.yaml") #Need to change this to crack
 
 parser = argparse.ArgumentParser(description="Semi-Supervised Semantic Segmentation")
 parser.add_argument("--config", type=str, default=experiment_config_dir)
@@ -635,7 +635,10 @@ def validate(
 ):
     model.eval()
 
-    num_classes = cfg["net"]["num_classes"]
+    num_classes, ignore_label = (
+        cfg["net"]["num_classes"],
+        cfg["dataset"]["ignore_label"],
+    )
     if distributed:
         data_loader.sampler.set_epoch(epoch)
         rank, world_size = dist.get_rank(), dist.get_world_size()
@@ -663,7 +666,7 @@ def validate(
 
         # start to calculate miou
         intersection, union, target = intersectionAndUnion(
-            output, target_origin, num_classes
+            output, target_origin, num_classes, ignore_label
         )
 
         # gather all validation information

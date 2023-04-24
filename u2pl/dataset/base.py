@@ -37,6 +37,7 @@ class BaseDataset(Dataset):
                     ]
                     for line in open(d_list, "r")
                 ]
+                stype = 'unsup'
             elif "val_label.txt" in d_list:
                 self.list_sample = [
                     [
@@ -44,7 +45,8 @@ class BaseDataset(Dataset):
                         line.strip()[:44] + "Segmentation" + line.strip()[49:],
                     ]
                     for line in open(d_list, "r")
-                ]            
+                ]
+                stype = 'val'
             else:
                 self.list_sample = [
                     [
@@ -54,6 +56,7 @@ class BaseDataset(Dataset):
                     ]
                     for line in open(d_list, "r")
                 ]
+                stype = 'sup'
         else:
             raise "unknown dataset!"
 
@@ -64,7 +67,7 @@ class BaseDataset(Dataset):
 
         self.num_sample = len(self.list_sample)
         assert self.num_sample > 0
-        logger.info("# samples: {}".format(self.num_sample))
+        logger.info("# samples available ({}): {}".format(stype, self.num_sample))
 
     def img_loader(self, path, mode):
         with open(path, "rb") as f:

@@ -217,7 +217,7 @@ class Crop(object):
         int instead of sequence like (h, w), a square crop (size, size) is made.
     """
 
-    def __init__(self, size, crop_type="center"):
+    def __init__(self, size, crop_type="center", ignore_label=255):
         if isinstance(size, int):
             self.crop_h = size
             self.crop_w = size
@@ -237,6 +237,11 @@ class Crop(object):
             self.crop_type = crop_type
         else:
             raise (RuntimeError("crop type error: rand | center\n"))
+        if isinstance(ignore_label, int):
+            ##!!!!!!change to 0
+            self.ignore_label = 0
+        else:
+            raise (RuntimeError("ignore_label should be an integer number\n"))
 
     def __call__(self, image, label):
         h, w = image.size()[-2:]
@@ -247,7 +252,7 @@ class Crop(object):
         if pad_h > 0 or pad_w > 0:
             border = (pad_w_half, pad_w - pad_w_half, pad_h_half, pad_h - pad_h_half)
             image = F.pad(image, border, mode="constant", value=0.0)
-            label = F.pad(label, border, mode="constant", value=0)
+            label = F.pad(label, border, mode="constant", value=self.ignore_label)
         h, w = image.size()[-2:]
         if self.crop_type == "rand":
             h_off = random.randint(0, h - self.crop_h)
@@ -265,7 +270,7 @@ class RandRotate(object):
     Randomly rotate image & label with rotate factor in [rotate_min, rotate_max]
     """
 
-    def __init__(self, rotate):
+    def __init__(self, rotate, ignore_label=255):
         assert isinstance(rotate, collections.abc.Iterable) and len(rotate) == 2
         if isinstance(rotate[0], numbers.Number) and isinstance(
             rotate[1], numbers.Number
@@ -273,6 +278,8 @@ class RandRotate(object):
             self.rotate = rotate
         else:
             raise (RuntimeError("segtransforms.RandRotate() scale param error.\n"))
+        assert isinstance(ignore_label, int)
+        self.ignore_label = ignore_label
 
     def __call__(self, image, label):
         angle = self.rotate[0] + (self.rotate[1] - self.rotate[0]) * random.random()
@@ -283,7 +290,7 @@ class RandRotate(object):
         image = F.grid_sample(image, grid, mode="bilinear", align_corners=False)
         label += 1
         label = F.grid_sample(label, grid, mode="nearest", align_corners=False)
-        label[label == 0.0] += 1
+        label[label == 0.0] = self.ignore_label + 1
         label -= 1
         return image, label
 

@@ -259,7 +259,10 @@ def validate(
     model.eval()
     data_loader.sampler.set_epoch(epoch)
 
-    num_classes = cfg["net"]["num_classes"]
+    num_classes, ignore_label = (
+        cfg["net"]["num_classes"],
+        cfg["dataset"]["ignore_label"],
+    )
     rank, world_size = dist.get_rank(), dist.get_world_size()
 
     intersection_meter = AverageMeter()
@@ -282,7 +285,7 @@ def validate(
 
         # start to calculate miou
         intersection, union, target = intersectionAndUnion(
-            output, target_origin, num_classes
+            output, target_origin, num_classes, ignore_label
         )
 
         # gather all validation information

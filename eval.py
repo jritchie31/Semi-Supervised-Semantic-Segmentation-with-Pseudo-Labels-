@@ -34,7 +34,7 @@ else:
 
 # Get the absolute path of the current file
 current_dir = osp.dirname(osp.abspath(__file__))
-experiment_config_dir = osp.join(current_dir, r"experiments/data_crack/ours/config.yaml")
+experiment_config_dir = osp.join(current_dir, r"experiments/data_crack/ours/config_local.yaml")
 
 # Setup Parser
 def get_parser():
@@ -236,12 +236,16 @@ def valiadte_whole(
     end = time.time()
     for i, (input_pth, _) in enumerate(data_list):
         data_time.update(time.time() - end)
+        
         image = Image.open(input_pth).convert("L")
+
         image = np.asarray(image).astype(np.float32)
+        mean = np.float32(mean)
+        std = np.float32(std)
         image = (image - mean) / std
-        image = torch.Tensor(image).permute(2, 0, 1)
-        image = image.contiguous().unsqueeze(dim=0)
+        image = torch.from_numpy(image[np.newaxis, :, :]).unsqueeze(dim=0)
         h, w = image.size()[-2:]
+
         prediction = torch.zeros((classes, h, w), dtype=torch.float).to(device)
         for scale in scales:
             new_h = round(h * scale)

@@ -745,7 +745,7 @@ def create_crack_label_colormap():
         A colormap for visualizing segmentation results.
     """
     colormap = 255 * np.ones((256, 1), dtype=np.uint8)
-    colormap[0] = [0]
-    colormap[1] = [255]
+    colormap[0] = [255]
+    colormap[1] = [0]
 
     return colormap

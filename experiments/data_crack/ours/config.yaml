@@ -10,13 +10,13 @@ dataset: # Required.
     #rand_rotation: [-10.0, 10.0]
     crop:
       type: rand
-      size: [500, 500] # random crop image with HxW size
+      size: [400, 400] # random crop image with HxW size
   val:
     data_root: "/home/ubuntu/U2PL-8813/data"
     data_list: "/home/ubuntu/U2PL-8813/data/Crack_Dataset/data_crack/Data_test/val_data/val_label.txt"
     crop:
       type: center
-      size: [500, 500] # central crop image with HxW size
+      size: [400, 400] # central crop image with HxW size
   batch_size: 4
   n_sup: 1132 #1132
   noise_std: 0.1 # Standard deviation of Gaussian noise added

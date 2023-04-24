@@ -18,8 +18,7 @@ dataset: # Required.
       type: center
       size: [500, 500] # central crop image with HxW size
   batch_size: 4
-  n_sup: 4 #1132
-  n_unsup: 4 #1132 #3284
+  n_sup: 100 #1132
   noise_std: 0.1 # Standard deviation of Gaussian noise added
   workers: 2 # Data loading workers
   # Normalization: mean and standard deviation values provided
@@ -27,7 +26,7 @@ dataset: # Required.
   std: [6] # 1
 
 trainer: # Required.
-  epochs: 2 #200
+  epochs: 5 #200
   eval_on: True
   sup_only_epoch: 1 # warm up epoch is helpful
   optimizer:

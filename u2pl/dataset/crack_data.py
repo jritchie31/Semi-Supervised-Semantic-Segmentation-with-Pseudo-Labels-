@@ -118,7 +118,6 @@ def build_crack_semi_loader(split, all_cfg, seed=0, distributed=False):
     workers = cfg.get("workers", 2)
     batch_size = cfg.get("batch_size", 1)
     n_sup = cfg.get("n_sup", 1132)
-    n_unsup = cfg.get("n_unsup", 3284)
     # build transform
     trs_form = build_transfrom(cfg)
     trs_form_unsup = build_transfrom(cfg)
@@ -145,7 +144,7 @@ def build_crack_semi_loader(split, all_cfg, seed=0, distributed=False):
         # build sampler for unlabeled set
         data_list_unsup = cfg["data_list"].replace("labeled.txt", "unlabeled.txt")
         dset_unsup = crackData(
-            cfg["data_root"], data_list_unsup, trs_form_unsup, seed, n_unsup, split
+            cfg["data_root"], data_list_unsup, trs_form_unsup, seed, n_sup, split
         )
 
         if distributed:

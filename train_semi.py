@@ -42,7 +42,7 @@ from u2pl.utils.utils import (
 
 # Get the absolute path of the current file
 current_dir = osp.dirname(osp.abspath(__file__))
-experiment_config_dir = osp.join(current_dir, r"experiments/data_crack/ours/config.yaml") #Need to change this to crack
+experiment_config_dir = osp.join(current_dir, r"experiments/data_crack/ours/config_local.yaml") #Need to change this to crack
 
 parser = argparse.ArgumentParser(description="Semi-Supervised Semantic Segmentation")
 parser.add_argument("--config", type=str, default=experiment_config_dir)

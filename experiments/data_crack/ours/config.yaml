@@ -27,7 +27,7 @@ dataset: # Required.
   std: [6] # 1
 
 trainer: # Required.
-  epochs: 50 #200
+  epochs: 10 #200
   eval_on: True
   sup_only_epoch: 5 # warm up epoch is helpful
   optimizer:

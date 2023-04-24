@@ -2,8 +2,8 @@
 dataset: # Required.
   type: crack_semi #Semi-supervised dataset can change this to crack
   train: # 50 labeled images with data augmentation (flip, random resize, random crop) from split 1
-    data_root: "/home/ubuntu/U2PL-8813/data"
-    data_list: "/home/ubuntu/U2PL-8813/data/Crack_Dataset/data_crack/Data_train/split_1/labeled.txt"
+    data_root: "/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data"
+    data_list: "/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data/Crack_Dataset/data_crack/Data_train/split_1/labeled.txt"
     flip: True
     GaussianBlur: False
     #rand_resize: [0.5, 2.0]
@@ -12,14 +12,14 @@ dataset: # Required.
       type: rand
       size: [500, 500] # random crop image with HxW size
   val:
-    data_root: "/home/ubuntu/U2PL-8813/data"
-    data_list: "/home/ubuntu/U2PL-8813/data/Crack_Dataset/data_crack/Data_test/val_data/val_label.txt"
+    data_root: "/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data"
+    data_list: "/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data/Crack_Dataset/data_crack/Data_test/val_data/val_label.txt"
     crop:
       type: center
       size: [500, 500] # central crop image with HxW size
   batch_size: 4
-  n_sup: 1132 #1132
-  n_unsup: 1132 #1132 #3284
+  n_sup: 4 #1132
+  n_unsup: 4 #1132 #3284
   noise_std: 0.1 # Standard deviation of Gaussian noise added
   workers: 2 # Data loading workers
   # Normalization: mean and standard deviation values provided
@@ -27,9 +27,9 @@ dataset: # Required.
   std: [6] # 1
 
 trainer: # Required.
-  epochs: 50 #200
+  epochs: 2 #200
   eval_on: True
-  sup_only_epoch: 5 # warm up epoch is helpful
+  sup_only_epoch: 1 # warm up epoch is helpful
   optimizer:
     type: SGD # stochastic gradient descent
     kwargs:

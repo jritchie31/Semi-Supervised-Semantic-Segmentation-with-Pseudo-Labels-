@@ -7,7 +7,7 @@ dataset: # Required.
     flip: True
     GaussianBlur: False
     #rand_resize: [0.5, 2.0]
-    rand_rotation: [-10.0, 10.0]
+    #rand_rotation: [-10.0, 10.0]
     crop:
       type: rand
       size: [400, 400] # random crop image with HxW size
@@ -15,10 +15,10 @@ dataset: # Required.
     data_root: "/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data"
     data_list: "/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data/Crack_Dataset/data_crack/Data_test/val_data/val_label.txt"
     crop:
-      type: rand
+      type: center
       size: [400, 400] # central crop image with HxW size
   batch_size: 4
-  n_sup: 10 #1132
+  n_sup: 400 #1132
   noise_std: 0.1 # Standard deviation of Gaussian noise added
   workers: 2 # Data loading workers
   # Normalization: mean and standard deviation values provided
@@ -26,7 +26,7 @@ dataset: # Required.
   std: [6] # 1
 
 trainer: # Required.
-  epochs: 5 #200
+  epochs: 20 #200
   eval_on: True
   sup_only_epoch: 1 # warm up epoch is helpful
   optimizer:
@@ -40,12 +40,12 @@ trainer: # Required.
     kwargs:
       power: 0.9
   unsupervised:
-    TTA: True # Test-Time Augmentation
+    TTA: False # Test-Time Augmentation
     drop_percent: 80
     apply_aug: cutmix
   # Various parameters for contralling the selection of positive and negative examples
   contrastive:
-    negative_high_entropy: False
+    negative_high_entropy: True
     low_rank: 3
     high_rank: 20
     current_class_threshold: 0.3

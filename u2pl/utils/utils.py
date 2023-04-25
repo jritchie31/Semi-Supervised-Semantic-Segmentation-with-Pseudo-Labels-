@@ -739,13 +739,14 @@ def create_pascal_label_colormap():
 
     return colormap
 
+
 def create_crack_label_colormap():
     """Creates a label colormap used in Crack segmentation benchmark.
     Returns:
         A colormap for visualizing segmentation results.
     """
     colormap = 255 * np.ones((256, 1), dtype=np.uint8)
-    colormap[0] = [255]
-    colormap[1] = [0]
+    colormap[0] = [0]  # Background (black)
+    colormap[1] = [1]  # Crack (white)
 
     return colormap

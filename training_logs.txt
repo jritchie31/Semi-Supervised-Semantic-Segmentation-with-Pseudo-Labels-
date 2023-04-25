@@ -4774,3 +4774,200 @@
 [2023-04-24 18:15:55,225][    INFO]  * class [1] IoU 0.00
 [2023-04-24 18:15:55,225][    INFO]  * epoch 4 mIoU 42.12
 [2023-04-24 18:15:56,453][    INFO] [31m * Currently, the best val result is: 42.13[0m
+[2023-04-24 18:42:46,151][    INFO] {'criterion': {'kwargs': {'min_kept': 100000, 'thresh': 0.7}, 'type': 'ohem'},
+ 'dataset': {'batch_size': 4,
+             'mean': [125.5],
+             'n_sup': 200,
+             'noise_std': 0.1,
+             'std': [6],
+             'train': {'GaussianBlur': False,
+                       'crop': {'size': [400, 400], 'type': 'rand'},
+                       'data_list': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data/Crack_Dataset/data_crack/Data_train/split_1/labeled.txt',
+                       'data_root': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data',
+                       'flip': True},
+             'type': 'crack_semi',
+             'val': {'crop': {'size': [400, 400], 'type': 'center'},
+                     'data_list': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data/Crack_Dataset/data_crack/Data_test/val_data/val_label.txt',
+                     'data_root': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data'},
+             'workers': 2},
+ 'exp_path': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/experiments/data_crack/ours',
+ 'net': {'aux_loss': {'aux_plane': 1024, 'loss_weight': 0.4},
+         'decoder': {'kwargs': {'dilations': [12, 24, 36], 'inner_planes': 256},
+                     'type': 'u2pl.models.decoder.dec_deeplabv3_plus'},
+         'ema_decay': 0.99,
+         'encoder': {'kwargs': {'fpn': True,
+                                'multi_grid': True,
+                                'replace_stride_with_dilation': [False,
+                                                                 True,
+                                                                 True],
+                                'zero_init_residual': True},
+                     'type': 'u2pl.models.resnet.resnet50'},
+         'num_classes': 2,
+         'sync_bn': True},
+ 'save_path': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/experiments/data_crack/ours/checkpoints',
+ 'saver': {'auto_resume': True, 'pretrain': '', 'snapshot_dir': 'checkpoints'},
+ 'trainer': {'contrastive': {'current_class_negative_threshold': 1,
+                             'current_class_threshold': 0.3,
+                             'high_rank': 20,
+                             'low_entropy_threshold': 20,
+                             'low_rank': 3,
+                             'negative_high_entropy': True,
+                             'num_negatives': 50,
+                             'num_queries': 256,
+                             'temperature': 0.5,
+                             'unsupervised_entropy_ignore': 80},
+             'epochs': 5,
+             'eval_on': True,
+             'lr_scheduler': {'kwargs': {'power': 0.9}, 'mode': 'poly'},
+             'optimizer': {'kwargs': {'lr': 0.002,
+                                      'momentum': 0.9,
+                                      'weight_decay': 0.0005},
+                           'type': 'SGD'},
+             'sup_only_epoch': 1,
+             'unsupervised': {'TTA': False,
+                              'apply_aug': 'cutmix',
+                              'drop_percent': 80}}}
+[2023-04-24 18:42:46,973][    INFO] # samples: 1132
+[2023-04-24 18:42:46,976][    INFO] # samples: 3224
+[2023-04-24 18:42:46,978][    INFO] # samples: 80
+[2023-04-24 18:42:46,978][    INFO] Get loader Done...
+[2023-04-24 18:42:47,569][    INFO] The kwargs for lr scheduler: 0.9
+[2023-04-24 18:43:17,104][    INFO] [200][none] Iter [0/250]	Data 0.00 (0.00)	Time 3.45 (3.45)	Sup 0.970 (0.970)	Uns 0.000 (0.000)	Con 0.000 (0.000)	LR 0.00200
+[2023-04-24 18:43:39,019][    INFO] [200][none] Iter [10/250]	Data 0.00 (0.01)	Time 2.14 (2.19)	Sup 0.311 (0.620)	Uns -0.000 (0.000)	Con -0.000 (0.000)	LR 0.00194
+[2023-04-24 18:44:00,354][    INFO] [200][none] Iter [20/250]	Data 0.00 (0.00)	Time 2.13 (2.13)	Sup 0.086 (0.169)	Uns 0.000 (0.000)	Con 0.000 (0.000)	LR 0.00186
+[2023-04-24 18:44:21,777][    INFO] [200][none] Iter [30/250]	Data 0.00 (0.00)	Time 2.14 (2.14)	Sup 0.047 (0.078)	Uns 0.000 (0.000)	Con 0.000 (0.000)	LR 0.00179
+[2023-04-24 18:44:43,138][    INFO] [200][none] Iter [40/250]	Data 0.00 (0.00)	Time 2.13 (2.14)	Sup 0.045 (0.046)	Uns -0.000 (0.000)	Con -0.000 (0.000)	LR 0.00172
+[2023-04-24 18:45:06,007][    INFO] start evaluation
+[2023-04-24 18:45:25,410][    INFO]  * class [0] IoU 84.25
+[2023-04-24 18:45:25,411][    INFO]  * class [1] IoU 0.00
+[2023-04-24 18:45:25,411][    INFO]  * epoch 0 mIoU 42.12
+[2023-04-24 18:45:27,536][    INFO] [31m * Currently, the best val result is: 42.12[0m
+[2023-04-24 18:46:01,918][    INFO] [200][3:20 high] Iter [50/250]	Data 0.00 (0.00)	Time 8.14 (8.14)	Sup 0.022 (0.022)	Uns 0.007 (0.007)	Con 0.000 (0.000)	LR 0.00164
+[2023-04-24 18:47:05,473][    INFO] [200][3:20 high] Iter [60/250]	Data 0.00 (0.00)	Time 6.48 (6.35)	Sup 0.036 (0.029)	Uns 0.012 (0.008)	Con -0.000 (0.000)	LR 0.00157
+[2023-04-24 18:48:08,244][    INFO] [200][3:20 high] Iter [70/250]	Data 0.00 (0.00)	Time 6.20 (6.28)	Sup 0.016 (0.025)	Uns 0.005 (0.006)	Con -0.000 (0.000)	LR 0.00150
+[2023-04-24 18:49:09,973][    INFO] [200][3:20 high] Iter [80/250]	Data 0.00 (0.00)	Time 6.27 (6.17)	Sup 0.020 (0.021)	Uns 0.007 (0.006)	Con -0.000 (0.000)	LR 0.00142
+[2023-04-24 18:50:09,716][    INFO] [200][3:20 high] Iter [90/250]	Data 0.00 (0.00)	Time 6.17 (5.97)	Sup 0.013 (0.017)	Uns 0.003 (0.004)	Con 0.000 (0.000)	LR 0.00135
+[2023-04-24 18:51:08,963][    INFO] start evaluation
+[2023-04-24 18:51:36,461][    INFO]  * class [0] IoU 84.25
+[2023-04-24 18:51:36,465][    INFO]  * class [1] IoU 0.00
+[2023-04-24 18:51:36,465][    INFO]  * epoch 1 mIoU 42.12
+[2023-04-24 18:51:37,716][    INFO] [31m * Currently, the best val result is: 42.12[0m
+[2023-04-24 18:52:20,186][    INFO] [200][3:20 high] Iter [100/250]	Data 0.00 (0.00)	Time 12.09 (12.09)	Sup 0.014 (0.014)	Uns 0.004 (0.004)	Con -0.000 (0.000)	LR 0.00127
+[2023-04-24 18:53:24,688][    INFO] [200][3:20 high] Iter [110/250]	Data 0.00 (0.00)	Time 7.13 (6.45)	Sup 0.013 (0.015)	Uns 0.003 (0.004)	Con 0.000 (0.000)	LR 0.00119
+[2023-04-24 18:54:27,499][    INFO] [200][3:20 high] Iter [120/250]	Data 0.00 (0.00)	Time 7.57 (6.28)	Sup 0.014 (0.013)	Uns 0.006 (0.004)	Con -0.000 (0.000)	LR 0.00112
+[2023-04-24 18:55:27,671][    INFO] [200][3:20 high] Iter [130/250]	Data 0.00 (0.00)	Time 5.79 (6.02)	Sup 0.012 (0.015)	Uns 0.003 (0.004)	Con 0.000 (0.000)	LR 0.00104
+[2023-04-24 18:56:30,340][    INFO] [200][3:20 high] Iter [140/250]	Data 0.00 (0.00)	Time 5.77 (6.27)	Sup 0.016 (0.012)	Uns 0.003 (0.003)	Con 0.000 (0.000)	LR 0.00096
+[2023-04-24 18:57:29,591][    INFO] start evaluation
+[2023-04-24 18:57:55,285][    INFO]  * class [0] IoU 84.25
+[2023-04-24 18:57:55,285][    INFO]  * class [1] IoU 0.00
+[2023-04-24 18:57:55,286][    INFO]  * epoch 2 mIoU 42.12
+[2023-04-24 18:57:56,584][    INFO] [31m * Currently, the best val result is: 42.12[0m
+[2023-04-24 18:58:44,482][    INFO] [200][3:20 high] Iter [150/250]	Data 0.00 (0.00)	Time 17.50 (17.50)	Sup 0.016 (0.016)	Uns 0.003 (0.003)	Con -0.000 (0.000)	LR 0.00088
+[2023-04-24 18:59:45,422][    INFO] {'criterion': {'kwargs': {'min_kept': 100000, 'thresh': 0.7}, 'type': 'ohem'},
+ 'dataset': {'batch_size': 4,
+             'mean': [125.5],
+             'n_sup': 200,
+             'noise_std': 0.1,
+             'std': [6],
+             'train': {'GaussianBlur': False,
+                       'crop': {'size': [400, 400], 'type': 'rand'},
+                       'data_list': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data/Crack_Dataset/data_crack/Data_train/split_1/labeled.txt',
+                       'data_root': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data',
+                       'flip': True},
+             'type': 'crack_semi',
+             'val': {'crop': {'size': [400, 400], 'type': 'center'},
+                     'data_list': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data/Crack_Dataset/data_crack/Data_test/val_data/val_label.txt',
+                     'data_root': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data'},
+             'workers': 2},
+ 'exp_path': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/experiments/data_crack/ours',
+ 'net': {'aux_loss': {'aux_plane': 1024, 'loss_weight': 0.4},
+         'decoder': {'kwargs': {'dilations': [12, 24, 36], 'inner_planes': 256},
+                     'type': 'u2pl.models.decoder.dec_deeplabv3_plus'},
+         'ema_decay': 0.99,
+         'encoder': {'kwargs': {'fpn': True,
+                                'multi_grid': True,
+                                'replace_stride_with_dilation': [False,
+                                                                 True,
+                                                                 True],
+                                'zero_init_residual': True},
+                     'type': 'u2pl.models.resnet.resnet50'},
+         'num_classes': 2,
+         'sync_bn': True},
+ 'save_path': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/experiments/data_crack/ours/checkpoints',
+ 'saver': {'auto_resume': True, 'pretrain': '', 'snapshot_dir': 'checkpoints'},
+ 'trainer': {'contrastive': {'current_class_negative_threshold': 1,
+                             'current_class_threshold': 0.3,
+                             'high_rank': 20,
+                             'low_entropy_threshold': 20,
+                             'low_rank': 3,
+                             'negative_high_entropy': True,
+                             'num_negatives': 50,
+                             'num_queries': 256,
+                             'temperature': 0.5,
+                             'unsupervised_entropy_ignore': 80},
+             'epochs': 5,
+             'eval_on': True,
+             'lr_scheduler': {'kwargs': {'power': 0.9}, 'mode': 'poly'},
+             'optimizer': {'kwargs': {'lr': 0.002,
+                                      'momentum': 0.9,
+                                      'weight_decay': 0.0005},
+                           'type': 'SGD'},
+             'sup_only_epoch': 1,
+             'unsupervised': {'TTA': False,
+                              'apply_aug': 'cutmix',
+                              'drop_percent': 80}}}
+[2023-04-24 18:59:46,226][    INFO] # samples: 1132
+[2023-04-24 18:59:46,229][    INFO] # samples: 3224
+[2023-04-24 18:59:46,231][    INFO] # samples: 80
+[2023-04-24 18:59:46,231][    INFO] Get loader Done...
+[2023-04-24 18:59:46,799][    INFO] The kwargs for lr scheduler: 0.9
+[2023-04-24 19:00:16,099][    INFO] [200][none] Iter [0/250]	Data 0.00 (0.00)	Time 2.82 (2.82)	Sup 0.970 (0.970)	Uns 0.000 (0.000)	Con 0.000 (0.000)	LR 0.00200
+[2023-04-24 19:00:37,540][    INFO] [200][none] Iter [10/250]	Data 0.00 (0.00)	Time 2.14 (2.14)	Sup 0.312 (0.620)	Uns -0.000 (0.000)	Con -0.000 (0.000)	LR 0.00194
+[2023-04-24 19:00:58,904][    INFO] [200][none] Iter [20/250]	Data 0.00 (0.00)	Time 2.15 (2.14)	Sup 0.086 (0.169)	Uns 0.000 (0.000)	Con 0.000 (0.000)	LR 0.00186
+[2023-04-24 19:01:20,294][    INFO] [200][none] Iter [30/250]	Data 0.00 (0.00)	Time 2.13 (2.14)	Sup 0.047 (0.078)	Uns 0.000 (0.000)	Con 0.000 (0.000)	LR 0.00179
+[2023-04-24 19:01:41,667][    INFO] [200][none] Iter [40/250]	Data 0.00 (0.00)	Time 2.13 (2.14)	Sup 0.045 (0.046)	Uns -0.000 (0.000)	Con -0.000 (0.000)	LR 0.00172
+[2023-04-24 19:02:03,778][    INFO] start evaluation
+[2023-04-24 19:02:22,545][    INFO]  * class [0] IoU 84.25
+[2023-04-24 19:02:22,545][    INFO]  * class [1] IoU 0.00
+[2023-04-24 19:02:22,545][    INFO]  * epoch 0 mIoU 42.12
+[2023-04-24 19:02:24,681][    INFO] [31m * Currently, the best val result is: 42.12[0m
+[2023-04-24 19:03:00,524][    INFO] [200][3:20 high] Iter [50/250]	Data 0.00 (0.00)	Time 9.71 (9.71)	Sup 0.022 (0.022)	Uns 0.006 (0.006)	Con 0.000 (0.000)	LR 0.00164
+[2023-04-24 19:03:59,467][    INFO] [200][3:20 high] Iter [60/250]	Data 0.00 (0.00)	Time 5.82 (5.89)	Sup 0.036 (0.029)	Uns 0.012 (0.008)	Con -0.000 (0.000)	LR 0.00157
+[2023-04-24 19:04:59,086][    INFO] [200][3:20 high] Iter [70/250]	Data 0.00 (0.00)	Time 5.75 (5.96)	Sup 0.016 (0.025)	Uns 0.005 (0.006)	Con -0.000 (0.000)	LR 0.00150
+[2023-04-24 19:05:58,472][    INFO] [200][3:20 high] Iter [80/250]	Data 0.00 (0.00)	Time 5.55 (5.94)	Sup 0.020 (0.021)	Uns 0.007 (0.006)	Con -0.000 (0.000)	LR 0.00142
+[2023-04-24 19:06:59,094][    INFO] [200][3:20 high] Iter [90/250]	Data 0.00 (0.00)	Time 6.19 (6.06)	Sup 0.014 (0.017)	Uns 0.003 (0.004)	Con 0.000 (0.000)	LR 0.00135
+[2023-04-24 19:07:55,672][    INFO] start evaluation
+[2023-04-24 19:08:19,616][    INFO]  * class [0] IoU 84.25
+[2023-04-24 19:08:19,616][    INFO]  * class [1] IoU 0.00
+[2023-04-24 19:08:19,617][    INFO]  * epoch 1 mIoU 42.12
+[2023-04-24 19:08:20,928][    INFO] [31m * Currently, the best val result is: 42.12[0m
+[2023-04-24 19:08:59,917][    INFO] [200][3:20 high] Iter [100/250]	Data 0.00 (0.00)	Time 10.19 (10.19)	Sup 0.014 (0.014)	Uns 0.004 (0.004)	Con -0.000 (0.000)	LR 0.00127
+[2023-04-24 19:09:58,196][    INFO] [200][3:20 high] Iter [110/250]	Data 0.00 (0.00)	Time 5.70 (5.83)	Sup 0.013 (0.015)	Uns 0.003 (0.004)	Con 0.000 (0.000)	LR 0.00119
+[2023-04-24 19:11:01,183][    INFO] [200][3:20 high] Iter [120/250]	Data 0.00 (0.00)	Time 5.99 (6.30)	Sup 0.014 (0.013)	Uns 0.006 (0.004)	Con -0.000 (0.000)	LR 0.00112
+[2023-04-24 19:12:03,844][    INFO] [200][3:20 high] Iter [130/250]	Data 0.00 (0.00)	Time 5.58 (6.26)	Sup 0.012 (0.015)	Uns 0.003 (0.004)	Con 0.000 (0.000)	LR 0.00104
+[2023-04-24 19:13:04,392][    INFO] [200][3:20 high] Iter [140/250]	Data 0.00 (0.00)	Time 5.59 (6.05)	Sup 0.016 (0.012)	Uns 0.003 (0.003)	Con 0.000 (0.000)	LR 0.00096
+[2023-04-24 19:14:00,049][    INFO] start evaluation
+[2023-04-24 19:14:23,108][    INFO]  * class [0] IoU 84.25
+[2023-04-24 19:14:23,112][    INFO]  * class [1] IoU 0.00
+[2023-04-24 19:14:23,112][    INFO]  * epoch 2 mIoU 42.12
+[2023-04-24 19:14:24,337][    INFO] [31m * Currently, the best val result is: 42.12[0m
+[2023-04-24 19:15:07,505][    INFO] [200][3:20 high] Iter [150/250]	Data 0.00 (0.00)	Time 14.22 (14.22)	Sup 0.016 (0.016)	Uns 0.003 (0.003)	Con -0.000 (0.000)	LR 0.00088
+[2023-04-24 19:16:09,059][    INFO] [200][3:20 high] Iter [160/250]	Data 0.00 (0.00)	Time 6.25 (6.15)	Sup 0.012 (0.013)	Uns 0.003 (0.003)	Con -0.000 (0.000)	LR 0.00081
+[2023-04-24 19:17:07,640][    INFO] [200][3:20 high] Iter [170/250]	Data 0.00 (0.00)	Time 5.41 (5.86)	Sup 0.010 (0.012)	Uns 0.002 (0.003)	Con -0.000 (0.000)	LR 0.00073
+[2023-04-24 19:18:07,287][    INFO] [200][3:20 high] Iter [180/250]	Data 0.00 (0.00)	Time 6.85 (5.96)	Sup 0.006 (0.011)	Uns 0.003 (0.003)	Con 0.000 (0.000)	LR 0.00064
+[2023-04-24 19:19:05,593][    INFO] [200][3:20 high] Iter [190/250]	Data 0.00 (0.00)	Time 6.03 (5.83)	Sup 0.012 (0.010)	Uns 0.001 (0.002)	Con -0.000 (0.000)	LR 0.00056
+[2023-04-24 19:20:02,189][    INFO] start evaluation
+[2023-04-24 19:20:25,231][    INFO]  * class [0] IoU 84.25
+[2023-04-24 19:20:25,231][    INFO]  * class [1] IoU 0.00
+[2023-04-24 19:20:25,232][    INFO]  * epoch 3 mIoU 42.12
+[2023-04-24 19:20:26,550][    INFO] [31m * Currently, the best val result is: 42.12[0m
+[2023-04-24 19:21:08,079][    INFO] [200][3:20 high] Iter [200/250]	Data 0.00 (0.00)	Time 12.15 (12.15)	Sup 0.013 (0.013)	Uns 0.002 (0.002)	Con 0.000 (0.000)	LR 0.00048
+[2023-04-24 19:22:06,607][    INFO] [200][3:20 high] Iter [210/250]	Data 0.00 (0.00)	Time 5.52 (5.85)	Sup 0.009 (0.010)	Uns 0.002 (0.002)	Con 0.000 (0.000)	LR 0.00039
+[2023-04-24 19:23:05,874][    INFO] [200][3:20 high] Iter [220/250]	Data 0.00 (0.00)	Time 5.42 (5.93)	Sup 0.010 (0.010)	Uns 0.002 (0.003)	Con -0.000 (0.000)	LR 0.00031
+[2023-04-24 19:24:02,183][    INFO] [200][3:20 high] Iter [230/250]	Data 0.00 (0.00)	Time 5.69 (5.63)	Sup 0.010 (0.011)	Uns 0.004 (0.003)	Con -0.000 (0.000)	LR 0.00022
+[2023-04-24 19:25:00,762][    INFO] [200][3:20 high] Iter [240/250]	Data 0.00 (0.00)	Time 6.30 (5.86)	Sup 0.009 (0.009)	Uns 0.003 (0.003)	Con 0.000 (0.000)	LR 0.00012
+[2023-04-24 19:25:57,537][    INFO] start evaluation
+[2023-04-24 19:26:21,179][    INFO]  * class [0] IoU 84.25
+[2023-04-24 19:26:21,182][    INFO]  * class [1] IoU 0.00
+[2023-04-24 19:26:21,182][    INFO]  * epoch 4 mIoU 42.12
+[2023-04-24 19:26:22,561][    INFO] [31m * Currently, the best val result is: 42.12[0m

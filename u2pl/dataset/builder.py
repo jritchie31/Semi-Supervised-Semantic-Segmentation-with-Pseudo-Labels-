@@ -1,7 +1,7 @@
 import logging
 
 from .cityscapes import build_city_semi_loader, build_cityloader
-from .crack_data import build_crackloader, build_crack_semi_loader
+from .crack_data import build_crackloader, build_crack_semi_loader, build_crack_semi_portion_loader
 from .pascal_voc import build_voc_semi_loader, build_vocloader
 
 logger = logging.getLogger("global")
@@ -45,7 +45,15 @@ def get_loader(cfg, seed=0, distributed=False):
         train_loader_sup, train_loader_unsup = build_crack_semi_loader(
             "train", cfg, seed=seed, distributed=distributed
         )
-        val_loader = build_crackloader("val", cfg, distributed=distributed)
+        val_loader = build_crack_semi_loader("val", cfg, distributed=distributed)
+        logger.info("Get loader Done...")
+        return train_loader_sup, train_loader_unsup, val_loader
+
+    elif cfg_dataset["type"] == "crack_semi_portion":
+        train_loader_sup, train_loader_unsup = build_crack_semi_portion_loader(
+            "train", cfg, seed=seed, distributed=distributed
+        )
+        val_loader = build_crack_semi_portion_loader("val", cfg, distributed=distributed)
         logger.info("Get loader Done...")
         return train_loader_sup, train_loader_unsup, val_loader
 

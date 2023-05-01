@@ -20,18 +20,31 @@ def compute_rce_loss(predict, target):
 
     with torch.no_grad():
         _, num_cls, h, w = predict.shape
-        temp_tar = target.clone()
-        temp_tar[target == 255] = 0
-
-        label = (
-            F.one_hot(temp_tar.clone().detach(), num_cls).float().to(device)
-        )  # (batch, h, w, num_cls)
+        label = F.one_hot(target.clone().detach(), num_cls).float().to(device)  # (batch, h, w, num_cls)
         label = rearrange(label, "b h w c -> b c h w")
         label = torch.clamp(label, min=1e-4, max=1.0)
 
-    rce = -torch.sum(predict * torch.log(label), dim=1) * (target != 255).bool()
-    return rce.sum() / (target != 255).sum()
+    rce = -torch.sum(predict * torch.log(label), dim=1)
+    return rce.sum() / target.numel()
 
+"""def compute_unsupervised_loss(predict, target, percent, pred_teacher):
+    batch_size, num_class, h, w = predict.shape
+
+    with torch.no_grad():
+        # drop pixels with high entropy
+        prob = torch.softmax(pred_teacher, dim=1)
+        entropy = -torch.sum(prob * torch.log(prob + 1e-10), dim=1)
+
+        thresh = np.percentile(entropy.detach().cpu().numpy().flatten(), percent)
+        thresh_mask = entropy.ge(thresh).bool()
+
+        target[thresh_mask] = -1  # Set ignored pixels to a temporary value
+        weight = batch_size * h * w / (target != -1).sum()
+
+    target[target == -1] = -1  # Set ignored pixels to -1
+    loss = weight * F.cross_entropy(predict, target, ignore_index=-1)  # [10, 321, 321]
+
+    return loss"""
 
 def compute_unsupervised_loss(predict, target, percent, pred_teacher):
     batch_size, num_class, h, w = predict.shape
@@ -41,18 +54,28 @@ def compute_unsupervised_loss(predict, target, percent, pred_teacher):
         prob = torch.softmax(pred_teacher, dim=1)
         entropy = -torch.sum(prob * torch.log(prob + 1e-10), dim=1)
 
-        thresh = np.percentile(
-            entropy[target != 255].detach().cpu().numpy().flatten(), percent
-        )
-        thresh_mask = entropy.ge(thresh).bool() * (target != 255).bool()
+        thresh = np.percentile(entropy.detach().cpu().numpy().flatten(), percent)
+        thresh_mask = entropy.ge(thresh).bool()
 
-        target[thresh_mask] = 255
-        weight = batch_size * h * w / torch.sum(target != 255)
+        target[thresh_mask] = -1  # Set ignored pixels to a temporary value
+        weight = batch_size * h * w / (target != -1).sum()
 
-    loss = weight * F.cross_entropy(predict, target)  # [10, 321, 321]
+    target[target == -1] = -1  # Set ignored pixels to -1
+    
+    # Calculate the number of samples for each class in the target tensor
+    class_counts = torch.bincount(target.view(-1), minlength=num_class + 1)[:-1]
+    
+    # Compute class weights based on the number of samples
+    class_weights = 1.0 / (class_counts.float() + 1e-10)
+    class_weights = class_weights / class_weights.sum()
+
+    # Move class weights to the same device as the predict tensor
+    class_weights = class_weights.to(predict.device)
+
+    # Calculate the weighted cross-entropy loss
+    loss = weight * F.cross_entropy(predict, target, weight=class_weights, ignore_index=-1)  # [10, 321, 321]
 
     return loss
-
 
 def compute_contra_memobank_loss(
     rep,
@@ -284,25 +307,8 @@ class Criterion(nn.Module):
                 device = torch.device("cpu")
             weights = torch.FloatTensor(
                 [
-                    0.0,
-                    0.0,
-                    0.0,
                     1.0,
-                    1.0,
-                    1.0,
-                    1.0,
-                    0.0,
-                    0.0,
-                    1.0,
-                    0.0,
-                    0.0,
-                    1.0,
-                    0.0,
-                    1.0,
-                    0.0,
-                    1.0,
-                    1.0,
-                    1.0,
+                    90.0,
                 ]
             ).to(device)
             self._criterion = nn.CrossEntropyLoss()
@@ -354,6 +360,9 @@ class CriterionOhem(nn.Module):
         self._criterion2 = OhemCrossEntropy2dTensor(thresh, min_kept)
 
     def forward(self, preds, target):
+        # Normalize target values to [0, 1] only if the maximum value is greater than 1
+        if target.max() == 255:
+            target = (target // 255).long()
         h, w = target.size(1), target.size(2)
         if self._aux_weight > 0:  # require aux loss
             main_pred, aux_pred = preds
@@ -493,25 +502,8 @@ class OhemCrossEntropy2dTensor(nn.Module):
         if use_weight:
             weight = torch.FloatTensor(
                 [
-                    0.8373,
-                    0.918,
-                    0.866,
-                    1.0345,
-                    1.0166,
-                    0.9969,
-                    0.9754,
-                    1.0489,
-                    0.8786,
-                    1.0023,
-                    0.9539,
-                    0.9843,
-                    1.1116,
-                    0.9037,
-                    1.0865,
-                    1.0955,
-                    1.0865,
-                    1.1529,
-                    1.0507,
+                    1.000,
+                    90.000,
                 ]
             ).to(device)
             # weight = torch.FloatTensor(

@@ -9,7 +9,7 @@ import torch
 import torch.nn.functional as F
 import torch.nn.parallel
 import torch.optim
-import torch.utils.data
+import torch.utils.data                                                                  
 import yaml
 from PIL import Image
 
@@ -18,6 +18,7 @@ from u2pl.utils.utils import (
     AverageMeter,
     check_makedirs,
     colorize,
+    gray_mask,
     convert_state_dict,
     create_cityscapes_label_colormap,
     create_pascal_label_colormap,
@@ -58,12 +59,12 @@ def get_parser():
         default=osp.join(current_dir, r"checkpoints/results/"),
         help="results save folder",
     )
-    parser.add_argument(
+    """parser.add_argument(
         "--names_path",
         type=str,
         default="../../vis_meta/cityscapes/cityscapesnames.mat",
         help="path of dataset category names",
-    )
+    )"""
     parser.add_argument(
         "--crop", action="store_true", default=False, help="whether use crop evaluation"
     )
@@ -262,15 +263,15 @@ def valiadte_whole(
         if (i + 1) % 10 == 0:
             logger.info(
                 "Test: [{}/{}] "
-                "Data {data_time.val:.3f} ({data_time.avg:.3f}) "
-                "Batch {batch_time.val:.3f} ({batch_time.avg:.3f}).".format(
+                "Data_Time {data_time.val:.3f} ({data_time.avg:.3f}) "
+                "Batch_Time {batch_time.val:.3f} ({batch_time.avg:.3f}).".format(
                     i + 1, len(data_list), data_time=data_time, batch_time=batch_time
                 )
             )
         check_makedirs(gray_folder)
         check_makedirs(color_folder)
         gray = np.uint8(prediction)
-        color = colorize(gray,colormap)
+        color = gray_mask(gray,colormap)
         image_path, _ = data_list[i]
         image_name = image_path.split("/")[-1].split(".")[0]
         gray_path = os.path.join(gray_folder, image_name + ".png")

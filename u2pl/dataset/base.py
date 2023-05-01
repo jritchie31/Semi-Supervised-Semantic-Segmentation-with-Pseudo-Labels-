@@ -62,9 +62,9 @@ class BaseDataset(Dataset):
         if start_idx >= 0 and end_idx >= 0:
             self.list_sample = self.list_sample[start_idx:end_idx]
 
-        self.num_sample = len(self.list_sample)
-        assert self.num_sample > 0
-        logger.info("# samples: {}".format(self.num_sample))
+        self.usable_sample = len(self.list_sample)
+        assert self.usable_sample > 0
+        logger.info("# usable_samples: {}".format(self.usable_sample))
 
     def img_loader(self, path, mode):
         with open(path, "rb") as f:
@@ -72,4 +72,4 @@ class BaseDataset(Dataset):
             return img.convert(mode)
 
     def __len__(self):
-        return self.num_sample
+        return self.usable_sample

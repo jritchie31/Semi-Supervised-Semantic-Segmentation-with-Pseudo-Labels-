@@ -534,7 +534,7 @@ def init_log(name, level=logging.INFO, log_file_path="training_logs.txt"):
 def convert_state_dict(state_dict):
     new_state_dict = OrderedDict()
     for k, v in state_dict.items():
-        name = k[7:]  # remove `module.`
+        name = k  # remove `module.`
         new_state_dict[name] = v
     return new_state_dict
 
@@ -569,6 +569,14 @@ def colorize(mask, colormap):
         color_mask[mask == i] = colormap[i]
 
     return Image.fromarray(np.uint8(color_mask))
+
+def gray_mask(mask, colormap):
+    gray_mask = np.zeros([mask.shape[0], mask.shape[1]], dtype=np.uint8)
+    a = np.unique(mask)
+    for i in np.unique(mask):
+        gray_mask[mask == i] = colormap[i]
+
+    return Image.fromarray(gray_mask)
 
 
 def check_mkdir(dir_name):
@@ -608,8 +616,13 @@ def intersectionAndUnion(output, target, K):
     # 'K' classes, output and target sizes are N or N * L or N * H * W, each value in range 0 to K - 1.
     assert output.ndim in [1, 2, 3]
     assert output.shape == target.shape
-    output = output.reshape(output.size).copy()
+    output = output.reshape(output.size)
     target = target.reshape(target.size)
+    
+    # Normalize target values to [0, 1]
+    if target.max() == 255:
+        target = (target // 255).astype(np.int64)
+    
     intersection = output[np.where(output == target)[0]]
     area_intersection, _ = np.histogram(intersection, bins=np.arange(K + 1))
     area_output, _ = np.histogram(output, bins=np.arange(K + 1))
@@ -745,8 +758,8 @@ def create_crack_label_colormap():
     Returns:
         A colormap for visualizing segmentation results.
     """
-    colormap = 255 * np.ones((256, 1), dtype=np.uint8)
-    colormap[0] = [0]  # Background (black)
-    colormap[1] = [1]  # Crack (white)
+    colormap = 0 * np.ones((256, 1), dtype=np.uint8)
+    colormap[0] = [0]  # Pavement Background (black)
+    colormap[1] = [255]  # Crack (white)
 
     return colormap

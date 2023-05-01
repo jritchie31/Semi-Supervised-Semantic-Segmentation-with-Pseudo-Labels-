@@ -4,6 +4,7 @@ dataset: # Required.
   train: # 50 labeled images with data augmentation (flip, random resize, random crop) from split 1
     data_root: "/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data"
     data_list: "/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data/Crack_Dataset/data_crack/Data_train/split_1/labeled.txt"
+    seed: 27
     flip: True
     GaussianBlur: False
     #rand_resize: [0.5, 2.0]
@@ -18,7 +19,8 @@ dataset: # Required.
       type: rand
       size: [400, 400] # central crop image with HxW size
   batch_size: 4
-  n_sup: 10 #1132
+  n_sup: 566 #1132
+  p_sup: 0.1
   noise_std: 0.1 # Standard deviation of Gaussian noise added
   workers: 2 # Data loading workers
   # Normalization: mean and standard deviation values provided
@@ -28,7 +30,7 @@ dataset: # Required.
 trainer: # Required.
   epochs: 5 #200
   eval_on: True
-  sup_only_epoch: 1 # warm up epoch is helpful
+  sup_only_epoch: 0 # warm up epoch is helpful
   optimizer:
     type: SGD # stochastic gradient descent
     kwargs:

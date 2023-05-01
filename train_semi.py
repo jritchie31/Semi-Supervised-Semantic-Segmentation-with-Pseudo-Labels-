@@ -47,7 +47,6 @@ experiment_config_dir = osp.join(current_dir, r"experiments/data_crack/ours/conf
 parser = argparse.ArgumentParser(description="Semi-Supervised Semantic Segmentation")
 parser.add_argument("--config", type=str, default=experiment_config_dir)
 parser.add_argument("--local_rank", type=int, default=0)
-parser.add_argument("--seed", type=int, default=0)
 parser.add_argument("--port", default=None, type=int)
 # Add a new command line argument for distributed training
 parser.add_argument("--distributed", action="store_true", help="Enable distributed training")
@@ -65,12 +64,12 @@ def to_device(tensor):
 def main():
     global args, cfg, prototype
     args = parser.parse_args()
-    seed = args.seed
     cfg = yaml.load(open(args.config, "r"), Loader=yaml.Loader)
 
     logger = init_log("global", logging.INFO)
     logger.propagate = 0
 
+    seed = cfg["dataset"]["train"]["seed"]
     cfg["exp_path"] = os.path.dirname(args.config)
     cfg["save_path"] = os.path.join(cfg["exp_path"], cfg["saver"]["snapshot_dir"])
 
@@ -92,9 +91,9 @@ def main():
     else:
         tb_logger = None
 
-    if args.seed is not None:
-        print("set random seed to", args.seed)
-        set_random_seed(args.seed)
+    if seed is not None:
+        print("set random seed to", seed)
+        set_random_seed(seed)
 
     if not osp.exists(cfg["saver"]["snapshot_dir"]) and rank == 0:
         os.makedirs(cfg["saver"]["snapshot_dir"])
@@ -282,10 +281,10 @@ def train(
         loader_u.sampler.set_epoch(epoch)
     loader_l_iter = iter(loader_l)
     loader_u_iter = iter(loader_u)
-    assert len(loader_l) == len(
+    """assert len(loader_l) == len(
         loader_u
     ), f"labeled data {len(loader_l)} unlabeled data {len(loader_u)}, imbalance!"
-
+    """
     if distributed:
         rank, world_size = dist.get_rank(), dist.get_world_size()
     else:
@@ -310,13 +309,19 @@ def train(
 
         image_l, label_l = next(loader_l_iter)
         batch_size, h, w = label_l.size()
+
+        # Show the images and labels
+        #visualize_image_label_batch(image_l, label_l, batch_size)
+        
         image_l, label_l = to_device(image_l), to_device(label_l)
 
         image_u, _ = next(loader_u_iter)
+        # Show the images and labels
+        #visualize_image_label_batch(image_u, _, batch_size)
         image_u = to_device(image_u)
 
         if epoch < cfg["trainer"].get("sup_only_epoch", 1):
-            contra_flag = "none"
+            #contra_flag = "none"
             # forward
             outs = model(image_l)
             pred, rep = outs["pred"], outs["rep"]
@@ -369,6 +374,7 @@ def train(
             # forward
             num_labeled = len(image_l)
             image_all = torch.cat((image_l, image_u_aug))
+            
             outs = model(image_all)
             pred_all, rep_all = outs["pred"], outs["rep"]
             pred_l, pred_u = pred_all[:num_labeled], pred_all[num_labeled:]
@@ -379,6 +385,9 @@ def train(
                 pred_u, size=(h, w), mode="bilinear", align_corners=True
             )
 
+            # Call the function with pred_l_large and pred_u_large as input arguments
+            #visualize_predictions(pred_l_large, pred_u_large)
+            
             # supervised loss
             if "aux_loss" in cfg["net"].keys():
                 aux = outs["aux"][:num_labeled]
@@ -416,7 +425,7 @@ def train(
                     )
                     * cfg["trainer"]["unsupervised"].get("loss_weight", 1)
             )
-
+        """
             # contrastive loss using unreliable pseudo labels
             contra_flag = "none"
             if cfg["trainer"].get("contrastive", False):
@@ -550,9 +559,10 @@ def train(
 
             else:
                 contra_loss = 0 * rep_all.sum()
-
-        loss = sup_loss + unsup_loss + contra_loss
-
+        """
+        #loss = sup_loss + unsup_loss + contra_loss
+        loss = sup_loss + unsup_loss #+ contra_loss
+        
         optimizer.zero_grad()
         loss.backward()
         optimizer.step()
@@ -561,13 +571,7 @@ def train(
         if epoch >= cfg["trainer"].get("sup_only_epoch", 1):
             with torch.no_grad():
                 ema_decay = min(
-                    1
-                    - 1
-                    / (
-                        i_iter
-                        - len(loader_l) * cfg["trainer"].get("sup_only_epoch", 1)
-                        + 1
-                    ),
+                    1 - 1 / (i_iter - len(loader_l) * cfg["trainer"].get("sup_only_epoch", 1) + 1 ),
                     ema_decay_origin,
                 )
                 for t_params, s_params in zip(
@@ -588,33 +592,33 @@ def train(
             dist.all_reduce(reduced_uns_loss)
         uns_losses.update(reduced_uns_loss.item())
 
-        reduced_con_loss = contra_loss.clone().detach()
+        """reduced_con_loss = contra_loss.clone().detach()
         if distributed:
             dist.all_reduce(reduced_con_loss)
-        con_losses.update(reduced_con_loss.item())
+        con_losses.update(reduced_con_loss.item())"""
 
         batch_end = time.time()
         batch_times.update(batch_end - batch_start)
 
         if i_iter % 10 == 0:
             logger.info(
-                "[{}][{}] "
+                "[Num_Sup {}]"#[{}] "
                 "Iter [{}/{}]\t"
-                "Data {data_time.val:.2f} ({data_time.avg:.2f})\t"
-                "Time {batch_time.val:.2f} ({batch_time.avg:.2f})\t"
+                "Data_Time {data_time.val:.2f} ({data_time.avg:.2f})\t"
+                "Batch_Time {batch_time.val:.2f} ({batch_time.avg:.2f})\t"
                 "Sup {sup_loss.val:.3f} ({sup_loss.avg:.3f})\t"
                 "Uns {uns_loss.val:.3f} ({uns_loss.avg:.3f})\t"
-                "Con {con_loss.val:.3f} ({con_loss.avg:.3f})\t"
+                #"Con {con_loss.val:.3f} ({con_loss.avg:.3f})\t"
                 "LR {lr.val:.5f}".format(
                     cfg["dataset"]["n_sup"],
-                    contra_flag,
+                    #contra_flag,
                     i_iter,
                     cfg["trainer"]["epochs"] * len(loader_l),
                     data_time=data_times,
                     batch_time=batch_times,
                     sup_loss=sup_losses,
                     uns_loss=uns_losses,
-                    con_loss=con_losses,
+                    #con_loss=con_losses,
                     lr=learning_rates,
                 )
             )
@@ -622,7 +626,7 @@ def train(
             tb_logger.add_scalar("lr", learning_rates.val, i_iter)
             tb_logger.add_scalar("Sup Loss", sup_losses.val, i_iter)
             tb_logger.add_scalar("Uns Loss", uns_losses.val, i_iter)
-            tb_logger.add_scalar("Con Loss", con_losses.val, i_iter)
+            #tb_logger.add_scalar("Con Loss", con_losses.val, i_iter)
 
 
 def validate(
@@ -688,7 +692,50 @@ def validate(
 
     return mIoU
 
+def visualize_image_label_batch(images, labels, batch_size):
+    fig, axes = plt.subplots(batch_size, 2, figsize=(8, batch_size * 4))
 
+    for i in range(batch_size):
+        image = images[i].squeeze().numpy()
+        label = labels[i].squeeze().numpy()
+
+        axes[i, 0].imshow(image, cmap="gray")
+        axes[i, 0].set_title("Image {}".format(i+1))
+        axes[i, 0].axis("off")
+
+        axes[i, 1].imshow(label, cmap="gray")
+        axes[i, 1].set_title("Label {}".format(i+1))
+        axes[i, 1].axis("off")
+
+    plt.tight_layout()
+    plt.show()
+
+def visualize_predictions(pred_l_large, pred_u_large):
+    pred_l_large_np = pred_l_large.detach().cpu().numpy()
+    pred_u_large_np = pred_u_large.detach().cpu().numpy()
+
+    # Get the class with the highest probability for each pixel
+    pred_l_large_class = np.argmax(pred_l_large_np, axis=1)
+    pred_u_large_class = np.argmax(pred_u_large_np, axis=1)
+
+    num_labeled = pred_l_large_class.shape[0]
+    num_unlabeled = pred_u_large_class.shape[0]
+
+    fig, axes = plt.subplots(max(num_labeled, num_unlabeled), 2, figsize=(8, 10))
+
+    # Visualize labeled predictions
+    for i in range(num_labeled):
+        axes[i, 0].imshow(pred_l_large_class[i], cmap='gray')
+        axes[i, 0].set_title(f'Labeled Prediction {i+1}')
+        axes[i, 0].axis('off')
+
+    # Visualize unlabeled predictions
+    for i in range(num_unlabeled):
+        axes[i, 1].imshow(pred_u_large_class[i], cmap='gray')
+        axes[i, 1].set_title(f'Unlabeled Prediction {i+1}')
+        axes[i, 1].axis('off')
+
+    plt.show()
 
 if __name__ == "__main__":
     main()

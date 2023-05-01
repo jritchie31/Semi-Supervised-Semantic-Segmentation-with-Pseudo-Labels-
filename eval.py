@@ -148,7 +148,12 @@ def main():
         color_folder,
     )
     # cal_acc(data_list, gray_folder, num_classes)
-
+    avg_tp_portion, avg_fp_portion, avg_fn_portion = calculate_metrics(data_list, gray_folder, color_folder, num_classes)
+    
+    logger.info(f"Average True Positive Portion: {avg_tp_portion:.4f}")
+    logger.info(f"Average False Positive Portion: {avg_fp_portion:.4f}")
+    logger.info(f"Average False Negative Portion: {avg_fn_portion:.4f}")
+    logger.info("<<<<<<<<<<<<<<<<< End  Evaluation <<<<<<<<<<<<<<<<<")
 
 @torch.no_grad()
 def net_process(model, image):
@@ -231,14 +236,17 @@ def valiadte_whole(
     model, classes, data_list, mean, std, scales, gray_folder, color_folder
 ):
     logger.info(">>>>>>>>>>>>>>>> Start Evaluation >>>>>>>>>>>>>>>>")
+    intersection_meter = AverageMeter()
+    union_meter = AverageMeter()
     data_time = AverageMeter()
     batch_time = AverageMeter()
     model.eval()
     end = time.time()
-    for i, (input_pth, _) in enumerate(data_list):
+    for i, (input_pth, label_pth) in enumerate(data_list):
         data_time.update(time.time() - end)
         
         image = Image.open(input_pth).convert("L")
+        label = np.asarray(Image.open(label_pth).convert("L"), dtype=np.int64)
 
         image = np.asarray(image).astype(np.float32)
         mean = np.float32(mean)
@@ -258,6 +266,21 @@ def valiadte_whole(
         prediction = (
             torch.max(prediction, dim=0)[1].cpu().numpy()
         )  ##############attention###############
+        
+        num_classes = classes
+        # start to calculate miou
+        intersection, union, target = intersectionAndUnion(
+            prediction, label, num_classes
+        )
+
+        # gather all validation information
+        reduced_intersection = torch.from_numpy(intersection).to(device)
+        reduced_union = torch.from_numpy(union).to(device)
+        reduced_target = torch.from_numpy(target).to(device)
+
+        intersection_meter.update(reduced_intersection.cpu().numpy())
+        union_meter.update(reduced_union.cpu().numpy())
+
         batch_time.update(time.time() - end)
         end = time.time()
         if (i + 1) % 10 == 0:
@@ -268,6 +291,7 @@ def valiadte_whole(
                     i + 1, len(data_list), data_time=data_time, batch_time=batch_time
                 )
             )
+
         check_makedirs(gray_folder)
         check_makedirs(color_folder)
         gray = np.uint8(prediction)
@@ -279,8 +303,64 @@ def valiadte_whole(
         gray = Image.fromarray(gray)
         gray.save(gray_path)
         color.save(color_path)
-    logger.info("<<<<<<<<<<<<<<<<< End  Evaluation <<<<<<<<<<<<<<<<<")
 
+    iou_class = intersection_meter.sum / (union_meter.sum + 1e-10)
+    mIoU = np.mean(iou_class)
+
+    for i, iou in enumerate(iou_class):
+        logger.info(" * class [{}] IoU {:.2f}".format(i, iou * 100))
+    logger.info(" * mIoU {:.2f}".format( mIoU * 100))
+
+def calculate_metrics(data_list, gray_folder, color_folder, num_classes):
+    total_tp = 0
+    total_fp = 0
+    total_fn = 0
+
+    # Create folders for visualizations
+    vis_folder = os.path.join(color_folder, "visualizations")
+    os.makedirs(vis_folder, exist_ok=True)
+
+    for i, (input_path, label_path) in enumerate(data_list):
+        image_name = label_path.split("/")[-1].split(".")[0]
+        color_path = os.path.join(color_folder, image_name + ".png")
+
+        pred = np.array(Image.open(color_path))
+        gt = np.array(Image.open(label_path))
+
+        # Compute True Positive (TP)
+        tp = (pred == 255) & (gt == 255)
+        # Compute False Positive (FP)
+        fp = (pred == 255) & (gt == 0)
+        # Compute False Negative (FN)
+        fn = (pred == 0) & (gt == 255)
+
+        total_tp += np.sum(tp)
+        total_fp += np.sum(fp)
+        total_fn += np.sum(fn)
+
+        # Create TP, FP, and FN color masks
+        tp_color_mask = np.zeros((*tp.shape, 3), dtype=np.uint8)
+        fp_color_mask = np.zeros((*fp.shape, 3), dtype=np.uint8)
+        fn_color_mask = np.zeros((*fn.shape, 3), dtype=np.uint8)
+
+        # Assign colors to TP, FP, and FN
+        tp_color_mask[tp] = [0, 255, 0]  # Green for TP
+        fp_color_mask[fp] = [255, 0, 0]  # Red for FP
+        fn_color_mask[fn] = [0, 0, 255]  # Blue for FN
+
+        # Blend TP, FP, and FN color masks
+        vis = np.maximum.reduce([tp_color_mask, fp_color_mask, fn_color_mask])
+
+        # Save visualization
+        vis_path = os.path.join(vis_folder, image_name + ".png")
+        Image.fromarray(vis).save(vis_path)
+
+    # Calculate average portions
+    avg_tp_portion = total_tp / (total_tp + total_fp + total_fn)
+    avg_fp_portion = total_fp / (total_tp + total_fp + total_fn)
+    avg_fn_portion = total_fn / (total_tp + total_fp + total_fn)
+
+    return avg_tp_portion, avg_fp_portion, avg_fn_portion
 
 if __name__ == "__main__":
     main()

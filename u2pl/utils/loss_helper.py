@@ -289,12 +289,30 @@ def get_criterion(cfg):
 
     return criterion
 
+class DiceLoss(nn.Module):
+    def __init__(self, smooth=1e-5):
+        super(DiceLoss, self).__init__()
+        self.smooth = smooth
+
+    def forward(self, logits, targets):
+        probs = F.softmax(logits, dim=1)
+        num_classes = probs.shape[1]
+        targets = F.one_hot(targets, num_classes).permute(0, 3, 1, 2).float()
+        dims = (0, 2, 3)
+
+        intersection = torch.sum(probs * targets, dims)
+        cardinality = torch.sum(probs * probs, dims) + torch.sum(targets * targets, dims)
+        dice_score = 2. * intersection / (cardinality + self.smooth)
+        return 1. - torch.mean(dice_score)
 
 class Criterion(nn.Module):
-    def __init__(self, aux_weight, use_weight=False):
+    def __init__(self, aux_weight, use_weight=False, ce_weight=0.5, dice_weight=0.5):
         super(Criterion, self).__init__()
         self._aux_weight = aux_weight
         self.use_weight = use_weight
+        self.ce_weight = ce_weight
+        self.dice_weight = dice_weight
+        self.dice_loss = DiceLoss()
         if not use_weight:
             self._criterion = nn.CrossEntropyLoss()
         else:
@@ -336,35 +354,36 @@ class Criterion(nn.Module):
             else:
                 loss1 = self._criterion(main_pred, target)
             loss2 = self._criterion(aux_pred, target)
+            # Add the Dice loss
+            loss1 = self.ce_weight * loss1 + self.dice_weight * self.dice_loss(main_pred, target)
+            loss2 = self.ce_weight * loss2 + self.dice_weight * self.dice_loss(aux_pred, target)
             loss = loss1 + self._aux_weight * loss2
         else:
             pred_h, pred_w = preds.size(2), preds.size(3)
             assert pred_h == h and pred_w == w
             loss = self._criterion(preds, target)
+            # Add the Dice loss
+            loss = self.ce_weight * loss + self.dice_weight * self.dice_loss(preds, target)
         return loss
 
 
 class CriterionOhem(nn.Module):
-    def __init__(
-        self,
-        aux_weight,
-        thresh=0.7,
-        min_kept=100000,
-        use_weight=False,
-    ):
+    def __init__(self, aux_weight, thresh=0.7, min_kept=100000, use_weight=False, ce_weight=0.5, dice_weight=0.5):
         super(CriterionOhem, self).__init__()
         self._aux_weight = aux_weight
+        self.ce_weight = ce_weight
+        self.dice_weight = dice_weight
+        self.dice_loss = DiceLoss()
         self._criterion1 = OhemCrossEntropy2dTensor(
             thresh, min_kept, use_weight
         )
         self._criterion2 = OhemCrossEntropy2dTensor(thresh, min_kept)
 
     def forward(self, preds, target):
-        # Normalize target values to [0, 1] only if the maximum value is greater than 1
         if target.max() == 255:
             target = (target // 255).long()
         h, w = target.size(1), target.size(2)
-        if self._aux_weight > 0:  # require aux loss
+        if self._aux_weight > 0:
             main_pred, aux_pred = preds
             main_h, main_w = main_pred.size(2), main_pred.size(3)
             aux_h, aux_w = aux_pred.size(2), aux_pred.size(3)
@@ -378,13 +397,16 @@ class CriterionOhem(nn.Module):
 
             loss1 = self._criterion1(main_pred, target)
             loss2 = self._criterion2(aux_pred, target)
+            loss1 = self.ce_weight * loss1 + self.dice_weight * self.dice_loss(main_pred, target)
+            loss2 = self.ce_weight * loss2 + self.dice_weight * self.dice_loss(aux_pred, target)
             loss = loss1 + self._aux_weight * loss2
         else:
             pred_h, pred_w = preds.size(2), preds.size(3)
             assert pred_h == h and pred_w == w
-            loss = self._criterion1(preds, target)
+            ce_loss = self._criterion1(preds, target)
+            dl_loss = self.dice_loss(F.softmax(preds, dim=1), target)
+            loss = ce_loss + self.dice_weight * dl_loss
         return loss
-
 
 class OhemCrossEntropy2d(nn.Module):
     def __init__(self, thresh=0.7, min_kept=100000, factor=8):

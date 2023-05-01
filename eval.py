@@ -77,14 +77,30 @@ def get_parser():
     return parser
 
 
-def get_logger():
+def get_logger(log_file="evaluation_output.txt"):
     logger_name = "main-logger"
     logger = logging.getLogger(logger_name)
     logger.setLevel(logging.INFO)
-    handler = logging.StreamHandler()
+
+    # Create a file handler to write logs to a file
+    file_handler = logging.FileHandler(log_file)
+    file_handler.setLevel(logging.INFO)
+
+    # Create a console handler to print logs to the console
+    console_handler = logging.StreamHandler()
+    console_handler.setLevel(logging.INFO)
+
     fmt = "[%(asctime)s %(levelname)s %(filename)s line %(lineno)d %(process)d] %(message)s"
-    handler.setFormatter(logging.Formatter(fmt))
-    logger.addHandler(handler)
+
+    # Set the formatter for both handlers
+    formatter = logging.Formatter(fmt)
+    file_handler.setFormatter(formatter)
+    console_handler.setFormatter(formatter)
+
+    # Add the file and console handlers to the logger
+    logger.addHandler(file_handler)
+    logger.addHandler(console_handler)
+
     return logger
 
 
@@ -92,7 +108,8 @@ def main():
     global args, logger, cfg, colormap
     args = get_parser().parse_args()
     cfg = yaml.load(open(args.config, "r"), Loader=yaml.Loader)
-    logger = get_logger()
+    logger_dir = os.path.join(args.save_folder, "log_file.txt")
+    logger = get_logger(logger_dir)
     logger.info(args)
 
     cfg_dset = cfg["dataset"]
@@ -148,8 +165,11 @@ def main():
         color_folder,
     )
     # cal_acc(data_list, gray_folder, num_classes)
-    avg_tp_portion, avg_fp_portion, avg_fn_portion = calculate_metrics(data_list, gray_folder, color_folder, num_classes)
-    
+    precision, recall, f1_score, avg_tp_portion, avg_fp_portion, avg_fn_portion = calculate_metrics(data_list, gray_folder, color_folder, num_classes)
+        
+    logger.info(f"Precision: {precision:.4f}")
+    logger.info(f"Recall: {recall:.4f}")
+    logger.info(f"F1-Score: {f1_score:.4f}")
     logger.info(f"Average True Positive Portion: {avg_tp_portion:.4f}")
     logger.info(f"Average False Positive Portion: {avg_fp_portion:.4f}")
     logger.info(f"Average False Negative Portion: {avg_fn_portion:.4f}")
@@ -355,12 +375,18 @@ def calculate_metrics(data_list, gray_folder, color_folder, num_classes):
         vis_path = os.path.join(vis_folder, image_name + ".png")
         Image.fromarray(vis).save(vis_path)
 
+    # Calculate precision, recall, and F1-score
+    precision = total_tp / (total_tp + total_fp)
+    recall = total_tp / (total_tp + total_fn)
+    f1_score = 2 * precision * recall / (precision + recall)
+
     # Calculate average portions
     avg_tp_portion = total_tp / (total_tp + total_fp + total_fn)
     avg_fp_portion = total_fp / (total_tp + total_fp + total_fn)
     avg_fn_portion = total_fn / (total_tp + total_fp + total_fn)
 
-    return avg_tp_portion, avg_fp_portion, avg_fn_portion
+    return precision, recall, f1_score, avg_tp_portion, avg_fp_portion, avg_fn_portion
+
 
 if __name__ == "__main__":
     main()

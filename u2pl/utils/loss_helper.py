@@ -46,7 +46,7 @@ def compute_rce_loss(predict, target):
 
     return loss"""
 
-def compute_unsupervised_loss(predict, target, percent, pred_teacher):
+def compute_unsupervised_loss(predict, target, percent, pred_teacher, alpha=0.5):
     batch_size, num_class, h, w = predict.shape
 
     with torch.no_grad():
@@ -61,10 +61,16 @@ def compute_unsupervised_loss(predict, target, percent, pred_teacher):
         weight = batch_size * h * w / (target != -1).sum()
 
     target[target == -1] = -1  # Set ignored pixels to -1
-    
+
+    # Shift target tensor values to non-negative integers
+    target_shifted = target + 1
+
     # Calculate the number of samples for each class in the target tensor
-    class_counts = torch.bincount(target.view(-1), minlength=num_class + 1)[:-1]
-    
+    class_counts = torch.bincount(target_shifted.view(-1), minlength=num_class + 1)[:-1]
+
+    # Shift class counts back to original meaning
+    class_counts = class_counts - 1
+
     # Compute class weights based on the number of samples
     class_weights = 1.0 / (class_counts.float() + 1e-10)
     class_weights = class_weights / class_weights.sum()
@@ -73,7 +79,18 @@ def compute_unsupervised_loss(predict, target, percent, pred_teacher):
     class_weights = class_weights.to(predict.device)
 
     # Calculate the weighted cross-entropy loss
-    loss = weight * F.cross_entropy(predict, target, weight=class_weights, ignore_index=-1)  # [10, 321, 321]
+    ce_loss = weight * F.cross_entropy(predict, target, weight=class_weights, ignore_index=-1)
+
+    # Calculate the Dice loss
+    predict_softmax = F.softmax(predict, dim=1)
+    target_one_hot = F.one_hot(target, num_classes=num_class).permute(0, 3, 1, 2).float().to(predict.device)
+    intersection = torch.sum(predict_softmax * target_one_hot, dim=(2, 3))
+    union = torch.sum(predict_softmax, dim=(2, 3)) + torch.sum(target_one_hot, dim=(2, 3))
+    dice_loss = 1 - (2 * intersection + 1e-10) / (union + 1e-10)
+    dice_loss = torch.mean(dice_loss)
+
+    # Combine the weighted cross-entropy loss and Dice loss
+    loss = alpha * ce_loss + (1 - alpha) * dice_loss
 
     return loss
 

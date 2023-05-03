@@ -20,7 +20,7 @@ dataset: # Required.
       size: [400, 400] # central crop image with HxW size
   batch_size: 4
   #n_sup: 566 #1132
-  p_sup: 1
+  p_sup: 0.3
   noise_std: 0.1 # Standard deviation of Gaussian noise added
   workers: 2 # Data loading workers
   # Normalization: mean and standard deviation values provided

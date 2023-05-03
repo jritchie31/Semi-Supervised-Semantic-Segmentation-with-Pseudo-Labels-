@@ -45,7 +45,9 @@ class crackData(BaseDataset):
         image = self.img_loader(image_path, "L")
         label = self.img_loader(label_path, "L")
         image, label = self.transform(image, label)
-        return image[0], label[0, 0].long()
+
+        # Return image path along with image and label
+        return image[0], label[0, 0].long(), image_path
 
     def __len__(self):
         return self.num_sample

@@ -82,6 +82,11 @@ def get_logger(log_file="evaluation_output.txt"):
     logger = logging.getLogger(logger_name)
     logger.setLevel(logging.INFO)
 
+    # Create the necessary directories if they don't exist
+    log_file_directory = os.path.dirname(log_file)
+    if log_file_directory and not os.path.exists(log_file_directory):
+        os.makedirs(log_file_directory)
+
     # Create a file handler to write logs to a file
     file_handler = logging.FileHandler(log_file)
     file_handler.setLevel(logging.INFO)

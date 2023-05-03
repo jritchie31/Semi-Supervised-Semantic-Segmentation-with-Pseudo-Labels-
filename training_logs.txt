@@ -11634,3 +11634,2258 @@
 [2023-05-01 20:32:05,690][    INFO]  * class [1] IoU 24.65
 [2023-05-01 20:32:05,690][    INFO]  * epoch 4 mIoU 61.67
 [2023-05-01 20:32:07,274][    INFO] [31m * Currently, the best val result is: 61.76[0m
+[2023-05-02 02:15:29,310][    INFO] {'criterion': {'kwargs': {'min_kept': 100000, 'thresh': 0.7}, 'type': 'ohem'},
+ 'dataset': {'batch_size': 4,
+             'mean': [125.5],
+             'n_sup': 566,
+             'noise_std': 0.1,
+             'p_sup': 0,
+             'std': [6],
+             'train': {'GaussianBlur': False,
+                       'crop': {'size': [400, 400], 'type': 'rand'},
+                       'data_list': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data/Crack_Dataset/data_crack/Data_train/split_1/labeled.txt',
+                       'data_root': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data',
+                       'flip': True,
+                       'rand_rotation': [-10.0, 10.0],
+                       'seed': 27},
+             'type': 'crack_semi_portion',
+             'val': {'crop': {'size': [400, 400], 'type': 'rand'},
+                     'data_list': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data/Crack_Dataset/data_crack/Data_test/val_data/val_label.txt',
+                     'data_root': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data'},
+             'workers': 2},
+ 'exp_path': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/experiments/data_crack/ours',
+ 'net': {'aux_loss': {'aux_plane': 1024, 'loss_weight': 0.4},
+         'decoder': {'kwargs': {'dilations': [12, 24, 36], 'inner_planes': 256},
+                     'type': 'u2pl.models.decoder.dec_deeplabv3_plus'},
+         'ema_decay': 0.99,
+         'encoder': {'kwargs': {'fpn': True,
+                                'multi_grid': True,
+                                'replace_stride_with_dilation': [False,
+                                                                 True,
+                                                                 True],
+                                'zero_init_residual': True},
+                     'type': 'u2pl.models.resnet.resnet50'},
+         'num_classes': 2,
+         'sync_bn': True},
+ 'save_path': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/experiments/data_crack/ours/checkpoints',
+ 'saver': {'auto_resume': True, 'pretrain': '', 'snapshot_dir': 'checkpoints'},
+ 'trainer': {'contrastive': {'current_class_negative_threshold': 1,
+                             'current_class_threshold': 0.3,
+                             'high_rank': 20,
+                             'low_entropy_threshold': 20,
+                             'low_rank': 3,
+                             'negative_high_entropy': False,
+                             'num_negatives': 50,
+                             'num_queries': 256,
+                             'temperature': 0.5,
+                             'unsupervised_entropy_ignore': 80},
+             'epochs': 5,
+             'eval_on': True,
+             'lr_scheduler': {'kwargs': {'power': 0.9}, 'mode': 'poly'},
+             'optimizer': {'kwargs': {'lr': 0.002,
+                                      'momentum': 0.9,
+                                      'weight_decay': 0.0005},
+                           'type': 'SGD'},
+             'sup_only_epoch': 0,
+             'unsupervised': True}}
+[2023-05-02 02:16:09,850][    INFO] {'criterion': {'kwargs': {'min_kept': 100000, 'thresh': 0.7}, 'type': 'ohem'},
+ 'dataset': {'batch_size': 4,
+             'mean': [125.5],
+             'n_sup': 566,
+             'noise_std': 0.1,
+             'p_sup': 0,
+             'std': [6],
+             'train': {'GaussianBlur': False,
+                       'crop': {'size': [400, 400], 'type': 'rand'},
+                       'data_list': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data/Crack_Dataset/data_crack/Data_train/split_1/labeled.txt',
+                       'data_root': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data',
+                       'flip': True,
+                       'rand_rotation': [-10.0, 10.0],
+                       'seed': 27},
+             'type': 'crack_semi_portion',
+             'val': {'crop': {'size': [400, 400], 'type': 'rand'},
+                     'data_list': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data/Crack_Dataset/data_crack/Data_test/val_data/val_label.txt',
+                     'data_root': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data'},
+             'workers': 2},
+ 'exp_path': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/experiments/data_crack/ours',
+ 'net': {'aux_loss': {'aux_plane': 1024, 'loss_weight': 0.4},
+         'decoder': {'kwargs': {'dilations': [12, 24, 36], 'inner_planes': 256},
+                     'type': 'u2pl.models.decoder.dec_deeplabv3_plus'},
+         'ema_decay': 0.99,
+         'encoder': {'kwargs': {'fpn': True,
+                                'multi_grid': True,
+                                'replace_stride_with_dilation': [False,
+                                                                 True,
+                                                                 True],
+                                'zero_init_residual': True},
+                     'type': 'u2pl.models.resnet.resnet50'},
+         'num_classes': 2,
+         'sync_bn': True},
+ 'save_path': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/experiments/data_crack/ours/checkpoints',
+ 'saver': {'auto_resume': True, 'pretrain': '', 'snapshot_dir': 'checkpoints'},
+ 'trainer': {'contrastive': {'current_class_negative_threshold': 1,
+                             'current_class_threshold': 0.3,
+                             'high_rank': 20,
+                             'low_entropy_threshold': 20,
+                             'low_rank': 3,
+                             'negative_high_entropy': False,
+                             'num_negatives': 50,
+                             'num_queries': 256,
+                             'temperature': 0.5,
+                             'unsupervised_entropy_ignore': 80},
+             'epochs': 5,
+             'eval_on': True,
+             'lr_scheduler': {'kwargs': {'power': 0.9}, 'mode': 'poly'},
+             'optimizer': {'kwargs': {'lr': 0.002,
+                                      'momentum': 0.9,
+                                      'weight_decay': 0.0005},
+                           'type': 'SGD'},
+             'sup_only_epoch': 0,
+             'unsupervised': True}}
+[2023-05-02 02:17:08,241][    INFO] {'criterion': {'kwargs': {'min_kept': 100000, 'thresh': 0.7}, 'type': 'ohem'},
+ 'dataset': {'batch_size': 4,
+             'mean': [125.5],
+             'n_sup': 566,
+             'noise_std': 0.1,
+             'p_sup': 0,
+             'std': [6],
+             'train': {'GaussianBlur': False,
+                       'crop': {'size': [400, 400], 'type': 'rand'},
+                       'data_list': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data/Crack_Dataset/data_crack/Data_train/split_1/labeled.txt',
+                       'data_root': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data',
+                       'flip': True,
+                       'rand_rotation': [-10.0, 10.0],
+                       'seed': 27},
+             'type': 'crack_semi_portion',
+             'val': {'crop': {'size': [400, 400], 'type': 'rand'},
+                     'data_list': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data/Crack_Dataset/data_crack/Data_test/val_data/val_label.txt',
+                     'data_root': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data'},
+             'workers': 2},
+ 'exp_path': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/experiments/data_crack/ours',
+ 'net': {'aux_loss': {'aux_plane': 1024, 'loss_weight': 0.4},
+         'decoder': {'kwargs': {'dilations': [12, 24, 36], 'inner_planes': 256},
+                     'type': 'u2pl.models.decoder.dec_deeplabv3_plus'},
+         'ema_decay': 0.99,
+         'encoder': {'kwargs': {'fpn': True,
+                                'multi_grid': True,
+                                'replace_stride_with_dilation': [False,
+                                                                 True,
+                                                                 True],
+                                'zero_init_residual': True},
+                     'type': 'u2pl.models.resnet.resnet50'},
+         'num_classes': 2,
+         'sync_bn': True},
+ 'save_path': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/experiments/data_crack/ours/checkpoints',
+ 'saver': {'auto_resume': True, 'pretrain': '', 'snapshot_dir': 'checkpoints'},
+ 'trainer': {'contrastive': {'current_class_negative_threshold': 1,
+                             'current_class_threshold': 0.3,
+                             'high_rank': 20,
+                             'low_entropy_threshold': 20,
+                             'low_rank': 3,
+                             'negative_high_entropy': False,
+                             'num_negatives': 50,
+                             'num_queries': 256,
+                             'temperature': 0.5,
+                             'unsupervised_entropy_ignore': 80},
+             'epochs': 5,
+             'eval_on': True,
+             'lr_scheduler': {'kwargs': {'power': 0.9}, 'mode': 'poly'},
+             'optimizer': {'kwargs': {'lr': 0.002,
+                                      'momentum': 0.9,
+                                      'weight_decay': 0.0005},
+                           'type': 'SGD'},
+             'sup_only_epoch': 0,
+             'unsupervised': True}}
+[2023-05-02 02:17:49,488][    INFO] {'criterion': {'kwargs': {'min_kept': 100000, 'thresh': 0.7}, 'type': 'ohem'},
+ 'dataset': {'batch_size': 4,
+             'mean': [125.5],
+             'n_sup': 566,
+             'noise_std': 0.1,
+             'p_sup': 0,
+             'std': [6],
+             'train': {'GaussianBlur': False,
+                       'crop': {'size': [400, 400], 'type': 'rand'},
+                       'data_list': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data/Crack_Dataset/data_crack/Data_train/split_1/labeled.txt',
+                       'data_root': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data',
+                       'flip': True,
+                       'rand_rotation': [-10.0, 10.0],
+                       'seed': 27},
+             'type': 'crack_semi_portion',
+             'val': {'crop': {'size': [400, 400], 'type': 'rand'},
+                     'data_list': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data/Crack_Dataset/data_crack/Data_test/val_data/val_label.txt',
+                     'data_root': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data'},
+             'workers': 2},
+ 'exp_path': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/experiments/data_crack/ours',
+ 'net': {'aux_loss': {'aux_plane': 1024, 'loss_weight': 0.4},
+         'decoder': {'kwargs': {'dilations': [12, 24, 36], 'inner_planes': 256},
+                     'type': 'u2pl.models.decoder.dec_deeplabv3_plus'},
+         'ema_decay': 0.99,
+         'encoder': {'kwargs': {'fpn': True,
+                                'multi_grid': True,
+                                'replace_stride_with_dilation': [False,
+                                                                 True,
+                                                                 True],
+                                'zero_init_residual': True},
+                     'type': 'u2pl.models.resnet.resnet50'},
+         'num_classes': 2,
+         'sync_bn': True},
+ 'save_path': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/experiments/data_crack/ours/checkpoints',
+ 'saver': {'auto_resume': True, 'pretrain': '', 'snapshot_dir': 'checkpoints'},
+ 'trainer': {'contrastive': {'current_class_negative_threshold': 1,
+                             'current_class_threshold': 0.3,
+                             'high_rank': 20,
+                             'low_entropy_threshold': 20,
+                             'low_rank': 3,
+                             'negative_high_entropy': False,
+                             'num_negatives': 50,
+                             'num_queries': 256,
+                             'temperature': 0.5,
+                             'unsupervised_entropy_ignore': 80},
+             'epochs': 5,
+             'eval_on': True,
+             'lr_scheduler': {'kwargs': {'power': 0.9}, 'mode': 'poly'},
+             'optimizer': {'kwargs': {'lr': 0.002,
+                                      'momentum': 0.9,
+                                      'weight_decay': 0.0005},
+                           'type': 'SGD'},
+             'sup_only_epoch': 0,
+             'unsupervised': True}}
+[2023-05-02 02:26:13,817][    INFO] {'criterion': {'kwargs': {'min_kept': 100000, 'thresh': 0.7}, 'type': 'ohem'},
+ 'dataset': {'batch_size': 4,
+             'mean': [125.5],
+             'n_sup': 566,
+             'noise_std': 0.1,
+             'p_sup': 0,
+             'std': [6],
+             'train': {'GaussianBlur': False,
+                       'crop': {'size': [400, 400], 'type': 'rand'},
+                       'data_list': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data/Crack_Dataset/data_crack/Data_train/split_1/labeled.txt',
+                       'data_root': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data',
+                       'flip': True,
+                       'rand_rotation': [-10.0, 10.0],
+                       'seed': 27},
+             'type': 'crack_semi_portion',
+             'val': {'crop': {'size': [400, 400], 'type': 'rand'},
+                     'data_list': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data/Crack_Dataset/data_crack/Data_test/val_data/val_label.txt',
+                     'data_root': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data'},
+             'workers': 2},
+ 'exp_path': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/experiments/data_crack/ours',
+ 'net': {'aux_loss': {'aux_plane': 1024, 'loss_weight': 0.4},
+         'decoder': {'kwargs': {'dilations': [12, 24, 36], 'inner_planes': 256},
+                     'type': 'u2pl.models.decoder.dec_deeplabv3_plus'},
+         'ema_decay': 0.99,
+         'encoder': {'kwargs': {'fpn': True,
+                                'multi_grid': True,
+                                'replace_stride_with_dilation': [False,
+                                                                 True,
+                                                                 True],
+                                'zero_init_residual': True},
+                     'type': 'u2pl.models.resnet.resnet50'},
+         'num_classes': 2,
+         'sync_bn': True},
+ 'save_path': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/experiments/data_crack/ours/checkpoints',
+ 'saver': {'auto_resume': True, 'pretrain': '', 'snapshot_dir': 'checkpoints'},
+ 'trainer': {'contrastive': {'current_class_negative_threshold': 1,
+                             'current_class_threshold': 0.3,
+                             'high_rank': 20,
+                             'low_entropy_threshold': 20,
+                             'low_rank': 3,
+                             'negative_high_entropy': False,
+                             'num_negatives': 50,
+                             'num_queries': 256,
+                             'temperature': 0.5,
+                             'unsupervised_entropy_ignore': 80},
+             'epochs': 5,
+             'eval_on': True,
+             'lr_scheduler': {'kwargs': {'power': 0.9}, 'mode': 'poly'},
+             'optimizer': {'kwargs': {'lr': 0.002,
+                                      'momentum': 0.9,
+                                      'weight_decay': 0.0005},
+                           'type': 'SGD'},
+             'sup_only_epoch': 0,
+             'unsupervised': True}}
+[2023-05-02 02:27:53,806][    INFO] {'criterion': {'kwargs': {'min_kept': 100000, 'thresh': 0.7}, 'type': 'ohem'},
+ 'dataset': {'batch_size': 4,
+             'mean': [125.5],
+             'n_sup': 566,
+             'noise_std': 0.1,
+             'p_sup': 0,
+             'std': [6],
+             'train': {'GaussianBlur': False,
+                       'crop': {'size': [400, 400], 'type': 'rand'},
+                       'data_list': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data/Crack_Dataset/data_crack/Data_train/split_1/labeled.txt',
+                       'data_root': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data',
+                       'flip': True,
+                       'rand_rotation': [-10.0, 10.0],
+                       'seed': 27},
+             'type': 'crack_semi_portion',
+             'val': {'crop': {'size': [400, 400], 'type': 'rand'},
+                     'data_list': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data/Crack_Dataset/data_crack/Data_test/val_data/val_label.txt',
+                     'data_root': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data'},
+             'workers': 2},
+ 'exp_path': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/experiments/data_crack/ours',
+ 'net': {'aux_loss': {'aux_plane': 1024, 'loss_weight': 0.4},
+         'decoder': {'kwargs': {'dilations': [12, 24, 36], 'inner_planes': 256},
+                     'type': 'u2pl.models.decoder.dec_deeplabv3_plus'},
+         'ema_decay': 0.99,
+         'encoder': {'kwargs': {'fpn': True,
+                                'multi_grid': True,
+                                'replace_stride_with_dilation': [False,
+                                                                 True,
+                                                                 True],
+                                'zero_init_residual': True},
+                     'type': 'u2pl.models.resnet.resnet50'},
+         'num_classes': 2,
+         'sync_bn': True},
+ 'save_path': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/experiments/data_crack/ours/checkpoints',
+ 'saver': {'auto_resume': True, 'pretrain': '', 'snapshot_dir': 'checkpoints'},
+ 'trainer': {'contrastive': {'current_class_negative_threshold': 1,
+                             'current_class_threshold': 0.3,
+                             'high_rank': 20,
+                             'low_entropy_threshold': 20,
+                             'low_rank': 3,
+                             'negative_high_entropy': False,
+                             'num_negatives': 50,
+                             'num_queries': 256,
+                             'temperature': 0.5,
+                             'unsupervised_entropy_ignore': 80},
+             'epochs': 5,
+             'eval_on': True,
+             'lr_scheduler': {'kwargs': {'power': 0.9}, 'mode': 'poly'},
+             'optimizer': {'kwargs': {'lr': 0.002,
+                                      'momentum': 0.9,
+                                      'weight_decay': 0.0005},
+                           'type': 'SGD'},
+             'sup_only_epoch': 0,
+             'unsupervised': True}}
+[2023-05-02 02:27:54,502][    INFO] # usable_samples: 0
+[2023-05-02 02:28:16,153][    INFO] {'criterion': {'kwargs': {'min_kept': 100000, 'thresh': 0.7}, 'type': 'ohem'},
+ 'dataset': {'batch_size': 4,
+             'mean': [125.5],
+             'n_sup': 566,
+             'noise_std': 0.1,
+             'p_sup': 0,
+             'std': [6],
+             'train': {'GaussianBlur': False,
+                       'crop': {'size': [400, 400], 'type': 'rand'},
+                       'data_list': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data/Crack_Dataset/data_crack/Data_train/split_1/labeled.txt',
+                       'data_root': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data',
+                       'flip': True,
+                       'rand_rotation': [-10.0, 10.0],
+                       'seed': 27},
+             'type': 'crack_semi_portion',
+             'val': {'crop': {'size': [400, 400], 'type': 'rand'},
+                     'data_list': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data/Crack_Dataset/data_crack/Data_test/val_data/val_label.txt',
+                     'data_root': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data'},
+             'workers': 2},
+ 'exp_path': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/experiments/data_crack/ours',
+ 'net': {'aux_loss': {'aux_plane': 1024, 'loss_weight': 0.4},
+         'decoder': {'kwargs': {'dilations': [12, 24, 36], 'inner_planes': 256},
+                     'type': 'u2pl.models.decoder.dec_deeplabv3_plus'},
+         'ema_decay': 0.99,
+         'encoder': {'kwargs': {'fpn': True,
+                                'multi_grid': True,
+                                'replace_stride_with_dilation': [False,
+                                                                 True,
+                                                                 True],
+                                'zero_init_residual': True},
+                     'type': 'u2pl.models.resnet.resnet50'},
+         'num_classes': 2,
+         'sync_bn': True},
+ 'save_path': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/experiments/data_crack/ours/checkpoints',
+ 'saver': {'auto_resume': True, 'pretrain': '', 'snapshot_dir': 'checkpoints'},
+ 'trainer': {'contrastive': {'current_class_negative_threshold': 1,
+                             'current_class_threshold': 0.3,
+                             'high_rank': 20,
+                             'low_entropy_threshold': 20,
+                             'low_rank': 3,
+                             'negative_high_entropy': False,
+                             'num_negatives': 50,
+                             'num_queries': 256,
+                             'temperature': 0.5,
+                             'unsupervised_entropy_ignore': 80},
+             'epochs': 5,
+             'eval_on': True,
+             'lr_scheduler': {'kwargs': {'power': 0.9}, 'mode': 'poly'},
+             'optimizer': {'kwargs': {'lr': 0.002,
+                                      'momentum': 0.9,
+                                      'weight_decay': 0.0005},
+                           'type': 'SGD'},
+             'sup_only_epoch': 0,
+             'unsupervised': True}}
+[2023-05-02 02:28:16,850][    INFO] # usable_samples: 0
+[2023-05-02 02:28:16,850][    INFO] # num_samples: 0
+[2023-05-02 02:28:16,852][    INFO] # usable_samples: 1132
+[2023-05-02 02:28:16,853][    INFO] # num_samples: 1132
+[2023-05-02 02:53:59,385][    INFO] {'criterion': {'kwargs': {'min_kept': 100000, 'thresh': 0.7}, 'type': 'ohem'},
+ 'dataset': {'batch_size': 4,
+             'mean': [125.5],
+             'n_sup': 566,
+             'noise_std': 0.1,
+             'p_sup': 0,
+             'std': [6],
+             'train': {'GaussianBlur': False,
+                       'crop': {'size': [400, 400], 'type': 'rand'},
+                       'data_list': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data/Crack_Dataset/data_crack/Data_train/split_1/labeled.txt',
+                       'data_root': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data',
+                       'flip': True,
+                       'rand_rotation': [-10.0, 10.0],
+                       'seed': 27},
+             'type': 'crack_semi_portion',
+             'val': {'crop': {'size': [400, 400], 'type': 'rand'},
+                     'data_list': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data/Crack_Dataset/data_crack/Data_test/val_data/val_label.txt',
+                     'data_root': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data'},
+             'workers': 2},
+ 'exp_path': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/experiments/data_crack/ours',
+ 'net': {'aux_loss': {'aux_plane': 1024, 'loss_weight': 0.4},
+         'decoder': {'kwargs': {'dilations': [12, 24, 36], 'inner_planes': 256},
+                     'type': 'u2pl.models.decoder.dec_deeplabv3_plus'},
+         'ema_decay': 0.99,
+         'encoder': {'kwargs': {'fpn': True,
+                                'multi_grid': True,
+                                'replace_stride_with_dilation': [False,
+                                                                 True,
+                                                                 True],
+                                'zero_init_residual': True},
+                     'type': 'u2pl.models.resnet.resnet50'},
+         'num_classes': 2,
+         'sync_bn': True},
+ 'save_path': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/experiments/data_crack/ours/checkpoints',
+ 'saver': {'auto_resume': True, 'pretrain': '', 'snapshot_dir': 'checkpoints'},
+ 'trainer': {'contrastive': {'current_class_negative_threshold': 1,
+                             'current_class_threshold': 0.3,
+                             'high_rank': 20,
+                             'low_entropy_threshold': 20,
+                             'low_rank': 3,
+                             'negative_high_entropy': False,
+                             'num_negatives': 50,
+                             'num_queries': 256,
+                             'temperature': 0.5,
+                             'unsupervised_entropy_ignore': 80},
+             'epochs': 5,
+             'eval_on': True,
+             'lr_scheduler': {'kwargs': {'power': 0.9}, 'mode': 'poly'},
+             'optimizer': {'kwargs': {'lr': 0.002,
+                                      'momentum': 0.9,
+                                      'weight_decay': 0.0005},
+                           'type': 'SGD'},
+             'sup_only_epoch': 0,
+             'unsupervised': True}}
+[2023-05-02 02:54:00,098][    INFO] # usable_samples: 0
+[2023-05-02 02:54:00,098][    INFO] # num_samples: 0
+[2023-05-02 02:54:00,100][    INFO] # usable_samples: 1132
+[2023-05-02 02:54:00,101][    INFO] # num_samples: 1132
+[2023-05-02 02:57:02,530][    INFO] {'criterion': {'kwargs': {'min_kept': 100000, 'thresh': 0.7}, 'type': 'ohem'},
+ 'dataset': {'batch_size': 4,
+             'mean': [125.5],
+             'n_sup': 566,
+             'noise_std': 0.1,
+             'p_sup': 0,
+             'std': [6],
+             'train': {'GaussianBlur': False,
+                       'crop': {'size': [400, 400], 'type': 'rand'},
+                       'data_list': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data/Crack_Dataset/data_crack/Data_train/split_1/labeled.txt',
+                       'data_root': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data',
+                       'flip': True,
+                       'rand_rotation': [-10.0, 10.0],
+                       'seed': 27},
+             'type': 'crack_semi_portion',
+             'val': {'crop': {'size': [400, 400], 'type': 'rand'},
+                     'data_list': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data/Crack_Dataset/data_crack/Data_test/val_data/val_label.txt',
+                     'data_root': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data'},
+             'workers': 2},
+ 'exp_path': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/experiments/data_crack/ours',
+ 'net': {'aux_loss': {'aux_plane': 1024, 'loss_weight': 0.4},
+         'decoder': {'kwargs': {'dilations': [12, 24, 36], 'inner_planes': 256},
+                     'type': 'u2pl.models.decoder.dec_deeplabv3_plus'},
+         'ema_decay': 0.99,
+         'encoder': {'kwargs': {'fpn': True,
+                                'multi_grid': True,
+                                'replace_stride_with_dilation': [False,
+                                                                 True,
+                                                                 True],
+                                'zero_init_residual': True},
+                     'type': 'u2pl.models.resnet.resnet50'},
+         'num_classes': 2,
+         'sync_bn': True},
+ 'save_path': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/experiments/data_crack/ours/checkpoints',
+ 'saver': {'auto_resume': True, 'pretrain': '', 'snapshot_dir': 'checkpoints'},
+ 'trainer': {'contrastive': {'current_class_negative_threshold': 1,
+                             'current_class_threshold': 0.3,
+                             'high_rank': 20,
+                             'low_entropy_threshold': 20,
+                             'low_rank': 3,
+                             'negative_high_entropy': False,
+                             'num_negatives': 50,
+                             'num_queries': 256,
+                             'temperature': 0.5,
+                             'unsupervised_entropy_ignore': 80},
+             'epochs': 5,
+             'eval_on': True,
+             'lr_scheduler': {'kwargs': {'power': 0.9}, 'mode': 'poly'},
+             'optimizer': {'kwargs': {'lr': 0.002,
+                                      'momentum': 0.9,
+                                      'weight_decay': 0.0005},
+                           'type': 'SGD'},
+             'sup_only_epoch': 0,
+             'unsupervised': True}}
+[2023-05-02 02:57:03,258][    INFO] # usable_samples: 0
+[2023-05-02 02:57:03,258][    INFO] # num_samples: 0
+[2023-05-02 02:57:03,260][    INFO] # usable_samples: 1132
+[2023-05-02 02:57:03,261][    INFO] # num_samples: 1132
+[2023-05-02 02:57:03,263][    INFO] # usable_samples: 0
+[2023-05-02 02:57:03,264][    INFO] # num_samples: 0
+[2023-05-02 16:02:58,714][    INFO] {'criterion': {'kwargs': {'min_kept': 100000, 'thresh': 0.7}, 'type': 'ohem'},
+ 'dataset': {'batch_size': 4,
+             'mean': [125.5],
+             'noise_std': 0.1,
+             'p_sup': 0,
+             'std': [6],
+             'train': {'GaussianBlur': False,
+                       'crop': {'size': [400, 400], 'type': 'rand'},
+                       'data_list': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data/Crack_Dataset/data_crack/Data_train/split_1/labeled.txt',
+                       'data_root': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data',
+                       'flip': True,
+                       'rand_rotation': [-10.0, 10.0],
+                       'seed': 27},
+             'type': 'crack_semi_portion',
+             'val': {'crop': {'size': [400, 400], 'type': 'rand'},
+                     'data_list': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data/Crack_Dataset/data_crack/Data_test/val_data/val_label.txt',
+                     'data_root': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data'},
+             'workers': 2},
+ 'exp_path': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/experiments/data_crack/ours',
+ 'net': {'aux_loss': {'aux_plane': 1024, 'loss_weight': 0.4},
+         'decoder': {'kwargs': {'dilations': [12, 24, 36], 'inner_planes': 256},
+                     'type': 'u2pl.models.decoder.dec_deeplabv3_plus'},
+         'ema_decay': 0.99,
+         'encoder': {'kwargs': {'fpn': True,
+                                'multi_grid': True,
+                                'replace_stride_with_dilation': [False,
+                                                                 True,
+                                                                 True],
+                                'zero_init_residual': True},
+                     'type': 'u2pl.models.resnet.resnet50'},
+         'num_classes': 2,
+         'sync_bn': True},
+ 'save_path': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/experiments/data_crack/ours/checkpoints',
+ 'saver': {'auto_resume': True, 'pretrain': '', 'snapshot_dir': 'checkpoints'},
+ 'trainer': {'contrastive': {'current_class_negative_threshold': 1,
+                             'current_class_threshold': 0.3,
+                             'high_rank': 20,
+                             'low_entropy_threshold': 20,
+                             'low_rank': 3,
+                             'negative_high_entropy': False,
+                             'num_negatives': 50,
+                             'num_queries': 256,
+                             'temperature': 0.5,
+                             'unsupervised_entropy_ignore': 80},
+             'epochs': 5,
+             'eval_on': True,
+             'lr_scheduler': {'kwargs': {'power': 0.9}, 'mode': 'poly'},
+             'optimizer': {'kwargs': {'lr': 0.002,
+                                      'momentum': 0.9,
+                                      'weight_decay': 0.0005},
+                           'type': 'SGD'},
+             'sup_only_epoch': 0,
+             'unsupervised': True}}
+[2023-05-02 16:02:58,750][    INFO] # usable_samples: 1132
+[2023-05-02 16:02:58,752][    INFO] # num_samples: 1132
+[2023-05-02 16:04:42,559][    INFO] {'criterion': {'kwargs': {'min_kept': 100000, 'thresh': 0.7}, 'type': 'ohem'},
+ 'dataset': {'batch_size': 4,
+             'mean': [125.5],
+             'noise_std': 0.1,
+             'p_sup': 0,
+             'std': [6],
+             'train': {'GaussianBlur': False,
+                       'crop': {'size': [400, 400], 'type': 'rand'},
+                       'data_list': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data/Crack_Dataset/data_crack/Data_train/split_1/labeled.txt',
+                       'data_root': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data',
+                       'flip': True,
+                       'rand_rotation': [-10.0, 10.0],
+                       'seed': 27},
+             'type': 'crack_semi_portion',
+             'val': {'crop': {'size': [400, 400], 'type': 'rand'},
+                     'data_list': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data/Crack_Dataset/data_crack/Data_test/val_data/val_label.txt',
+                     'data_root': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data'},
+             'workers': 2},
+ 'exp_path': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/experiments/data_crack/ours',
+ 'net': {'aux_loss': {'aux_plane': 1024, 'loss_weight': 0.4},
+         'decoder': {'kwargs': {'dilations': [12, 24, 36], 'inner_planes': 256},
+                     'type': 'u2pl.models.decoder.dec_deeplabv3_plus'},
+         'ema_decay': 0.99,
+         'encoder': {'kwargs': {'fpn': True,
+                                'multi_grid': True,
+                                'replace_stride_with_dilation': [False,
+                                                                 True,
+                                                                 True],
+                                'zero_init_residual': True},
+                     'type': 'u2pl.models.resnet.resnet50'},
+         'num_classes': 2,
+         'sync_bn': True},
+ 'save_path': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/experiments/data_crack/ours/checkpoints',
+ 'saver': {'auto_resume': True, 'pretrain': '', 'snapshot_dir': 'checkpoints'},
+ 'trainer': {'contrastive': {'current_class_negative_threshold': 1,
+                             'current_class_threshold': 0.3,
+                             'high_rank': 20,
+                             'low_entropy_threshold': 20,
+                             'low_rank': 3,
+                             'negative_high_entropy': False,
+                             'num_negatives': 50,
+                             'num_queries': 256,
+                             'temperature': 0.5,
+                             'unsupervised_entropy_ignore': 80},
+             'epochs': 5,
+             'eval_on': True,
+             'lr_scheduler': {'kwargs': {'power': 0.9}, 'mode': 'poly'},
+             'optimizer': {'kwargs': {'lr': 0.002,
+                                      'momentum': 0.9,
+                                      'weight_decay': 0.0005},
+                           'type': 'SGD'},
+             'sup_only_epoch': 0,
+             'unsupervised': True}}
+[2023-05-02 16:11:58,070][    INFO] {'criterion': {'kwargs': {'min_kept': 100000, 'thresh': 0.7}, 'type': 'ohem'},
+ 'dataset': {'batch_size': 4,
+             'mean': [125.5],
+             'noise_std': 0.1,
+             'p_sup': 0,
+             'std': [6],
+             'train': {'GaussianBlur': False,
+                       'crop': {'size': [400, 400], 'type': 'rand'},
+                       'data_list': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data/Crack_Dataset/data_crack/Data_train/split_1/labeled.txt',
+                       'data_root': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data',
+                       'flip': True,
+                       'rand_rotation': [-10.0, 10.0],
+                       'seed': 27},
+             'type': 'crack_semi_portion',
+             'val': {'crop': {'size': [400, 400], 'type': 'rand'},
+                     'data_list': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data/Crack_Dataset/data_crack/Data_test/val_data/val_label.txt',
+                     'data_root': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data'},
+             'workers': 2},
+ 'exp_path': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/experiments/data_crack/ours',
+ 'net': {'aux_loss': {'aux_plane': 1024, 'loss_weight': 0.4},
+         'decoder': {'kwargs': {'dilations': [12, 24, 36], 'inner_planes': 256},
+                     'type': 'u2pl.models.decoder.dec_deeplabv3_plus'},
+         'ema_decay': 0.99,
+         'encoder': {'kwargs': {'fpn': True,
+                                'multi_grid': True,
+                                'replace_stride_with_dilation': [False,
+                                                                 True,
+                                                                 True],
+                                'zero_init_residual': True},
+                     'type': 'u2pl.models.resnet.resnet50'},
+         'num_classes': 2,
+         'sync_bn': True},
+ 'save_path': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/experiments/data_crack/ours/checkpoints',
+ 'saver': {'auto_resume': True, 'pretrain': '', 'snapshot_dir': 'checkpoints'},
+ 'trainer': {'contrastive': {'current_class_negative_threshold': 1,
+                             'current_class_threshold': 0.3,
+                             'high_rank': 20,
+                             'low_entropy_threshold': 20,
+                             'low_rank': 3,
+                             'negative_high_entropy': False,
+                             'num_negatives': 50,
+                             'num_queries': 256,
+                             'temperature': 0.5,
+                             'unsupervised_entropy_ignore': 80},
+             'epochs': 5,
+             'eval_on': True,
+             'lr_scheduler': {'kwargs': {'power': 0.9}, 'mode': 'poly'},
+             'optimizer': {'kwargs': {'lr': 0.002,
+                                      'momentum': 0.9,
+                                      'weight_decay': 0.0005},
+                           'type': 'SGD'},
+             'sup_only_epoch': 0,
+             'unsupervised': True}}
+[2023-05-02 16:11:58,104][    INFO] # usable_samples: 80
+[2023-05-02 16:11:58,105][    INFO] # num_samples: 80
+[2023-05-02 16:11:58,106][    INFO] # usable_samples: 1132
+[2023-05-02 16:11:58,108][    INFO] # num_samples: 1132
+[2023-05-02 16:11:58,111][    INFO] # usable_samples: 80
+[2023-05-02 16:11:58,111][    INFO] # num_samples: 80
+[2023-05-02 16:12:48,275][    INFO] {'criterion': {'kwargs': {'min_kept': 100000, 'thresh': 0.7}, 'type': 'ohem'},
+ 'dataset': {'batch_size': 4,
+             'mean': [125.5],
+             'noise_std': 0.1,
+             'p_sup': 0,
+             'std': [6],
+             'train': {'GaussianBlur': False,
+                       'crop': {'size': [400, 400], 'type': 'rand'},
+                       'data_list': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data/Crack_Dataset/data_crack/Data_train/split_1/labeled.txt',
+                       'data_root': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data',
+                       'flip': True,
+                       'rand_rotation': [-10.0, 10.0],
+                       'seed': 27},
+             'type': 'crack_semi_portion',
+             'val': {'crop': {'size': [400, 400], 'type': 'rand'},
+                     'data_list': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data/Crack_Dataset/data_crack/Data_test/val_data/val_label.txt',
+                     'data_root': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data'},
+             'workers': 2},
+ 'exp_path': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/experiments/data_crack/ours',
+ 'net': {'aux_loss': {'aux_plane': 1024, 'loss_weight': 0.4},
+         'decoder': {'kwargs': {'dilations': [12, 24, 36], 'inner_planes': 256},
+                     'type': 'u2pl.models.decoder.dec_deeplabv3_plus'},
+         'ema_decay': 0.99,
+         'encoder': {'kwargs': {'fpn': True,
+                                'multi_grid': True,
+                                'replace_stride_with_dilation': [False,
+                                                                 True,
+                                                                 True],
+                                'zero_init_residual': True},
+                     'type': 'u2pl.models.resnet.resnet50'},
+         'num_classes': 2,
+         'sync_bn': True},
+ 'save_path': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/experiments/data_crack/ours/checkpoints',
+ 'saver': {'auto_resume': True, 'pretrain': '', 'snapshot_dir': 'checkpoints'},
+ 'trainer': {'contrastive': {'current_class_negative_threshold': 1,
+                             'current_class_threshold': 0.3,
+                             'high_rank': 20,
+                             'low_entropy_threshold': 20,
+                             'low_rank': 3,
+                             'negative_high_entropy': False,
+                             'num_negatives': 50,
+                             'num_queries': 256,
+                             'temperature': 0.5,
+                             'unsupervised_entropy_ignore': 80},
+             'epochs': 5,
+             'eval_on': True,
+             'lr_scheduler': {'kwargs': {'power': 0.9}, 'mode': 'poly'},
+             'optimizer': {'kwargs': {'lr': 0.002,
+                                      'momentum': 0.9,
+                                      'weight_decay': 0.0005},
+                           'type': 'SGD'},
+             'sup_only_epoch': 0,
+             'unsupervised': True}}
+[2023-05-02 16:12:48,310][    INFO] # usable_samples: 80
+[2023-05-02 16:12:48,310][    INFO] # num_samples: 80
+[2023-05-02 16:12:48,311][    INFO] # usable_samples: 1132
+[2023-05-02 16:12:48,313][    INFO] # num_samples: 1132
+[2023-05-02 16:12:48,317][    INFO] # usable_samples: 80
+[2023-05-02 16:12:48,317][    INFO] # num_samples: 80
+[2023-05-02 16:12:48,317][    INFO] Get loader Done...
+[2023-05-02 16:14:50,775][    INFO] {'criterion': {'kwargs': {'min_kept': 100000, 'thresh': 0.7}, 'type': 'ohem'},
+ 'dataset': {'batch_size': 4,
+             'mean': [125.5],
+             'noise_std': 0.1,
+             'p_sup': 0,
+             'std': [6],
+             'train': {'GaussianBlur': False,
+                       'crop': {'size': [400, 400], 'type': 'rand'},
+                       'data_list': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data/Crack_Dataset/data_crack/Data_train/split_1/labeled.txt',
+                       'data_root': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data',
+                       'flip': True,
+                       'rand_rotation': [-10.0, 10.0],
+                       'seed': 27},
+             'type': 'crack_semi_portion',
+             'val': {'crop': {'size': [400, 400], 'type': 'rand'},
+                     'data_list': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data/Crack_Dataset/data_crack/Data_test/val_data/val_label.txt',
+                     'data_root': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data'},
+             'workers': 2},
+ 'exp_path': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/experiments/data_crack/ours',
+ 'net': {'aux_loss': {'aux_plane': 1024, 'loss_weight': 0.4},
+         'decoder': {'kwargs': {'dilations': [12, 24, 36], 'inner_planes': 256},
+                     'type': 'u2pl.models.decoder.dec_deeplabv3_plus'},
+         'ema_decay': 0.99,
+         'encoder': {'kwargs': {'fpn': True,
+                                'multi_grid': True,
+                                'replace_stride_with_dilation': [False,
+                                                                 True,
+                                                                 True],
+                                'zero_init_residual': True},
+                     'type': 'u2pl.models.resnet.resnet50'},
+         'num_classes': 2,
+         'sync_bn': True},
+ 'save_path': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/experiments/data_crack/ours/checkpoints',
+ 'saver': {'auto_resume': True, 'pretrain': '', 'snapshot_dir': 'checkpoints'},
+ 'trainer': {'contrastive': {'current_class_negative_threshold': 1,
+                             'current_class_threshold': 0.3,
+                             'high_rank': 20,
+                             'low_entropy_threshold': 20,
+                             'low_rank': 3,
+                             'negative_high_entropy': False,
+                             'num_negatives': 50,
+                             'num_queries': 256,
+                             'temperature': 0.5,
+                             'unsupervised_entropy_ignore': 80},
+             'epochs': 5,
+             'eval_on': True,
+             'lr_scheduler': {'kwargs': {'power': 0.9}, 'mode': 'poly'},
+             'optimizer': {'kwargs': {'lr': 0.002,
+                                      'momentum': 0.9,
+                                      'weight_decay': 0.0005},
+                           'type': 'SGD'},
+             'sup_only_epoch': 0,
+             'unsupervised': True}}
+[2023-05-02 16:14:50,809][    INFO] # usable_samples: 80
+[2023-05-02 16:14:50,809][    INFO] # num_samples: 80
+[2023-05-02 16:14:50,811][    INFO] # usable_samples: 1132
+[2023-05-02 16:14:50,812][    INFO] # num_samples: 1132
+[2023-05-02 16:14:50,815][    INFO] # usable_samples: 80
+[2023-05-02 16:14:50,816][    INFO] # num_samples: 80
+[2023-05-02 16:14:50,816][    INFO] Get loader Done...
+[2023-05-02 16:14:51,560][    INFO] The kwargs for lr scheduler: 0.9
+[2023-05-02 16:25:47,440][    INFO] {'criterion': {'kwargs': {'min_kept': 100000, 'thresh': 0.7}, 'type': 'ohem'},
+ 'dataset': {'batch_size': 4,
+             'mean': [125.5],
+             'noise_std': 0.1,
+             'p_sup': 0.5,
+             'std': [6],
+             'train': {'GaussianBlur': False,
+                       'crop': {'size': [400, 400], 'type': 'rand'},
+                       'data_list': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data/Crack_Dataset/data_crack/Data_train/split_1/labeled.txt',
+                       'data_root': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data',
+                       'flip': True,
+                       'rand_rotation': [-10.0, 10.0],
+                       'seed': 27},
+             'type': 'crack_semi_portion',
+             'val': {'crop': {'size': [400, 400], 'type': 'rand'},
+                     'data_list': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data/Crack_Dataset/data_crack/Data_test/val_data/val_label.txt',
+                     'data_root': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data'},
+             'workers': 2},
+ 'exp_path': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/experiments/data_crack/ours',
+ 'net': {'aux_loss': {'aux_plane': 1024, 'loss_weight': 0.4},
+         'decoder': {'kwargs': {'dilations': [12, 24, 36], 'inner_planes': 256},
+                     'type': 'u2pl.models.decoder.dec_deeplabv3_plus'},
+         'ema_decay': 0.99,
+         'encoder': {'kwargs': {'fpn': True,
+                                'multi_grid': True,
+                                'replace_stride_with_dilation': [False,
+                                                                 True,
+                                                                 True],
+                                'zero_init_residual': True},
+                     'type': 'u2pl.models.resnet.resnet50'},
+         'num_classes': 2,
+         'sync_bn': True},
+ 'save_path': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/experiments/data_crack/ours/checkpoints',
+ 'saver': {'auto_resume': True, 'pretrain': '', 'snapshot_dir': 'checkpoints'},
+ 'trainer': {'contrastive': {'current_class_negative_threshold': 1,
+                             'current_class_threshold': 0.3,
+                             'high_rank': 20,
+                             'low_entropy_threshold': 20,
+                             'low_rank': 3,
+                             'negative_high_entropy': False,
+                             'num_negatives': 50,
+                             'num_queries': 256,
+                             'temperature': 0.5,
+                             'unsupervised_entropy_ignore': 80},
+             'epochs': 5,
+             'eval_on': True,
+             'lr_scheduler': {'kwargs': {'power': 0.9}, 'mode': 'poly'},
+             'optimizer': {'kwargs': {'lr': 0.002,
+                                      'momentum': 0.9,
+                                      'weight_decay': 0.0005},
+                           'type': 'SGD'},
+             'sup_only_epoch': 0,
+             'unsupervised': True}}
+[2023-05-02 16:25:48,191][    INFO] # usable_samples: 80
+[2023-05-02 16:25:48,191][    INFO] # num_samples: 80
+[2023-05-02 16:25:48,192][    INFO] # usable_samples: 566
+[2023-05-02 16:27:32,539][    INFO] {'criterion': {'kwargs': {'min_kept': 100000, 'thresh': 0.7}, 'type': 'ohem'},
+ 'dataset': {'batch_size': 4,
+             'mean': [125.5],
+             'noise_std': 0.1,
+             'p_sup': 0.5,
+             'std': [6],
+             'train': {'GaussianBlur': False,
+                       'crop': {'size': [400, 400], 'type': 'rand'},
+                       'data_list': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data/Crack_Dataset/data_crack/Data_train/split_1/labeled.txt',
+                       'data_root': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data',
+                       'flip': True,
+                       'rand_rotation': [-10.0, 10.0],
+                       'seed': 27},
+             'type': 'crack_semi_portion',
+             'val': {'crop': {'size': [400, 400], 'type': 'rand'},
+                     'data_list': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data/Crack_Dataset/data_crack/Data_test/val_data/val_label.txt',
+                     'data_root': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data'},
+             'workers': 2},
+ 'exp_path': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/experiments/data_crack/ours',
+ 'net': {'aux_loss': {'aux_plane': 1024, 'loss_weight': 0.4},
+         'decoder': {'kwargs': {'dilations': [12, 24, 36], 'inner_planes': 256},
+                     'type': 'u2pl.models.decoder.dec_deeplabv3_plus'},
+         'ema_decay': 0.99,
+         'encoder': {'kwargs': {'fpn': True,
+                                'multi_grid': True,
+                                'replace_stride_with_dilation': [False,
+                                                                 True,
+                                                                 True],
+                                'zero_init_residual': True},
+                     'type': 'u2pl.models.resnet.resnet50'},
+         'num_classes': 2,
+         'sync_bn': True},
+ 'save_path': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/experiments/data_crack/ours/checkpoints',
+ 'saver': {'auto_resume': True, 'pretrain': '', 'snapshot_dir': 'checkpoints'},
+ 'trainer': {'contrastive': {'current_class_negative_threshold': 1,
+                             'current_class_threshold': 0.3,
+                             'high_rank': 20,
+                             'low_entropy_threshold': 20,
+                             'low_rank': 3,
+                             'negative_high_entropy': False,
+                             'num_negatives': 50,
+                             'num_queries': 256,
+                             'temperature': 0.5,
+                             'unsupervised_entropy_ignore': 80},
+             'epochs': 5,
+             'eval_on': True,
+             'lr_scheduler': {'kwargs': {'power': 0.9}, 'mode': 'poly'},
+             'optimizer': {'kwargs': {'lr': 0.002,
+                                      'momentum': 0.9,
+                                      'weight_decay': 0.0005},
+                           'type': 'SGD'},
+             'sup_only_epoch': 0,
+             'unsupervised': True}}
+[2023-05-02 16:27:33,255][    INFO] # usable_samples: 80
+[2023-05-02 16:27:33,255][    INFO] # num_samples: 80
+[2023-05-02 16:27:33,256][    INFO] # usable_samples: 566
+[2023-05-02 16:27:33,257][    INFO] # num_samples: 566
+[2023-05-02 16:27:33,257][    INFO] # usable_samples: 566
+[2023-05-02 16:27:33,258][    INFO] # num_samples: 566
+[2023-05-02 16:27:33,261][    INFO] # usable_samples: 80
+[2023-05-02 16:27:33,261][    INFO] # num_samples: 80
+[2023-05-02 16:27:33,262][    INFO] # usable_samples: 566
+[2023-05-02 16:27:33,262][    INFO] # num_samples: 566
+[2023-05-02 16:27:33,262][    INFO] Get loader Done...
+[2023-05-02 16:27:33,832][    INFO] The kwargs for lr scheduler: 0.9
+[2023-05-02 16:32:39,523][    INFO] {'criterion': {'kwargs': {'min_kept': 100000, 'thresh': 0.7}, 'type': 'ohem'},
+ 'dataset': {'batch_size': 4,
+             'mean': [125.5],
+             'noise_std': 0.1,
+             'p_sup': 0.5,
+             'std': [6],
+             'train': {'GaussianBlur': False,
+                       'crop': {'size': [400, 400], 'type': 'rand'},
+                       'data_list': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data/Crack_Dataset/data_crack/Data_train/split_1/labeled.txt',
+                       'data_root': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data',
+                       'flip': True,
+                       'rand_rotation': [-10.0, 10.0],
+                       'seed': 27},
+             'type': 'crack_semi_portion',
+             'val': {'crop': {'size': [400, 400], 'type': 'rand'},
+                     'data_list': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data/Crack_Dataset/data_crack/Data_test/val_data/val_label.txt',
+                     'data_root': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data'},
+             'workers': 2},
+ 'exp_path': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/experiments/data_crack/ours',
+ 'net': {'aux_loss': {'aux_plane': 1024, 'loss_weight': 0.4},
+         'decoder': {'kwargs': {'dilations': [12, 24, 36], 'inner_planes': 256},
+                     'type': 'u2pl.models.decoder.dec_deeplabv3_plus'},
+         'ema_decay': 0.99,
+         'encoder': {'kwargs': {'fpn': True,
+                                'multi_grid': True,
+                                'replace_stride_with_dilation': [False,
+                                                                 True,
+                                                                 True],
+                                'zero_init_residual': True},
+                     'type': 'u2pl.models.resnet.resnet50'},
+         'num_classes': 2,
+         'sync_bn': True},
+ 'save_path': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/experiments/data_crack/ours/checkpoints',
+ 'saver': {'auto_resume': True, 'pretrain': '', 'snapshot_dir': 'checkpoints'},
+ 'trainer': {'contrastive': {'current_class_negative_threshold': 1,
+                             'current_class_threshold': 0.3,
+                             'high_rank': 20,
+                             'low_entropy_threshold': 20,
+                             'low_rank': 3,
+                             'negative_high_entropy': False,
+                             'num_negatives': 50,
+                             'num_queries': 256,
+                             'temperature': 0.5,
+                             'unsupervised_entropy_ignore': 80},
+             'epochs': 5,
+             'eval_on': True,
+             'lr_scheduler': {'kwargs': {'power': 0.9}, 'mode': 'poly'},
+             'optimizer': {'kwargs': {'lr': 0.002,
+                                      'momentum': 0.9,
+                                      'weight_decay': 0.0005},
+                           'type': 'SGD'},
+             'sup_only_epoch': 0,
+             'unsupervised': True}}
+[2023-05-02 16:32:40,215][    INFO] # usable_samples: 80
+[2023-05-02 16:32:40,216][    INFO] # num_samples: 80
+[2023-05-02 16:32:40,216][    INFO] # usable_samples: 566
+[2023-05-02 16:32:40,217][    INFO] # num_samples: 566
+[2023-05-02 16:32:40,218][    INFO] # usable_samples: 566
+[2023-05-02 16:32:40,218][    INFO] # num_samples: 566
+[2023-05-02 16:32:40,221][    INFO] # usable_samples: 80
+[2023-05-02 16:32:40,221][    INFO] # num_samples: 80
+[2023-05-02 16:32:40,222][    INFO] # usable_samples: 566
+[2023-05-02 16:32:40,222][    INFO] # num_samples: 566
+[2023-05-02 16:32:40,222][    INFO] Get loader Done...
+[2023-05-02 16:32:40,794][    INFO] The kwargs for lr scheduler: 0.9
+[2023-05-02 16:34:34,458][    INFO] {'criterion': {'kwargs': {'min_kept': 100000, 'thresh': 0.7}, 'type': 'ohem'},
+ 'dataset': {'batch_size': 4,
+             'mean': [125.5],
+             'noise_std': 0.1,
+             'p_sup': 0.5,
+             'std': [6],
+             'train': {'GaussianBlur': False,
+                       'crop': {'size': [400, 400], 'type': 'rand'},
+                       'data_list': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data/Crack_Dataset/data_crack/Data_train/split_1/labeled.txt',
+                       'data_root': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data',
+                       'flip': True,
+                       'rand_rotation': [-10.0, 10.0],
+                       'seed': 27},
+             'type': 'crack_semi_portion',
+             'val': {'crop': {'size': [400, 400], 'type': 'rand'},
+                     'data_list': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data/Crack_Dataset/data_crack/Data_test/val_data/val_label.txt',
+                     'data_root': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data'},
+             'workers': 2},
+ 'exp_path': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/experiments/data_crack/ours',
+ 'net': {'aux_loss': {'aux_plane': 1024, 'loss_weight': 0.4},
+         'decoder': {'kwargs': {'dilations': [12, 24, 36], 'inner_planes': 256},
+                     'type': 'u2pl.models.decoder.dec_deeplabv3_plus'},
+         'ema_decay': 0.99,
+         'encoder': {'kwargs': {'fpn': True,
+                                'multi_grid': True,
+                                'replace_stride_with_dilation': [False,
+                                                                 True,
+                                                                 True],
+                                'zero_init_residual': True},
+                     'type': 'u2pl.models.resnet.resnet50'},
+         'num_classes': 2,
+         'sync_bn': True},
+ 'save_path': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/experiments/data_crack/ours/checkpoints',
+ 'saver': {'auto_resume': True, 'pretrain': '', 'snapshot_dir': 'checkpoints'},
+ 'trainer': {'contrastive': {'current_class_negative_threshold': 1,
+                             'current_class_threshold': 0.3,
+                             'high_rank': 20,
+                             'low_entropy_threshold': 20,
+                             'low_rank': 3,
+                             'negative_high_entropy': False,
+                             'num_negatives': 50,
+                             'num_queries': 256,
+                             'temperature': 0.5,
+                             'unsupervised_entropy_ignore': 80},
+             'epochs': 5,
+             'eval_on': True,
+             'lr_scheduler': {'kwargs': {'power': 0.9}, 'mode': 'poly'},
+             'optimizer': {'kwargs': {'lr': 0.002,
+                                      'momentum': 0.9,
+                                      'weight_decay': 0.0005},
+                           'type': 'SGD'},
+             'sup_only_epoch': 0,
+             'unsupervised': {'TTA': True,
+                              'apply_aug': 'cutmix',
+                              'drop_percent': 80,
+                              'enable': True}}}
+[2023-05-02 16:34:35,140][    INFO] # usable_samples: 80
+[2023-05-02 16:34:35,141][    INFO] # num_samples: 80
+[2023-05-02 16:34:35,141][    INFO] # usable_samples: 566
+[2023-05-02 16:34:35,142][    INFO] # num_samples: 566
+[2023-05-02 16:34:35,143][    INFO] # usable_samples: 566
+[2023-05-02 16:34:35,143][    INFO] # num_samples: 566
+[2023-05-02 16:34:35,146][    INFO] # usable_samples: 80
+[2023-05-02 16:34:35,147][    INFO] # num_samples: 80
+[2023-05-02 16:34:35,147][    INFO] # usable_samples: 566
+[2023-05-02 16:34:35,147][    INFO] # num_samples: 566
+[2023-05-02 16:34:35,147][    INFO] Get loader Done...
+[2023-05-02 16:34:35,716][    INFO] The kwargs for lr scheduler: 0.9
+[2023-05-02 16:36:08,842][    INFO] {'criterion': {'kwargs': {'min_kept': 100000, 'thresh': 0.7}, 'type': 'ohem'},
+ 'dataset': {'batch_size': 4,
+             'mean': [125.5],
+             'noise_std': 0.1,
+             'p_sup': 0.5,
+             'std': [6],
+             'train': {'GaussianBlur': False,
+                       'crop': {'size': [400, 400], 'type': 'rand'},
+                       'data_list': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data/Crack_Dataset/data_crack/Data_train/split_1/labeled.txt',
+                       'data_root': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data',
+                       'flip': True,
+                       'rand_rotation': [-10.0, 10.0],
+                       'seed': 27},
+             'type': 'crack_semi_portion',
+             'val': {'crop': {'size': [400, 400], 'type': 'rand'},
+                     'data_list': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data/Crack_Dataset/data_crack/Data_test/val_data/val_label.txt',
+                     'data_root': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data'},
+             'workers': 2},
+ 'exp_path': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/experiments/data_crack/ours',
+ 'net': {'aux_loss': {'aux_plane': 1024, 'loss_weight': 0.4},
+         'decoder': {'kwargs': {'dilations': [12, 24, 36], 'inner_planes': 256},
+                     'type': 'u2pl.models.decoder.dec_deeplabv3_plus'},
+         'ema_decay': 0.99,
+         'encoder': {'kwargs': {'fpn': True,
+                                'multi_grid': True,
+                                'replace_stride_with_dilation': [False,
+                                                                 True,
+                                                                 True],
+                                'zero_init_residual': True},
+                     'type': 'u2pl.models.resnet.resnet50'},
+         'num_classes': 2,
+         'sync_bn': True},
+ 'save_path': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/experiments/data_crack/ours/checkpoints',
+ 'saver': {'auto_resume': True, 'pretrain': '', 'snapshot_dir': 'checkpoints'},
+ 'trainer': {'contrastive': {'current_class_negative_threshold': 1,
+                             'current_class_threshold': 0.3,
+                             'high_rank': 20,
+                             'low_entropy_threshold': 20,
+                             'low_rank': 3,
+                             'negative_high_entropy': False,
+                             'num_negatives': 50,
+                             'num_queries': 256,
+                             'temperature': 0.5,
+                             'unsupervised_entropy_ignore': 80},
+             'epochs': 5,
+             'eval_on': True,
+             'lr_scheduler': {'kwargs': {'power': 0.9}, 'mode': 'poly'},
+             'optimizer': {'kwargs': {'lr': 0.002,
+                                      'momentum': 0.9,
+                                      'weight_decay': 0.0005},
+                           'type': 'SGD'},
+             'sup_only_epoch': 0,
+             'unsupervised': {'TTA': True,
+                              'apply_aug': 'cutmix',
+                              'drop_percent': 80,
+                              'enable': True}}}
+[2023-05-02 16:36:09,545][    INFO] # usable_samples: 80
+[2023-05-02 16:36:09,545][    INFO] # num_samples: 80
+[2023-05-02 16:36:09,546][    INFO] # usable_samples: 566
+[2023-05-02 16:36:09,547][    INFO] # num_samples: 566
+[2023-05-02 16:36:09,547][    INFO] # usable_samples: 566
+[2023-05-02 16:36:09,548][    INFO] # num_samples: 566
+[2023-05-02 16:36:09,551][    INFO] # usable_samples: 80
+[2023-05-02 16:36:09,551][    INFO] # num_samples: 80
+[2023-05-02 16:36:09,552][    INFO] # usable_samples: 566
+[2023-05-02 16:36:09,552][    INFO] # num_samples: 566
+[2023-05-02 16:36:09,552][    INFO] Get loader Done...
+[2023-05-02 16:36:10,132][    INFO] The kwargs for lr scheduler: 0.9
+[2023-05-02 16:36:33,163][    INFO] [P_Sup 0.5]Iter [0/705]	Data_Time 0.00 (0.00)	Batch_Time 19.04 (19.04)	Sup 0.779 (0.779)	Uns 1.099 (1.099)	LR 0.00200
+[2023-05-02 16:37:52,650][    INFO] [P_Sup 0.5]Iter [10/705]	Data_Time 0.00 (0.01)	Batch_Time 8.96 (7.94)	Sup 0.594 (0.781)	Uns 0.457 (0.657)	LR 0.00198
+[2023-05-02 16:47:31,738][    INFO] [P_Sup 0.5]Iter [20/705]	Data_Time 0.00 (0.00)	Batch_Time 9.39 (57.91)	Sup 0.461 (0.515)	Uns 0.310 (0.354)	LR 0.00195
+[2023-05-02 16:49:15,607][    INFO] [P_Sup 0.5]Iter [30/705]	Data_Time 0.00 (0.00)	Batch_Time 9.83 (10.38)	Sup 0.368 (0.415)	Uns 0.284 (0.294)	LR 0.00193
+[2023-05-02 16:50:52,242][    INFO] [P_Sup 0.5]Iter [40/705]	Data_Time 0.00 (0.00)	Batch_Time 9.54 (9.66)	Sup 0.276 (0.299)	Uns 0.284 (0.278)	LR 0.00190
+[2023-05-02 16:52:37,917][    INFO] [P_Sup 0.5]Iter [50/705]	Data_Time 0.00 (0.00)	Batch_Time 7.65 (10.56)	Sup 0.151 (0.285)	Uns 0.280 (0.282)	LR 0.00187
+[2023-05-02 16:54:17,452][    INFO] [P_Sup 0.5]Iter [60/705]	Data_Time 0.00 (0.00)	Batch_Time 9.16 (9.95)	Sup 0.291 (0.254)	Uns 0.274 (0.271)	LR 0.00185
+[2023-05-02 16:56:08,277][    INFO] [P_Sup 0.5]Iter [70/705]	Data_Time 0.00 (0.00)	Batch_Time 15.37 (11.08)	Sup 0.370 (0.255)	Uns 0.259 (0.267)	LR 0.00182
+[2023-05-02 16:58:08,019][    INFO] [P_Sup 0.5]Iter [80/705]	Data_Time 0.00 (0.00)	Batch_Time 10.78 (11.97)	Sup 0.198 (0.265)	Uns 0.281 (0.271)	LR 0.00180
+[2023-05-02 17:00:06,110][    INFO] [P_Sup 0.5]Iter [90/705]	Data_Time 0.00 (0.00)	Batch_Time 12.59 (11.81)	Sup 0.254 (0.252)	Uns 0.268 (0.273)	LR 0.00177
+[2023-05-02 17:01:50,020][    INFO] [P_Sup 0.5]Iter [100/705]	Data_Time 0.00 (0.00)	Batch_Time 9.28 (10.39)	Sup 0.188 (0.262)	Uns 0.276 (0.261)	LR 0.00175
+[2023-05-02 17:02:47,524][    INFO] {'criterion': {'kwargs': {'min_kept': 100000, 'thresh': 0.7}, 'type': 'ohem'},
+ 'dataset': {'batch_size': 4,
+             'mean': [125.5],
+             'noise_std': 0.1,
+             'p_sup': 0.3,
+             'std': [6],
+             'train': {'GaussianBlur': False,
+                       'crop': {'size': [400, 400], 'type': 'rand'},
+                       'data_list': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data/Crack_Dataset/data_crack/Data_train/split_1/labeled.txt',
+                       'data_root': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data',
+                       'flip': True,
+                       'rand_rotation': [-10.0, 10.0],
+                       'seed': 27},
+             'type': 'crack_semi_portion',
+             'val': {'crop': {'size': [400, 400], 'type': 'rand'},
+                     'data_list': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data/Crack_Dataset/data_crack/Data_test/val_data/val_label.txt',
+                     'data_root': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data'},
+             'workers': 2},
+ 'exp_path': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/experiments/data_crack/ours',
+ 'net': {'aux_loss': {'aux_plane': 1024, 'loss_weight': 0.4},
+         'decoder': {'kwargs': {'dilations': [12, 24, 36], 'inner_planes': 256},
+                     'type': 'u2pl.models.decoder.dec_deeplabv3_plus'},
+         'ema_decay': 0.99,
+         'encoder': {'kwargs': {'fpn': True,
+                                'multi_grid': True,
+                                'replace_stride_with_dilation': [False,
+                                                                 True,
+                                                                 True],
+                                'zero_init_residual': True},
+                     'type': 'u2pl.models.resnet.resnet50'},
+         'num_classes': 2,
+         'sync_bn': True},
+ 'save_path': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/experiments/data_crack/ours/checkpoints',
+ 'saver': {'auto_resume': True, 'pretrain': '', 'snapshot_dir': 'checkpoints'},
+ 'trainer': {'contrastive': {'current_class_negative_threshold': 1,
+                             'current_class_threshold': 0.3,
+                             'high_rank': 20,
+                             'low_entropy_threshold': 20,
+                             'low_rank': 3,
+                             'negative_high_entropy': False,
+                             'num_negatives': 50,
+                             'num_queries': 256,
+                             'temperature': 0.5,
+                             'unsupervised_entropy_ignore': 80},
+             'epochs': 5,
+             'eval_on': True,
+             'lr_scheduler': {'kwargs': {'power': 0.9}, 'mode': 'poly'},
+             'optimizer': {'kwargs': {'lr': 0.002,
+                                      'momentum': 0.9,
+                                      'weight_decay': 0.0005},
+                           'type': 'SGD'},
+             'sup_only_epoch': 0,
+             'unsupervised': {'TTA': True,
+                              'apply_aug': 'cutmix',
+                              'drop_percent': 80,
+                              'enable': True}}}
+[2023-05-02 17:02:48,218][    INFO] # usable_samples: 80
+[2023-05-02 17:02:48,219][    INFO] # num_samples: 80
+[2023-05-02 17:02:48,219][    INFO] # usable_samples: 339
+[2023-05-02 17:02:48,220][    INFO] # num_samples: 340
+[2023-05-02 17:02:48,221][    INFO] # usable_samples: 793
+[2023-05-02 17:02:48,222][    INFO] # num_samples: 792
+[2023-05-02 17:02:48,224][    INFO] # usable_samples: 80
+[2023-05-02 17:02:48,225][    INFO] # num_samples: 80
+[2023-05-02 17:02:48,225][    INFO] # usable_samples: 339
+[2023-05-02 17:02:48,225][    INFO] # num_samples: 339
+[2023-05-02 17:02:48,225][    INFO] Get loader Done...
+[2023-05-02 17:02:48,783][    INFO] The kwargs for lr scheduler: 0.9
+[2023-05-02 17:03:29,774][    INFO] [P_Sup 0.3]Iter [0/425]	Data_Time 0.00 (0.00)	Batch_Time 11.61 (11.61)	Sup 0.792 (0.792)	Uns 0.993 (0.993)	LR 0.00200
+[2023-05-02 17:04:47,841][    INFO] [P_Sup 0.3]Iter [10/425]	Data_Time 0.00 (0.01)	Batch_Time 7.32 (7.80)	Sup 0.770 (0.803)	Uns 0.736 (0.906)	LR 0.00196
+[2023-05-02 17:06:09,705][    INFO] [P_Sup 0.3]Iter [20/425]	Data_Time 0.00 (0.00)	Batch_Time 9.83 (8.19)	Sup 0.440 (0.560)	Uns 0.333 (0.428)	LR 0.00192
+[2023-05-02 17:09:07,398][    INFO] [P_Sup 0.3]Iter [30/425]	Data_Time 0.00 (0.00)	Batch_Time 11.04 (17.77)	Sup 0.289 (0.349)	Uns 0.283 (0.295)	LR 0.00188
+[2023-05-02 17:09:55,811][    INFO] {'criterion': {'kwargs': {'min_kept': 100000, 'thresh': 0.7}, 'type': 'ohem'},
+ 'dataset': {'batch_size': 4,
+             'mean': [125.5],
+             'noise_std': 0.1,
+             'p_sup': 0.3,
+             'std': [6],
+             'train': {'GaussianBlur': False,
+                       'crop': {'size': [400, 400], 'type': 'rand'},
+                       'data_list': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data/Crack_Dataset/data_crack/Data_train/split_1/labeled.txt',
+                       'data_root': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data',
+                       'flip': True,
+                       'rand_rotation': [-10.0, 10.0],
+                       'seed': 27},
+             'type': 'crack_semi_portion',
+             'val': {'crop': {'size': [400, 400], 'type': 'rand'},
+                     'data_list': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data/Crack_Dataset/data_crack/Data_test/val_data/val_label.txt',
+                     'data_root': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data'},
+             'workers': 2},
+ 'exp_path': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/experiments/data_crack/ours',
+ 'net': {'aux_loss': {'aux_plane': 1024, 'loss_weight': 0.4},
+         'decoder': {'kwargs': {'dilations': [12, 24, 36], 'inner_planes': 256},
+                     'type': 'u2pl.models.decoder.dec_deeplabv3_plus'},
+         'ema_decay': 0.99,
+         'encoder': {'kwargs': {'fpn': True,
+                                'multi_grid': True,
+                                'replace_stride_with_dilation': [False,
+                                                                 True,
+                                                                 True],
+                                'zero_init_residual': True},
+                     'type': 'u2pl.models.resnet.resnet50'},
+         'num_classes': 2,
+         'sync_bn': True},
+ 'save_path': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/experiments/data_crack/ours/checkpoints',
+ 'saver': {'auto_resume': True, 'pretrain': '', 'snapshot_dir': 'checkpoints'},
+ 'trainer': {'contrastive': {'current_class_negative_threshold': 1,
+                             'current_class_threshold': 0.3,
+                             'high_rank': 20,
+                             'low_entropy_threshold': 20,
+                             'low_rank': 3,
+                             'negative_high_entropy': False,
+                             'num_negatives': 50,
+                             'num_queries': 256,
+                             'temperature': 0.5,
+                             'unsupervised_entropy_ignore': 80},
+             'epochs': 5,
+             'eval_on': True,
+             'lr_scheduler': {'kwargs': {'power': 0.9}, 'mode': 'poly'},
+             'optimizer': {'kwargs': {'lr': 0.002,
+                                      'momentum': 0.9,
+                                      'weight_decay': 0.0005},
+                           'type': 'SGD'},
+             'sup_only_epoch': 0,
+             'unsupervised': {'TTA': True,
+                              'apply_aug': 'cutmix',
+                              'drop_percent': 80,
+                              'enable': True}}}
+[2023-05-02 17:09:56,530][    INFO] # usable_samples: 80
+[2023-05-02 17:09:56,530][    INFO] # num_samples: 80
+[2023-05-02 17:09:56,531][    INFO] # usable_samples: 339
+[2023-05-02 17:09:56,531][    INFO] # num_samples: 340
+[2023-05-02 17:09:56,532][    INFO] # usable_samples: 793
+[2023-05-02 17:09:56,533][    INFO] # num_samples: 792
+[2023-05-02 17:09:56,536][    INFO] # usable_samples: 80
+[2023-05-02 17:09:56,536][    INFO] # num_samples: 80
+[2023-05-02 17:09:56,537][    INFO] # usable_samples: 339
+[2023-05-02 17:09:56,537][    INFO] # num_samples: 339
+[2023-05-02 17:09:56,537][    INFO] Get loader Done...
+[2023-05-02 17:09:57,102][    INFO] The kwargs for lr scheduler: 0.9
+[2023-05-02 17:11:26,280][    INFO] {'criterion': {'kwargs': {'min_kept': 100000, 'thresh': 0.7}, 'type': 'ohem'},
+ 'dataset': {'batch_size': 4,
+             'mean': [125.5],
+             'noise_std': 0.1,
+             'p_sup': 0.5,
+             'std': [6],
+             'train': {'GaussianBlur': False,
+                       'crop': {'size': [400, 400], 'type': 'rand'},
+                       'data_list': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data/Crack_Dataset/data_crack/Data_train/split_1/labeled.txt',
+                       'data_root': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data',
+                       'flip': True,
+                       'rand_rotation': [-10.0, 10.0],
+                       'seed': 27},
+             'type': 'crack_semi_portion',
+             'val': {'crop': {'size': [400, 400], 'type': 'rand'},
+                     'data_list': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data/Crack_Dataset/data_crack/Data_test/val_data/val_label.txt',
+                     'data_root': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data'},
+             'workers': 2},
+ 'exp_path': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/experiments/data_crack/ours',
+ 'net': {'aux_loss': {'aux_plane': 1024, 'loss_weight': 0.4},
+         'decoder': {'kwargs': {'dilations': [12, 24, 36], 'inner_planes': 256},
+                     'type': 'u2pl.models.decoder.dec_deeplabv3_plus'},
+         'ema_decay': 0.99,
+         'encoder': {'kwargs': {'fpn': True,
+                                'multi_grid': True,
+                                'replace_stride_with_dilation': [False,
+                                                                 True,
+                                                                 True],
+                                'zero_init_residual': True},
+                     'type': 'u2pl.models.resnet.resnet50'},
+         'num_classes': 2,
+         'sync_bn': True},
+ 'save_path': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/experiments/data_crack/ours/checkpoints',
+ 'saver': {'auto_resume': True, 'pretrain': '', 'snapshot_dir': 'checkpoints'},
+ 'trainer': {'contrastive': {'current_class_negative_threshold': 1,
+                             'current_class_threshold': 0.3,
+                             'high_rank': 20,
+                             'low_entropy_threshold': 20,
+                             'low_rank': 3,
+                             'negative_high_entropy': False,
+                             'num_negatives': 50,
+                             'num_queries': 256,
+                             'temperature': 0.5,
+                             'unsupervised_entropy_ignore': 80},
+             'epochs': 5,
+             'eval_on': True,
+             'lr_scheduler': {'kwargs': {'power': 0.9}, 'mode': 'poly'},
+             'optimizer': {'kwargs': {'lr': 0.002,
+                                      'momentum': 0.9,
+                                      'weight_decay': 0.0005},
+                           'type': 'SGD'},
+             'sup_only_epoch': 0,
+             'unsupervised': {'TTA': True,
+                              'apply_aug': 'cutmix',
+                              'drop_percent': 80,
+                              'enable': True}}}
+[2023-05-02 17:11:26,957][    INFO] # usable_samples: 80
+[2023-05-02 17:11:26,958][    INFO] # num_samples: 80
+[2023-05-02 17:11:26,958][    INFO] # usable_samples: 566
+[2023-05-02 17:11:26,959][    INFO] # num_samples: 566
+[2023-05-02 17:11:26,960][    INFO] # usable_samples: 566
+[2023-05-02 17:11:26,961][    INFO] # num_samples: 566
+[2023-05-02 17:11:26,964][    INFO] # usable_samples: 80
+[2023-05-02 17:11:26,964][    INFO] # num_samples: 80
+[2023-05-02 17:11:26,965][    INFO] # usable_samples: 566
+[2023-05-02 17:11:26,965][    INFO] # num_samples: 566
+[2023-05-02 17:11:26,965][    INFO] Get loader Done...
+[2023-05-02 17:11:27,522][    INFO] The kwargs for lr scheduler: 0.9
+[2023-05-02 17:11:42,142][    INFO] {'criterion': {'kwargs': {'min_kept': 100000, 'thresh': 0.7}, 'type': 'ohem'},
+ 'dataset': {'batch_size': 4,
+             'mean': [125.5],
+             'noise_std': 0.1,
+             'p_sup': 0.7,
+             'std': [6],
+             'train': {'GaussianBlur': False,
+                       'crop': {'size': [400, 400], 'type': 'rand'},
+                       'data_list': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data/Crack_Dataset/data_crack/Data_train/split_1/labeled.txt',
+                       'data_root': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data',
+                       'flip': True,
+                       'rand_rotation': [-10.0, 10.0],
+                       'seed': 27},
+             'type': 'crack_semi_portion',
+             'val': {'crop': {'size': [400, 400], 'type': 'rand'},
+                     'data_list': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data/Crack_Dataset/data_crack/Data_test/val_data/val_label.txt',
+                     'data_root': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data'},
+             'workers': 2},
+ 'exp_path': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/experiments/data_crack/ours',
+ 'net': {'aux_loss': {'aux_plane': 1024, 'loss_weight': 0.4},
+         'decoder': {'kwargs': {'dilations': [12, 24, 36], 'inner_planes': 256},
+                     'type': 'u2pl.models.decoder.dec_deeplabv3_plus'},
+         'ema_decay': 0.99,
+         'encoder': {'kwargs': {'fpn': True,
+                                'multi_grid': True,
+                                'replace_stride_with_dilation': [False,
+                                                                 True,
+                                                                 True],
+                                'zero_init_residual': True},
+                     'type': 'u2pl.models.resnet.resnet50'},
+         'num_classes': 2,
+         'sync_bn': True},
+ 'save_path': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/experiments/data_crack/ours/checkpoints',
+ 'saver': {'auto_resume': True, 'pretrain': '', 'snapshot_dir': 'checkpoints'},
+ 'trainer': {'contrastive': {'current_class_negative_threshold': 1,
+                             'current_class_threshold': 0.3,
+                             'high_rank': 20,
+                             'low_entropy_threshold': 20,
+                             'low_rank': 3,
+                             'negative_high_entropy': False,
+                             'num_negatives': 50,
+                             'num_queries': 256,
+                             'temperature': 0.5,
+                             'unsupervised_entropy_ignore': 80},
+             'epochs': 5,
+             'eval_on': True,
+             'lr_scheduler': {'kwargs': {'power': 0.9}, 'mode': 'poly'},
+             'optimizer': {'kwargs': {'lr': 0.002,
+                                      'momentum': 0.9,
+                                      'weight_decay': 0.0005},
+                           'type': 'SGD'},
+             'sup_only_epoch': 0,
+             'unsupervised': {'TTA': True,
+                              'apply_aug': 'cutmix',
+                              'drop_percent': 80,
+                              'enable': True}}}
+[2023-05-02 17:11:42,809][    INFO] # usable_samples: 80
+[2023-05-02 17:11:42,809][    INFO] # num_samples: 80
+[2023-05-02 17:11:42,810][    INFO] # usable_samples: 792
+[2023-05-02 17:11:42,811][    INFO] # num_samples: 792
+[2023-05-02 17:11:42,812][    INFO] # usable_samples: 340
+[2023-05-02 17:11:42,812][    INFO] # num_samples: 340
+[2023-05-02 17:11:42,815][    INFO] # usable_samples: 80
+[2023-05-02 17:11:42,815][    INFO] # num_samples: 80
+[2023-05-02 17:11:42,816][    INFO] # usable_samples: 792
+[2023-05-02 17:11:42,816][    INFO] # num_samples: 792
+[2023-05-02 17:11:42,817][    INFO] Get loader Done...
+[2023-05-02 17:11:43,372][    INFO] The kwargs for lr scheduler: 0.9
+[2023-05-02 17:12:04,608][    INFO] {'criterion': {'kwargs': {'min_kept': 100000, 'thresh': 0.7}, 'type': 'ohem'},
+ 'dataset': {'batch_size': 4,
+             'mean': [125.5],
+             'noise_std': 0.1,
+             'p_sup': 0.7,
+             'std': [6],
+             'train': {'GaussianBlur': False,
+                       'crop': {'size': [400, 400], 'type': 'rand'},
+                       'data_list': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data/Crack_Dataset/data_crack/Data_train/split_1/labeled.txt',
+                       'data_root': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data',
+                       'flip': True,
+                       'rand_rotation': [-10.0, 10.0],
+                       'seed': 27},
+             'type': 'crack_semi_portion',
+             'val': {'crop': {'size': [400, 400], 'type': 'rand'},
+                     'data_list': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data/Crack_Dataset/data_crack/Data_test/val_data/val_label.txt',
+                     'data_root': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data'},
+             'workers': 2},
+ 'exp_path': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/experiments/data_crack/ours',
+ 'net': {'aux_loss': {'aux_plane': 1024, 'loss_weight': 0.4},
+         'decoder': {'kwargs': {'dilations': [12, 24, 36], 'inner_planes': 256},
+                     'type': 'u2pl.models.decoder.dec_deeplabv3_plus'},
+         'ema_decay': 0.99,
+         'encoder': {'kwargs': {'fpn': True,
+                                'multi_grid': True,
+                                'replace_stride_with_dilation': [False,
+                                                                 True,
+                                                                 True],
+                                'zero_init_residual': True},
+                     'type': 'u2pl.models.resnet.resnet50'},
+         'num_classes': 2,
+         'sync_bn': True},
+ 'save_path': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/experiments/data_crack/ours/checkpoints',
+ 'saver': {'auto_resume': True, 'pretrain': '', 'snapshot_dir': 'checkpoints'},
+ 'trainer': {'contrastive': {'current_class_negative_threshold': 1,
+                             'current_class_threshold': 0.3,
+                             'high_rank': 20,
+                             'low_entropy_threshold': 20,
+                             'low_rank': 3,
+                             'negative_high_entropy': False,
+                             'num_negatives': 50,
+                             'num_queries': 256,
+                             'temperature': 0.5,
+                             'unsupervised_entropy_ignore': 80},
+             'epochs': 5,
+             'eval_on': True,
+             'lr_scheduler': {'kwargs': {'power': 0.9}, 'mode': 'poly'},
+             'optimizer': {'kwargs': {'lr': 0.002,
+                                      'momentum': 0.9,
+                                      'weight_decay': 0.0005},
+                           'type': 'SGD'},
+             'sup_only_epoch': 0,
+             'unsupervised': {'TTA': True,
+                              'apply_aug': 'cutmix',
+                              'drop_percent': 80,
+                              'enable': True}}}
+[2023-05-02 17:12:05,297][    INFO] # usable_samples: 80
+[2023-05-02 17:12:05,297][    INFO] # num_samples: 80
+[2023-05-02 17:12:05,298][    INFO] # usable_samples: 792
+[2023-05-02 17:12:05,299][    INFO] # num_samples: 792
+[2023-05-02 17:12:05,300][    INFO] # usable_samples: 340
+[2023-05-02 17:12:05,300][    INFO] # num_samples: 340
+[2023-05-02 17:12:05,303][    INFO] # usable_samples: 80
+[2023-05-02 17:12:05,303][    INFO] # num_samples: 80
+[2023-05-02 17:12:05,304][    INFO] # usable_samples: 792
+[2023-05-02 17:12:05,304][    INFO] # num_samples: 792
+[2023-05-02 17:12:05,305][    INFO] Get loader Done...
+[2023-05-02 17:12:05,858][    INFO] The kwargs for lr scheduler: 0.9
+[2023-05-02 17:12:54,247][    INFO] [P_Sup 0.7]Iter [0/990]	Data_Time 0.00 (0.00)	Batch_Time 17.40 (17.40)	Sup 0.775 (0.775)	Uns 1.033 (1.033)	LR 0.00200
+[2023-05-02 17:13:37,657][    INFO] {'criterion': {'kwargs': {'min_kept': 100000, 'thresh': 0.7}, 'type': 'ohem'},
+ 'dataset': {'batch_size': 4,
+             'mean': [125.5],
+             'noise_std': 0.1,
+             'p_sup': 0.3,
+             'std': [6],
+             'train': {'GaussianBlur': False,
+                       'crop': {'size': [400, 400], 'type': 'rand'},
+                       'data_list': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data/Crack_Dataset/data_crack/Data_train/split_1/labeled.txt',
+                       'data_root': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data',
+                       'flip': True,
+                       'rand_rotation': [-10.0, 10.0],
+                       'seed': 27},
+             'type': 'crack_semi_portion',
+             'val': {'crop': {'size': [400, 400], 'type': 'rand'},
+                     'data_list': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data/Crack_Dataset/data_crack/Data_test/val_data/val_label.txt',
+                     'data_root': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data'},
+             'workers': 2},
+ 'exp_path': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/experiments/data_crack/ours',
+ 'net': {'aux_loss': {'aux_plane': 1024, 'loss_weight': 0.4},
+         'decoder': {'kwargs': {'dilations': [12, 24, 36], 'inner_planes': 256},
+                     'type': 'u2pl.models.decoder.dec_deeplabv3_plus'},
+         'ema_decay': 0.99,
+         'encoder': {'kwargs': {'fpn': True,
+                                'multi_grid': True,
+                                'replace_stride_with_dilation': [False,
+                                                                 True,
+                                                                 True],
+                                'zero_init_residual': True},
+                     'type': 'u2pl.models.resnet.resnet50'},
+         'num_classes': 2,
+         'sync_bn': True},
+ 'save_path': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/experiments/data_crack/ours/checkpoints',
+ 'saver': {'auto_resume': True, 'pretrain': '', 'snapshot_dir': 'checkpoints'},
+ 'trainer': {'contrastive': {'current_class_negative_threshold': 1,
+                             'current_class_threshold': 0.3,
+                             'high_rank': 20,
+                             'low_entropy_threshold': 20,
+                             'low_rank': 3,
+                             'negative_high_entropy': False,
+                             'num_negatives': 50,
+                             'num_queries': 256,
+                             'temperature': 0.5,
+                             'unsupervised_entropy_ignore': 80},
+             'epochs': 5,
+             'eval_on': True,
+             'lr_scheduler': {'kwargs': {'power': 0.9}, 'mode': 'poly'},
+             'optimizer': {'kwargs': {'lr': 0.002,
+                                      'momentum': 0.9,
+                                      'weight_decay': 0.0005},
+                           'type': 'SGD'},
+             'sup_only_epoch': 0,
+             'unsupervised': {'TTA': True,
+                              'apply_aug': 'cutmix',
+                              'drop_percent': 80,
+                              'enable': True}}}
+[2023-05-02 17:13:38,340][    INFO] # usable_samples: 80
+[2023-05-02 17:13:38,340][    INFO] # num_samples: 80
+[2023-05-02 17:13:38,340][    INFO] # usable_samples: 339
+[2023-05-02 17:13:38,341][    INFO] # num_samples: 340
+[2023-05-02 17:13:38,342][    INFO] # usable_samples: 793
+[2023-05-02 17:13:38,343][    INFO] # num_samples: 792
+[2023-05-02 17:13:38,346][    INFO] # usable_samples: 80
+[2023-05-02 17:13:38,346][    INFO] # num_samples: 80
+[2023-05-02 17:13:38,346][    INFO] # usable_samples: 339
+[2023-05-02 17:13:38,346][    INFO] # num_samples: 339
+[2023-05-02 17:13:38,346][    INFO] Get loader Done...
+[2023-05-02 17:13:38,907][    INFO] The kwargs for lr scheduler: 0.9
+[2023-05-02 17:14:20,339][    INFO] [P_Sup 0.3]Iter [0/990]	Data_Time 0.00 (0.00)	Batch_Time 11.78 (11.78)	Sup 0.792 (0.792)	Uns 0.993 (0.993)	LR 0.00200
+[2023-05-02 17:14:47,361][    INFO] {'criterion': {'kwargs': {'min_kept': 100000, 'thresh': 0.7}, 'type': 'ohem'},
+ 'dataset': {'batch_size': 4,
+             'mean': [125.5],
+             'noise_std': 0.1,
+             'p_sup': 1,
+             'std': [6],
+             'train': {'GaussianBlur': False,
+                       'crop': {'size': [400, 400], 'type': 'rand'},
+                       'data_list': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data/Crack_Dataset/data_crack/Data_train/split_1/labeled.txt',
+                       'data_root': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data',
+                       'flip': True,
+                       'rand_rotation': [-10.0, 10.0],
+                       'seed': 27},
+             'type': 'crack_semi_portion',
+             'val': {'crop': {'size': [400, 400], 'type': 'rand'},
+                     'data_list': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data/Crack_Dataset/data_crack/Data_test/val_data/val_label.txt',
+                     'data_root': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data'},
+             'workers': 2},
+ 'exp_path': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/experiments/data_crack/ours',
+ 'net': {'aux_loss': {'aux_plane': 1024, 'loss_weight': 0.4},
+         'decoder': {'kwargs': {'dilations': [12, 24, 36], 'inner_planes': 256},
+                     'type': 'u2pl.models.decoder.dec_deeplabv3_plus'},
+         'ema_decay': 0.99,
+         'encoder': {'kwargs': {'fpn': True,
+                                'multi_grid': True,
+                                'replace_stride_with_dilation': [False,
+                                                                 True,
+                                                                 True],
+                                'zero_init_residual': True},
+                     'type': 'u2pl.models.resnet.resnet50'},
+         'num_classes': 2,
+         'sync_bn': True},
+ 'save_path': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/experiments/data_crack/ours/checkpoints',
+ 'saver': {'auto_resume': True, 'pretrain': '', 'snapshot_dir': 'checkpoints'},
+ 'trainer': {'contrastive': {'current_class_negative_threshold': 1,
+                             'current_class_threshold': 0.3,
+                             'high_rank': 20,
+                             'low_entropy_threshold': 20,
+                             'low_rank': 3,
+                             'negative_high_entropy': False,
+                             'num_negatives': 50,
+                             'num_queries': 256,
+                             'temperature': 0.5,
+                             'unsupervised_entropy_ignore': 80},
+             'epochs': 5,
+             'eval_on': True,
+             'lr_scheduler': {'kwargs': {'power': 0.9}, 'mode': 'poly'},
+             'optimizer': {'kwargs': {'lr': 0.002,
+                                      'momentum': 0.9,
+                                      'weight_decay': 0.0005},
+                           'type': 'SGD'},
+             'sup_only_epoch': 0,
+             'unsupervised': {'TTA': True,
+                              'apply_aug': 'cutmix',
+                              'drop_percent': 80,
+                              'enable': True}}}
+[2023-05-02 17:14:48,051][    INFO] # usable_samples: 80
+[2023-05-02 17:14:48,051][    INFO] # num_samples: 80
+[2023-05-02 17:14:48,052][    INFO] # usable_samples: 1132
+[2023-05-02 17:14:48,054][    INFO] # num_samples: 1132
+[2023-05-02 17:14:48,057][    INFO] # usable_samples: 80
+[2023-05-02 17:14:48,057][    INFO] # num_samples: 80
+[2023-05-02 17:14:48,058][    INFO] # usable_samples: 1132
+[2023-05-02 17:14:48,058][    INFO] # num_samples: 1132
+[2023-05-02 17:14:48,059][    INFO] Get loader Done...
+[2023-05-02 17:14:48,062][    INFO] The kwargs for lr scheduler: 0.9
+[2023-05-02 17:15:41,455][    INFO] {'criterion': {'kwargs': {'min_kept': 100000, 'thresh': 0.7}, 'type': 'ohem'},
+ 'dataset': {'batch_size': 4,
+             'mean': [125.5],
+             'noise_std': 0.1,
+             'p_sup': 1,
+             'std': [6],
+             'train': {'GaussianBlur': False,
+                       'crop': {'size': [400, 400], 'type': 'rand'},
+                       'data_list': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data/Crack_Dataset/data_crack/Data_train/split_1/labeled.txt',
+                       'data_root': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data',
+                       'flip': True,
+                       'rand_rotation': [-10.0, 10.0],
+                       'seed': 27},
+             'type': 'crack_semi_portion',
+             'val': {'crop': {'size': [400, 400], 'type': 'rand'},
+                     'data_list': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data/Crack_Dataset/data_crack/Data_test/val_data/val_label.txt',
+                     'data_root': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data'},
+             'workers': 2},
+ 'exp_path': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/experiments/data_crack/ours',
+ 'net': {'aux_loss': {'aux_plane': 1024, 'loss_weight': 0.4},
+         'decoder': {'kwargs': {'dilations': [12, 24, 36], 'inner_planes': 256},
+                     'type': 'u2pl.models.decoder.dec_deeplabv3_plus'},
+         'ema_decay': 0.99,
+         'encoder': {'kwargs': {'fpn': True,
+                                'multi_grid': True,
+                                'replace_stride_with_dilation': [False,
+                                                                 True,
+                                                                 True],
+                                'zero_init_residual': True},
+                     'type': 'u2pl.models.resnet.resnet50'},
+         'num_classes': 2,
+         'sync_bn': True},
+ 'save_path': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/experiments/data_crack/ours/checkpoints',
+ 'saver': {'auto_resume': True, 'pretrain': '', 'snapshot_dir': 'checkpoints'},
+ 'trainer': {'contrastive': {'current_class_negative_threshold': 1,
+                             'current_class_threshold': 0.3,
+                             'high_rank': 20,
+                             'low_entropy_threshold': 20,
+                             'low_rank': 3,
+                             'negative_high_entropy': False,
+                             'num_negatives': 50,
+                             'num_queries': 256,
+                             'temperature': 0.5,
+                             'unsupervised_entropy_ignore': 80},
+             'epochs': 5,
+             'eval_on': True,
+             'lr_scheduler': {'kwargs': {'power': 0.9}, 'mode': 'poly'},
+             'optimizer': {'kwargs': {'lr': 0.002,
+                                      'momentum': 0.9,
+                                      'weight_decay': 0.0005},
+                           'type': 'SGD'},
+             'sup_only_epoch': 0,
+             'unsupervised': {'TTA': True,
+                              'apply_aug': 'cutmix',
+                              'drop_percent': 80,
+                              'enable': True}}}
+[2023-05-02 17:15:42,133][    INFO] # usable_samples: 80
+[2023-05-02 17:15:42,133][    INFO] # num_samples: 80
+[2023-05-02 17:15:42,134][    INFO] # usable_samples: 1132
+[2023-05-02 17:15:42,136][    INFO] # num_samples: 1132
+[2023-05-02 17:15:42,139][    INFO] # usable_samples: 80
+[2023-05-02 17:15:42,139][    INFO] # num_samples: 80
+[2023-05-02 17:15:42,140][    INFO] # usable_samples: 1132
+[2023-05-02 17:15:42,140][    INFO] # num_samples: 1132
+[2023-05-02 17:15:42,140][    INFO] Get loader Done...
+[2023-05-02 17:15:42,143][    INFO] The kwargs for lr scheduler: 0.9
+[2023-05-02 17:20:33,643][    INFO] {'criterion': {'kwargs': {'min_kept': 100000, 'thresh': 0.7}, 'type': 'ohem'},
+ 'dataset': {'batch_size': 4,
+             'mean': [125.5],
+             'noise_std': 0.1,
+             'p_sup': 1,
+             'std': [6],
+             'train': {'GaussianBlur': False,
+                       'crop': {'size': [400, 400], 'type': 'rand'},
+                       'data_list': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data/Crack_Dataset/data_crack/Data_train/split_1/labeled.txt',
+                       'data_root': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data',
+                       'flip': True,
+                       'rand_rotation': [-10.0, 10.0],
+                       'seed': 27},
+             'type': 'crack_semi_portion',
+             'val': {'crop': {'size': [400, 400], 'type': 'rand'},
+                     'data_list': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data/Crack_Dataset/data_crack/Data_test/val_data/val_label.txt',
+                     'data_root': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data'},
+             'workers': 2},
+ 'exp_path': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/experiments/data_crack/ours',
+ 'net': {'aux_loss': {'aux_plane': 1024, 'loss_weight': 0.4},
+         'decoder': {'kwargs': {'dilations': [12, 24, 36], 'inner_planes': 256},
+                     'type': 'u2pl.models.decoder.dec_deeplabv3_plus'},
+         'ema_decay': 0.99,
+         'encoder': {'kwargs': {'fpn': True,
+                                'multi_grid': True,
+                                'replace_stride_with_dilation': [False,
+                                                                 True,
+                                                                 True],
+                                'zero_init_residual': True},
+                     'type': 'u2pl.models.resnet.resnet50'},
+         'num_classes': 2,
+         'sync_bn': True},
+ 'save_path': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/experiments/data_crack/ours/checkpoints',
+ 'saver': {'auto_resume': True, 'pretrain': '', 'snapshot_dir': 'checkpoints'},
+ 'trainer': {'contrastive': {'current_class_negative_threshold': 1,
+                             'current_class_threshold': 0.3,
+                             'high_rank': 20,
+                             'low_entropy_threshold': 20,
+                             'low_rank': 3,
+                             'negative_high_entropy': False,
+                             'num_negatives': 50,
+                             'num_queries': 256,
+                             'temperature': 0.5,
+                             'unsupervised_entropy_ignore': 80},
+             'epochs': 5,
+             'eval_on': True,
+             'lr_scheduler': {'kwargs': {'power': 0.9}, 'mode': 'poly'},
+             'optimizer': {'kwargs': {'lr': 0.002,
+                                      'momentum': 0.9,
+                                      'weight_decay': 0.0005},
+                           'type': 'SGD'},
+             'sup_only_epoch': 0,
+             'unsupervised': {'TTA': True,
+                              'apply_aug': 'cutmix',
+                              'drop_percent': 80,
+                              'enable': True}}}
+[2023-05-02 17:20:34,312][    INFO] # usable_samples: 80
+[2023-05-02 17:20:34,312][    INFO] # num_samples: 80
+[2023-05-02 17:20:34,313][    INFO] # usable_samples: 1132
+[2023-05-02 17:20:34,315][    INFO] # num_samples: 1132
+[2023-05-02 17:20:34,317][    INFO] # usable_samples: 80
+[2023-05-02 17:20:34,318][    INFO] # num_samples: 80
+[2023-05-02 17:20:34,319][    INFO] # usable_samples: 1132
+[2023-05-02 17:20:34,319][    INFO] # num_samples: 1132
+[2023-05-02 17:20:34,319][    INFO] Get loader Done...
+[2023-05-02 17:20:34,322][    INFO] The kwargs for lr scheduler: 0.9
+[2023-05-02 17:22:06,838][    INFO] {'criterion': {'kwargs': {'min_kept': 100000, 'thresh': 0.7}, 'type': 'ohem'},
+ 'dataset': {'batch_size': 4,
+             'mean': [125.5],
+             'noise_std': 0.1,
+             'p_sup': 1,
+             'std': [6],
+             'train': {'GaussianBlur': False,
+                       'crop': {'size': [400, 400], 'type': 'rand'},
+                       'data_list': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data/Crack_Dataset/data_crack/Data_train/split_1/labeled.txt',
+                       'data_root': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data',
+                       'flip': True,
+                       'rand_rotation': [-10.0, 10.0],
+                       'seed': 27},
+             'type': 'crack_semi_portion',
+             'val': {'crop': {'size': [400, 400], 'type': 'rand'},
+                     'data_list': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data/Crack_Dataset/data_crack/Data_test/val_data/val_label.txt',
+                     'data_root': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data'},
+             'workers': 2},
+ 'exp_path': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/experiments/data_crack/ours',
+ 'net': {'aux_loss': {'aux_plane': 1024, 'loss_weight': 0.4},
+         'decoder': {'kwargs': {'dilations': [12, 24, 36], 'inner_planes': 256},
+                     'type': 'u2pl.models.decoder.dec_deeplabv3_plus'},
+         'ema_decay': 0.99,
+         'encoder': {'kwargs': {'fpn': True,
+                                'multi_grid': True,
+                                'replace_stride_with_dilation': [False,
+                                                                 True,
+                                                                 True],
+                                'zero_init_residual': True},
+                     'type': 'u2pl.models.resnet.resnet50'},
+         'num_classes': 2,
+         'sync_bn': True},
+ 'save_path': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/experiments/data_crack/ours/checkpoints',
+ 'saver': {'auto_resume': True, 'pretrain': '', 'snapshot_dir': 'checkpoints'},
+ 'trainer': {'contrastive': {'current_class_negative_threshold': 1,
+                             'current_class_threshold': 0.3,
+                             'high_rank': 20,
+                             'low_entropy_threshold': 20,
+                             'low_rank': 3,
+                             'negative_high_entropy': False,
+                             'num_negatives': 50,
+                             'num_queries': 256,
+                             'temperature': 0.5,
+                             'unsupervised_entropy_ignore': 80},
+             'epochs': 5,
+             'eval_on': True,
+             'lr_scheduler': {'kwargs': {'power': 0.9}, 'mode': 'poly'},
+             'optimizer': {'kwargs': {'lr': 0.002,
+                                      'momentum': 0.9,
+                                      'weight_decay': 0.0005},
+                           'type': 'SGD'},
+             'sup_only_epoch': 0,
+             'unsupervised': {'TTA': True,
+                              'apply_aug': 'cutmix',
+                              'drop_percent': 80,
+                              'enable': True}}}
+[2023-05-02 17:22:07,539][    INFO] # usable_samples: 80
+[2023-05-02 17:22:07,539][    INFO] # num_samples: 80
+[2023-05-02 17:22:07,540][    INFO] # usable_samples: 1132
+[2023-05-02 17:22:07,542][    INFO] # num_samples: 1132
+[2023-05-02 17:22:07,545][    INFO] # usable_samples: 80
+[2023-05-02 17:22:07,545][    INFO] # num_samples: 80
+[2023-05-02 17:22:07,546][    INFO] # usable_samples: 1132
+[2023-05-02 17:22:07,546][    INFO] # num_samples: 1132
+[2023-05-02 17:22:07,547][    INFO] Get loader Done...
+[2023-05-02 17:22:07,550][    INFO] The kwargs for lr scheduler: 0.9
+[2023-05-02 17:26:31,073][    INFO] {'criterion': {'kwargs': {'min_kept': 100000, 'thresh': 0.7}, 'type': 'ohem'},
+ 'dataset': {'batch_size': 4,
+             'mean': [125.5],
+             'noise_std': 0.1,
+             'p_sup': 1,
+             'std': [6],
+             'train': {'GaussianBlur': False,
+                       'crop': {'size': [400, 400], 'type': 'rand'},
+                       'data_list': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data/Crack_Dataset/data_crack/Data_train/split_1/labeled.txt',
+                       'data_root': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data',
+                       'flip': True,
+                       'rand_rotation': [-10.0, 10.0],
+                       'seed': 27},
+             'type': 'crack_semi_portion',
+             'val': {'crop': {'size': [400, 400], 'type': 'rand'},
+                     'data_list': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data/Crack_Dataset/data_crack/Data_test/val_data/val_label.txt',
+                     'data_root': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data'},
+             'workers': 2},
+ 'exp_path': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/experiments/data_crack/ours',
+ 'net': {'aux_loss': {'aux_plane': 1024, 'loss_weight': 0.4},
+         'decoder': {'kwargs': {'dilations': [12, 24, 36], 'inner_planes': 256},
+                     'type': 'u2pl.models.decoder.dec_deeplabv3_plus'},
+         'ema_decay': 0.99,
+         'encoder': {'kwargs': {'fpn': True,
+                                'multi_grid': True,
+                                'replace_stride_with_dilation': [False,
+                                                                 True,
+                                                                 True],
+                                'zero_init_residual': True},
+                     'type': 'u2pl.models.resnet.resnet50'},
+         'num_classes': 2,
+         'sync_bn': True},
+ 'save_path': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/experiments/data_crack/ours/checkpoints',
+ 'saver': {'auto_resume': True, 'pretrain': '', 'snapshot_dir': 'checkpoints'},
+ 'trainer': {'contrastive': {'current_class_negative_threshold': 1,
+                             'current_class_threshold': 0.3,
+                             'high_rank': 20,
+                             'low_entropy_threshold': 20,
+                             'low_rank': 3,
+                             'negative_high_entropy': False,
+                             'num_negatives': 50,
+                             'num_queries': 256,
+                             'temperature': 0.5,
+                             'unsupervised_entropy_ignore': 80},
+             'epochs': 5,
+             'eval_on': True,
+             'lr_scheduler': {'kwargs': {'power': 0.9}, 'mode': 'poly'},
+             'optimizer': {'kwargs': {'lr': 0.002,
+                                      'momentum': 0.9,
+                                      'weight_decay': 0.0005},
+                           'type': 'SGD'},
+             'sup_only_epoch': 0,
+             'unsupervised': {'TTA': True,
+                              'apply_aug': 'cutmix',
+                              'drop_percent': 80,
+                              'enable': True}}}
+[2023-05-02 17:26:31,748][    INFO] # usable_samples: 80
+[2023-05-02 17:26:31,748][    INFO] # num_samples: 80
+[2023-05-02 17:26:31,749][    INFO] # usable_samples: 1132
+[2023-05-02 17:26:31,751][    INFO] # num_samples: 1132
+[2023-05-02 17:26:31,754][    INFO] # usable_samples: 80
+[2023-05-02 17:26:31,754][    INFO] # num_samples: 80
+[2023-05-02 17:26:31,755][    INFO] # usable_samples: 1132
+[2023-05-02 17:26:31,755][    INFO] # num_samples: 1132
+[2023-05-02 17:26:31,755][    INFO] Get loader Done...
+[2023-05-02 17:26:31,758][    INFO] The kwargs for lr scheduler: 0.9
+[2023-05-02 17:29:57,421][    INFO] {'criterion': {'kwargs': {'min_kept': 100000, 'thresh': 0.7}, 'type': 'ohem'},
+ 'dataset': {'batch_size': 4,
+             'mean': [125.5],
+             'noise_std': 0.1,
+             'p_sup': 1,
+             'std': [6],
+             'train': {'GaussianBlur': False,
+                       'crop': {'size': [400, 400], 'type': 'rand'},
+                       'data_list': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data/Crack_Dataset/data_crack/Data_train/split_1/labeled.txt',
+                       'data_root': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data',
+                       'flip': True,
+                       'rand_rotation': [-10.0, 10.0],
+                       'seed': 27},
+             'type': 'crack_semi_portion',
+             'val': {'crop': {'size': [400, 400], 'type': 'rand'},
+                     'data_list': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data/Crack_Dataset/data_crack/Data_test/val_data/val_label.txt',
+                     'data_root': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data'},
+             'workers': 2},
+ 'exp_path': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/experiments/data_crack/ours',
+ 'net': {'aux_loss': {'aux_plane': 1024, 'loss_weight': 0.4},
+         'decoder': {'kwargs': {'dilations': [12, 24, 36], 'inner_planes': 256},
+                     'type': 'u2pl.models.decoder.dec_deeplabv3_plus'},
+         'ema_decay': 0.99,
+         'encoder': {'kwargs': {'fpn': True,
+                                'multi_grid': True,
+                                'replace_stride_with_dilation': [False,
+                                                                 True,
+                                                                 True],
+                                'zero_init_residual': True},
+                     'type': 'u2pl.models.resnet.resnet50'},
+         'num_classes': 2,
+         'sync_bn': True},
+ 'save_path': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/experiments/data_crack/ours/checkpoints',
+ 'saver': {'auto_resume': True, 'pretrain': '', 'snapshot_dir': 'checkpoints'},
+ 'trainer': {'contrastive': {'current_class_negative_threshold': 1,
+                             'current_class_threshold': 0.3,
+                             'high_rank': 20,
+                             'low_entropy_threshold': 20,
+                             'low_rank': 3,
+                             'negative_high_entropy': False,
+                             'num_negatives': 50,
+                             'num_queries': 256,
+                             'temperature': 0.5,
+                             'unsupervised_entropy_ignore': 80},
+             'epochs': 5,
+             'eval_on': True,
+             'lr_scheduler': {'kwargs': {'power': 0.9}, 'mode': 'poly'},
+             'optimizer': {'kwargs': {'lr': 0.002,
+                                      'momentum': 0.9,
+                                      'weight_decay': 0.0005},
+                           'type': 'SGD'},
+             'sup_only_epoch': 0,
+             'unsupervised': {'TTA': True,
+                              'apply_aug': 'cutmix',
+                              'drop_percent': 80,
+                              'enable': True}}}
+[2023-05-02 17:29:58,106][    INFO] # usable_samples: 80
+[2023-05-02 17:29:58,107][    INFO] # num_samples: 80
+[2023-05-02 17:29:58,108][    INFO] # usable_samples: 1132
+[2023-05-02 17:29:58,110][    INFO] # num_samples: 1132
+[2023-05-02 17:29:58,116][    INFO] # usable_samples: 80
+[2023-05-02 17:29:58,116][    INFO] # num_samples: 80
+[2023-05-02 17:29:58,117][    INFO] # usable_samples: 1132
+[2023-05-02 17:29:58,117][    INFO] # num_samples: 1132
+[2023-05-02 17:29:58,118][    INFO] Get loader Done...
+[2023-05-02 17:29:58,121][    INFO] The kwargs for lr scheduler: 0.9
+[2023-05-02 17:32:46,457][    INFO] {'criterion': {'kwargs': {'min_kept': 100000, 'thresh': 0.7}, 'type': 'ohem'},
+ 'dataset': {'batch_size': 4,
+             'mean': [125.5],
+             'noise_std': 0.1,
+             'p_sup': 1,
+             'std': [6],
+             'train': {'GaussianBlur': False,
+                       'crop': {'size': [400, 400], 'type': 'rand'},
+                       'data_list': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data/Crack_Dataset/data_crack/Data_train/split_1/labeled.txt',
+                       'data_root': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data',
+                       'flip': True,
+                       'rand_rotation': [-10.0, 10.0],
+                       'seed': 27},
+             'type': 'crack_semi_portion',
+             'val': {'crop': {'size': [400, 400], 'type': 'rand'},
+                     'data_list': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data/Crack_Dataset/data_crack/Data_test/val_data/val_label.txt',
+                     'data_root': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data'},
+             'workers': 2},
+ 'exp_path': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/experiments/data_crack/ours',
+ 'net': {'aux_loss': {'aux_plane': 1024, 'loss_weight': 0.4},
+         'decoder': {'kwargs': {'dilations': [12, 24, 36], 'inner_planes': 256},
+                     'type': 'u2pl.models.decoder.dec_deeplabv3_plus'},
+         'ema_decay': 0.99,
+         'encoder': {'kwargs': {'fpn': True,
+                                'multi_grid': True,
+                                'replace_stride_with_dilation': [False,
+                                                                 True,
+                                                                 True],
+                                'zero_init_residual': True},
+                     'type': 'u2pl.models.resnet.resnet50'},
+         'num_classes': 2,
+         'sync_bn': True},
+ 'save_path': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/experiments/data_crack/ours/checkpoints',
+ 'saver': {'auto_resume': True, 'pretrain': '', 'snapshot_dir': 'checkpoints'},
+ 'trainer': {'contrastive': {'current_class_negative_threshold': 1,
+                             'current_class_threshold': 0.3,
+                             'high_rank': 20,
+                             'low_entropy_threshold': 20,
+                             'low_rank': 3,
+                             'negative_high_entropy': False,
+                             'num_negatives': 50,
+                             'num_queries': 256,
+                             'temperature': 0.5,
+                             'unsupervised_entropy_ignore': 80},
+             'epochs': 5,
+             'eval_on': True,
+             'lr_scheduler': {'kwargs': {'power': 0.9}, 'mode': 'poly'},
+             'optimizer': {'kwargs': {'lr': 0.002,
+                                      'momentum': 0.9,
+                                      'weight_decay': 0.0005},
+                           'type': 'SGD'},
+             'sup_only_epoch': 0,
+             'unsupervised': {'TTA': True,
+                              'apply_aug': 'cutmix',
+                              'drop_percent': 80,
+                              'enable': True}}}
+[2023-05-02 17:32:47,135][    INFO] # usable_samples: 80
+[2023-05-02 17:32:47,136][    INFO] # num_samples: 80
+[2023-05-02 17:32:47,137][    INFO] # usable_samples: 1132
+[2023-05-02 17:32:47,138][    INFO] # num_samples: 1132
+[2023-05-02 17:32:47,141][    INFO] # usable_samples: 80
+[2023-05-02 17:32:47,141][    INFO] # num_samples: 80
+[2023-05-02 17:32:47,142][    INFO] # usable_samples: 1132
+[2023-05-02 17:32:47,142][    INFO] # num_samples: 1132
+[2023-05-02 17:32:47,142][    INFO] Get loader Done...
+[2023-05-02 17:32:47,145][    INFO] The kwargs for lr scheduler: 0.9
+[2023-05-02 17:33:04,212][    INFO] Iter [0/1415]	Data 0.00 (0.00)	Time 2.84 (2.84)	Loss 0.7674 (0.7674)	LR 0.00200 (0.00200)	
+[2023-05-02 17:33:20,575][    INFO] Iter [10/1415]	Data 0.00 (0.00)	Time 1.60 (1.64)	Loss 0.5790 (0.6688)	LR 0.00199 (0.00199)	
+[2023-05-02 17:33:36,680][    INFO] Iter [20/1415]	Data 0.00 (0.00)	Time 1.58 (1.61)	Loss 0.4203 (0.4558)	LR 0.00198 (0.00198)	
+[2023-05-02 17:33:52,575][    INFO] Iter [30/1415]	Data 0.00 (0.00)	Time 1.58 (1.59)	Loss 0.3666 (0.3873)	LR 0.00196 (0.00197)	
+[2023-05-02 17:34:08,466][    INFO] Iter [40/1415]	Data 0.00 (0.00)	Time 1.59 (1.59)	Loss 0.2194 (0.3255)	LR 0.00195 (0.00196)	
+[2023-05-02 17:34:24,300][    INFO] Iter [50/1415]	Data 0.00 (0.00)	Time 1.59 (1.58)	Loss 0.2566 (0.2714)	LR 0.00194 (0.00194)	
+[2023-05-02 17:34:40,226][    INFO] Iter [60/1415]	Data 0.00 (0.00)	Time 1.59 (1.59)	Loss 0.2122 (0.2532)	LR 0.00192 (0.00193)	
+[2023-05-02 17:34:56,107][    INFO] Iter [70/1415]	Data 0.00 (0.00)	Time 1.59 (1.59)	Loss 0.1943 (0.2631)	LR 0.00191 (0.00192)	
+[2023-05-02 17:35:11,982][    INFO] Iter [80/1415]	Data 0.00 (0.00)	Time 1.54 (1.59)	Loss 0.2539 (0.2397)	LR 0.00190 (0.00190)	
+[2023-05-02 17:35:27,895][    INFO] Iter [90/1415]	Data 0.00 (0.00)	Time 1.59 (1.59)	Loss 0.2077 (0.2674)	LR 0.00189 (0.00189)	
+[2023-05-02 17:35:43,798][    INFO] Iter [100/1415]	Data 0.00 (0.00)	Time 1.59 (1.59)	Loss 0.2786 (0.2338)	LR 0.00187 (0.00188)	
+[2023-05-02 17:35:59,669][    INFO] Iter [110/1415]	Data 0.00 (0.00)	Time 1.60 (1.59)	Loss 0.0815 (0.2343)	LR 0.00186 (0.00187)	
+[2023-05-02 17:36:15,555][    INFO] Iter [120/1415]	Data 0.00 (0.00)	Time 1.59 (1.59)	Loss 0.2365 (0.2520)	LR 0.00185 (0.00185)	
+[2023-05-02 17:36:31,484][    INFO] Iter [130/1415]	Data 0.00 (0.00)	Time 1.57 (1.59)	Loss 0.3294 (0.2626)	LR 0.00184 (0.00184)	
+[2023-05-02 17:36:47,405][    INFO] Iter [140/1415]	Data 0.00 (0.00)	Time 1.60 (1.59)	Loss 0.3240 (0.2504)	LR 0.00182 (0.00183)	
+[2023-05-02 17:37:03,028][    INFO] Iter [150/1415]	Data 0.00 (0.00)	Time 1.56 (1.56)	Loss 0.2304 (0.2180)	LR 0.00181 (0.00182)	
+[2023-05-02 17:37:18,585][    INFO] Iter [160/1415]	Data 0.00 (0.00)	Time 1.54 (1.56)	Loss 0.2612 (0.2163)	LR 0.00180 (0.00180)	
+[2023-05-02 17:37:34,165][    INFO] Iter [170/1415]	Data 0.00 (0.00)	Time 1.58 (1.56)	Loss 0.3647 (0.1804)	LR 0.00178 (0.00179)	
+[2023-05-02 17:37:49,815][    INFO] Iter [180/1415]	Data 0.00 (0.00)	Time 1.56 (1.56)	Loss 0.1247 (0.2142)	LR 0.00177 (0.00178)	
+[2023-05-02 17:38:05,524][    INFO] Iter [190/1415]	Data 0.00 (0.00)	Time 1.59 (1.57)	Loss 0.1861 (0.2158)	LR 0.00176 (0.00176)	
+[2023-05-02 17:38:21,059][    INFO] Iter [200/1415]	Data 0.00 (0.00)	Time 1.54 (1.55)	Loss 0.2849 (0.2409)	LR 0.00174 (0.00175)	
+[2023-05-02 17:38:36,611][    INFO] Iter [210/1415]	Data 0.00 (0.00)	Time 1.56 (1.55)	Loss 0.0608 (0.2250)	LR 0.00173 (0.00174)	
+[2023-05-02 17:38:52,114][    INFO] Iter [220/1415]	Data 0.00 (0.00)	Time 1.54 (1.55)	Loss 0.1867 (0.2111)	LR 0.00172 (0.00172)	
+[2023-05-02 17:39:07,682][    INFO] Iter [230/1415]	Data 0.00 (0.00)	Time 1.56 (1.56)	Loss 0.2015 (0.2476)	LR 0.00171 (0.00171)	
+[2023-05-02 17:39:23,206][    INFO] Iter [240/1415]	Data 0.00 (0.00)	Time 1.54 (1.55)	Loss 0.0665 (0.1554)	LR 0.00169 (0.00170)	
+[2023-05-02 17:39:38,799][    INFO] Iter [250/1415]	Data 0.00 (0.00)	Time 1.55 (1.56)	Loss 0.1643 (0.2296)	LR 0.00168 (0.00169)	
+[2023-05-02 17:39:54,300][    INFO] Iter [260/1415]	Data 0.00 (0.00)	Time 1.57 (1.55)	Loss 0.1715 (0.2180)	LR 0.00167 (0.00167)	
+[2023-05-02 17:40:09,862][    INFO] Iter [270/1415]	Data 0.00 (0.00)	Time 1.53 (1.56)	Loss 0.1060 (0.1650)	LR 0.00165 (0.00166)	
+[2023-05-02 17:40:25,457][    INFO] Iter [280/1415]	Data 0.00 (0.00)	Time 1.54 (1.56)	Loss 0.1199 (0.2243)	LR 0.00164 (0.00165)	
+[2023-05-02 17:41:51,313][    INFO] {'criterion': {'kwargs': {'min_kept': 100000, 'thresh': 0.7}, 'type': 'ohem'},
+ 'dataset': {'batch_size': 4,
+             'mean': [125.5],
+             'noise_std': 0.1,
+             'p_sup': 1,
+             'std': [6],
+             'train': {'GaussianBlur': False,
+                       'crop': {'size': [400, 400], 'type': 'rand'},
+                       'data_list': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data/Crack_Dataset/data_crack/Data_train/split_1/labeled.txt',
+                       'data_root': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data',
+                       'flip': True,
+                       'rand_rotation': [-10.0, 10.0],
+                       'seed': 27},
+             'type': 'crack_semi_portion',
+             'val': {'crop': {'size': [400, 400], 'type': 'rand'},
+                     'data_list': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data/Crack_Dataset/data_crack/Data_test/val_data/val_label.txt',
+                     'data_root': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data'},
+             'workers': 2},
+ 'exp_path': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/experiments/data_crack/ours',
+ 'net': {'aux_loss': {'aux_plane': 1024, 'loss_weight': 0.4},
+         'decoder': {'kwargs': {'dilations': [12, 24, 36], 'inner_planes': 256},
+                     'type': 'u2pl.models.decoder.dec_deeplabv3_plus'},
+         'ema_decay': 0.99,
+         'encoder': {'kwargs': {'fpn': True,
+                                'multi_grid': True,
+                                'replace_stride_with_dilation': [False,
+                                                                 True,
+                                                                 True],
+                                'zero_init_residual': True},
+                     'type': 'u2pl.models.resnet.resnet50'},
+         'num_classes': 2,
+         'sync_bn': True},
+ 'save_path': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/experiments/data_crack/ours/checkpoints',
+ 'saver': {'auto_resume': True, 'pretrain': '', 'snapshot_dir': 'checkpoints'},
+ 'trainer': {'contrastive': {'current_class_negative_threshold': 1,
+                             'current_class_threshold': 0.3,
+                             'high_rank': 20,
+                             'low_entropy_threshold': 20,
+                             'low_rank': 3,
+                             'negative_high_entropy': False,
+                             'num_negatives': 50,
+                             'num_queries': 256,
+                             'temperature': 0.5,
+                             'unsupervised_entropy_ignore': 80},
+             'epochs': 5,
+             'eval_on': True,
+             'lr_scheduler': {'kwargs': {'power': 0.9}, 'mode': 'poly'},
+             'optimizer': {'kwargs': {'lr': 0.002,
+                                      'momentum': 0.9,
+                                      'weight_decay': 0.0005},
+                           'type': 'SGD'},
+             'sup_only_epoch': 0,
+             'unsupervised': {'TTA': True,
+                              'apply_aug': 'cutmix',
+                              'drop_percent': 80,
+                              'enable': True}}}
+[2023-05-02 17:41:52,068][    INFO] # usable_samples: 80
+[2023-05-02 17:41:52,068][    INFO] # num_samples: 80
+[2023-05-02 17:41:52,069][    INFO] # usable_samples: 1132
+[2023-05-02 17:41:52,071][    INFO] # num_samples: 1132
+[2023-05-02 17:41:52,074][    INFO] # usable_samples: 80
+[2023-05-02 17:41:52,074][    INFO] # num_samples: 80
+[2023-05-02 17:41:52,075][    INFO] # usable_samples: 1132
+[2023-05-02 17:41:52,075][    INFO] # num_samples: 1132
+[2023-05-02 17:41:52,075][    INFO] Get loader Done...
+[2023-05-02 17:41:52,078][    INFO] The kwargs for lr scheduler: 0.9
+[2023-05-02 17:42:09,790][    INFO] Iter [0/1415]	Data 0.00 (0.00)	Time 2.87 (2.87)	Loss 0.7674 (0.7674)	LR 0.00200 (0.00200)	
+[2023-05-02 17:42:25,614][    INFO] Iter [10/1415]	Data 0.00 (0.00)	Time 1.55 (1.58)	Loss 0.5790 (0.6688)	LR 0.00199 (0.00199)	
+[2023-05-02 17:42:41,196][    INFO] Iter [20/1415]	Data 0.00 (0.00)	Time 1.55 (1.56)	Loss 0.4203 (0.4558)	LR 0.00198 (0.00198)	
+[2023-05-02 17:42:56,734][    INFO] Iter [30/1415]	Data 0.00 (0.00)	Time 1.55 (1.55)	Loss 0.3666 (0.3873)	LR 0.00196 (0.00197)	
+[2023-05-02 17:43:12,234][    INFO] Iter [40/1415]	Data 0.00 (0.00)	Time 1.56 (1.55)	Loss 0.2194 (0.3255)	LR 0.00195 (0.00196)	
+[2023-05-02 17:43:27,918][    INFO] Iter [50/1415]	Data 0.00 (0.00)	Time 1.55 (1.57)	Loss 0.2566 (0.2714)	LR 0.00194 (0.00194)	
+[2023-05-02 17:43:43,401][    INFO] Iter [60/1415]	Data 0.00 (0.00)	Time 1.54 (1.55)	Loss 0.2122 (0.2532)	LR 0.00192 (0.00193)	
+[2023-05-02 17:43:58,964][    INFO] Iter [70/1415]	Data 0.00 (0.00)	Time 1.55 (1.56)	Loss 0.1943 (0.2631)	LR 0.00191 (0.00192)	
+[2023-05-02 17:44:14,772][    INFO] Iter [80/1415]	Data 0.00 (0.00)	Time 1.59 (1.58)	Loss 0.2539 (0.2397)	LR 0.00190 (0.00190)	
+[2023-05-02 17:44:30,540][    INFO] Iter [90/1415]	Data 0.00 (0.00)	Time 1.57 (1.58)	Loss 0.2077 (0.2674)	LR 0.00189 (0.00189)	
+[2023-05-02 17:44:46,179][    INFO] Iter [100/1415]	Data 0.00 (0.00)	Time 1.57 (1.56)	Loss 0.2786 (0.2338)	LR 0.00187 (0.00188)	
+[2023-05-02 17:45:01,917][    INFO] Iter [110/1415]	Data 0.00 (0.00)	Time 1.59 (1.57)	Loss 0.0815 (0.2343)	LR 0.00186 (0.00187)	
+[2023-05-02 17:45:17,532][    INFO] Iter [120/1415]	Data 0.00 (0.00)	Time 1.56 (1.56)	Loss 0.2365 (0.2520)	LR 0.00185 (0.00185)	
+[2023-05-02 17:45:33,253][    INFO] Iter [130/1415]	Data 0.00 (0.00)	Time 1.59 (1.57)	Loss 0.3294 (0.2626)	LR 0.00184 (0.00184)	
+[2023-05-02 17:45:48,930][    INFO] Iter [140/1415]	Data 0.00 (0.00)	Time 1.60 (1.57)	Loss 0.3240 (0.2504)	LR 0.00182 (0.00183)	
+[2023-05-02 17:46:04,605][    INFO] Iter [150/1415]	Data 0.00 (0.00)	Time 1.56 (1.57)	Loss 0.2304 (0.2180)	LR 0.00181 (0.00182)	
+[2023-05-02 17:46:20,323][    INFO] Iter [160/1415]	Data 0.00 (0.00)	Time 1.60 (1.57)	Loss 0.2612 (0.2163)	LR 0.00180 (0.00180)	
+[2023-05-02 17:46:35,871][    INFO] Iter [170/1415]	Data 0.00 (0.00)	Time 1.56 (1.55)	Loss 0.3647 (0.1804)	LR 0.00178 (0.00179)	
+[2023-05-02 17:46:51,548][    INFO] Iter [180/1415]	Data 0.00 (0.00)	Time 1.63 (1.57)	Loss 0.1247 (0.2142)	LR 0.00177 (0.00178)	
+[2023-05-02 17:47:07,318][    INFO] Iter [190/1415]	Data 0.00 (0.00)	Time 1.56 (1.58)	Loss 0.1861 (0.2158)	LR 0.00176 (0.00176)	
+[2023-05-02 17:47:23,105][    INFO] Iter [200/1415]	Data 0.00 (0.00)	Time 1.59 (1.58)	Loss 0.2849 (0.2409)	LR 0.00174 (0.00175)	
+[2023-05-02 17:47:38,870][    INFO] Iter [210/1415]	Data 0.00 (0.00)	Time 1.60 (1.58)	Loss 0.0608 (0.2250)	LR 0.00173 (0.00174)	
+[2023-05-02 17:47:54,620][    INFO] Iter [220/1415]	Data 0.00 (0.00)	Time 1.56 (1.57)	Loss 0.1867 (0.2111)	LR 0.00172 (0.00172)	
+[2023-05-02 17:48:10,359][    INFO] Iter [230/1415]	Data 0.00 (0.00)	Time 1.57 (1.57)	Loss 0.2015 (0.2476)	LR 0.00171 (0.00171)	
+[2023-05-02 17:48:25,972][    INFO] Iter [240/1415]	Data 0.00 (0.00)	Time 1.55 (1.56)	Loss 0.0665 (0.1554)	LR 0.00169 (0.00170)	
+[2023-05-02 17:48:41,684][    INFO] Iter [250/1415]	Data 0.00 (0.00)	Time 1.56 (1.57)	Loss 0.1643 (0.2296)	LR 0.00168 (0.00169)	
+[2023-05-02 17:48:57,490][    INFO] Iter [260/1415]	Data 0.00 (0.00)	Time 1.54 (1.58)	Loss 0.1715 (0.2180)	LR 0.00167 (0.00167)	
+[2023-05-02 17:49:12,859][    INFO] Iter [270/1415]	Data 0.00 (0.00)	Time 1.53 (1.54)	Loss 0.1060 (0.1650)	LR 0.00165 (0.00166)	
+[2023-05-02 17:49:28,147][    INFO] Iter [280/1415]	Data 0.00 (0.00)	Time 1.53 (1.53)	Loss 0.1199 (0.2243)	LR 0.00164 (0.00165)	
+[2023-05-02 17:49:53,592][    INFO]  * class [0] IoU 98.79
+[2023-05-02 17:49:53,593][    INFO]  * class [1] IoU 20.10
+[2023-05-02 17:49:53,593][    INFO]  * epoch 0 mIoU 59.45
+[2023-05-02 17:49:55,063][    INFO] [31m * Currently, the best val result is: 59.45[0m
+[2023-05-02 17:50:23,434][    INFO] Iter [290/1415]	Data 0.00 (0.00)	Time 1.55 (1.68)	Loss 0.3593 (0.2610)	LR 0.00163 (0.00163)	
+[2023-05-02 17:50:38,986][    INFO] Iter [300/1415]	Data 0.00 (0.00)	Time 1.55 (1.55)	Loss 0.2024 (0.2061)	LR 0.00162 (0.00162)	
+[2023-05-02 17:50:54,556][    INFO] Iter [310/1415]	Data 0.00 (0.00)	Time 1.55 (1.56)	Loss 0.0725 (0.1732)	LR 0.00160 (0.00161)	
+[2023-05-02 17:51:10,124][    INFO] Iter [320/1415]	Data 0.00 (0.00)	Time 1.57 (1.56)	Loss 0.2658 (0.1753)	LR 0.00159 (0.00160)	
+[2023-05-02 17:51:25,680][    INFO] Iter [330/1415]	Data 0.00 (0.00)	Time 1.55 (1.56)	Loss 0.2692 (0.2297)	LR 0.00158 (0.00158)	
+[2023-05-02 17:51:41,290][    INFO] Iter [340/1415]	Data 0.00 (0.00)	Time 1.56 (1.56)	Loss 0.1827 (0.2089)	LR 0.00156 (0.00157)	
+[2023-05-02 17:51:56,828][    INFO] Iter [350/1415]	Data 0.00 (0.00)	Time 1.57 (1.55)	Loss 0.0721 (0.1983)	LR 0.00155 (0.00156)	
+[2023-05-02 17:52:12,534][    INFO] Iter [360/1415]	Data 0.00 (0.00)	Time 1.56 (1.57)	Loss 0.2148 (0.2489)	LR 0.00154 (0.00154)	
+[2023-05-02 17:52:28,008][    INFO] Iter [370/1415]	Data 0.00 (0.00)	Time 1.55 (1.55)	Loss 0.1309 (0.2253)	LR 0.00152 (0.00153)	
+[2023-05-02 17:52:43,529][    INFO] Iter [380/1415]	Data 0.00 (0.00)	Time 1.55 (1.55)	Loss 0.2133 (0.2264)	LR 0.00151 (0.00152)	
+[2023-05-02 17:52:59,145][    INFO] Iter [390/1415]	Data 0.00 (0.00)	Time 1.61 (1.56)	Loss 0.3082 (0.1851)	LR 0.00150 (0.00150)	
+[2023-05-02 17:53:14,953][    INFO] Iter [400/1415]	Data 0.00 (0.00)	Time 1.58 (1.58)	Loss 0.1450 (0.1599)	LR 0.00148 (0.00149)	
+[2023-05-02 17:53:30,672][    INFO] Iter [410/1415]	Data 0.00 (0.00)	Time 1.57 (1.57)	Loss 0.2292 (0.2066)	LR 0.00147 (0.00148)	
+[2023-05-02 17:53:46,502][    INFO] Iter [420/1415]	Data 0.00 (0.00)	Time 1.60 (1.58)	Loss 0.2970 (0.2137)	LR 0.00146 (0.00146)	
+[2023-05-02 17:54:02,334][    INFO] Iter [430/1415]	Data 0.00 (0.00)	Time 1.60 (1.58)	Loss 0.1471 (0.1675)	LR 0.00144 (0.00145)	
+[2023-05-02 17:54:18,157][    INFO] Iter [440/1415]	Data 0.00 (0.00)	Time 1.60 (1.58)	Loss 0.3571 (0.1927)	LR 0.00143 (0.00144)	
+[2023-05-02 17:54:33,860][    INFO] Iter [450/1415]	Data 0.00 (0.00)	Time 1.60 (1.57)	Loss 0.1078 (0.1938)	LR 0.00142 (0.00142)	
+[2023-05-02 17:54:49,660][    INFO] Iter [460/1415]	Data 0.00 (0.00)	Time 1.57 (1.58)	Loss 0.1780 (0.1718)	LR 0.00141 (0.00141)	
+[2023-05-02 17:55:05,387][    INFO] Iter [470/1415]	Data 0.00 (0.00)	Time 1.58 (1.57)	Loss 0.0743 (0.1958)	LR 0.00139 (0.00140)	
+[2023-05-02 17:55:20,955][    INFO] Iter [480/1415]	Data 0.00 (0.00)	Time 1.56 (1.56)	Loss 0.1799 (0.2402)	LR 0.00138 (0.00138)	
+[2023-05-02 17:55:36,464][    INFO] Iter [490/1415]	Data 0.00 (0.00)	Time 1.56 (1.55)	Loss 0.3582 (0.2212)	LR 0.00137 (0.00137)	
+[2023-05-02 17:55:51,901][    INFO] Iter [500/1415]	Data 0.00 (0.00)	Time 1.54 (1.54)	Loss 0.3285 (0.1986)	LR 0.00135 (0.00136)	
+[2023-05-02 17:56:07,229][    INFO] Iter [510/1415]	Data 0.00 (0.00)	Time 1.53 (1.53)	Loss 0.1343 (0.2129)	LR 0.00134 (0.00134)	
+[2023-05-02 17:56:22,600][    INFO] Iter [520/1415]	Data 0.00 (0.00)	Time 1.54 (1.54)	Loss 0.1302 (0.1547)	LR 0.00133 (0.00133)	
+[2023-05-02 17:56:37,930][    INFO] Iter [530/1415]	Data 0.00 (0.00)	Time 1.54 (1.53)	Loss 0.1339 (0.1579)	LR 0.00131 (0.00132)	
+[2023-05-02 17:56:53,378][    INFO] Iter [540/1415]	Data 0.00 (0.00)	Time 1.53 (1.54)	Loss 0.2808 (0.2177)	LR 0.00130 (0.00130)	
+[2023-05-02 17:57:08,819][    INFO] Iter [550/1415]	Data 0.00 (0.00)	Time 1.55 (1.54)	Loss 0.0938 (0.1746)	LR 0.00129 (0.00129)	
+[2023-05-02 17:57:24,192][    INFO] Iter [560/1415]	Data 0.00 (0.00)	Time 1.53 (1.54)	Loss 0.0986 (0.1948)	LR 0.00127 (0.00128)	
+[2023-05-02 17:57:54,949][    INFO]  * class [0] IoU 98.86
+[2023-05-02 17:57:54,951][    INFO]  * class [1] IoU 27.32
+[2023-05-02 17:57:54,951][    INFO]  * epoch 1 mIoU 63.09
+[2023-05-02 17:57:56,470][    INFO] [31m * Currently, the best val result is: 63.09[0m
+[2023-05-02 17:58:21,062][    INFO] Iter [570/1415]	Data 0.00 (0.00)	Time 1.53 (1.82)	Loss 0.2960 (0.1630)	LR 0.00126 (0.00126)	
+[2023-05-02 17:58:36,551][    INFO] Iter [580/1415]	Data 0.00 (0.00)	Time 1.56 (1.55)	Loss 0.3576 (0.1961)	LR 0.00125 (0.00125)	
+[2023-05-02 17:58:51,850][    INFO] Iter [590/1415]	Data 0.00 (0.00)	Time 1.53 (1.53)	Loss 0.1272 (0.2004)	LR 0.00123 (0.00124)	
+[2023-05-02 17:59:07,149][    INFO] Iter [600/1415]	Data 0.00 (0.00)	Time 1.53 (1.53)	Loss 0.1453 (0.1843)	LR 0.00122 (0.00122)	
+[2023-05-02 17:59:22,454][    INFO] Iter [610/1415]	Data 0.00 (0.00)	Time 1.53 (1.53)	Loss 0.2914 (0.2069)	LR 0.00121 (0.00121)	
+[2023-05-02 17:59:37,802][    INFO] Iter [620/1415]	Data 0.00 (0.00)	Time 1.53 (1.53)	Loss 0.1105 (0.2093)	LR 0.00119 (0.00120)	
+[2023-05-02 17:59:53,168][    INFO] Iter [630/1415]	Data 0.00 (0.00)	Time 1.54 (1.54)	Loss 0.2095 (0.1862)	LR 0.00118 (0.00118)	
+[2023-05-02 18:00:08,533][    INFO] Iter [640/1415]	Data 0.00 (0.00)	Time 1.54 (1.54)	Loss 0.1107 (0.1592)	LR 0.00116 (0.00117)	
+[2023-05-02 18:00:23,906][    INFO] Iter [650/1415]	Data 0.00 (0.00)	Time 1.53 (1.54)	Loss 0.3728 (0.1415)	LR 0.00115 (0.00116)	
+[2023-05-02 18:00:39,202][    INFO] Iter [660/1415]	Data 0.00 (0.00)	Time 1.53 (1.53)	Loss 0.0886 (0.1845)	LR 0.00114 (0.00114)	
+[2023-05-02 18:00:54,483][    INFO] Iter [670/1415]	Data 0.00 (0.00)	Time 1.53 (1.53)	Loss 0.1301 (0.1613)	LR 0.00112 (0.00113)	
+[2023-05-02 18:01:09,758][    INFO] Iter [680/1415]	Data 0.00 (0.00)	Time 1.53 (1.53)	Loss 0.2275 (0.1989)	LR 0.00111 (0.00112)	
+[2023-05-02 18:01:25,014][    INFO] Iter [690/1415]	Data 0.00 (0.00)	Time 1.52 (1.53)	Loss 0.0650 (0.1458)	LR 0.00110 (0.00110)	
+[2023-05-02 18:01:40,284][    INFO] Iter [700/1415]	Data 0.00 (0.00)	Time 1.52 (1.53)	Loss 0.0783 (0.2223)	LR 0.00108 (0.00109)	
+[2023-05-02 18:01:55,545][    INFO] Iter [710/1415]	Data 0.00 (0.00)	Time 1.52 (1.53)	Loss 0.1983 (0.2041)	LR 0.00107 (0.00108)	
+[2023-05-02 18:02:10,815][    INFO] Iter [720/1415]	Data 0.00 (0.00)	Time 1.52 (1.53)	Loss 0.3617 (0.1884)	LR 0.00106 (0.00106)	
+[2023-05-02 18:02:26,072][    INFO] Iter [730/1415]	Data 0.00 (0.00)	Time 1.53 (1.53)	Loss 0.2532 (0.2425)	LR 0.00104 (0.00105)	
+[2023-05-02 18:02:41,384][    INFO] Iter [740/1415]	Data 0.00 (0.00)	Time 1.53 (1.53)	Loss 0.3138 (0.1980)	LR 0.00103 (0.00103)	
+[2023-05-02 18:02:56,680][    INFO] Iter [750/1415]	Data 0.00 (0.00)	Time 1.53 (1.53)	Loss 0.1051 (0.1674)	LR 0.00102 (0.00102)	
+[2023-05-02 18:03:12,039][    INFO] Iter [760/1415]	Data 0.00 (0.00)	Time 1.53 (1.54)	Loss 0.0938 (0.1442)	LR 0.00100 (0.00101)	
+[2023-05-02 18:03:27,366][    INFO] Iter [770/1415]	Data 0.00 (0.00)	Time 1.54 (1.53)	Loss 0.0671 (0.1894)	LR 0.00099 (0.00099)	
+[2023-05-02 18:03:42,721][    INFO] Iter [780/1415]	Data 0.00 (0.00)	Time 1.53 (1.54)	Loss 0.3472 (0.1667)	LR 0.00097 (0.00098)	
+[2023-05-02 18:03:58,118][    INFO] Iter [790/1415]	Data 0.00 (0.00)	Time 1.54 (1.54)	Loss 0.2536 (0.2223)	LR 0.00096 (0.00097)	
+[2023-05-02 18:04:13,440][    INFO] Iter [800/1415]	Data 0.00 (0.00)	Time 1.53 (1.53)	Loss 0.1177 (0.2236)	LR 0.00095 (0.00095)	
+[2023-05-02 18:04:28,817][    INFO] Iter [810/1415]	Data 0.00 (0.00)	Time 1.53 (1.54)	Loss 0.2617 (0.1751)	LR 0.00093 (0.00094)	
+[2023-05-02 18:04:44,139][    INFO] Iter [820/1415]	Data 0.00 (0.00)	Time 1.53 (1.53)	Loss 0.0922 (0.2068)	LR 0.00092 (0.00092)	
+[2023-05-02 18:04:59,480][    INFO] Iter [830/1415]	Data 0.00 (0.00)	Time 1.53 (1.53)	Loss 0.0704 (0.1418)	LR 0.00090 (0.00091)	
+[2023-05-02 18:05:14,934][    INFO] Iter [840/1415]	Data 0.00 (0.00)	Time 1.54 (1.55)	Loss 0.2147 (0.1976)	LR 0.00089 (0.00090)	
+[2023-05-02 18:05:51,132][    INFO]  * class [0] IoU 98.62
+[2023-05-02 18:05:51,134][    INFO]  * class [1] IoU 28.36
+[2023-05-02 18:05:51,134][    INFO]  * epoch 2 mIoU 63.49
+[2023-05-02 18:05:52,575][    INFO] [31m * Currently, the best val result is: 63.49[0m
+[2023-05-02 18:06:11,448][    INFO] Iter [850/1415]	Data 0.00 (0.00)	Time 1.54 (1.91)	Loss 0.1080 (0.1430)	LR 0.00088 (0.00088)	
+[2023-05-02 18:06:26,848][    INFO] Iter [860/1415]	Data 0.00 (0.00)	Time 1.53 (1.54)	Loss 0.1721 (0.1734)	LR 0.00086 (0.00087)	
+[2023-05-02 18:06:42,314][    INFO] Iter [870/1415]	Data 0.00 (0.00)	Time 1.53 (1.55)	Loss 0.2315 (0.2181)	LR 0.00085 (0.00086)	
+[2023-05-02 18:06:57,686][    INFO] Iter [880/1415]	Data 0.00 (0.00)	Time 1.54 (1.54)	Loss 0.1939 (0.1832)	LR 0.00083 (0.00084)	
+[2023-05-02 18:07:13,013][    INFO] Iter [890/1415]	Data 0.00 (0.00)	Time 1.53 (1.53)	Loss 0.3077 (0.1494)	LR 0.00082 (0.00083)	
+[2023-05-02 18:07:28,499][    INFO] Iter [900/1415]	Data 0.00 (0.00)	Time 1.56 (1.55)	Loss 0.1671 (0.1477)	LR 0.00081 (0.00081)	
+[2023-05-02 18:07:43,841][    INFO] Iter [910/1415]	Data 0.00 (0.00)	Time 1.53 (1.53)	Loss 0.0791 (0.1883)	LR 0.00079 (0.00080)	
+[2023-05-02 18:07:59,148][    INFO] Iter [920/1415]	Data 0.00 (0.00)	Time 1.53 (1.53)	Loss 0.1688 (0.1332)	LR 0.00078 (0.00078)	
+[2023-05-02 18:08:14,457][    INFO] Iter [930/1415]	Data 0.00 (0.00)	Time 1.54 (1.53)	Loss 0.0347 (0.1624)	LR 0.00076 (0.00077)	
+[2023-05-02 18:08:29,834][    INFO] Iter [940/1415]	Data 0.00 (0.00)	Time 1.54 (1.54)	Loss 0.0452 (0.1429)	LR 0.00075 (0.00076)	
+[2023-05-02 18:08:45,199][    INFO] Iter [950/1415]	Data 0.00 (0.00)	Time 1.54 (1.54)	Loss 0.2095 (0.2086)	LR 0.00074 (0.00074)	
+[2023-05-02 18:09:00,843][    INFO] Iter [960/1415]	Data 0.00 (0.00)	Time 1.56 (1.56)	Loss 0.2532 (0.2242)	LR 0.00072 (0.00073)	
+[2023-05-02 18:09:16,314][    INFO] Iter [970/1415]	Data 0.00 (0.00)	Time 1.55 (1.55)	Loss 0.2327 (0.1584)	LR 0.00071 (0.00071)	
+[2023-05-02 18:09:31,770][    INFO] Iter [980/1415]	Data 0.00 (0.00)	Time 1.54 (1.55)	Loss 0.1164 (0.1632)	LR 0.00069 (0.00070)	
+[2023-05-02 18:09:47,355][    INFO] Iter [990/1415]	Data 0.00 (0.00)	Time 1.55 (1.56)	Loss 0.3531 (0.2095)	LR 0.00068 (0.00069)	
+[2023-05-02 18:10:02,819][    INFO] Iter [1000/1415]	Data 0.00 (0.00)	Time 1.54 (1.55)	Loss 0.2210 (0.1587)	LR 0.00066 (0.00067)	
+[2023-05-02 18:10:18,402][    INFO] Iter [1010/1415]	Data 0.00 (0.00)	Time 1.54 (1.56)	Loss 0.3552 (0.2089)	LR 0.00065 (0.00066)	
+[2023-05-02 18:10:33,741][    INFO] Iter [1020/1415]	Data 0.00 (0.00)	Time 1.54 (1.53)	Loss 0.2426 (0.1539)	LR 0.00064 (0.00064)	
+[2023-05-02 18:10:49,126][    INFO] Iter [1030/1415]	Data 0.00 (0.00)	Time 1.53 (1.54)	Loss 0.1586 (0.2062)	LR 0.00062 (0.00063)	
+[2023-05-02 18:11:04,430][    INFO] Iter [1040/1415]	Data 0.00 (0.00)	Time 1.53 (1.53)	Loss 0.0651 (0.1839)	LR 0.00061 (0.00061)	
+[2023-05-02 18:11:19,725][    INFO] Iter [1050/1415]	Data 0.00 (0.00)	Time 1.53 (1.53)	Loss 0.3535 (0.2247)	LR 0.00059 (0.00060)	
+[2023-05-02 18:11:35,031][    INFO] Iter [1060/1415]	Data 0.00 (0.00)	Time 1.53 (1.53)	Loss 0.0693 (0.1917)	LR 0.00058 (0.00058)	
+[2023-05-02 18:11:50,336][    INFO] Iter [1070/1415]	Data 0.00 (0.00)	Time 1.53 (1.53)	Loss 0.3302 (0.1686)	LR 0.00056 (0.00057)	
+[2023-05-02 18:12:05,663][    INFO] Iter [1080/1415]	Data 0.00 (0.00)	Time 1.53 (1.53)	Loss 0.2360 (0.1760)	LR 0.00055 (0.00055)	
+[2023-05-02 18:12:20,960][    INFO] Iter [1090/1415]	Data 0.00 (0.00)	Time 1.53 (1.53)	Loss 0.0747 (0.1617)	LR 0.00053 (0.00054)	
+[2023-05-02 18:12:36,229][    INFO] Iter [1100/1415]	Data 0.00 (0.00)	Time 1.52 (1.53)	Loss 0.1463 (0.1920)	LR 0.00052 (0.00053)	
+[2023-05-02 18:12:51,494][    INFO] Iter [1110/1415]	Data 0.00 (0.00)	Time 1.53 (1.53)	Loss 0.0766 (0.1772)	LR 0.00050 (0.00051)	
+[2023-05-02 18:13:06,756][    INFO] Iter [1120/1415]	Data 0.00 (0.00)	Time 1.53 (1.53)	Loss 0.2618 (0.2052)	LR 0.00049 (0.00050)	
+[2023-05-02 18:13:22,039][    INFO] Iter [1130/1415]	Data 0.00 (0.00)	Time 1.52 (1.53)	Loss 0.0569 (0.2053)	LR 0.00047 (0.00048)	
+[2023-05-02 18:13:45,897][    INFO]  * class [0] IoU 98.85
+[2023-05-02 18:13:45,898][    INFO]  * class [1] IoU 29.62
+[2023-05-02 18:13:45,898][    INFO]  * epoch 3 mIoU 64.23
+[2023-05-02 18:13:47,333][    INFO] [31m * Currently, the best val result is: 64.23[0m
+[2023-05-02 18:14:16,217][    INFO] Iter [1140/1415]	Data 0.00 (0.00)	Time 1.54 (1.62)	Loss 0.1500 (0.1898)	LR 0.00046 (0.00047)	
+[2023-05-02 18:14:31,563][    INFO] Iter [1150/1415]	Data 0.00 (0.00)	Time 1.53 (1.53)	Loss 0.1428 (0.1532)	LR 0.00044 (0.00045)	
+[2023-05-02 18:14:46,835][    INFO] Iter [1160/1415]	Data 0.00 (0.00)	Time 1.53 (1.53)	Loss 0.3563 (0.2414)	LR 0.00043 (0.00044)	
+[2023-05-02 18:15:02,112][    INFO] Iter [1170/1415]	Data 0.00 (0.00)	Time 1.53 (1.53)	Loss 0.1892 (0.1587)	LR 0.00041 (0.00042)	
+[2023-05-02 18:15:17,401][    INFO] Iter [1180/1415]	Data 0.00 (0.00)	Time 1.53 (1.53)	Loss 0.3279 (0.1822)	LR 0.00040 (0.00041)	
+[2023-05-02 18:15:32,681][    INFO] Iter [1190/1415]	Data 0.00 (0.00)	Time 1.53 (1.53)	Loss 0.1408 (0.1745)	LR 0.00038 (0.00039)	
+[2023-05-02 18:15:48,023][    INFO] Iter [1200/1415]	Data 0.00 (0.00)	Time 1.54 (1.53)	Loss 0.2928 (0.2020)	LR 0.00037 (0.00038)	
+[2023-05-02 18:16:03,389][    INFO] Iter [1210/1415]	Data 0.00 (0.00)	Time 1.53 (1.54)	Loss 0.2759 (0.1834)	LR 0.00035 (0.00036)	
+[2023-05-02 18:16:18,858][    INFO] Iter [1220/1415]	Data 0.00 (0.00)	Time 1.55 (1.55)	Loss 0.1082 (0.1320)	LR 0.00034 (0.00034)	
+[2023-05-02 18:16:34,378][    INFO] Iter [1230/1415]	Data 0.00 (0.00)	Time 1.53 (1.55)	Loss 0.0492 (0.1997)	LR 0.00032 (0.00033)	
+[2023-05-02 18:16:49,654][    INFO] Iter [1240/1415]	Data 0.00 (0.00)	Time 1.52 (1.53)	Loss 0.0989 (0.1269)	LR 0.00031 (0.00031)	
+[2023-05-02 18:17:04,953][    INFO] Iter [1250/1415]	Data 0.00 (0.00)	Time 1.53 (1.53)	Loss 0.1925 (0.1745)	LR 0.00029 (0.00030)	
+[2023-05-02 18:17:20,244][    INFO] Iter [1260/1415]	Data 0.00 (0.00)	Time 1.53 (1.53)	Loss 0.3551 (0.1678)	LR 0.00027 (0.00028)	
+[2023-05-02 18:17:35,514][    INFO] Iter [1270/1415]	Data 0.00 (0.00)	Time 1.52 (1.53)	Loss 0.1000 (0.1524)	LR 0.00026 (0.00027)	
+[2023-05-02 18:17:50,801][    INFO] Iter [1280/1415]	Data 0.00 (0.00)	Time 1.53 (1.53)	Loss 0.2552 (0.2053)	LR 0.00024 (0.00025)	
+[2023-05-02 18:18:06,113][    INFO] Iter [1290/1415]	Data 0.00 (0.00)	Time 1.52 (1.53)	Loss 0.3617 (0.2046)	LR 0.00023 (0.00023)	
+[2023-05-02 18:18:21,392][    INFO] Iter [1300/1415]	Data 0.00 (0.00)	Time 1.53 (1.53)	Loss 0.1310 (0.1883)	LR 0.00021 (0.00022)	
+[2023-05-02 18:18:36,656][    INFO] Iter [1310/1415]	Data 0.00 (0.00)	Time 1.53 (1.53)	Loss 0.0502 (0.1502)	LR 0.00019 (0.00020)	
+[2023-05-02 18:18:51,921][    INFO] Iter [1320/1415]	Data 0.00 (0.00)	Time 1.53 (1.53)	Loss 0.2892 (0.1891)	LR 0.00018 (0.00019)	
+[2023-05-02 18:19:07,195][    INFO] Iter [1330/1415]	Data 0.00 (0.00)	Time 1.53 (1.53)	Loss 0.1961 (0.1861)	LR 0.00016 (0.00017)	
+[2023-05-02 18:19:22,459][    INFO] Iter [1340/1415]	Data 0.00 (0.00)	Time 1.52 (1.53)	Loss 0.1034 (0.2031)	LR 0.00014 (0.00015)	
+[2023-05-02 18:19:37,739][    INFO] Iter [1350/1415]	Data 0.00 (0.00)	Time 1.53 (1.53)	Loss 0.2369 (0.1548)	LR 0.00013 (0.00013)	
+[2023-05-02 18:19:53,002][    INFO] Iter [1360/1415]	Data 0.00 (0.00)	Time 1.52 (1.53)	Loss 0.0661 (0.1705)	LR 0.00011 (0.00012)	
+[2023-05-02 18:20:08,268][    INFO] Iter [1370/1415]	Data 0.00 (0.00)	Time 1.52 (1.53)	Loss 0.1468 (0.2013)	LR 0.00009 (0.00010)	
+[2023-05-02 18:20:23,530][    INFO] Iter [1380/1415]	Data 0.00 (0.00)	Time 1.52 (1.53)	Loss 0.3541 (0.1964)	LR 0.00007 (0.00008)	
+[2023-05-02 18:20:38,797][    INFO] Iter [1390/1415]	Data 0.00 (0.00)	Time 1.53 (1.53)	Loss 0.0930 (0.1656)	LR 0.00005 (0.00006)	
+[2023-05-02 18:20:54,084][    INFO] Iter [1400/1415]	Data 0.00 (0.00)	Time 1.53 (1.53)	Loss 0.1708 (0.1498)	LR 0.00004 (0.00004)	
+[2023-05-02 18:21:09,363][    INFO] Iter [1410/1415]	Data 0.00 (0.00)	Time 1.53 (1.53)	Loss 0.1689 (0.1686)	LR 0.00001 (0.00002)	
+[2023-05-02 18:21:38,436][    INFO]  * class [0] IoU 98.84
+[2023-05-02 18:21:38,437][    INFO]  * class [1] IoU 31.87
+[2023-05-02 18:21:38,437][    INFO]  * epoch 4 mIoU 65.35
+[2023-05-02 18:21:39,862][    INFO] [31m * Currently, the best val result is: 65.35[0m

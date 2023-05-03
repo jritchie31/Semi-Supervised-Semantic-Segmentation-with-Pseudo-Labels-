@@ -1,0 +1,69 @@
+[2023-05-02 00:59:41,939 INFO eval.py line 127 15402] Namespace(base_size=2048, scales=[1.0], config='/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/experiments/data_crack/ours/config_local.yaml', model_path='/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/checkpoints/ckpt_best.pth', save_folder='/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/checkpoints/results/', crop=False, distributed=False)
+[2023-05-02 00:59:41,940 INFO eval.py line 145 15402] => creating model from '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/checkpoints/ckpt_best.pth' ...
+[2023-05-02 00:59:43,162 INFO eval.py line 152 15402] => load checkpoint[model_state]
+[2023-05-02 00:59:43,399 INFO eval.py line 157 15402] Load Model Done!
+[2023-05-02 00:59:43,400 INFO eval.py line 260 15402] >>>>>>>>>>>>>>>> Start Evaluation >>>>>>>>>>>>>>>>
+[2023-05-02 00:59:46,521 INFO eval.py line 309 15402] Test: [10/80] Data_Time 0.010 (0.008) Batch_Time 0.273 (0.312).
+[2023-05-02 00:59:49,233 INFO eval.py line 309 15402] Test: [20/80] Data_Time 0.008 (0.009) Batch_Time 0.271 (0.292).
+[2023-05-02 00:59:51,952 INFO eval.py line 309 15402] Test: [30/80] Data_Time 0.010 (0.009) Batch_Time 0.273 (0.285).
+[2023-05-02 00:59:54,667 INFO eval.py line 309 15402] Test: [40/80] Data_Time 0.010 (0.009) Batch_Time 0.269 (0.282).
+[2023-05-02 00:59:57,378 INFO eval.py line 309 15402] Test: [50/80] Data_Time 0.008 (0.009) Batch_Time 0.278 (0.280).
+[2023-05-02 01:00:00,094 INFO eval.py line 309 15402] Test: [60/80] Data_Time 0.010 (0.009) Batch_Time 0.273 (0.278).
+[2023-05-02 01:00:02,806 INFO eval.py line 309 15402] Test: [70/80] Data_Time 0.009 (0.009) Batch_Time 0.269 (0.277).
+[2023-05-02 01:00:05,507 INFO eval.py line 309 15402] Test: [80/80] Data_Time 0.010 (0.009) Batch_Time 0.269 (0.276).
+[2023-05-02 01:00:05,516 INFO eval.py line 333 15402]  * class [0] IoU 98.92
+[2023-05-02 01:00:05,517 INFO eval.py line 333 15402]  * class [1] IoU 24.09
+[2023-05-02 01:00:05,517 INFO eval.py line 334 15402]  * mIoU 61.51
+[2023-05-02 01:00:06,692 INFO eval.py line 172 15402] Precision: 0.4359
+[2023-05-02 01:00:06,692 INFO eval.py line 173 15402] Recall: 0.3884
+[2023-05-02 01:00:06,692 INFO eval.py line 174 15402] F1-Score: 0.4108
+[2023-05-02 01:00:06,692 INFO eval.py line 175 15402] Average True Positive Portion: 0.2585
+[2023-05-02 01:00:06,692 INFO eval.py line 176 15402] Average False Positive Portion: 0.3345
+[2023-05-02 01:00:06,692 INFO eval.py line 177 15402] Average False Negative Portion: 0.4070
+[2023-05-02 01:00:06,692 INFO eval.py line 178 15402] <<<<<<<<<<<<<<<<< End  Evaluation <<<<<<<<<<<<<<<<<
+[2023-05-02 01:02:44,550 INFO eval.py line 118 15486] Namespace(base_size=2048, scales=[1.0], config='/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/experiments/data_crack/ours/config_local.yaml', model_path='/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/checkpoints/ckpt_best.pth', save_folder='/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/checkpoints/results/', crop=False, distributed=False)
+[2023-05-02 01:02:44,551 INFO eval.py line 149 15486] => creating model from '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/checkpoints/ckpt_best.pth' ...
+[2023-05-02 01:02:45,605 INFO eval.py line 156 15486] => load checkpoint[model_state]
+[2023-05-02 01:02:45,822 INFO eval.py line 161 15486] Load Model Done!
+[2023-05-02 01:02:45,822 INFO eval.py line 264 15486] >>>>>>>>>>>>>>>> Start Evaluation >>>>>>>>>>>>>>>>
+[2023-05-02 01:02:48,887 INFO eval.py line 313 15486] Test: [10/80] Data_Time 0.010 (0.009) Batch_Time 0.269 (0.306).
+[2023-05-02 01:02:51,575 INFO eval.py line 313 15486] Test: [20/80] Data_Time 0.009 (0.009) Batch_Time 0.267 (0.288).
+[2023-05-02 01:02:54,265 INFO eval.py line 313 15486] Test: [30/80] Data_Time 0.010 (0.009) Batch_Time 0.269 (0.281).
+[2023-05-02 01:02:56,954 INFO eval.py line 313 15486] Test: [40/80] Data_Time 0.010 (0.009) Batch_Time 0.269 (0.278).
+[2023-05-02 01:02:59,649 INFO eval.py line 313 15486] Test: [50/80] Data_Time 0.008 (0.009) Batch_Time 0.269 (0.277).
+[2023-05-02 01:03:02,355 INFO eval.py line 313 15486] Test: [60/80] Data_Time 0.010 (0.009) Batch_Time 0.269 (0.276).
+[2023-05-02 01:03:05,070 INFO eval.py line 313 15486] Test: [70/80] Data_Time 0.008 (0.009) Batch_Time 0.268 (0.275).
+[2023-05-02 01:03:07,780 INFO eval.py line 313 15486] Test: [80/80] Data_Time 0.010 (0.009) Batch_Time 0.279 (0.274).
+[2023-05-02 01:03:07,789 INFO eval.py line 337 15486]  * class [0] IoU 98.92
+[2023-05-02 01:03:07,790 INFO eval.py line 337 15486]  * class [1] IoU 24.09
+[2023-05-02 01:03:07,790 INFO eval.py line 338 15486]  * mIoU 61.51
+[2023-05-02 01:03:08,948 INFO eval.py line 176 15486] Precision: 0.4359
+[2023-05-02 01:03:08,948 INFO eval.py line 177 15486] Recall: 0.3884
+[2023-05-02 01:03:08,948 INFO eval.py line 178 15486] F1-Score: 0.4108
+[2023-05-02 01:03:08,948 INFO eval.py line 179 15486] Average True Positive Portion: 0.2585
+[2023-05-02 01:03:08,948 INFO eval.py line 180 15486] Average False Positive Portion: 0.3345
+[2023-05-02 01:03:08,948 INFO eval.py line 181 15486] Average False Negative Portion: 0.4070
+[2023-05-02 01:03:08,948 INFO eval.py line 182 15486] <<<<<<<<<<<<<<<<< End  Evaluation <<<<<<<<<<<<<<<<<
+[2023-05-02 20:11:08,365 INFO eval.py line 118 31277] Namespace(base_size=2048, scales=[1.0], config='/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/experiments/data_crack/ours/config_local.yaml', model_path='/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/checkpoints/ckpt_best.pth', save_folder='/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/checkpoints/results/', crop=False, distributed=False)
+[2023-05-02 20:11:08,367 INFO eval.py line 149 31277] => creating model from '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/checkpoints/ckpt_best.pth' ...
+[2023-05-02 20:11:09,280 INFO eval.py line 155 31277] => load checkpoint[model_state]
+[2023-05-02 20:11:09,507 INFO eval.py line 160 31277] Load Model Done!
+[2023-05-02 20:11:09,508 INFO eval.py line 263 31277] >>>>>>>>>>>>>>>> Start Evaluation >>>>>>>>>>>>>>>>
+[2023-05-02 20:11:12,634 INFO eval.py line 312 31277] Test: [10/80] Data_Time 0.010 (0.009) Batch_Time 0.269 (0.312).
+[2023-05-02 20:11:15,333 INFO eval.py line 312 31277] Test: [20/80] Data_Time 0.008 (0.009) Batch_Time 0.269 (0.291).
+[2023-05-02 20:11:18,054 INFO eval.py line 312 31277] Test: [30/80] Data_Time 0.010 (0.009) Batch_Time 0.269 (0.285).
+[2023-05-02 20:11:20,769 INFO eval.py line 312 31277] Test: [40/80] Data_Time 0.011 (0.009) Batch_Time 0.272 (0.281).
+[2023-05-02 20:11:23,487 INFO eval.py line 312 31277] Test: [50/80] Data_Time 0.008 (0.009) Batch_Time 0.270 (0.280).
+[2023-05-02 20:11:26,218 INFO eval.py line 312 31277] Test: [60/80] Data_Time 0.010 (0.009) Batch_Time 0.280 (0.278).
+[2023-05-02 20:11:28,921 INFO eval.py line 312 31277] Test: [70/80] Data_Time 0.008 (0.010) Batch_Time 0.267 (0.277).
+[2023-05-02 20:11:31,621 INFO eval.py line 312 31277] Test: [80/80] Data_Time 0.010 (0.010) Batch_Time 0.269 (0.276).
+[2023-05-02 20:11:31,631 INFO eval.py line 336 31277]  * class [0] IoU 99.00
+[2023-05-02 20:11:31,631 INFO eval.py line 336 31277]  * class [1] IoU 30.20
+[2023-05-02 20:11:31,631 INFO eval.py line 337 31277]  * mIoU 64.60
+[2023-05-02 20:11:32,787 INFO eval.py line 175 31277] Precision: 0.5127
+[2023-05-02 20:11:32,787 INFO eval.py line 176 31277] Recall: 0.4887
+[2023-05-02 20:11:32,787 INFO eval.py line 177 31277] F1-Score: 0.5004
+[2023-05-02 20:11:32,787 INFO eval.py line 178 31277] Average True Positive Portion: 0.3337
+[2023-05-02 20:11:32,787 INFO eval.py line 179 31277] Average False Positive Portion: 0.3172
+[2023-05-02 20:11:32,787 INFO eval.py line 180 31277] Average False Negative Portion: 0.3491
+[2023-05-02 20:11:32,787 INFO eval.py line 181 31277] <<<<<<<<<<<<<<<<< End  Evaluation <<<<<<<<<<<<<<<<<

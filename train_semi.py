@@ -10,6 +10,10 @@ from datetime import datetime
 import matplotlib.pyplot as plt
 from torch.utils.tensorboard import SummaryWriter
 from PIL import Image
+from itertools import cycle
+from sklearn.cluster import KMeans
+from sklearn.decomposition import PCA
+from sklearn.manifold import TSNE
 
 import numpy as np
 import torch
@@ -97,63 +101,148 @@ def main():
 
     if not osp.exists(cfg["saver"]["snapshot_dir"]) and rank == 0:
         os.makedirs(cfg["saver"]["snapshot_dir"])
+    
+    if cfg["dataset"]["p_sup"] == 0:
+        train_loader_unsup, val_loader = get_loader(cfg, seed=seed, distributed=args.distributed)
 
-    # Create network
-    model = ModelBuilder(cfg["net"])
-    modules_back = [model.encoder]
-    if cfg["net"].get("aux_loss", False):
-        modules_head = [model.auxor, model.decoder]
+        # Optimizer and lr decay scheduler
+        cfg_trainer = cfg["trainer"]
+        cfg_optim = cfg_trainer["optimizer"]
+        times = 1
+
+        # Teacher model
+        model_teacher = ModelBuilder(cfg["net"])
+        model_teacher = to_device(model_teacher)
+        if args.distributed:
+            model_teacher = torch.nn.parallel.DistributedDataParallel(
+                model_teacher,
+                device_ids=[local_rank],
+                output_device=local_rank,
+                find_unused_parameters=False,
+            )
+
+        for p in model_teacher.parameters():
+            p.requires_grad = False    
+
+        modules_back = [model_teacher.encoder]
+        if cfg["net"].get("aux_loss", False):
+            modules_head = [model_teacher.auxor, model_teacher.decoder]
+        else:
+            modules_head = [model_teacher.decoder]
+
+        params_list = []
+        for module in modules_back:
+            params_list.append(
+                dict(params=module.parameters(), lr=cfg_optim["kwargs"]["lr"])
+            )
+        for module in modules_head:
+            params_list.append(
+                dict(params=module.parameters(), lr=cfg_optim["kwargs"]["lr"] * times)
+            )
+
+        optimizer = get_optimizer(params_list, cfg_optim)
+    
+    elif cfg["dataset"]["p_sup"] == 1:
+        # Create network
+        model = ModelBuilder(cfg["net"])
+        modules_back = [model.encoder]
+        if cfg["net"].get("aux_loss", False):
+            modules_head = [model.auxor, model.decoder]
+        else:
+            modules_head = [model.decoder]
+
+        if cfg["net"].get("sync_bn", True):
+            model = torch.nn.SyncBatchNorm.convert_sync_batchnorm(model)
+
+        model = to_device(model)
+
+        sup_loss_fn = get_criterion(cfg)
+
+        train_loader_sup, val_loader = get_loader(cfg, seed=seed, distributed=args.distributed)
+
+        # Optimizer and lr decay scheduler
+        cfg_trainer = cfg["trainer"]
+        cfg_optim = cfg_trainer["optimizer"]
+        times = 1
+
+        params_list = []
+        for module in modules_back:
+            params_list.append(
+                dict(params=module.parameters(), lr=cfg_optim["kwargs"]["lr"])
+            )
+        for module in modules_head:
+            params_list.append(
+                dict(params=module.parameters(), lr=cfg_optim["kwargs"]["lr"] * times)
+            )
+
+        optimizer = get_optimizer(params_list, cfg_optim)
+
+        if args.distributed:
+            local_rank = int(os.environ["LOCAL_RANK"])
+            model = torch.nn.parallel.DistributedDataParallel(
+                model,
+                device_ids=[local_rank],
+                output_device=local_rank,
+                find_unused_parameters=False,
+            )
+    
     else:
-        modules_head = [model.decoder]
+        # Create network
+        model = ModelBuilder(cfg["net"])
+        modules_back = [model.encoder]
+        if cfg["net"].get("aux_loss", False):
+            modules_head = [model.auxor, model.decoder]
+        else:
+            modules_head = [model.decoder]
 
-    if cfg["net"].get("sync_bn", True):
-        model = torch.nn.SyncBatchNorm.convert_sync_batchnorm(model)
+        if cfg["net"].get("sync_bn", True):
+            model = torch.nn.SyncBatchNorm.convert_sync_batchnorm(model)
 
-    model = to_device(model)
+        model = to_device(model)
 
-    sup_loss_fn = get_criterion(cfg)
+        sup_loss_fn = get_criterion(cfg)
 
-    train_loader_sup, train_loader_unsup, val_loader = get_loader(cfg, seed=seed, distributed=args.distributed)
+        train_loader_sup, train_loader_unsup, val_loader = get_loader(cfg, seed=seed, distributed=args.distributed)
 
-    # Optimizer and lr decay scheduler
-    cfg_trainer = cfg["trainer"]
-    cfg_optim = cfg_trainer["optimizer"]
-    times = 10 if "pascal" in cfg["dataset"]["type"] else 1
+        # Optimizer and lr decay scheduler
+        cfg_trainer = cfg["trainer"]
+        cfg_optim = cfg_trainer["optimizer"]
+        times = 1
 
-    params_list = []
-    for module in modules_back:
-        params_list.append(
-            dict(params=module.parameters(), lr=cfg_optim["kwargs"]["lr"])
-        )
-    for module in modules_head:
-        params_list.append(
-            dict(params=module.parameters(), lr=cfg_optim["kwargs"]["lr"] * times)
-        )
+        params_list = []
+        for module in modules_back:
+            params_list.append(
+                dict(params=module.parameters(), lr=cfg_optim["kwargs"]["lr"])
+            )
+        for module in modules_head:
+            params_list.append(
+                dict(params=module.parameters(), lr=cfg_optim["kwargs"]["lr"] * times)
+            )
 
-    optimizer = get_optimizer(params_list, cfg_optim)
+        optimizer = get_optimizer(params_list, cfg_optim)
 
-    if args.distributed:
-        local_rank = int(os.environ["LOCAL_RANK"])
-        model = torch.nn.parallel.DistributedDataParallel(
-            model,
-            device_ids=[local_rank],
-            output_device=local_rank,
-            find_unused_parameters=False,
-        )
+        if args.distributed:
+            local_rank = int(os.environ["LOCAL_RANK"])
+            model = torch.nn.parallel.DistributedDataParallel(
+                model,
+                device_ids=[local_rank],
+                output_device=local_rank,
+                find_unused_parameters=False,
+            )
 
-    # Teacher model
-    model_teacher = ModelBuilder(cfg["net"])
-    model_teacher = to_device(model_teacher)
-    if args.distributed:
-        model_teacher = torch.nn.parallel.DistributedDataParallel(
-            model_teacher,
-            device_ids=[local_rank],
-            output_device=local_rank,
-            find_unused_parameters=False,
-        )
+        # Teacher model
+        model_teacher = ModelBuilder(cfg["net"])
+        model_teacher = to_device(model_teacher)
+        if args.distributed:
+            model_teacher = torch.nn.parallel.DistributedDataParallel(
+                model_teacher,
+                device_ids=[local_rank],
+                output_device=local_rank,
+                find_unused_parameters=False,
+            )
 
-    for p in model_teacher.parameters():
-        p.requires_grad = False
+        for p in model_teacher.parameters():
+            p.requires_grad = False
 
     best_prec = 0
     last_epoch = 0
@@ -177,19 +266,14 @@ def main():
         load_state(cfg["saver"]["pretrain"], model_teacher, key="teacher_state")
 
     optimizer_start = get_optimizer(params_list, cfg_optim)
-    lr_scheduler = get_scheduler(
-        cfg_trainer, len(train_loader_sup), optimizer_start, start_epoch=last_epoch
-    )
-
-    # build class-wise memory bank
-    memobank = []
-    queue_ptrlis = []
-    queue_size = []
-    for i in range(cfg["net"]["num_classes"]):
-        memobank.append([torch.zeros(0, 256)])
-        queue_size.append(30000)
-        queue_ptrlis.append(torch.zeros(1, dtype=torch.long))
-    queue_size[0] = 50000
+    if cfg["dataset"]["p_sup"] == 0:
+        lr_scheduler = get_scheduler(
+            cfg_trainer, len(train_loader_unsup), optimizer_start, start_epoch=last_epoch
+                )
+    else:
+        lr_scheduler = get_scheduler(
+            cfg_trainer, len(train_loader_sup), optimizer_start, start_epoch=last_epoch
+                )
 
     # build prototype
     prototype = torch.zeros(
@@ -202,45 +286,65 @@ def main():
     )
     prototype = to_device(prototype)
 
-    # Start to train model
-    for epoch in range(last_epoch, cfg_trainer["epochs"]):
-        # Training
-        train(
-            model,
-            model_teacher,
-            optimizer,
-            lr_scheduler,
-            sup_loss_fn,
-            train_loader_sup,
-            train_loader_unsup,
-            epoch,
-            tb_logger,
-            logger,
-            memobank,
-            queue_ptrlis,
-            queue_size,
-        )
+    # Call select_diverse_samples after a few epochs (e.g., 5)
+    if cfg["dataset"]["p_sup"] == 0:
+        for epoch in range(5):
+            # Training
+            cluster_train(
+                model_teacher,
+                optimizer,
+                lr_scheduler,
+                train_loader_unsup,
+                epoch,
+                tb_logger,
+                logger,
+            )
+            # Set the number of clusters and samples per cluster
+            n_clusters = 10
+            n_samples_per_cluster = 10
 
-        # Validation
-        if cfg_trainer["eval_on"]:
-            if rank == 0:
-                logger.info("start evaluation")
+            # Extract the file paths from the unlabeled dataset
+            filenames = [sample[0] for sample in train_loader_unsup.dataset.list_sample]
 
-            if epoch < cfg["trainer"].get("sup_only_epoch", 1):
-                prec = validate(model, val_loader, epoch, logger, device)
-            else:
-                prec = validate(model_teacher, val_loader, epoch, logger, device)
+            # Call the select_diverse_samples function
+            selected_filenames = select_diverse_samples(model, train_loader_unsup, train_loader_unsup.dataset, device, n_clusters, n_samples_per_cluster, filenames)
+
+            # Save the selected filenames to a file
+            annotation_queue_file = os.path.join(cfg["saver"]["snapshot_dir"], "annotation_queue.txt")
+            with open(annotation_queue_file, "w") as f:
+                for filename in selected_filenames:
+                    f.write(f"{filename}\n")
+
+            # Stop the training process after selecting diverse samples
+            break
+    elif cfg["dataset"]["p_sup"] == 1:
+        for epoch in range(last_epoch, cfg_trainer["epochs"]):
+            # Training
+            sup_train(
+                model,
+                optimizer,
+                lr_scheduler,
+                sup_loss_fn,
+                train_loader_sup,
+                epoch,
+                tb_logger,
+                logger,
+            )
+
+            # Validation and store checkpoint
+            prec = validate(model, val_loader, epoch, logger, device)
 
             if rank == 0:
                 state = {
-                    "epoch": epoch + 1,
+                    "epoch": epoch,
                     "model_state": model.state_dict(),
                     "optimizer_state": optimizer.state_dict(),
-                    "teacher_state": model_teacher.state_dict(),
                     "best_miou": best_prec,
                 }
+
                 if prec > best_prec:
                     best_prec = prec
+                    state["best_miou"] = prec
                     torch.save(
                         state, osp.join(cfg["saver"]["snapshot_dir"], "ckpt_best.pth")
                     )
@@ -253,7 +357,328 @@ def main():
                     )
                 )
                 tb_logger.add_scalar("mIoU val", prec, epoch)
+    else:
+            # build class-wise memory bank
+        memobank = []
+        queue_ptrlis = []
+        queue_size = []
+        for i in range(cfg["net"]["num_classes"]):
+            memobank.append([torch.zeros(0, 256)])
+            queue_size.append(30000)
+            queue_ptrlis.append(torch.zeros(1, dtype=torch.long))
+        queue_size[0] = 50000
+        # Start to train model
+        for epoch in range(last_epoch, cfg_trainer["epochs"]):
+            # Training
+            train(
+                model,
+                model_teacher,
+                optimizer,
+                lr_scheduler,
+                sup_loss_fn,
+                train_loader_sup,
+                train_loader_unsup,
+                epoch,
+                tb_logger,
+                logger,
+                memobank,
+                queue_ptrlis,
+                queue_size,
+            )
 
+            # Validation
+            if cfg_trainer["eval_on"]:
+                if rank == 0:
+                    logger.info("start evaluation")
+
+                if epoch < cfg["trainer"].get("sup_only_epoch", 1):
+                    prec = validate(model, val_loader, epoch, logger, device)
+                else:
+                    prec = validate(model_teacher, val_loader, epoch, logger, device)
+
+                if rank == 0:
+                    state = {
+                        "epoch": epoch + 1,
+                        "model_state": model.state_dict(),
+                        "optimizer_state": optimizer.state_dict(),
+                        "teacher_state": model_teacher.state_dict(),
+                        "best_miou": best_prec,
+                    }
+                    if prec > best_prec:
+                        best_prec = prec
+                        torch.save(
+                            state, osp.join(cfg["saver"]["snapshot_dir"], "ckpt_best.pth")
+                        )
+
+                    torch.save(state, osp.join(cfg["saver"]["snapshot_dir"], "ckpt.pth"))
+
+                    logger.info(
+                        "\033[31m * Currently, the best val result is: {:.2f}\033[0m".format(
+                            best_prec * 100
+                        )
+                    )
+                    tb_logger.add_scalar("mIoU val", prec, epoch)
+
+def extract_features(model, dataloader, device):
+    model.eval()
+    features = []
+
+    with torch.no_grad():
+        for batch in dataloader:
+            inputs = batch[0].to(device)
+            # Assuming that your model returns a dictionary with keys 'pred', 'rep', and 'aux'
+            output = model(inputs)
+            feature_batch = output['rep']
+            features.append(feature_batch.cpu().numpy())
+
+    features = np.concatenate(features, axis=0)
+    return features
+
+def select_diverse_samples(model, unlabeled_dataloader, unlabeled_dataset, device, n_clusters, n_samples_per_cluster, filenames):
+    features = extract_features(model, unlabeled_dataloader, device)
+
+    # Perform clustering
+    kmeans = KMeans(n_clusters=n_clusters, random_state=0).fit(features)
+
+    # Reduce dimensions using PCA or t-SNE
+    reducer = PCA(n_components=2)  # Or use TSNE(n_components=2, random_state=0)
+    reduced_embeddings = reducer.fit_transform(features)
+
+    # Create a scatter plot with colored points based on their cluster
+    plt.scatter(reduced_embeddings[:, 0], reduced_embeddings[:, 1], c=kmeans.labels_, cmap='viridis')
+
+    # Set plot title and labels
+    plt.title("Clustering of feature embeddings")
+    plt.xlabel("Dimension 1")
+    plt.ylabel("Dimension 2")
+
+    # Save the plot to a file
+    plt.savefig(os.path.join(cfg["saver"]["snapshot_dir"], "clustering_visualization.png"))
+    plt.close()
+
+    cluster_assignments = kmeans.fit_predict(features)
+
+    selected_samples = []
+    for cluster in range(n_clusters):
+        cluster_indices = np.where(cluster_assignments == cluster)[0]
+        if len(cluster_indices) > n_samples_per_cluster:
+            cluster_indices = np.random.choice(cluster_indices, n_samples_per_cluster, replace=False)
+        selected_samples.extend(cluster_indices)
+
+    selected_filenames = [filenames[i] for i in selected_samples]
+
+    return selected_filenames
+
+def cluster_train(
+    model_teacher,
+    optimizer,
+    lr_scheduler,
+    loader_u,
+    epoch,
+    tb_logger,
+    logger,
+    distributed=False,
+):
+    global prototype
+
+    max_length = len(loader_u)
+    model_teacher.train()
+
+    if distributed:
+        loader_u.sampler.set_epoch(epoch)
+    loader_u_circular = cycle(loader_u)
+    if distributed:
+        rank, world_size = dist.get_rank(), dist.get_world_size()
+    else:
+        rank, world_size = 0, 1
+
+    uns_losses = AverageMeter(10)
+    data_times = AverageMeter(10)
+    batch_times = AverageMeter(10)
+    learning_rates = AverageMeter(10)
+
+    batch_end = time.time()
+    for step in range(max_length):
+        batch_start = time.time()
+        data_times.update(batch_start - batch_end)
+
+        i_iter = epoch * max_length + step  # Update i_iter to use max_length
+        lr = lr_scheduler.get_lr()
+        learning_rates.update(lr[0])
+        lr_scheduler.step()
+
+        image_u, _ = next(loader_u_circular)
+        batch_size, h, w = _.size()
+        # Show the images and labels
+        #visualize_image_label_batch(image_u, _, batch_size)
+        image_u = to_device(image_u)
+
+        # apply strong data augmentation: cutout, cutmix, or classmix
+        if np.random.uniform(0, 1) < 0.5 and cfg["trainer"]["unsupervised"].get(
+            "apply_aug", False
+        ):
+            image_u_aug, label_u_aug, logits_u_aug = generate_unsup_data(
+                image_u,
+                label_u_aug.clone(),
+                logits_u_aug.clone(),
+                mode=cfg["trainer"]["unsupervised"]["apply_aug"],
+            )
+        else:
+            image_u_aug = image_u
+
+        # forward
+        image_all = image_u_aug
+            
+        outs = model_teacher(image_all)
+        pred_all, rep_all = outs["pred"], outs["rep"]
+        pred_u = pred_all
+        pred_u_large = F.interpolate(
+            pred_u, size=(h, w), mode="bilinear", align_corners=True
+        )        
+
+        # teacher forward
+        model_teacher.train()
+        with torch.no_grad():
+            out_t = model_teacher(image_all)
+            pred_all_teacher, rep_all_teacher = out_t["pred"], out_t["rep"]
+            prob_all_teacher = F.softmax(pred_all_teacher, dim=1)
+
+            pred_u_teacher = pred_all_teacher
+            pred_u_large_teacher = F.interpolate(
+                pred_u_teacher, size=(h, w), mode="bilinear", align_corners=True
+            )
+
+        # unsupervised loss
+        drop_percent = cfg["trainer"]["unsupervised"].get("drop_percent", 100)
+        percent_unreliable = (100 - drop_percent) * (1 - epoch / cfg["trainer"]["epochs"])
+        drop_percent = 100 - percent_unreliable
+        unsup_loss = (
+                compute_unsupervised_loss(
+                    pred_u_large,
+                    label_u_aug.clone(),
+                    drop_percent,
+                    pred_u_large_teacher.detach(),
+                )
+                * cfg["trainer"]["unsupervised"].get("loss_weight", 1)
+        )
+
+        loss = unsup_loss
+        
+        optimizer.zero_grad()
+        loss.backward()
+        optimizer.step()
+
+        reduced_uns_loss = unsup_loss.clone().detach()
+        if distributed:
+            dist.all_reduce(reduced_uns_loss)
+        uns_losses.update(reduced_uns_loss.item())
+
+        batch_end = time.time()
+        batch_times.update(batch_end - batch_start)
+
+        if i_iter % 10 == 0:
+            logger.info(
+                "[Num_Sup {}]"#[{}] "
+                "Iter [{}/{}]\t"
+                "Data_Time {data_time.val:.2f} ({data_time.avg:.2f})\t"
+                "Batch_Time {batch_time.val:.2f} ({batch_time.avg:.2f})\t"
+                "Uns {uns_loss.val:.3f} ({uns_loss.avg:.3f})\t"
+                "LR {lr.val:.5f}".format(
+                    cfg["dataset"]["n_sup"],
+                    #contra_flag,
+                    i_iter,
+                    cfg["trainer"]["epochs"] * len(loader_u),
+                    data_time=data_times,
+                    batch_time=batch_times,
+                    uns_loss=uns_losses,
+                    lr=learning_rates,
+                )
+            )
+
+            tb_logger.add_scalar("lr", learning_rates.val, i_iter)
+            tb_logger.add_scalar("Uns Loss", uns_losses.val, i_iter)
+
+def sup_train(
+    model,
+    optimizer,
+    lr_scheduler,
+    criterion,
+    data_loader,
+    epoch,
+    tb_logger,
+    logger,
+    distributed = False,
+):
+    model.train()
+    if distributed:
+        data_loader.sampler.set_epoch(epoch)
+    data_loader_iter = iter(data_loader)
+
+    if distributed:
+        rank, world_size = dist.get_rank(), dist.get_world_size()
+    else:
+        rank, world_size = 0, 1
+    
+    losses = AverageMeter(10)
+    data_times = AverageMeter(10)
+    batch_times = AverageMeter(10)
+    learning_rates = AverageMeter(10)
+
+    batch_end = time.time()
+    for step in range(len(data_loader)):
+        batch_start = time.time()
+        data_times.update(batch_start - batch_end)
+
+        i_iter = epoch * len(data_loader) + step
+        lr = lr_scheduler.get_lr()
+        learning_rates.update(lr[0])
+        lr_scheduler.step()
+
+        image, label = next(data_loader_iter)
+        batch_size, h, w = label.size()
+        image, label = to_device(image), to_device(label)
+        outs = model(image)
+        pred = outs["pred"]
+        pred = F.interpolate(pred, (h, w), mode="bilinear", align_corners=True)
+
+        if "aux_loss" in cfg["net"].keys():
+            aux = outs["aux"]
+            aux = F.interpolate(aux, (h, w), mode="bilinear", align_corners=True)
+            loss = criterion([pred, aux], label)
+        else:
+            loss = criterion(pred, label)
+
+        optimizer.zero_grad()
+        loss.backward()
+        optimizer.step()
+
+        # gather all loss from different gpus
+        reduced_loss = loss.clone().detach()
+        if distributed:
+            dist.all_reduce(reduced_loss)
+        losses.update(reduced_loss.item())
+
+        batch_end = time.time()
+        batch_times.update(batch_end - batch_start)
+
+        if i_iter % 10 == 0 and rank == 0:
+            logger.info(
+                "Iter [{}/{}]\t"
+                "Data {data_time.val:.2f} ({data_time.avg:.2f})\t"
+                "Time {batch_time.val:.2f} ({batch_time.avg:.2f})\t"
+                "Loss {loss.val:.4f} ({loss.avg:.4f})\t"
+                "LR {lr.val:.5f} ({lr.avg:.5f})\t".format(
+                    i_iter,
+                    cfg["trainer"]["epochs"] * len(data_loader),
+                    data_time=data_times,
+                    batch_time=batch_times,
+                    loss=losses,
+                    lr=learning_rates,
+                )
+            )
+
+            tb_logger.add_scalar("lr", learning_rates.avg, i_iter)
+            tb_logger.add_scalar("Loss", losses.avg, i_iter)
 
 def train(
     model,
@@ -274,6 +699,9 @@ def train(
     global prototype
     ema_decay_origin = cfg["net"]["ema_decay"]
 
+    #a = len(loader_l)
+    #b = len(loader_u)
+    max_length = max(len(loader_l), len(loader_u))
     model.train()
 
     if distributed:
@@ -281,6 +709,8 @@ def train(
         loader_u.sampler.set_epoch(epoch)
     loader_l_iter = iter(loader_l)
     loader_u_iter = iter(loader_u)
+    loader_l_circular = cycle(loader_l)
+    loader_u_circular = cycle(loader_u)
     """assert len(loader_l) == len(
         loader_u
     ), f"labeled data {len(loader_l)} unlabeled data {len(loader_u)}, imbalance!"
@@ -298,16 +728,17 @@ def train(
     learning_rates = AverageMeter(10)
 
     batch_end = time.time()
-    for step in range(len(loader_l)):
+    for step in range(max_length):
         batch_start = time.time()
         data_times.update(batch_start - batch_end)
 
-        i_iter = epoch * len(loader_l) + step
+        i_iter = epoch * max_length + step  # Update i_iter to use max_length
         lr = lr_scheduler.get_lr()
         learning_rates.update(lr[0])
         lr_scheduler.step()
 
-        image_l, label_l = next(loader_l_iter)
+        # Use circular iterators instead of regular iterators
+        image_l, label_l = next(loader_l_circular)
         batch_size, h, w = label_l.size()
 
         # Show the images and labels
@@ -315,7 +746,7 @@ def train(
         
         image_l, label_l = to_device(image_l), to_device(label_l)
 
-        image_u, _ = next(loader_u_iter)
+        image_u, _ = next(loader_u_circular)
         # Show the images and labels
         #visualize_image_label_batch(image_u, _, batch_size)
         image_u = to_device(image_u)
@@ -571,7 +1002,7 @@ def train(
         if epoch >= cfg["trainer"].get("sup_only_epoch", 1):
             with torch.no_grad():
                 ema_decay = min(
-                    1 - 1 / (i_iter - len(loader_l) * cfg["trainer"].get("sup_only_epoch", 1) + 1 ),
+                    1 - 1 / (i_iter - max_length * cfg["trainer"].get("sup_only_epoch", 1) + 1 ),
                     ema_decay_origin,
                 )
                 for t_params, s_params in zip(
@@ -602,7 +1033,7 @@ def train(
 
         if i_iter % 10 == 0:
             logger.info(
-                "[Num_Sup {}]"#[{}] "
+                "[P_Sup {}]"#[{}] "
                 "Iter [{}/{}]\t"
                 "Data_Time {data_time.val:.2f} ({data_time.avg:.2f})\t"
                 "Batch_Time {batch_time.val:.2f} ({batch_time.avg:.2f})\t"
@@ -610,10 +1041,10 @@ def train(
                 "Uns {uns_loss.val:.3f} ({uns_loss.avg:.3f})\t"
                 #"Con {con_loss.val:.3f} ({con_loss.avg:.3f})\t"
                 "LR {lr.val:.5f}".format(
-                    cfg["dataset"]["n_sup"],
+                    cfg["dataset"]["p_sup"],
                     #contra_flag,
                     i_iter,
-                    cfg["trainer"]["epochs"] * len(loader_l),
+                    cfg["trainer"]["epochs"] * max_length,
                     data_time=data_times,
                     batch_time=batch_times,
                     sup_loss=sup_losses,
@@ -627,7 +1058,6 @@ def train(
             tb_logger.add_scalar("Sup Loss", sup_losses.val, i_iter)
             tb_logger.add_scalar("Uns Loss", uns_losses.val, i_iter)
             #tb_logger.add_scalar("Con Loss", con_losses.val, i_iter)
-
 
 def validate(
     model,

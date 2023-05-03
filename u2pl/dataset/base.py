@@ -12,23 +12,7 @@ class BaseDataset(Dataset):
     def parse_input_list(self, d_list, max_sample=-1, start_idx=-1, end_idx=-1):
         logger = logging.getLogger("global")
         assert isinstance(d_list, str)
-        if "cityscapes" in d_list:
-            self.list_sample = [
-                [
-                    line.strip(),
-                    "gtFine/" + line.strip()[12:-15] + "gtFine_labelTrainIds.png",
-                ]
-                for line in open(d_list, "r")
-            ]
-        elif "pascal" in d_list or "VOC" in d_list:
-            self.list_sample = [
-                [
-                    "JPEGImages/{}.jpg".format(line.strip()),
-                    "SegmentationClassAug/{}.png".format(line.strip()),
-                ]
-                for line in open(d_list, "r")
-            ]
-        elif "Crack_Dataset" in d_list:
+        if "Crack_Dataset" in d_list:
             if "unlabeled.txt" in d_list:
                 self.list_sample = [
                     [
@@ -63,7 +47,7 @@ class BaseDataset(Dataset):
             self.list_sample = self.list_sample[start_idx:end_idx]
 
         self.usable_sample = len(self.list_sample)
-        assert self.usable_sample > 0
+        assert self.usable_sample >= 0
         logger.info("# usable_samples: {}".format(self.usable_sample))
 
     def img_loader(self, path, mode):

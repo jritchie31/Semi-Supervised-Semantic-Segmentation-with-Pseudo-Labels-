@@ -8,7 +8,6 @@ data/cityscapes/
 data/VOC2012/
 *.pth
 events/
-log/
 checkpoints/
 viewer*/
 train.log.*

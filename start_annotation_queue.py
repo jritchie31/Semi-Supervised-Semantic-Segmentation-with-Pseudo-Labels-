@@ -1,8 +1,11 @@
+import os
+import os.path as osp
 from sklearn.cluster import MiniBatchKMeans
+import matplotlib.pyplot as plt
 import numpy as np
+from sklearn.decomposition import PCA
 
 def kcluster(features):
-    # fit on the whole data
     kmeans = MiniBatchKMeans(n_clusters=10,
                                 random_state=0,
                                 batch_size=10,
@@ -11,27 +14,30 @@ def kcluster(features):
 
     return kmeans
 
+def select_diverse_samples(n_clusters, n_samples_per_cluster, n_lines=None):
+    current_dir = osp.dirname(osp.abspath(__file__))
+    file_dir = osp.join(current_dir, r"result_report_0.0_Unsupervised")
+    features_dir = osp.join(file_dir, r"features.txt")
+    paths_dir = osp.join(file_dir, r"paths.txt")
+    
+    with open(features_dir, 'r') as f:
+        features = np.array([list(map(float, line.strip().split(','))) for line in f][:n_lines])
 
+    with open(paths_dir, 'r') as f:
+        paths = [line.strip() for line in f][:n_lines]
 
-def select_diverse_samples(model, unlabeled_dataloader, unlabeled_dataset, device, n_clusters, n_samples_per_cluster, logger):
-    features, paths = extract_features(model, unlabeled_dataloader, device, logger)
-    # Perform clustering
     kmeans = kcluster(features)
 
-    # Reduce dimensions using PCA or t-SNE
-    reducer = PCA(n_components=2)  # Or use TSNE(n_components=2, random_state=0)
+    reducer = PCA(n_components=2)
     reduced_embeddings = reducer.fit_transform(features)
 
-    # Create a scatter plot with colored points based on their cluster
     plt.scatter(reduced_embeddings[:, 0], reduced_embeddings[:, 1], c=kmeans.labels_, cmap='viridis')
 
-    # Set plot title and labels
     plt.title("Clustering of feature embeddings")
     plt.xlabel("Dimension 1")
     plt.ylabel("Dimension 2")
 
-    # Save the plot to a file
-    plt.savefig(os.path.join(cfg["saver"]["snapshot_dir"], "clustering_visualization.png"))
+    plt.savefig(os.path.join(file_dir, "clustering_visualization.png"))
     plt.close()
 
     cluster_assignments = kmeans.predict(features)
@@ -45,5 +51,12 @@ def select_diverse_samples(model, unlabeled_dataloader, unlabeled_dataset, devic
 
     selected_paths = [paths[i] for i in selected_samples]
 
+    # Save the selected paths to a file
+    with open(os.path.join(file_dir, "annotation_queue.txt"), 'w') as f:
+        for path in selected_paths:
+            f.write(f"{path}\n")
+
     return selected_paths
+
+selected_paths = select_diverse_samples(n_clusters=10, n_samples_per_cluster=34)
 

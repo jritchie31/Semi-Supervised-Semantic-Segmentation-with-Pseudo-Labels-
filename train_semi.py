@@ -11,8 +11,6 @@ import matplotlib.pyplot as plt
 from torch.utils.tensorboard import SummaryWriter
 from PIL import Image
 from itertools import cycle
-from sklearn.cluster import MiniBatchKMeans
-from sklearn.decomposition import PCA
 
 import numpy as np
 import torch

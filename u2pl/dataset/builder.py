@@ -1,6 +1,6 @@
 import logging
 
-from .crack_data import build_crackloader, build_crack_semi_loader, build_crack_semi_portion_loader
+from .crack_data import build_crackloader, build_crack_semi_loader, build_crack_semi_portion_loader, build_crack_semi_active_loader
 
 logger = logging.getLogger("global")
 #Function checks the type of dataset specified in the configuration, and based on type will call one of the
@@ -43,6 +43,14 @@ def get_loader(cfg, logger=logger, seed=0, distributed=False):
             val_loader = build_crack_semi_portion_loader("val", cfg, distributed=distributed)
             logger.info("Get loader Done...")
             return train_loader_sup, train_loader_unsup, val_loader
+    
+    elif cfg_dataset["type"] == "crack_semi_active":
+        train_loader_sup, train_loader_unsup = build_crack_semi_active_loader(
+            "train", cfg, seed=seed, distributed=distributed
+        )
+        val_loader = build_crack_semi_active_loader("val", cfg, distributed=distributed)
+        logger.info("Get loader Done...")
+        return train_loader_sup, train_loader_unsup, val_loader
 
     elif cfg_dataset["type"] == "crack":
         train_loader_sup = build_crackloader("train", cfg, seed=seed, distributed=distributed)

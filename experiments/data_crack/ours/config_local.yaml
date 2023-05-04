@@ -4,6 +4,7 @@ dataset: # Required.
   train: # 50 labeled images with data augmentation (flip, random resize, random crop) from split 1
     data_root: "/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data"
     data_list: "/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data/Crack_Dataset/data_crack/Data_train/split_1/labeled.txt"
+    ann_data_list: "/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data/Crack_Dataset/data_crack/Data_train/split_1/labeled.txt"
     seed: 27
     flip: True
     GaussianBlur: False

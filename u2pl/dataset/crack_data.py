@@ -298,6 +298,78 @@ def build_crack_semi_portion_loader(split, all_cfg, seed=0, distributed=False):
             )
             return loader_sup, loader_unsup
 
+def build_crack_semi_active_loader(split, all_cfg, seed=0, distributed=False):
+    cfg_dset = all_cfg["dataset"]
+
+    cfg = copy.deepcopy(cfg_dset)
+    cfg.update(cfg.get(split, {}))
+
+    cfg_all_dlst = cfg["train"]["data_list"]
+    cfg_sup_dlst = cfg["train"]["ann_data_list"]
+    save_dir = os.path.dirname(cfg_sup_dlst)
+    
+    cfg_uns_dlst, n_sup, n_unsup = create_unsupervised_data_list(cfg_all_dlst, cfg_sup_dlst, save_dir)
+    cfg_dlst_val = cfg['val']["data_list"]
+    workers = cfg.get("workers", 2)
+    batch_size = cfg.get("batch_size", 1)
+    n_val = 80
+    # build transform
+    trs_form = build_transform(cfg)
+    trs_form_unsup = build_transform(cfg)
+    
+    dset_val = crackData(cfg['val']["data_root"], cfg_dlst_val, trs_form, seed, n_val, split)
+    dset = crackData(cfg['train']["data_root"], cfg_sup_dlst, trs_form, seed, n_sup, split)
+
+    if split == "val":
+        # build sampler
+        if distributed:
+            sampler = DistributedSampler(dset_val)
+        else:
+            sampler = torch.utils.data.RandomSampler(dset_val)
+
+        loader = DataLoader(
+            dset_val,
+            batch_size=batch_size,
+            num_workers=workers,
+            sampler=sampler,
+            shuffle=False,
+            pin_memory=True,
+        )
+        return loader
+
+    else:
+        # build sampler for unlabeled set
+        dset_unsup = crackData(
+            cfg["data_root"], cfg_uns_dlst, trs_form_unsup, seed, n_unsup, split
+        )
+
+        if distributed:
+            sampler_sup = DistributedSampler(dset)
+            sampler_unsup = DistributedSampler(dset_unsup)
+        else:
+            sampler_sup = torch.utils.data.RandomSampler(dset)
+            sampler_unsup = torch.utils.data.RandomSampler(dset_unsup)
+
+        loader_sup = DataLoader(
+            dset,
+            batch_size=batch_size,
+            num_workers=workers,
+            sampler=sampler_sup,
+            shuffle=False,
+            pin_memory=True,
+            drop_last=True,
+        )
+
+        loader_unsup = DataLoader(
+            dset_unsup,
+            batch_size=batch_size,
+            num_workers=workers,
+            sampler=sampler_unsup,
+            shuffle=False,
+            pin_memory=True,
+            drop_last=True,
+        )
+        return loader_sup, loader_unsup
 
 def split_list(cfg_dlst, p_sup):
     # Read the lines from the original list file
@@ -326,3 +398,25 @@ def split_list(cfg_dlst, p_sup):
         f.writelines(unlabeled_lines)
 
     return labeled_list, unlabeled_list
+
+def create_unsupervised_data_list(cfg_all_dlst, cfg_sup_dlst, save_dir):
+    with open(cfg_all_dlst, 'r') as f:
+        all_data = set(line.strip() for line in f)
+
+    with open(cfg_sup_dlst, 'r') as f:
+        sup_data = set(line.strip() for line in f)
+
+    unsup_data = all_data - sup_data
+    cfg_uns_dlst = os.path.join(save_dir, "cfg_uns_dlst.txt")
+
+    with open(cfg_uns_dlst, 'w') as f:
+        for path in unsup_data:
+            f.write(f"{path}\n")
+
+    n_sup = len(sup_data)
+    n_unsup = len(unsup_data)
+    n_all = len(all_data)
+
+    assert n_sup + n_unsup == n_all, f"Unexpected number of samples, found {n_sup + n_unsup}, expected {n_all}"
+
+    return cfg_uns_dlst, n_sup, n_unsup

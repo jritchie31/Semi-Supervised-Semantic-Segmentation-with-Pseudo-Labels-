@@ -23058,3 +23058,846 @@
 [2023-05-04 13:36:40,118][    INFO] The kwargs for lr scheduler: 0.9
 [2023-05-04 13:37:08,691][    INFO] [Semi-Supervised][P_Sup 0.7]Iter [0/990]	Data_Time 0.00 (0.00)	Batch_Time 13.37 (13.37)	Sup 0.775 (0.775)	Uns 1.033 (1.033)	LR 0.00200
 [2023-05-04 13:38:24,377][    INFO] [Semi-Supervised][P_Sup 0.7]Iter [10/990]	Data_Time 0.00 (0.01)	Batch_Time 7.33 (7.56)	Sup 1.063 (0.866)	Uns 0.855 (0.904)	LR 0.00198
+[2023-05-04 13:39:41,053][    INFO] [Semi-Supervised][P_Sup 0.7]Iter [20/990]	Data_Time 0.00 (0.00)	Batch_Time 7.15 (7.67)	Sup 1.060 (1.014)	Uns 0.909 (0.721)	LR 0.00197
+[2023-05-04 13:40:58,894][    INFO] [Semi-Supervised][P_Sup 0.7]Iter [30/990]	Data_Time 0.00 (0.00)	Batch_Time 8.29 (7.78)	Sup 0.897 (0.908)	Uns 0.725 (0.715)	LR 0.00195
+[2023-05-04 13:42:13,040][    INFO] [Semi-Supervised][P_Sup 0.7]Iter [40/990]	Data_Time 0.00 (0.00)	Batch_Time 7.39 (7.41)	Sup 0.584 (0.755)	Uns 0.487 (0.621)	LR 0.00193
+[2023-05-04 13:43:31,861][    INFO] [Semi-Supervised][P_Sup 0.7]Iter [50/990]	Data_Time 0.00 (0.00)	Batch_Time 7.83 (7.88)	Sup 0.396 (0.467)	Uns 0.325 (0.388)	LR 0.00191
+[2023-05-04 13:44:49,906][    INFO] [Semi-Supervised][P_Sup 0.7]Iter [60/990]	Data_Time 0.00 (0.00)	Batch_Time 7.94 (7.80)	Sup 0.365 (0.401)	Uns 0.294 (0.303)	LR 0.00189
+[2023-05-04 13:46:07,731][    INFO] [Semi-Supervised][P_Sup 0.7]Iter [70/990]	Data_Time 0.00 (0.00)	Batch_Time 7.74 (7.78)	Sup 0.346 (0.315)	Uns 0.271 (0.287)	LR 0.00187
+[2023-05-04 13:47:28,623][    INFO] [Semi-Supervised][P_Sup 0.7]Iter [80/990]	Data_Time 0.00 (0.00)	Batch_Time 8.18 (8.09)	Sup 0.187 (0.270)	Uns 0.284 (0.283)	LR 0.00186
+[2023-05-04 13:48:49,534][    INFO] [Semi-Supervised][P_Sup 0.7]Iter [90/990]	Data_Time 0.00 (0.00)	Batch_Time 7.80 (8.09)	Sup 0.375 (0.283)	Uns 0.281 (0.275)	LR 0.00184
+[2023-05-04 13:50:06,259][    INFO] [Semi-Supervised][P_Sup 0.7]Iter [100/990]	Data_Time 0.00 (0.00)	Batch_Time 7.98 (7.67)	Sup 0.326 (0.270)	Uns 0.255 (0.275)	LR 0.00182
+[2023-05-04 13:51:24,975][    INFO] [Semi-Supervised][P_Sup 0.7]Iter [110/990]	Data_Time 0.00 (0.00)	Batch_Time 7.68 (7.87)	Sup 0.260 (0.240)	Uns 0.275 (0.272)	LR 0.00180
+[2023-05-04 13:52:42,648][    INFO] [Semi-Supervised][P_Sup 0.7]Iter [120/990]	Data_Time 0.00 (0.00)	Batch_Time 7.82 (7.77)	Sup 0.314 (0.249)	Uns 0.251 (0.270)	LR 0.00178
+[2023-05-04 13:54:00,865][    INFO] [Semi-Supervised][P_Sup 0.7]Iter [130/990]	Data_Time 0.00 (0.00)	Batch_Time 7.52 (7.82)	Sup 0.201 (0.274)	Uns 0.241 (0.257)	LR 0.00176
+[2023-05-04 13:55:17,630][    INFO] [Semi-Supervised][P_Sup 0.7]Iter [140/990]	Data_Time 0.00 (0.00)	Batch_Time 7.44 (7.68)	Sup 0.259 (0.225)	Uns 0.275 (0.254)	LR 0.00175
+[2023-05-04 13:56:35,623][    INFO] [Semi-Supervised][P_Sup 0.7]Iter [150/990]	Data_Time 0.00 (0.00)	Batch_Time 7.59 (7.80)	Sup 0.331 (0.224)	Uns 0.225 (0.264)	LR 0.00173
+[2023-05-04 13:57:51,585][    INFO] [Semi-Supervised][P_Sup 0.7]Iter [160/990]	Data_Time 0.00 (0.00)	Batch_Time 7.94 (7.59)	Sup 0.269 (0.224)	Uns 0.265 (0.276)	LR 0.00171
+[2023-05-04 13:59:03,689][    INFO] [Semi-Supervised][P_Sup 0.7]Iter [170/990]	Data_Time 0.00 (0.00)	Batch_Time 7.83 (7.21)	Sup 0.193 (0.228)	Uns 0.233 (0.244)	LR 0.00169
+[2023-05-04 14:00:22,323][    INFO] [Semi-Supervised][P_Sup 0.7]Iter [180/990]	Data_Time 0.00 (0.00)	Batch_Time 7.85 (7.86)	Sup 0.136 (0.224)	Uns 0.276 (0.261)	LR 0.00167
+[2023-05-04 14:01:40,919][    INFO] [Semi-Supervised][P_Sup 0.7]Iter [190/990]	Data_Time 0.00 (0.00)	Batch_Time 7.76 (7.86)	Sup 0.197 (0.225)	Uns 0.277 (0.270)	LR 0.00165
+[2023-05-04 14:02:41,347][    INFO] start evaluation
+[2023-05-04 14:03:00,822][    INFO]  * class [0] IoU 97.99
+[2023-05-04 14:03:00,822][    INFO]  * class [1] IoU 21.79
+[2023-05-04 14:03:00,823][    INFO]  * epoch 0 mIoU 59.89
+[2023-05-04 14:03:03,810][    INFO] [31m * Currently, the best val result is: 59.89[0m
+[2023-05-04 14:03:57,483][    INFO] [Semi-Supervised][P_Sup 0.7]Iter [200/990]	Data_Time 0.00 (0.00)	Batch_Time 10.34 (12.61)	Sup 0.211 (0.242)	Uns 0.233 (0.245)	LR 0.00163
+[2023-05-04 14:05:44,612][    INFO] [Semi-Supervised][P_Sup 0.7]Iter [210/990]	Data_Time 0.00 (0.00)	Batch_Time 9.56 (10.71)	Sup 0.274 (0.219)	Uns 0.236 (0.257)	LR 0.00162
+[2023-05-04 14:07:24,751][    INFO] [Semi-Supervised][P_Sup 0.7]Iter [220/990]	Data_Time 0.00 (0.00)	Batch_Time 10.04 (10.01)	Sup 0.361 (0.235)	Uns 0.223 (0.244)	LR 0.00160
+[2023-05-04 14:09:08,798][    INFO] [Semi-Supervised][P_Sup 0.7]Iter [230/990]	Data_Time 0.00 (0.00)	Batch_Time 10.05 (10.40)	Sup 0.154 (0.163)	Uns 0.254 (0.257)	LR 0.00158
+[2023-05-04 14:10:53,324][    INFO] [Semi-Supervised][P_Sup 0.7]Iter [240/990]	Data_Time 0.00 (0.00)	Batch_Time 9.14 (10.45)	Sup 0.356 (0.287)	Uns 0.218 (0.228)	LR 0.00156
+[2023-05-04 14:12:28,688][    INFO] [Semi-Supervised][P_Sup 0.7]Iter [250/990]	Data_Time 0.00 (0.00)	Batch_Time 9.52 (9.53)	Sup 0.217 (0.212)	Uns 0.256 (0.244)	LR 0.00154
+[2023-05-04 14:14:08,601][    INFO] [Semi-Supervised][P_Sup 0.7]Iter [260/990]	Data_Time 0.00 (0.00)	Batch_Time 10.84 (9.99)	Sup 0.128 (0.186)	Uns 0.269 (0.242)	LR 0.00152
+[2023-05-04 14:15:48,348][    INFO] [Semi-Supervised][P_Sup 0.7]Iter [270/990]	Data_Time 0.00 (0.00)	Batch_Time 9.06 (9.97)	Sup 0.335 (0.259)	Uns 0.204 (0.233)	LR 0.00150
+[2023-05-04 14:17:26,248][    INFO] [Semi-Supervised][P_Sup 0.7]Iter [280/990]	Data_Time 0.00 (0.00)	Batch_Time 10.44 (9.79)	Sup 0.146 (0.216)	Uns 0.227 (0.248)	LR 0.00148
+[2023-05-04 14:19:04,370][    INFO] [Semi-Supervised][P_Sup 0.7]Iter [290/990]	Data_Time 0.00 (0.00)	Batch_Time 9.29 (9.81)	Sup 0.177 (0.201)	Uns 0.262 (0.248)	LR 0.00147
+[2023-05-04 14:20:36,818][    INFO] [Semi-Supervised][P_Sup 0.7]Iter [300/990]	Data_Time 0.00 (0.00)	Batch_Time 8.79 (9.24)	Sup 0.201 (0.204)	Uns 0.227 (0.248)	LR 0.00145
+[2023-05-04 14:22:08,073][    INFO] [Semi-Supervised][P_Sup 0.7]Iter [310/990]	Data_Time 0.00 (0.00)	Batch_Time 9.00 (9.12)	Sup 0.358 (0.239)	Uns 0.235 (0.239)	LR 0.00143
+[2023-05-04 14:23:47,346][    INFO] [Semi-Supervised][P_Sup 0.7]Iter [320/990]	Data_Time 0.00 (0.01)	Batch_Time 9.69 (9.92)	Sup 0.127 (0.280)	Uns 0.255 (0.238)	LR 0.00141
+[2023-05-04 14:25:21,455][    INFO] [Semi-Supervised][P_Sup 0.7]Iter [330/990]	Data_Time 0.00 (0.00)	Batch_Time 9.61 (9.41)	Sup 0.354 (0.243)	Uns 0.259 (0.238)	LR 0.00139
+[2023-05-04 14:26:54,437][    INFO] [Semi-Supervised][P_Sup 0.7]Iter [340/990]	Data_Time 0.00 (0.00)	Batch_Time 9.44 (9.30)	Sup 0.294 (0.217)	Uns 0.270 (0.247)	LR 0.00137
+[2023-05-04 14:28:27,303][    INFO] [Semi-Supervised][P_Sup 0.7]Iter [350/990]	Data_Time 0.00 (0.00)	Batch_Time 8.57 (9.28)	Sup 0.175 (0.215)	Uns 0.210 (0.232)	LR 0.00135
+[2023-05-04 14:30:08,517][    INFO] [Semi-Supervised][P_Sup 0.7]Iter [360/990]	Data_Time 0.00 (0.00)	Batch_Time 12.72 (10.12)	Sup 0.241 (0.205)	Uns 0.236 (0.231)	LR 0.00133
+[2023-05-04 14:31:40,831][    INFO] [Semi-Supervised][P_Sup 0.7]Iter [370/990]	Data_Time 0.00 (0.00)	Batch_Time 9.74 (9.23)	Sup 0.220 (0.173)	Uns 0.269 (0.263)	LR 0.00131
+[2023-05-04 14:33:20,264][    INFO] [Semi-Supervised][P_Sup 0.7]Iter [380/990]	Data_Time 0.00 (0.00)	Batch_Time 9.07 (9.94)	Sup 0.096 (0.250)	Uns 0.265 (0.258)	LR 0.00130
+[2023-05-04 14:34:57,669][    INFO] [Semi-Supervised][P_Sup 0.7]Iter [390/990]	Data_Time 0.00 (0.00)	Batch_Time 9.09 (9.74)	Sup 0.218 (0.204)	Uns 0.192 (0.245)	LR 0.00128
+[2023-05-04 14:35:49,443][    INFO] start evaluation
+[2023-05-04 14:36:08,578][    INFO]  * class [0] IoU 98.82
+[2023-05-04 14:36:08,580][    INFO]  * class [1] IoU 23.41
+[2023-05-04 14:36:08,580][    INFO]  * epoch 1 mIoU 61.11
+[2023-05-04 14:36:11,367][    INFO] [31m * Currently, the best val result is: 61.11[0m
+[2023-05-04 14:37:34,242][    INFO] [Semi-Supervised][P_Sup 0.7]Iter [400/990]	Data_Time 0.00 (0.00)	Batch_Time 10.25 (13.38)	Sup 0.153 (0.173)	Uns 0.227 (0.243)	LR 0.00126
+[2023-05-04 14:39:21,895][    INFO] [Semi-Supervised][P_Sup 0.7]Iter [410/990]	Data_Time 0.00 (0.00)	Batch_Time 12.80 (10.76)	Sup 0.159 (0.190)	Uns 0.221 (0.236)	LR 0.00124
+[2023-05-04 14:41:06,869][    INFO] [Semi-Supervised][P_Sup 0.7]Iter [420/990]	Data_Time 0.00 (0.00)	Batch_Time 9.11 (10.50)	Sup 0.136 (0.244)	Uns 0.238 (0.238)	LR 0.00122
+[2023-05-04 14:42:45,911][    INFO] [Semi-Supervised][P_Sup 0.7]Iter [430/990]	Data_Time 0.00 (0.00)	Batch_Time 12.24 (9.90)	Sup 0.220 (0.214)	Uns 0.220 (0.236)	LR 0.00120
+[2023-05-04 14:44:27,295][    INFO] [Semi-Supervised][P_Sup 0.7]Iter [440/990]	Data_Time 0.00 (0.00)	Batch_Time 13.95 (10.14)	Sup 0.350 (0.252)	Uns 0.239 (0.242)	LR 0.00118
+[2023-05-04 14:46:35,532][    INFO] [Semi-Supervised][P_Sup 0.7]Iter [450/990]	Data_Time 0.00 (0.00)	Batch_Time 9.27 (12.82)	Sup 0.277 (0.252)	Uns 0.266 (0.231)	LR 0.00116
+[2023-05-04 14:48:22,558][    INFO] [Semi-Supervised][P_Sup 0.7]Iter [460/990]	Data_Time 0.00 (0.00)	Batch_Time 10.50 (10.70)	Sup 0.374 (0.241)	Uns 0.248 (0.244)	LR 0.00114
+[2023-05-04 14:49:59,528][    INFO] [Semi-Supervised][P_Sup 0.7]Iter [470/990]	Data_Time 0.00 (0.00)	Batch_Time 9.17 (9.69)	Sup 0.132 (0.232)	Uns 0.268 (0.244)	LR 0.00112
+[2023-05-04 14:51:43,494][    INFO] [Semi-Supervised][P_Sup 0.7]Iter [480/990]	Data_Time 0.00 (0.00)	Batch_Time 9.05 (10.39)	Sup 0.332 (0.206)	Uns 0.224 (0.232)	LR 0.00110
+[2023-05-04 14:53:22,752][    INFO] [Semi-Supervised][P_Sup 0.7]Iter [490/990]	Data_Time 0.00 (0.00)	Batch_Time 10.13 (9.92)	Sup 0.149 (0.226)	Uns 0.249 (0.233)	LR 0.00108
+[2023-05-04 14:54:53,975][    INFO] [Semi-Supervised][P_Sup 0.7]Iter [500/990]	Data_Time 0.00 (0.00)	Batch_Time 8.89 (9.12)	Sup 0.094 (0.180)	Uns 0.258 (0.247)	LR 0.00106
+[2023-05-04 14:56:26,861][    INFO] [Semi-Supervised][P_Sup 0.7]Iter [510/990]	Data_Time 0.00 (0.00)	Batch_Time 8.76 (9.29)	Sup 0.075 (0.162)	Uns 0.266 (0.251)	LR 0.00104
+[2023-05-04 14:57:59,241][    INFO] [Semi-Supervised][P_Sup 0.7]Iter [520/990]	Data_Time 0.00 (0.00)	Batch_Time 8.68 (9.24)	Sup 0.188 (0.177)	Uns 0.237 (0.245)	LR 0.00102
+[2023-05-04 14:59:33,335][    INFO] [Semi-Supervised][P_Sup 0.7]Iter [530/990]	Data_Time 0.00 (0.00)	Batch_Time 9.22 (9.41)	Sup 0.275 (0.179)	Uns 0.236 (0.234)	LR 0.00101
+[2023-05-04 15:01:14,221][    INFO] [Semi-Supervised][P_Sup 0.7]Iter [540/990]	Data_Time 0.00 (0.00)	Batch_Time 10.47 (10.09)	Sup 0.128 (0.185)	Uns 0.260 (0.247)	LR 0.00099
+[2023-05-04 15:02:54,177][    INFO] [Semi-Supervised][P_Sup 0.7]Iter [550/990]	Data_Time 0.00 (0.00)	Batch_Time 8.63 (9.99)	Sup 0.085 (0.228)	Uns 0.205 (0.248)	LR 0.00097
+[2023-05-04 15:04:34,078][    INFO] [Semi-Supervised][P_Sup 0.7]Iter [560/990]	Data_Time 0.00 (0.00)	Batch_Time 9.57 (9.99)	Sup 0.188 (0.221)	Uns 0.263 (0.232)	LR 0.00095
+[2023-05-04 15:06:07,723][    INFO] [Semi-Supervised][P_Sup 0.7]Iter [570/990]	Data_Time 0.00 (0.00)	Batch_Time 9.63 (9.36)	Sup 0.243 (0.195)	Uns 0.222 (0.247)	LR 0.00093
+[2023-05-04 15:07:47,642][    INFO] [Semi-Supervised][P_Sup 0.7]Iter [580/990]	Data_Time 0.00 (0.00)	Batch_Time 9.13 (9.99)	Sup 0.106 (0.187)	Uns 0.265 (0.253)	LR 0.00091
+[2023-05-04 15:09:23,378][    INFO] [Semi-Supervised][P_Sup 0.7]Iter [590/990]	Data_Time 0.00 (0.00)	Batch_Time 9.28 (9.57)	Sup 0.094 (0.198)	Uns 0.254 (0.249)	LR 0.00089
+[2023-05-04 15:09:56,989][    INFO] start evaluation
+[2023-05-04 15:10:16,006][    INFO]  * class [0] IoU 98.71
+[2023-05-04 15:10:16,007][    INFO]  * class [1] IoU 24.42
+[2023-05-04 15:10:16,008][    INFO]  * epoch 2 mIoU 61.57
+[2023-05-04 15:10:19,326][    INFO] [31m * Currently, the best val result is: 61.57[0m
+[2023-05-04 15:12:00,049][    INFO] [Semi-Supervised][P_Sup 0.7]Iter [600/990]	Data_Time 0.00 (0.00)	Batch_Time 10.10 (12.14)	Sup 0.200 (0.155)	Uns 0.231 (0.249)	LR 0.00087
+[2023-05-04 15:13:55,638][    INFO] [Semi-Supervised][P_Sup 0.7]Iter [610/990]	Data_Time 0.00 (0.00)	Batch_Time 11.89 (11.56)	Sup 0.348 (0.209)	Uns 0.242 (0.242)	LR 0.00085
+[2023-05-04 15:15:53,215][    INFO] [Semi-Supervised][P_Sup 0.7]Iter [620/990]	Data_Time 0.00 (0.00)	Batch_Time 10.81 (11.76)	Sup 0.168 (0.202)	Uns 0.255 (0.243)	LR 0.00083
+[2023-05-04 15:17:42,288][    INFO] [Semi-Supervised][P_Sup 0.7]Iter [630/990]	Data_Time 0.00 (0.00)	Batch_Time 10.26 (10.90)	Sup 0.082 (0.132)	Uns 0.257 (0.245)	LR 0.00081
+[2023-05-04 15:19:32,217][    INFO] [Semi-Supervised][P_Sup 0.7]Iter [640/990]	Data_Time 0.00 (0.00)	Batch_Time 10.27 (10.99)	Sup 0.353 (0.218)	Uns 0.259 (0.250)	LR 0.00079
+[2023-05-04 15:21:10,855][    INFO] [Semi-Supervised][P_Sup 0.7]Iter [650/990]	Data_Time 0.00 (0.00)	Batch_Time 10.06 (9.86)	Sup 0.176 (0.200)	Uns 0.215 (0.229)	LR 0.00077
+[2023-05-04 15:22:43,586][    INFO] [Semi-Supervised][P_Sup 0.7]Iter [660/990]	Data_Time 0.00 (0.00)	Batch_Time 9.44 (9.27)	Sup 0.112 (0.196)	Uns 0.256 (0.236)	LR 0.00075
+[2023-05-04 15:24:22,442][    INFO] [Semi-Supervised][P_Sup 0.7]Iter [670/990]	Data_Time 0.00 (0.00)	Batch_Time 8.91 (9.88)	Sup 0.102 (0.227)	Uns 0.259 (0.248)	LR 0.00073
+[2023-05-04 15:26:04,446][    INFO] [Semi-Supervised][P_Sup 0.7]Iter [680/990]	Data_Time 0.00 (0.00)	Batch_Time 9.40 (10.20)	Sup 0.353 (0.249)	Uns 0.257 (0.244)	LR 0.00071
+[2023-05-04 15:27:43,165][    INFO] [Semi-Supervised][P_Sup 0.7]Iter [690/990]	Data_Time 0.00 (0.00)	Batch_Time 8.95 (9.87)	Sup 0.155 (0.153)	Uns 0.259 (0.250)	LR 0.00068
+[2023-05-04 15:29:20,459][    INFO] [Semi-Supervised][P_Sup 0.7]Iter [700/990]	Data_Time 0.00 (0.00)	Batch_Time 9.27 (9.73)	Sup 0.271 (0.183)	Uns 0.253 (0.252)	LR 0.00066
+[2023-05-04 15:30:56,425][    INFO] [Semi-Supervised][P_Sup 0.7]Iter [710/990]	Data_Time 0.00 (0.00)	Batch_Time 9.99 (9.59)	Sup 0.174 (0.196)	Uns 0.234 (0.247)	LR 0.00064
+[2023-05-04 15:32:26,400][    INFO] [Semi-Supervised][P_Sup 0.7]Iter [720/990]	Data_Time 0.00 (0.00)	Batch_Time 9.16 (9.00)	Sup 0.321 (0.249)	Uns 0.249 (0.251)	LR 0.00062
+[2023-05-04 15:34:04,350][    INFO] [Semi-Supervised][P_Sup 0.7]Iter [730/990]	Data_Time 0.00 (0.00)	Batch_Time 8.25 (9.79)	Sup 0.132 (0.166)	Uns 0.251 (0.238)	LR 0.00060
+[2023-05-04 15:35:40,630][    INFO] [Semi-Supervised][P_Sup 0.7]Iter [740/990]	Data_Time 0.00 (0.00)	Batch_Time 9.29 (9.63)	Sup 0.135 (0.150)	Uns 0.261 (0.250)	LR 0.00058
+[2023-05-04 15:37:17,053][    INFO] [Semi-Supervised][P_Sup 0.7]Iter [750/990]	Data_Time 0.00 (0.00)	Batch_Time 9.62 (9.64)	Sup 0.240 (0.142)	Uns 0.257 (0.249)	LR 0.00056
+[2023-05-04 15:38:52,755][    INFO] [Semi-Supervised][P_Sup 0.7]Iter [760/990]	Data_Time 0.00 (0.00)	Batch_Time 8.74 (9.57)	Sup 0.290 (0.233)	Uns 0.252 (0.249)	LR 0.00054
+[2023-05-04 15:40:29,594][    INFO] [Semi-Supervised][P_Sup 0.7]Iter [770/990]	Data_Time 0.00 (0.00)	Batch_Time 8.70 (9.68)	Sup 0.055 (0.163)	Uns 0.260 (0.248)	LR 0.00052
+[2023-05-04 15:42:05,414][    INFO] [Semi-Supervised][P_Sup 0.7]Iter [780/990]	Data_Time 0.00 (0.00)	Batch_Time 9.20 (9.58)	Sup 0.164 (0.195)	Uns 0.259 (0.249)	LR 0.00050
+[2023-05-04 15:43:46,110][    INFO] [Semi-Supervised][P_Sup 0.7]Iter [790/990]	Data_Time 0.00 (0.00)	Batch_Time 9.18 (10.07)	Sup 0.352 (0.194)	Uns 0.231 (0.244)	LR 0.00048
+[2023-05-04 15:44:01,533][    INFO] start evaluation
+[2023-05-04 15:44:20,538][    INFO]  * class [0] IoU 98.65
+[2023-05-04 15:44:20,539][    INFO]  * class [1] IoU 27.79
+[2023-05-04 15:44:20,539][    INFO]  * epoch 3 mIoU 63.22
+[2023-05-04 15:44:23,369][    INFO] [31m * Currently, the best val result is: 63.22[0m
+[2023-05-04 15:46:22,340][    INFO] [Semi-Supervised][P_Sup 0.7]Iter [800/990]	Data_Time 0.00 (0.00)	Batch_Time 9.84 (11.48)	Sup 0.186 (0.215)	Uns 0.256 (0.234)	LR 0.00045
+[2023-05-04 15:48:03,870][    INFO] [Semi-Supervised][P_Sup 0.7]Iter [810/990]	Data_Time 0.00 (0.00)	Batch_Time 9.71 (10.15)	Sup 0.360 (0.246)	Uns 0.248 (0.232)	LR 0.00043
+[2023-05-04 15:49:50,599][    INFO] [Semi-Supervised][P_Sup 0.7]Iter [820/990]	Data_Time 0.00 (0.00)	Batch_Time 11.23 (10.67)	Sup 0.120 (0.160)	Uns 0.221 (0.229)	LR 0.00041
+[2023-05-04 15:51:34,355][    INFO] [Semi-Supervised][P_Sup 0.7]Iter [830/990]	Data_Time 0.00 (0.00)	Batch_Time 10.30 (10.37)	Sup 0.338 (0.218)	Uns 0.251 (0.234)	LR 0.00039
+[2023-05-04 15:53:15,136][    INFO] [Semi-Supervised][P_Sup 0.7]Iter [840/990]	Data_Time 0.00 (0.00)	Batch_Time 10.71 (10.08)	Sup 0.092 (0.141)	Uns 0.253 (0.252)	LR 0.00037
+[2023-05-04 15:55:00,634][    INFO] [Semi-Supervised][P_Sup 0.7]Iter [850/990]	Data_Time 0.00 (0.00)	Batch_Time 10.72 (10.55)	Sup 0.208 (0.180)	Uns 0.253 (0.242)	LR 0.00035
+[2023-05-04 15:56:38,633][    INFO] [Semi-Supervised][P_Sup 0.7]Iter [860/990]	Data_Time 0.00 (0.00)	Batch_Time 9.21 (9.80)	Sup 0.055 (0.196)	Uns 0.254 (0.242)	LR 0.00032
+[2023-05-04 15:58:17,585][    INFO] [Semi-Supervised][P_Sup 0.7]Iter [870/990]	Data_Time 0.00 (0.00)	Batch_Time 12.44 (9.89)	Sup 0.106 (0.181)	Uns 0.246 (0.232)	LR 0.00030
+[2023-05-04 16:00:00,283][    INFO] [Semi-Supervised][P_Sup 0.7]Iter [880/990]	Data_Time 0.00 (0.00)	Batch_Time 9.34 (10.27)	Sup 0.092 (0.159)	Uns 0.226 (0.239)	LR 0.00028
+[2023-05-04 16:01:39,808][    INFO] [Semi-Supervised][P_Sup 0.7]Iter [890/990]	Data_Time 0.00 (0.00)	Batch_Time 9.45 (9.95)	Sup 0.104 (0.190)	Uns 0.251 (0.231)	LR 0.00026
+[2023-05-04 16:03:16,787][    INFO] [Semi-Supervised][P_Sup 0.7]Iter [900/990]	Data_Time 0.00 (0.00)	Batch_Time 9.67 (9.70)	Sup 0.133 (0.199)	Uns 0.228 (0.233)	LR 0.00023
+[2023-05-04 16:04:54,813][    INFO] [Semi-Supervised][P_Sup 0.7]Iter [910/990]	Data_Time 0.00 (0.00)	Batch_Time 9.82 (9.80)	Sup 0.150 (0.202)	Uns 0.241 (0.240)	LR 0.00021
+[2023-05-04 16:06:29,980][    INFO] [Semi-Supervised][P_Sup 0.7]Iter [920/990]	Data_Time 0.00 (0.00)	Batch_Time 9.39 (9.51)	Sup 0.352 (0.160)	Uns 0.232 (0.242)	LR 0.00019
+[2023-05-04 16:08:56,250][    INFO] [Semi-Supervised][P_Sup 0.7]Iter [930/990]	Data_Time 0.00 (0.00)	Batch_Time 14.99 (14.62)	Sup 0.193 (0.200)	Uns 0.223 (0.242)	LR 0.00016
+[2023-05-04 16:10:51,467][    INFO] [Semi-Supervised][P_Sup 0.7]Iter [940/990]	Data_Time 0.00 (0.00)	Batch_Time 11.19 (11.52)	Sup 0.100 (0.128)	Uns 0.249 (0.243)	LR 0.00014
+[2023-05-04 16:12:58,390][    INFO] [Semi-Supervised][P_Sup 0.7]Iter [950/990]	Data_Time 0.00 (0.00)	Batch_Time 11.66 (12.69)	Sup 0.276 (0.166)	Uns 0.247 (0.238)	LR 0.00011
+[2023-05-04 16:15:34,492][    INFO] [Semi-Supervised][P_Sup 0.7]Iter [960/990]	Data_Time 0.00 (0.00)	Batch_Time 10.34 (15.61)	Sup 0.291 (0.168)	Uns 0.240 (0.241)	LR 0.00009
+[2023-05-04 16:19:41,801][    INFO] [Semi-Supervised][P_Sup 0.7]Iter [970/990]	Data_Time 0.00 (0.00)	Batch_Time 40.39 (24.73)	Sup 0.166 (0.177)	Uns 0.256 (0.246)	LR 0.00006
+[2023-05-04 16:21:46,357][    INFO] [Semi-Supervised][P_Sup 0.7]Iter [980/990]	Data_Time 0.00 (0.00)	Batch_Time 11.07 (12.45)	Sup 0.287 (0.197)	Uns 0.250 (0.237)	LR 0.00003
+[2023-05-04 16:23:56,639][    INFO] start evaluation
+[2023-05-04 16:24:21,392][    INFO]  * class [0] IoU 98.81
+[2023-05-04 16:24:21,394][    INFO]  * class [1] IoU 24.97
+[2023-05-04 16:24:21,394][    INFO]  * epoch 4 mIoU 61.89
+[2023-05-04 16:24:23,187][    INFO] [31m * Currently, the best val result is: 63.22[0m
+[2023-05-04 16:24:31,535][    INFO] [Evaluating Unlabeled Data]Num [0/85]	
+[2023-05-04 16:24:36,597][    INFO] [Evaluating Unlabeled Data]Num [10/85]	
+[2023-05-04 16:24:41,470][    INFO] [Evaluating Unlabeled Data]Num [20/85]	
+[2023-05-04 16:24:46,394][    INFO] [Evaluating Unlabeled Data]Num [30/85]	
+[2023-05-04 16:24:51,190][    INFO] [Evaluating Unlabeled Data]Num [40/85]	
+[2023-05-04 16:24:56,960][    INFO] [Evaluating Unlabeled Data]Num [50/85]	
+[2023-05-04 16:25:03,577][    INFO] [Evaluating Unlabeled Data]Num [60/85]	
+[2023-05-04 16:25:11,718][    INFO] [Evaluating Unlabeled Data]Num [70/85]	
+[2023-05-04 16:25:19,259][    INFO] [Evaluating Unlabeled Data]Num [80/85]	
+[2023-05-04 16:35:35,121][    INFO] {'criterion': {'kwargs': {'min_kept': 100000, 'thresh': 0.7}, 'type': 'ohem'},
+ 'dataset': {'batch_size': 4,
+             'mean': [125.5],
+             'noise_std': 0.1,
+             'p_sup': 1,
+             'std': [6],
+             'train': {'GaussianBlur': False,
+                       'ann_data_list': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data/Crack_Dataset/data_crack/Data_train/split_1/labeled.txt',
+                       'crop': {'size': [400, 400], 'type': 'rand'},
+                       'data_list': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data/Crack_Dataset/data_crack/Data_train/split_1/labeled.txt',
+                       'data_root': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data',
+                       'flip': True,
+                       'rand_rotation': [-10.0, 10.0],
+                       'seed': 27},
+             'type': 'crack_semi_portion',
+             'val': {'crop': {'size': [400, 400], 'type': 'rand'},
+                     'data_list': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data/Crack_Dataset/data_crack/Data_test/val_data/val_label.txt',
+                     'data_root': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data'},
+             'workers': 2},
+ 'exp_path': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/experiments/data_crack/ours',
+ 'net': {'aux_loss': {'aux_plane': 1024, 'loss_weight': 0.4},
+         'decoder': {'kwargs': {'dilations': [12, 24, 36], 'inner_planes': 256},
+                     'type': 'u2pl.models.decoder.dec_deeplabv3_plus'},
+         'ema_decay': 0.99,
+         'encoder': {'kwargs': {'fpn': True,
+                                'multi_grid': True,
+                                'replace_stride_with_dilation': [False,
+                                                                 True,
+                                                                 True],
+                                'zero_init_residual': True},
+                     'type': 'u2pl.models.resnet.resnet50'},
+         'num_classes': 2,
+         'sync_bn': True},
+ 'save_path': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/experiments/data_crack/ours/checkpoints',
+ 'saver': {'auto_resume': True, 'pretrain': '', 'snapshot_dir': 'checkpoints'},
+ 'trainer': {'contrastive': {'current_class_negative_threshold': 1,
+                             'current_class_threshold': 0.3,
+                             'high_rank': 20,
+                             'low_entropy_threshold': 20,
+                             'low_rank': 3,
+                             'negative_high_entropy': False,
+                             'num_negatives': 50,
+                             'num_queries': 256,
+                             'temperature': 0.5,
+                             'unsupervised_entropy_ignore': 80},
+             'epochs': 7,
+             'eval_on': True,
+             'lr_scheduler': {'kwargs': {'power': 0.9}, 'mode': 'poly'},
+             'optimizer': {'kwargs': {'lr': 0.002,
+                                      'momentum': 0.9,
+                                      'weight_decay': 0.0005},
+                           'type': 'SGD'},
+             'sup_only_epoch': 0,
+             'unsupervised': {'TTA': True,
+                              'apply_aug': 'cutmix',
+                              'drop_percent': 80,
+                              'enable': True}}}
+[2023-05-04 16:35:35,831][    INFO] # usable_samples: 80
+[2023-05-04 16:35:35,831][    INFO] # num_samples: 80
+[2023-05-04 16:35:35,833][    INFO] # usable_samples: 1132
+[2023-05-04 16:35:35,834][    INFO] # num_samples: 1132
+[2023-05-04 16:35:35,837][    INFO] # usable_samples: 80
+[2023-05-04 16:35:35,837][    INFO] # num_samples: 80
+[2023-05-04 16:35:35,838][    INFO] # usable_samples: 1132
+[2023-05-04 16:35:35,839][    INFO] # num_samples: 1132
+[2023-05-04 16:35:35,839][    INFO] Get loader Done...
+[2023-05-04 16:35:35,842][    INFO] The kwargs for lr scheduler: 0.9
+[2023-05-04 16:35:46,287][    INFO] [Supervised]Iter [0/1981]	Data 0.00 (0.00)	Time 2.95 (2.95)	Loss 0.7674 (0.7674)	LR 0.00200 (0.00200)	
+[2023-05-04 16:36:01,962][    INFO] [Supervised]Iter [10/1981]	Data 0.00 (0.00)	Time 1.54 (1.57)	Loss 0.5788 (0.6687)	LR 0.00199 (0.00200)	
+[2023-05-04 16:36:27,991][    INFO] {'criterion': {'kwargs': {'min_kept': 100000, 'thresh': 0.7}, 'type': 'ohem'},
+ 'dataset': {'batch_size': 4,
+             'mean': [125.5],
+             'noise_std': 0.1,
+             'p_sup': 1,
+             'std': [6],
+             'train': {'GaussianBlur': False,
+                       'ann_data_list': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data/Crack_Dataset/data_crack/Data_train/split_1/labeled.txt',
+                       'crop': {'size': [400, 400], 'type': 'rand'},
+                       'data_list': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data/Crack_Dataset/data_crack/Data_train/split_1/labeled.txt',
+                       'data_root': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data',
+                       'flip': True,
+                       'rand_rotation': [-10.0, 10.0],
+                       'seed': 27},
+             'type': 'crack_semi_portion',
+             'val': {'crop': {'size': [400, 400], 'type': 'rand'},
+                     'data_list': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data/Crack_Dataset/data_crack/Data_test/val_data/val_label.txt',
+                     'data_root': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data'},
+             'workers': 2},
+ 'exp_path': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/experiments/data_crack/ours',
+ 'net': {'aux_loss': {'aux_plane': 1024, 'loss_weight': 0.4},
+         'decoder': {'kwargs': {'dilations': [12, 24, 36], 'inner_planes': 256},
+                     'type': 'u2pl.models.decoder.dec_deeplabv3_plus'},
+         'ema_decay': 0.99,
+         'encoder': {'kwargs': {'fpn': True,
+                                'multi_grid': True,
+                                'replace_stride_with_dilation': [False,
+                                                                 True,
+                                                                 True],
+                                'zero_init_residual': True},
+                     'type': 'u2pl.models.resnet.resnet50'},
+         'num_classes': 2,
+         'sync_bn': True},
+ 'save_path': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/experiments/data_crack/ours/checkpoints',
+ 'saver': {'auto_resume': True, 'pretrain': '', 'snapshot_dir': 'checkpoints'},
+ 'trainer': {'contrastive': {'current_class_negative_threshold': 1,
+                             'current_class_threshold': 0.3,
+                             'high_rank': 20,
+                             'low_entropy_threshold': 20,
+                             'low_rank': 3,
+                             'negative_high_entropy': False,
+                             'num_negatives': 50,
+                             'num_queries': 256,
+                             'temperature': 0.5,
+                             'unsupervised_entropy_ignore': 80},
+             'epochs': 5,
+             'eval_on': True,
+             'lr_scheduler': {'kwargs': {'power': 0.9}, 'mode': 'poly'},
+             'optimizer': {'kwargs': {'lr': 0.002,
+                                      'momentum': 0.9,
+                                      'weight_decay': 0.0005},
+                           'type': 'SGD'},
+             'sup_only_epoch': 0,
+             'unsupervised': {'TTA': True,
+                              'apply_aug': 'cutmix',
+                              'drop_percent': 80,
+                              'enable': True}}}
+[2023-05-04 16:36:28,687][    INFO] # usable_samples: 80
+[2023-05-04 16:36:28,687][    INFO] # num_samples: 80
+[2023-05-04 16:36:28,688][    INFO] # usable_samples: 1132
+[2023-05-04 16:36:28,690][    INFO] # num_samples: 1132
+[2023-05-04 16:36:28,693][    INFO] # usable_samples: 80
+[2023-05-04 16:36:28,693][    INFO] # num_samples: 80
+[2023-05-04 16:36:28,694][    INFO] # usable_samples: 1132
+[2023-05-04 16:36:28,694][    INFO] # num_samples: 1132
+[2023-05-04 16:36:28,694][    INFO] Get loader Done...
+[2023-05-04 16:36:28,697][    INFO] The kwargs for lr scheduler: 0.9
+[2023-05-04 16:36:38,351][    INFO] [Supervised]Iter [0/1415]	Data 0.00 (0.00)	Time 2.52 (2.52)	Loss 0.7674 (0.7674)	LR 0.00200 (0.00200)	
+[2023-05-04 16:36:53,978][    INFO] [Supervised]Iter [10/1415]	Data 0.00 (0.00)	Time 1.53 (1.56)	Loss 0.5790 (0.6688)	LR 0.00199 (0.00199)	
+[2023-05-04 16:37:09,308][    INFO] [Supervised]Iter [20/1415]	Data 0.00 (0.00)	Time 1.54 (1.53)	Loss 0.4203 (0.4558)	LR 0.00198 (0.00198)	
+[2023-05-04 16:47:16,661][    INFO] {'criterion': {'kwargs': {'min_kept': 100000, 'thresh': 0.7}, 'type': 'ohem'},
+ 'dataset': {'batch_size': 4,
+             'mean': [125.5],
+             'noise_std': 0.1,
+             'std': [6],
+             'train': {'GaussianBlur': False,
+                       'ann_data_list': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/results_report_0.0_Unsupervised/annotation_start_queue.txt',
+                       'crop': {'size': [400, 400], 'type': 'rand'},
+                       'data_list': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data/Crack_Dataset/data_crack/Data_train/split_1/labeled.txt',
+                       'data_root': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data',
+                       'flip': True,
+                       'rand_rotation': [-10.0, 10.0],
+                       'seed': 27},
+             'type': 'crack_semi_active',
+             'val': {'crop': {'size': [400, 400], 'type': 'rand'},
+                     'data_list': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data/Crack_Dataset/data_crack/Data_test/val_data/val_label.txt',
+                     'data_root': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data'},
+             'workers': 2},
+ 'exp_path': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/experiments/data_crack/ours',
+ 'net': {'aux_loss': {'aux_plane': 1024, 'loss_weight': 0.4},
+         'decoder': {'kwargs': {'dilations': [12, 24, 36], 'inner_planes': 256},
+                     'type': 'u2pl.models.decoder.dec_deeplabv3_plus'},
+         'ema_decay': 0.99,
+         'encoder': {'kwargs': {'fpn': True,
+                                'multi_grid': True,
+                                'replace_stride_with_dilation': [False,
+                                                                 True,
+                                                                 True],
+                                'zero_init_residual': True},
+                     'type': 'u2pl.models.resnet.resnet50'},
+         'num_classes': 2,
+         'sync_bn': True},
+ 'save_path': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/experiments/data_crack/ours/checkpoints',
+ 'saver': {'auto_resume': True, 'pretrain': '', 'snapshot_dir': 'checkpoints'},
+ 'trainer': {'contrastive': {'current_class_negative_threshold': 1,
+                             'current_class_threshold': 0.3,
+                             'high_rank': 20,
+                             'low_entropy_threshold': 20,
+                             'low_rank': 3,
+                             'negative_high_entropy': False,
+                             'num_negatives': 50,
+                             'num_queries': 256,
+                             'temperature': 0.5,
+                             'unsupervised_entropy_ignore': 80},
+             'epochs': 5,
+             'eval_on': True,
+             'lr_scheduler': {'kwargs': {'power': 0.9}, 'mode': 'poly'},
+             'optimizer': {'kwargs': {'lr': 0.002,
+                                      'momentum': 0.9,
+                                      'weight_decay': 0.0005},
+                           'type': 'SGD'},
+             'sup_only_epoch': 0,
+             'unsupervised': {'TTA': True,
+                              'apply_aug': 'cutmix',
+                              'drop_percent': 80,
+                              'enable': True}}}
+[2023-05-04 16:48:17,788][    INFO] {'criterion': {'kwargs': {'min_kept': 100000, 'thresh': 0.7}, 'type': 'ohem'},
+ 'dataset': {'batch_size': 4,
+             'mean': [125.5],
+             'noise_std': 0.1,
+             'p_sup': 0.3,
+             'std': [6],
+             'train': {'GaussianBlur': False,
+                       'ann_data_list': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/results_report_0.0_Unsupervised/annotation_start_queue.txt',
+                       'crop': {'size': [400, 400], 'type': 'rand'},
+                       'data_list': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data/Crack_Dataset/data_crack/Data_train/split_1/labeled.txt',
+                       'data_root': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data',
+                       'flip': True,
+                       'rand_rotation': [-10.0, 10.0],
+                       'seed': 27},
+             'type': 'crack_semi_active',
+             'val': {'crop': {'size': [400, 400], 'type': 'rand'},
+                     'data_list': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data/Crack_Dataset/data_crack/Data_test/val_data/val_label.txt',
+                     'data_root': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data'},
+             'workers': 2},
+ 'exp_path': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/experiments/data_crack/ours',
+ 'net': {'aux_loss': {'aux_plane': 1024, 'loss_weight': 0.4},
+         'decoder': {'kwargs': {'dilations': [12, 24, 36], 'inner_planes': 256},
+                     'type': 'u2pl.models.decoder.dec_deeplabv3_plus'},
+         'ema_decay': 0.99,
+         'encoder': {'kwargs': {'fpn': True,
+                                'multi_grid': True,
+                                'replace_stride_with_dilation': [False,
+                                                                 True,
+                                                                 True],
+                                'zero_init_residual': True},
+                     'type': 'u2pl.models.resnet.resnet50'},
+         'num_classes': 2,
+         'sync_bn': True},
+ 'save_path': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/experiments/data_crack/ours/checkpoints',
+ 'saver': {'auto_resume': True, 'pretrain': '', 'snapshot_dir': 'checkpoints'},
+ 'trainer': {'contrastive': {'current_class_negative_threshold': 1,
+                             'current_class_threshold': 0.3,
+                             'high_rank': 20,
+                             'low_entropy_threshold': 20,
+                             'low_rank': 3,
+                             'negative_high_entropy': False,
+                             'num_negatives': 50,
+                             'num_queries': 256,
+                             'temperature': 0.5,
+                             'unsupervised_entropy_ignore': 80},
+             'epochs': 5,
+             'eval_on': True,
+             'lr_scheduler': {'kwargs': {'power': 0.9}, 'mode': 'poly'},
+             'optimizer': {'kwargs': {'lr': 0.002,
+                                      'momentum': 0.9,
+                                      'weight_decay': 0.0005},
+                           'type': 'SGD'},
+             'sup_only_epoch': 0,
+             'unsupervised': {'TTA': True,
+                              'apply_aug': 'cutmix',
+                              'drop_percent': 80,
+                              'enable': True}}}
+[2023-05-04 16:48:18,521][    INFO] # usable_samples: 80
+[2023-05-04 16:48:18,521][    INFO] # num_samples: 80
+[2023-05-04 16:52:00,449][    INFO] {'criterion': {'kwargs': {'min_kept': 100000, 'thresh': 0.7}, 'type': 'ohem'},
+ 'dataset': {'batch_size': 4,
+             'mean': [125.5],
+             'noise_std': 0.1,
+             'std': [6],
+             'train': {'GaussianBlur': False,
+                       'ann_data_list': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/results_report_0.0_Unsupervised/annotation_start_queue.txt',
+                       'crop': {'size': [400, 400], 'type': 'rand'},
+                       'data_list': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data/Crack_Dataset/data_crack/Data_train/split_1/labeled.txt',
+                       'data_root': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data',
+                       'flip': True,
+                       'rand_rotation': [-10.0, 10.0],
+                       'seed': 27},
+             'type': 'crack_semi_active',
+             'val': {'crop': {'size': [400, 400], 'type': 'rand'},
+                     'data_list': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data/Crack_Dataset/data_crack/Data_test/val_data/val_label.txt',
+                     'data_root': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data'},
+             'workers': 2},
+ 'exp_path': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/experiments/data_crack/ours',
+ 'net': {'aux_loss': {'aux_plane': 1024, 'loss_weight': 0.4},
+         'decoder': {'kwargs': {'dilations': [12, 24, 36], 'inner_planes': 256},
+                     'type': 'u2pl.models.decoder.dec_deeplabv3_plus'},
+         'ema_decay': 0.99,
+         'encoder': {'kwargs': {'fpn': True,
+                                'multi_grid': True,
+                                'replace_stride_with_dilation': [False,
+                                                                 True,
+                                                                 True],
+                                'zero_init_residual': True},
+                     'type': 'u2pl.models.resnet.resnet50'},
+         'num_classes': 2,
+         'sync_bn': True},
+ 'save_path': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/experiments/data_crack/ours/checkpoints',
+ 'saver': {'auto_resume': True, 'pretrain': '', 'snapshot_dir': 'checkpoints'},
+ 'trainer': {'contrastive': {'current_class_negative_threshold': 1,
+                             'current_class_threshold': 0.3,
+                             'high_rank': 20,
+                             'low_entropy_threshold': 20,
+                             'low_rank': 3,
+                             'negative_high_entropy': False,
+                             'num_negatives': 50,
+                             'num_queries': 256,
+                             'temperature': 0.5,
+                             'unsupervised_entropy_ignore': 80},
+             'epochs': 5,
+             'eval_on': True,
+             'lr_scheduler': {'kwargs': {'power': 0.9}, 'mode': 'poly'},
+             'optimizer': {'kwargs': {'lr': 0.002,
+                                      'momentum': 0.9,
+                                      'weight_decay': 0.0005},
+                           'type': 'SGD'},
+             'sup_only_epoch': 0,
+             'unsupervised': {'TTA': True,
+                              'apply_aug': 'cutmix',
+                              'drop_percent': 80,
+                              'enable': True}}}
+[2023-05-04 16:55:15,878][    INFO] {'criterion': {'kwargs': {'min_kept': 100000, 'thresh': 0.7}, 'type': 'ohem'},
+ 'dataset': {'batch_size': 4,
+             'mean': [125.5],
+             'noise_std': 0.1,
+             'std': [6],
+             'train': {'GaussianBlur': False,
+                       'ann_data_list': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/results_report_0.0_Unsupervised/annotation_start_queue.txt',
+                       'crop': {'size': [400, 400], 'type': 'rand'},
+                       'data_list': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data/Crack_Dataset/data_crack/Data_train/split_1/labeled.txt',
+                       'data_root': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data',
+                       'flip': True,
+                       'rand_rotation': [-10.0, 10.0],
+                       'seed': 27},
+             'type': 'crack_semi_active',
+             'val': {'crop': {'size': [400, 400], 'type': 'rand'},
+                     'data_list': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data/Crack_Dataset/data_crack/Data_test/val_data/val_label.txt',
+                     'data_root': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data'},
+             'workers': 2},
+ 'exp_path': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/experiments/data_crack/ours',
+ 'net': {'aux_loss': {'aux_plane': 1024, 'loss_weight': 0.4},
+         'decoder': {'kwargs': {'dilations': [12, 24, 36], 'inner_planes': 256},
+                     'type': 'u2pl.models.decoder.dec_deeplabv3_plus'},
+         'ema_decay': 0.99,
+         'encoder': {'kwargs': {'fpn': True,
+                                'multi_grid': True,
+                                'replace_stride_with_dilation': [False,
+                                                                 True,
+                                                                 True],
+                                'zero_init_residual': True},
+                     'type': 'u2pl.models.resnet.resnet50'},
+         'num_classes': 2,
+         'sync_bn': True},
+ 'save_path': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/experiments/data_crack/ours/checkpoints',
+ 'saver': {'auto_resume': True, 'pretrain': '', 'snapshot_dir': 'checkpoints'},
+ 'trainer': {'contrastive': {'current_class_negative_threshold': 1,
+                             'current_class_threshold': 0.3,
+                             'high_rank': 20,
+                             'low_entropy_threshold': 20,
+                             'low_rank': 3,
+                             'negative_high_entropy': False,
+                             'num_negatives': 50,
+                             'num_queries': 256,
+                             'temperature': 0.5,
+                             'unsupervised_entropy_ignore': 80},
+             'epochs': 5,
+             'eval_on': True,
+             'lr_scheduler': {'kwargs': {'power': 0.9}, 'mode': 'poly'},
+             'optimizer': {'kwargs': {'lr': 0.002,
+                                      'momentum': 0.9,
+                                      'weight_decay': 0.0005},
+                           'type': 'SGD'},
+             'sup_only_epoch': 0,
+             'unsupervised': {'TTA': True,
+                              'apply_aug': 'cutmix',
+                              'drop_percent': 80,
+                              'enable': True}}}
+[2023-05-04 16:55:25,909][    INFO] # usable_samples: 80
+[2023-05-04 16:55:25,910][    INFO] # num_samples: 80
+[2023-05-04 16:55:28,136][    INFO] # usable_samples: 331
+[2023-05-04 16:55:28,138][    INFO] # num_samples: 331
+[2023-05-04 16:59:06,573][    INFO] {'criterion': {'kwargs': {'min_kept': 100000, 'thresh': 0.7}, 'type': 'ohem'},
+ 'dataset': {'batch_size': 4,
+             'mean': [125.5],
+             'noise_std': 0.1,
+             'std': [6],
+             'train': {'GaussianBlur': False,
+                       'ann_data_list': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/results_report_0.0_Unsupervised/annotation_start_queue.txt',
+                       'crop': {'size': [400, 400], 'type': 'rand'},
+                       'data_list': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data/Crack_Dataset/data_crack/Data_train/split_1/labeled.txt',
+                       'data_root': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data',
+                       'flip': True,
+                       'rand_rotation': [-10.0, 10.0],
+                       'seed': 27},
+             'type': 'crack_semi_active',
+             'val': {'crop': {'size': [400, 400], 'type': 'rand'},
+                     'data_list': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data/Crack_Dataset/data_crack/Data_test/val_data/val_label.txt',
+                     'data_root': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data'},
+             'workers': 2},
+ 'exp_path': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/experiments/data_crack/ours',
+ 'net': {'aux_loss': {'aux_plane': 1024, 'loss_weight': 0.4},
+         'decoder': {'kwargs': {'dilations': [12, 24, 36], 'inner_planes': 256},
+                     'type': 'u2pl.models.decoder.dec_deeplabv3_plus'},
+         'ema_decay': 0.99,
+         'encoder': {'kwargs': {'fpn': True,
+                                'multi_grid': True,
+                                'replace_stride_with_dilation': [False,
+                                                                 True,
+                                                                 True],
+                                'zero_init_residual': True},
+                     'type': 'u2pl.models.resnet.resnet50'},
+         'num_classes': 2,
+         'sync_bn': True},
+ 'save_path': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/experiments/data_crack/ours/checkpoints',
+ 'saver': {'auto_resume': True, 'pretrain': '', 'snapshot_dir': 'checkpoints'},
+ 'trainer': {'contrastive': {'current_class_negative_threshold': 1,
+                             'current_class_threshold': 0.3,
+                             'high_rank': 20,
+                             'low_entropy_threshold': 20,
+                             'low_rank': 3,
+                             'negative_high_entropy': False,
+                             'num_negatives': 50,
+                             'num_queries': 256,
+                             'temperature': 0.5,
+                             'unsupervised_entropy_ignore': 80},
+             'epochs': 5,
+             'eval_on': True,
+             'lr_scheduler': {'kwargs': {'power': 0.9}, 'mode': 'poly'},
+             'optimizer': {'kwargs': {'lr': 0.002,
+                                      'momentum': 0.9,
+                                      'weight_decay': 0.0005},
+                           'type': 'SGD'},
+             'sup_only_epoch': 0,
+             'unsupervised': {'TTA': True,
+                              'apply_aug': 'cutmix',
+                              'drop_percent': 80,
+                              'enable': True}}}
+[2023-05-04 16:59:13,630][    INFO] # usable_samples: 80
+[2023-05-04 16:59:13,631][    INFO] # num_samples: 80
+[2023-05-04 16:59:18,736][    INFO] # usable_samples: 331
+[2023-05-04 16:59:18,738][    INFO] # num_samples: 331
+[2023-05-04 16:59:24,183][    INFO] # usable_samples: 801
+[2023-05-04 16:59:24,186][    INFO] # num_samples: 801
+[2023-05-04 17:00:46,335][    INFO] # usable_samples: 80
+[2023-05-04 17:00:46,335][    INFO] # num_samples: 80
+[2023-05-04 17:00:46,337][    INFO] # usable_samples: 331
+[2023-05-04 17:00:46,337][    INFO] # num_samples: 331
+[2023-05-04 17:00:46,338][    INFO] Get loader Done...
+[2023-05-04 17:01:32,196][    INFO] {'criterion': {'kwargs': {'min_kept': 100000, 'thresh': 0.7}, 'type': 'ohem'},
+ 'dataset': {'batch_size': 4,
+             'mean': [125.5],
+             'noise_std': 0.1,
+             'std': [6],
+             'train': {'GaussianBlur': False,
+                       'ann_data_list': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/results_report_0.0_Unsupervised/annotation_start_queue.txt',
+                       'crop': {'size': [400, 400], 'type': 'rand'},
+                       'data_list': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data/Crack_Dataset/data_crack/Data_train/split_1/labeled.txt',
+                       'data_root': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data',
+                       'flip': True,
+                       'rand_rotation': [-10.0, 10.0],
+                       'seed': 27},
+             'type': 'crack_semi_active',
+             'val': {'crop': {'size': [400, 400], 'type': 'rand'},
+                     'data_list': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data/Crack_Dataset/data_crack/Data_test/val_data/val_label.txt',
+                     'data_root': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data'},
+             'workers': 2},
+ 'exp_path': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/experiments/data_crack/ours',
+ 'net': {'aux_loss': {'aux_plane': 1024, 'loss_weight': 0.4},
+         'decoder': {'kwargs': {'dilations': [12, 24, 36], 'inner_planes': 256},
+                     'type': 'u2pl.models.decoder.dec_deeplabv3_plus'},
+         'ema_decay': 0.99,
+         'encoder': {'kwargs': {'fpn': True,
+                                'multi_grid': True,
+                                'replace_stride_with_dilation': [False,
+                                                                 True,
+                                                                 True],
+                                'zero_init_residual': True},
+                     'type': 'u2pl.models.resnet.resnet50'},
+         'num_classes': 2,
+         'sync_bn': True},
+ 'save_path': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/experiments/data_crack/ours/checkpoints',
+ 'saver': {'auto_resume': True, 'pretrain': '', 'snapshot_dir': 'checkpoints'},
+ 'trainer': {'contrastive': {'current_class_negative_threshold': 1,
+                             'current_class_threshold': 0.3,
+                             'high_rank': 20,
+                             'low_entropy_threshold': 20,
+                             'low_rank': 3,
+                             'negative_high_entropy': False,
+                             'num_negatives': 50,
+                             'num_queries': 256,
+                             'temperature': 0.5,
+                             'unsupervised_entropy_ignore': 80},
+             'epochs': 5,
+             'eval_on': True,
+             'lr_scheduler': {'kwargs': {'power': 0.9}, 'mode': 'poly'},
+             'optimizer': {'kwargs': {'lr': 0.002,
+                                      'momentum': 0.9,
+                                      'weight_decay': 0.0005},
+                           'type': 'SGD'},
+             'sup_only_epoch': 0,
+             'unsupervised': {'TTA': True,
+                              'apply_aug': 'cutmix',
+                              'drop_percent': 80,
+                              'enable': True}}}
+[2023-05-04 17:01:32,850][    INFO] # usable_samples: 80
+[2023-05-04 17:01:32,851][    INFO] # num_samples: 80
+[2023-05-04 17:01:32,851][    INFO] # usable_samples: 331
+[2023-05-04 17:01:32,852][    INFO] # num_samples: 331
+[2023-05-04 17:01:32,852][    INFO] # usable_samples: 801
+[2023-05-04 17:01:32,854][    INFO] # num_samples: 801
+[2023-05-04 17:01:32,859][    INFO] # usable_samples: 80
+[2023-05-04 17:01:32,859][    INFO] # num_samples: 80
+[2023-05-04 17:01:32,859][    INFO] # usable_samples: 331
+[2023-05-04 17:01:32,860][    INFO] # num_samples: 331
+[2023-05-04 17:01:32,860][    INFO] Get loader Done...
+[2023-05-04 17:01:33,407][    INFO] The kwargs for lr scheduler: 0.9
+[2023-05-04 17:03:02,453][    INFO] {'criterion': {'kwargs': {'min_kept': 100000, 'thresh': 0.7}, 'type': 'ohem'},
+ 'dataset': {'batch_size': 4,
+             'mean': [125.5],
+             'noise_std': 0.1,
+             'std': [6],
+             'train': {'GaussianBlur': False,
+                       'ann_data_list': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/results_report_0.0_Unsupervised/annotation_start_queue.txt',
+                       'crop': {'size': [400, 400], 'type': 'rand'},
+                       'data_list': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data/Crack_Dataset/data_crack/Data_train/split_1/labeled.txt',
+                       'data_root': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data',
+                       'flip': True,
+                       'rand_rotation': [-10.0, 10.0],
+                       'seed': 27},
+             'type': 'crack_semi_active',
+             'val': {'crop': {'size': [400, 400], 'type': 'rand'},
+                     'data_list': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data/Crack_Dataset/data_crack/Data_test/val_data/val_label.txt',
+                     'data_root': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data'},
+             'workers': 2},
+ 'exp_path': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/experiments/data_crack/ours',
+ 'net': {'aux_loss': {'aux_plane': 1024, 'loss_weight': 0.4},
+         'decoder': {'kwargs': {'dilations': [12, 24, 36], 'inner_planes': 256},
+                     'type': 'u2pl.models.decoder.dec_deeplabv3_plus'},
+         'ema_decay': 0.99,
+         'encoder': {'kwargs': {'fpn': True,
+                                'multi_grid': True,
+                                'replace_stride_with_dilation': [False,
+                                                                 True,
+                                                                 True],
+                                'zero_init_residual': True},
+                     'type': 'u2pl.models.resnet.resnet50'},
+         'num_classes': 2,
+         'sync_bn': True},
+ 'save_path': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/experiments/data_crack/ours/checkpoints',
+ 'saver': {'auto_resume': True, 'pretrain': '', 'snapshot_dir': 'checkpoints'},
+ 'trainer': {'contrastive': {'current_class_negative_threshold': 1,
+                             'current_class_threshold': 0.3,
+                             'high_rank': 20,
+                             'low_entropy_threshold': 20,
+                             'low_rank': 3,
+                             'negative_high_entropy': False,
+                             'num_negatives': 50,
+                             'num_queries': 256,
+                             'temperature': 0.5,
+                             'unsupervised_entropy_ignore': 80},
+             'epochs': 5,
+             'eval_on': True,
+             'lr_scheduler': {'kwargs': {'power': 0.9}, 'mode': 'poly'},
+             'optimizer': {'kwargs': {'lr': 0.002,
+                                      'momentum': 0.9,
+                                      'weight_decay': 0.0005},
+                           'type': 'SGD'},
+             'sup_only_epoch': 0,
+             'unsupervised': {'TTA': True,
+                              'apply_aug': 'cutmix',
+                              'drop_percent': 80,
+                              'enable': True}}}
+[2023-05-04 17:03:03,128][    INFO] # usable_samples: 80
+[2023-05-04 17:03:03,128][    INFO] # num_samples: 80
+[2023-05-04 17:03:03,129][    INFO] # usable_samples: 331
+[2023-05-04 17:03:03,129][    INFO] # num_samples: 331
+[2023-05-04 17:03:03,130][    INFO] # usable_samples: 801
+[2023-05-04 17:03:03,131][    INFO] # num_samples: 801
+[2023-05-04 17:03:03,137][    INFO] # usable_samples: 80
+[2023-05-04 17:03:03,137][    INFO] # num_samples: 80
+[2023-05-04 17:03:03,137][    INFO] # usable_samples: 331
+[2023-05-04 17:03:03,137][    INFO] # num_samples: 331
+[2023-05-04 17:03:03,137][    INFO] Get loader Done...
+[2023-05-04 17:03:03,687][    INFO] The kwargs for lr scheduler: 0.9
+[2023-05-04 17:04:43,658][    INFO] {'criterion': {'kwargs': {'min_kept': 100000, 'thresh': 0.7}, 'type': 'ohem'},
+ 'dataset': {'batch_size': 4,
+             'mean': [125.5],
+             'noise_std': 0.1,
+             'std': [6],
+             'train': {'GaussianBlur': False,
+                       'ann_data_list': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/results_report_0.0_Unsupervised/annotation_start_queue.txt',
+                       'crop': {'size': [400, 400], 'type': 'rand'},
+                       'data_list': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data/Crack_Dataset/data_crack/Data_train/split_1/labeled.txt',
+                       'data_root': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data',
+                       'flip': True,
+                       'rand_rotation': [-10.0, 10.0],
+                       'seed': 27},
+             'type': 'crack_semi_active',
+             'val': {'crop': {'size': [400, 400], 'type': 'rand'},
+                     'data_list': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data/Crack_Dataset/data_crack/Data_test/val_data/val_label.txt',
+                     'data_root': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data'},
+             'workers': 2},
+ 'exp_path': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/experiments/data_crack/ours',
+ 'net': {'aux_loss': {'aux_plane': 1024, 'loss_weight': 0.4},
+         'decoder': {'kwargs': {'dilations': [12, 24, 36], 'inner_planes': 256},
+                     'type': 'u2pl.models.decoder.dec_deeplabv3_plus'},
+         'ema_decay': 0.99,
+         'encoder': {'kwargs': {'fpn': True,
+                                'multi_grid': True,
+                                'replace_stride_with_dilation': [False,
+                                                                 True,
+                                                                 True],
+                                'zero_init_residual': True},
+                     'type': 'u2pl.models.resnet.resnet50'},
+         'num_classes': 2,
+         'sync_bn': True},
+ 'save_path': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/experiments/data_crack/ours/checkpoints',
+ 'saver': {'auto_resume': True, 'pretrain': '', 'snapshot_dir': 'checkpoints'},
+ 'trainer': {'contrastive': {'current_class_negative_threshold': 1,
+                             'current_class_threshold': 0.3,
+                             'high_rank': 20,
+                             'low_entropy_threshold': 20,
+                             'low_rank': 3,
+                             'negative_high_entropy': False,
+                             'num_negatives': 50,
+                             'num_queries': 256,
+                             'temperature': 0.5,
+                             'unsupervised_entropy_ignore': 80},
+             'epochs': 5,
+             'eval_on': True,
+             'lr_scheduler': {'kwargs': {'power': 0.9}, 'mode': 'poly'},
+             'optimizer': {'kwargs': {'lr': 0.002,
+                                      'momentum': 0.9,
+                                      'weight_decay': 0.0005},
+                           'type': 'SGD'},
+             'sup_only_epoch': 0,
+             'unsupervised': {'TTA': True,
+                              'apply_aug': 'cutmix',
+                              'drop_percent': 80,
+                              'enable': True}}}
+[2023-05-04 17:04:44,342][    INFO] # usable_samples: 80
+[2023-05-04 17:04:44,342][    INFO] # num_samples: 80
+[2023-05-04 17:04:44,343][    INFO] # usable_samples: 331
+[2023-05-04 17:04:44,343][    INFO] # num_samples: 331
+[2023-05-04 17:04:44,344][    INFO] # usable_samples: 801
+[2023-05-04 17:04:44,345][    INFO] # num_samples: 801
+[2023-05-04 17:04:44,350][    INFO] # usable_samples: 80
+[2023-05-04 17:04:44,350][    INFO] # num_samples: 80
+[2023-05-04 17:04:44,351][    INFO] # usable_samples: 331
+[2023-05-04 17:04:44,351][    INFO] # num_samples: 331
+[2023-05-04 17:04:44,351][    INFO] Get loader Done...
+[2023-05-04 17:04:44,947][    INFO] The kwargs for lr scheduler: 0.9
+[2023-05-04 17:06:38,638][    INFO] {'criterion': {'kwargs': {'min_kept': 100000, 'thresh': 0.7}, 'type': 'ohem'},
+ 'dataset': {'batch_size': 4,
+             'mean': [125.5],
+             'noise_std': 0.1,
+             'std': [6],
+             'train': {'GaussianBlur': False,
+                       'ann_data_list': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/results_report_0.0_Unsupervised/annotation_start_queue.txt',
+                       'crop': {'size': [400, 400], 'type': 'rand'},
+                       'data_list': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data/Crack_Dataset/data_crack/Data_train/split_1/labeled.txt',
+                       'data_root': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data',
+                       'flip': True,
+                       'rand_rotation': [-10.0, 10.0],
+                       'seed': 27},
+             'type': 'crack_semi_active',
+             'val': {'crop': {'size': [400, 400], 'type': 'rand'},
+                     'data_list': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data/Crack_Dataset/data_crack/Data_test/val_data/val_label.txt',
+                     'data_root': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data'},
+             'workers': 2},
+ 'exp_path': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/experiments/data_crack/ours',
+ 'net': {'aux_loss': {'aux_plane': 1024, 'loss_weight': 0.4},
+         'decoder': {'kwargs': {'dilations': [12, 24, 36], 'inner_planes': 256},
+                     'type': 'u2pl.models.decoder.dec_deeplabv3_plus'},
+         'ema_decay': 0.99,
+         'encoder': {'kwargs': {'fpn': True,
+                                'multi_grid': True,
+                                'replace_stride_with_dilation': [False,
+                                                                 True,
+                                                                 True],
+                                'zero_init_residual': True},
+                     'type': 'u2pl.models.resnet.resnet50'},
+         'num_classes': 2,
+         'sync_bn': True},
+ 'save_path': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/experiments/data_crack/ours/checkpoints',
+ 'saver': {'auto_resume': True, 'pretrain': '', 'snapshot_dir': 'checkpoints'},
+ 'trainer': {'contrastive': {'current_class_negative_threshold': 1,
+                             'current_class_threshold': 0.3,
+                             'high_rank': 20,
+                             'low_entropy_threshold': 20,
+                             'low_rank': 3,
+                             'negative_high_entropy': False,
+                             'num_negatives': 50,
+                             'num_queries': 256,
+                             'temperature': 0.5,
+                             'unsupervised_entropy_ignore': 80},
+             'epochs': 5,
+             'eval_on': True,
+             'lr_scheduler': {'kwargs': {'power': 0.9}, 'mode': 'poly'},
+             'optimizer': {'kwargs': {'lr': 0.002,
+                                      'momentum': 0.9,
+                                      'weight_decay': 0.0005},
+                           'type': 'SGD'},
+             'sup_only_epoch': 0,
+             'unsupervised': {'TTA': True,
+                              'apply_aug': 'cutmix',
+                              'drop_percent': 80,
+                              'enable': True}}}
+[2023-05-04 17:06:39,310][    INFO] # usable_samples: 80
+[2023-05-04 17:06:39,311][    INFO] # num_samples: 80
+[2023-05-04 17:06:39,311][    INFO] # usable_samples: 331
+[2023-05-04 17:06:39,312][    INFO] # num_samples: 331
+[2023-05-04 17:06:39,312][    INFO] # usable_samples: 801
+[2023-05-04 17:06:39,314][    INFO] # num_samples: 801
+[2023-05-04 17:06:39,319][    INFO] # usable_samples: 80
+[2023-05-04 17:06:39,319][    INFO] # num_samples: 80
+[2023-05-04 17:06:39,319][    INFO] # usable_samples: 331
+[2023-05-04 17:06:39,319][    INFO] # num_samples: 331
+[2023-05-04 17:06:39,319][    INFO] Get loader Done...
+[2023-05-04 17:06:39,867][    INFO] The kwargs for lr scheduler: 0.9
+[2023-05-04 17:07:05,174][    INFO] [Semi-Supervised]Iter [0/1000]	Data_Time 0.00 (0.00)	Batch_Time 10.26 (10.26)	Sup 0.796 (0.796)	Uns 1.012 (1.012)	LR 0.00200
+[2023-05-04 17:08:20,920][    INFO] [Semi-Supervised]Iter [10/1000]	Data_Time 0.00 (0.01)	Batch_Time 5.81 (7.57)	Sup 0.849 (0.797)	Uns 0.576 (0.822)	LR 0.00198
+[2023-05-04 17:09:35,073][    INFO] [Semi-Supervised]Iter [20/1000]	Data_Time 0.00 (0.00)	Batch_Time 7.16 (7.41)	Sup 0.855 (0.953)	Uns 0.554 (0.698)	LR 0.00197

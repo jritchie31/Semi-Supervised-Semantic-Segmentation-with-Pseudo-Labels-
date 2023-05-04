@@ -407,7 +407,7 @@ def create_unsupervised_data_list(cfg_all_dlst, cfg_sup_dlst, save_dir):
         sup_data = set(line.strip() for line in f)
 
     unsup_data = all_data - sup_data
-    cfg_uns_dlst = os.path.join(save_dir, "cfg_uns_dlst.txt")
+    cfg_uns_dlst = os.path.join(save_dir, "annotation_cfg_uns_dlst.txt")
 
     with open(cfg_uns_dlst, 'w') as f:
         for path in unsup_data:

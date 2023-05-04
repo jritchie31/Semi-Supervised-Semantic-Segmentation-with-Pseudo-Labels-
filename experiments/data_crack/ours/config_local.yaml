@@ -1,10 +1,10 @@
 #File used to specify hyper parameters and other settings for the model training process, will be refereneced as cfg
 dataset: # Required.
-  type: crack_semi_portion #crack_semi #Semi-supervised dataset can change this to crack
+  type: crack_semi_active #crack_semi #Semi-supervised dataset can change this to crack
   train: # 50 labeled images with data augmentation (flip, random resize, random crop) from split 1
     data_root: "/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data"
     data_list: "/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data/Crack_Dataset/data_crack/Data_train/split_1/labeled.txt"
-    ann_data_list: "/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data/Crack_Dataset/data_crack/Data_train/split_1/labeled.txt"
+    ann_data_list: "/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/results_report_0.0_Unsupervised/annotation_start_queue.txt"
     seed: 27
     flip: True
     GaussianBlur: False
@@ -21,7 +21,7 @@ dataset: # Required.
       size: [400, 400] # central crop image with HxW size
   batch_size: 4
   #n_sup: 566 #1132
-  p_sup: 0.7
+  #p_sup: 0.3
   noise_std: 0.1 # Standard deviation of Gaussian noise added
   workers: 2 # Data loading workers
   # Normalization: mean and standard deviation values provided
@@ -29,7 +29,7 @@ dataset: # Required.
   std: [6] # 1
 
 trainer: # Required.
-  epochs: 5 #7 #200
+  epochs: 5 #200
   eval_on: True
   sup_only_epoch: 0 # warm up epoch is helpful
   optimizer:

@@ -38,6 +38,15 @@ class BaseDataset(Dataset):
                     ]
                     for line in open(d_list, "r")
                 ]
+        elif "annotation" in d_list:
+            self.list_sample = [
+                [
+                    line.strip(),
+                    line.strip()[:52] + "Segmentation" + line.strip()[-38:],
+
+                ]
+                for line in open(d_list, "r")
+            ]
         else:
             raise "unknown dataset!"
 

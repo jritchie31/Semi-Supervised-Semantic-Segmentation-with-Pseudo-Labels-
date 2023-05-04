@@ -99,101 +99,160 @@ def main():
     if not osp.exists(cfg["saver"]["snapshot_dir"]) and rank == 0:
         os.makedirs(cfg["saver"]["snapshot_dir"])
     
-    if cfg["dataset"]["p_sup"] == 0:
-        cfg["dataset"]["batch_size"] = 1
-        train_loader_unsup, val_loader = get_loader(cfg, seed=seed, distributed=args.distributed)
+    if cfg["dataset"]["type"] == "crack_semi_portion":
+        if cfg["dataset"]["p_sup"] == 0:
+            cfg["dataset"]["batch_size"] = 1
+            train_loader_unsup, val_loader = get_loader(cfg, seed=seed, distributed=args.distributed)
+            
+            # Optimizer and lr decay scheduler
+            cfg_trainer = cfg["trainer"]
+            cfg_optim = cfg_trainer["optimizer"]
+            times = 1
+
+            # Create network
+            model = ModelBuilder(cfg["net"])
+            modules_back = [model.encoder]
+            if cfg["net"].get("aux_loss", False):
+                modules_head = [model.auxor, model.decoder]
+            else:
+                modules_head = [model.decoder]
+
+            if cfg["net"].get("sync_bn", True):
+                model = torch.nn.SyncBatchNorm.convert_sync_batchnorm(model)
+
+            model = to_device(model)
+            # Teacher model
+            model_teacher = ModelBuilder(cfg["net"])
+            model_teacher = to_device(model_teacher)
+            if args.distributed:
+                model_teacher = torch.nn.parallel.DistributedDataParallel(
+                    model_teacher,
+                    device_ids=[local_rank],
+                    output_device=local_rank,
+                    find_unused_parameters=False,
+                )
+
+            for p in model_teacher.parameters():
+                p.requires_grad = False    
+
+            modules_back = [model_teacher.encoder]
+            if cfg["net"].get("aux_loss", False):
+                modules_head = [model_teacher.auxor, model_teacher.decoder]
+            else:
+                modules_head = [model_teacher.decoder]
+
+            params_list = []
+            for module in modules_back:
+                params_list.append(
+                    dict(params=module.parameters(), lr=cfg_optim["kwargs"]["lr"])
+                )
+            for module in modules_head:
+                params_list.append(
+                    dict(params=module.parameters(), lr=cfg_optim["kwargs"]["lr"] * times)
+                )
         
-        # Optimizer and lr decay scheduler
-        cfg_trainer = cfg["trainer"]
-        cfg_optim = cfg_trainer["optimizer"]
-        times = 1
+        elif cfg["dataset"]["p_sup"] == 1:
+            # Create network
+            model = ModelBuilder(cfg["net"])
+            modules_back = [model.encoder]
+            if cfg["net"].get("aux_loss", False):
+                modules_head = [model.auxor, model.decoder]
+            else:
+                modules_head = [model.decoder]
 
-        # Create network
-        model = ModelBuilder(cfg["net"])
-        modules_back = [model.encoder]
-        if cfg["net"].get("aux_loss", False):
-            modules_head = [model.auxor, model.decoder]
+            if cfg["net"].get("sync_bn", True):
+                model = torch.nn.SyncBatchNorm.convert_sync_batchnorm(model)
+
+            model = to_device(model)
+
+            sup_loss_fn = get_criterion(cfg)
+
+            train_loader_sup, val_loader = get_loader(cfg, seed=seed, distributed=args.distributed)
+
+            # Optimizer and lr decay scheduler
+            cfg_trainer = cfg["trainer"]
+            cfg_optim = cfg_trainer["optimizer"]
+            times = 1
+
+            params_list = []
+            for module in modules_back:
+                params_list.append(
+                    dict(params=module.parameters(), lr=cfg_optim["kwargs"]["lr"])
+                )
+            for module in modules_head:
+                params_list.append(
+                    dict(params=module.parameters(), lr=cfg_optim["kwargs"]["lr"] * times)
+                )
+
+            optimizer = get_optimizer(params_list, cfg_optim)
+
+            if args.distributed:
+                local_rank = int(os.environ["LOCAL_RANK"])
+                model = torch.nn.parallel.DistributedDataParallel(
+                    model,
+                    device_ids=[local_rank],
+                    output_device=local_rank,
+                    find_unused_parameters=False,
+                )
+
         else:
-            modules_head = [model.decoder]
+            # Create network
+            model = ModelBuilder(cfg["net"])
+            modules_back = [model.encoder]
+            if cfg["net"].get("aux_loss", False):
+                modules_head = [model.auxor, model.decoder]
+            else:
+                modules_head = [model.decoder]
 
-        if cfg["net"].get("sync_bn", True):
-            model = torch.nn.SyncBatchNorm.convert_sync_batchnorm(model)
+            if cfg["net"].get("sync_bn", True):
+                model = torch.nn.SyncBatchNorm.convert_sync_batchnorm(model)
 
-        model = to_device(model)
-        # Teacher model
-        model_teacher = ModelBuilder(cfg["net"])
-        model_teacher = to_device(model_teacher)
-        if args.distributed:
-            model_teacher = torch.nn.parallel.DistributedDataParallel(
-                model_teacher,
-                device_ids=[local_rank],
-                output_device=local_rank,
-                find_unused_parameters=False,
-            )
+            model = to_device(model)
 
-        for p in model_teacher.parameters():
-            p.requires_grad = False    
+            sup_loss_fn = get_criterion(cfg)
 
-        modules_back = [model_teacher.encoder]
-        if cfg["net"].get("aux_loss", False):
-            modules_head = [model_teacher.auxor, model_teacher.decoder]
-        else:
-            modules_head = [model_teacher.decoder]
+            train_loader_sup, train_loader_unsup, val_loader = get_loader(cfg, seed=seed, distributed=args.distributed)
 
-        params_list = []
-        for module in modules_back:
-            params_list.append(
-                dict(params=module.parameters(), lr=cfg_optim["kwargs"]["lr"])
-            )
-        for module in modules_head:
-            params_list.append(
-                dict(params=module.parameters(), lr=cfg_optim["kwargs"]["lr"] * times)
-            )
-    
-    elif cfg["dataset"]["p_sup"] == 1:
-        # Create network
-        model = ModelBuilder(cfg["net"])
-        modules_back = [model.encoder]
-        if cfg["net"].get("aux_loss", False):
-            modules_head = [model.auxor, model.decoder]
-        else:
-            modules_head = [model.decoder]
+            # Optimizer and lr decay scheduler
+            cfg_trainer = cfg["trainer"]
+            cfg_optim = cfg_trainer["optimizer"]
+            times = 1
 
-        if cfg["net"].get("sync_bn", True):
-            model = torch.nn.SyncBatchNorm.convert_sync_batchnorm(model)
+            params_list = []
+            for module in modules_back:
+                params_list.append(
+                    dict(params=module.parameters(), lr=cfg_optim["kwargs"]["lr"])
+                )
+            for module in modules_head:
+                params_list.append(
+                    dict(params=module.parameters(), lr=cfg_optim["kwargs"]["lr"] * times)
+                )
 
-        model = to_device(model)
+            optimizer = get_optimizer(params_list, cfg_optim)
 
-        sup_loss_fn = get_criterion(cfg)
+            if args.distributed:
+                local_rank = int(os.environ["LOCAL_RANK"])
+                model = torch.nn.parallel.DistributedDataParallel(
+                    model,
+                    device_ids=[local_rank],
+                    output_device=local_rank,
+                    find_unused_parameters=False,
+                )
 
-        train_loader_sup, val_loader = get_loader(cfg, seed=seed, distributed=args.distributed)
+            # Teacher model
+            model_teacher = ModelBuilder(cfg["net"])
+            model_teacher = to_device(model_teacher)
+            if args.distributed:
+                model_teacher = torch.nn.parallel.DistributedDataParallel(
+                    model_teacher,
+                    device_ids=[local_rank],
+                    output_device=local_rank,
+                    find_unused_parameters=False,
+                )
 
-        # Optimizer and lr decay scheduler
-        cfg_trainer = cfg["trainer"]
-        cfg_optim = cfg_trainer["optimizer"]
-        times = 1
+            for p in model_teacher.parameters():
+                p.requires_grad = False
 
-        params_list = []
-        for module in modules_back:
-            params_list.append(
-                dict(params=module.parameters(), lr=cfg_optim["kwargs"]["lr"])
-            )
-        for module in modules_head:
-            params_list.append(
-                dict(params=module.parameters(), lr=cfg_optim["kwargs"]["lr"] * times)
-            )
-
-        optimizer = get_optimizer(params_list, cfg_optim)
-
-        if args.distributed:
-            local_rank = int(os.environ["LOCAL_RANK"])
-            model = torch.nn.parallel.DistributedDataParallel(
-                model,
-                device_ids=[local_rank],
-                output_device=local_rank,
-                find_unused_parameters=False,
-            )
-    
     else:
         # Create network
         model = ModelBuilder(cfg["net"])
@@ -274,14 +333,20 @@ def main():
         load_state(cfg["saver"]["pretrain"], model_teacher, key="teacher_state")
 
     optimizer_start = get_optimizer(params_list, cfg_optim)
-    if cfg["dataset"]["p_sup"] == 0:
-        lr_scheduler = get_scheduler(
-            cfg_trainer, len(train_loader_unsup), optimizer_start, start_epoch=last_epoch
-                )       
-    elif cfg["dataset"]["p_sup"] == 1:
-        lr_scheduler = get_scheduler(
-            cfg_trainer, len(train_loader_sup), optimizer_start, start_epoch=last_epoch
-                ) 
+    if cfg["dataset"]["type"] == "crack_semi_portion":
+        if cfg["dataset"]["p_sup"] == 0:
+            lr_scheduler = get_scheduler(
+                cfg_trainer, len(train_loader_unsup), optimizer_start, start_epoch=last_epoch
+                    )       
+        elif cfg["dataset"]["p_sup"] == 1:
+            lr_scheduler = get_scheduler(
+                cfg_trainer, len(train_loader_sup), optimizer_start, start_epoch=last_epoch
+                    ) 
+        else:
+            max_length = max(len(train_loader_sup), len(train_loader_unsup))
+            lr_scheduler = get_scheduler(
+                cfg_trainer, max_length, optimizer_start, start_epoch=last_epoch
+                    )
     else:
         max_length = max(len(train_loader_sup), len(train_loader_unsup))
         lr_scheduler = get_scheduler(
@@ -299,54 +364,147 @@ def main():
     )
     prototype = to_device(prototype)
 
-    # Call select_diverse_samples after a few epochs (e.g., 5)
-    if cfg["dataset"]["p_sup"] == 0:
-        # Set the number of clusters and samples per cluster
-        # Call the select_diverse_samples function
-        extract_features(model_teacher, train_loader_unsup, device, logger)
-        logger.info("Generated the list of features and filenames, please process")
-        # Save the selected paths to a file
+    if cfg["dataset"]["type"] == "crack_semi_portion":
+        if cfg["dataset"]["p_sup"] == 0:
+            # Set the number of clusters and samples per cluster
+            # Call the select_diverse_samples function
+            extract_features(model_teacher, train_loader_unsup, device, logger)
+            logger.info("Generated the list of features and filenames, please process")
+            # Save the selected paths to a file
 
-    elif cfg["dataset"]["p_sup"] == 1:
-        for epoch in range(last_epoch, cfg_trainer["epochs"]):
-            # Training
-            sup_train(
-                model,
-                optimizer,
-                lr_scheduler,
-                sup_loss_fn,
-                train_loader_sup,
-                epoch,
-                tb_logger,
-                logger,
-            )
-
-            # Validation and store checkpoint
-            prec = validate(model, val_loader, epoch, logger, device)
-
-            if rank == 0:
-                state = {
-                    "epoch": epoch,
-                    "model_state": model.state_dict(),
-                    "optimizer_state": optimizer.state_dict(),
-                    "best_miou": best_prec,
-                }
-
-                if prec > best_prec:
-                    best_prec = prec
-                    state["best_miou"] = prec
-                    torch.save(
-                        state, osp.join(cfg["saver"]["snapshot_dir"], "ckpt_best.pth")
-                    )
-
-                torch.save(state, osp.join(cfg["saver"]["snapshot_dir"], "ckpt.pth"))
-
-                logger.info(
-                    "\033[31m * Currently, the best val result is: {:.2f}\033[0m".format(
-                        best_prec * 100
-                    )
+        elif cfg["dataset"]["p_sup"] == 1:
+            for epoch in range(last_epoch, cfg_trainer["epochs"]):
+                # Training
+                sup_train(
+                    model,
+                    optimizer,
+                    lr_scheduler,
+                    sup_loss_fn,
+                    train_loader_sup,
+                    epoch,
+                    tb_logger,
+                    logger,
                 )
-                tb_logger.add_scalar("mIoU val", prec, epoch)
+
+                # Validation and store checkpoint
+                prec = validate(model, val_loader, epoch, logger, device)
+
+                if rank == 0:
+                    state = {
+                        "epoch": epoch,
+                        "model_state": model.state_dict(),
+                        "optimizer_state": optimizer.state_dict(),
+                        "best_miou": best_prec,
+                    }
+
+                    if prec > best_prec:
+                        best_prec = prec
+                        state["best_miou"] = prec
+                        torch.save(
+                            state, osp.join(cfg["saver"]["snapshot_dir"], "ckpt_best.pth")
+                        )
+
+                    torch.save(state, osp.join(cfg["saver"]["snapshot_dir"], "ckpt.pth"))
+
+                    logger.info(
+                        "\033[31m * Currently, the best val result is: {:.2f}\033[0m".format(
+                            best_prec * 100
+                        )
+                    )
+                    tb_logger.add_scalar("mIoU val", prec, epoch)
+        else:
+            # Start to train model
+            for epoch in range(last_epoch, cfg_trainer["epochs"]):
+                # Training
+                train(
+                    model,
+                    model_teacher,
+                    optimizer,
+                    lr_scheduler,
+                    sup_loss_fn,
+                    train_loader_sup,
+                    train_loader_unsup,
+                    epoch,
+                    tb_logger,
+                    logger,
+                )
+
+                # Validation
+                if cfg_trainer["eval_on"]:
+                    if rank == 0:
+                        logger.info("start evaluation")
+
+                    if epoch < cfg["trainer"].get("sup_only_epoch", 1):
+                        prec = validate(model, val_loader, epoch, logger, device)
+                    else:
+                        prec = validate(model_teacher, val_loader, epoch, logger, device)
+
+                    if rank == 0:
+                        state = {
+                            "epoch": epoch + 1,
+                            "model_state": model.state_dict(),
+                            "optimizer_state": optimizer.state_dict(),
+                            "teacher_state": model_teacher.state_dict(),
+                            "best_miou": best_prec,
+                        }
+                        if prec > best_prec:
+                            best_prec = prec
+                            torch.save(
+                                state, osp.join(cfg["saver"]["snapshot_dir"], "ckpt_best.pth")
+                            )
+
+                        torch.save(state, osp.join(cfg["saver"]["snapshot_dir"], "ckpt.pth"))
+
+                        logger.info(
+                            "\033[31m * Currently, the best val result is: {:.2f}\033[0m".format(
+                                best_prec * 100
+                            )
+                        )
+                        tb_logger.add_scalar("mIoU val", prec, epoch)
+            
+            teacher_entropies, image_filenames = get_teacher_predictions(model_teacher, train_loader_unsup, device, logger)
+            # Create a new list to store the filenames of the most annotation-needed images.
+            annotation_needed_filenames = []
+            with torch.no_grad():            
+                # Convert the teacher_entropies list to a tensor
+                entropy_tensor = torch.tensor(teacher_entropies)
+                # Assuming that image_filenames is a list of image filenames corresponding to pred_u_large_teacher
+                # Replace N with the number of top images you want to select
+                N = 230
+                assert N <= len(image_filenames), "Not enough files"
+                # Get the top N entropy values and their indices
+                top_entropy_values, top_entropy_indices = torch.topk(entropy_tensor, N, largest=True)
+                
+                # Return the list of filenames.
+                for idx in top_entropy_indices:
+                    annotation_needed_filenames.append(image_filenames[idx])
+            # Save the list of filenames as a .txt file in the checkpoints folder
+            filenames_string = "\n".join(annotation_needed_filenames)
+
+            ckpt_dir = osp.join(current_dir, cfg["saver"]["snapshot_dir"])
+            result_dir = osp.join(ckpt_dir, f"results")
+            # Create the result_dir folder if it doesn't exist
+            os.makedirs(result_dir, exist_ok=True)
+            pred_teacher_filepath = osp.join(result_dir, f"annotation_needed_queue.txt")
+
+            with open(pred_teacher_filepath, "w") as pred_teacher_file:
+                pred_teacher_file.write(filenames_string)
+            
+            # Read the content of the annotation data list file
+            with open(cfg["dataset"]["train"]["ann_data_list"], "r") as ann_data_file:
+                ann_data_list_content = ann_data_file.read()
+
+            # Read the content of the annotation_needed_queue.txt file
+            with open(pred_teacher_filepath, "r") as pred_teacher_file:
+                annotation_needed_queue_content = pred_teacher_file.read()
+
+            # Combine the contents of both files
+            combined_content = ann_data_list_content + "\n" + annotation_needed_queue_content
+
+            # Save the combined content to a new file called annotation_queue.txt
+            with open(osp.join(result_dir, "annotation_queue.txt"), "w") as annotation_queue_file:
+                annotation_queue_file.write(combined_content)
+
     else:
         # Start to train model
         for epoch in range(last_epoch, cfg_trainer["epochs"]):
@@ -405,7 +563,8 @@ def main():
             entropy_tensor = torch.tensor(teacher_entropies)
             # Assuming that image_filenames is a list of image filenames corresponding to pred_u_large_teacher
             # Replace N with the number of top images you want to select
-            N = len(image_filenames)
+            N = 230
+            assert N <= len(image_filenames), "Not enough files"
             # Get the top N entropy values and their indices
             top_entropy_values, top_entropy_indices = torch.topk(entropy_tensor, N, largest=True)
             
@@ -791,34 +950,53 @@ def train(
         batch_end = time.time()
         batch_times.update(batch_end - batch_start)
 
-        if i_iter % 10 == 0:
-            logger.info(
-                "[Semi-Supervised]"
-                "[P_Sup {}]"#[{}] "
-                "Iter [{}/{}]\t"
-                "Data_Time {data_time.val:.2f} ({data_time.avg:.2f})\t"
-                "Batch_Time {batch_time.val:.2f} ({batch_time.avg:.2f})\t"
-                "Sup {sup_loss.val:.3f} ({sup_loss.avg:.3f})\t"
-                "Uns {uns_loss.val:.3f} ({uns_loss.avg:.3f})\t"
-                #"Con {con_loss.val:.3f} ({con_loss.avg:.3f})\t"
-                "LR {lr.val:.5f}".format(
-                    cfg["dataset"]["p_sup"],
-                    #contra_flag,
-                    i_iter,
-                    cfg["trainer"]["epochs"] * max_length,
-                    data_time=data_times,
-                    batch_time=batch_times,
-                    sup_loss=sup_losses,
-                    uns_loss=uns_losses,
-                    #con_loss=con_losses,
-                    lr=learning_rates,
+        if cfg["dataset"].get("p_sup") is not None:
+            if i_iter % 10 == 0:
+                logger.info(
+                    "[Semi-Supervised]"
+                    "[P_Sup {}]"#[{}] "
+                    "Iter [{}/{}]\t"
+                    "Data_Time {data_time.val:.2f} ({data_time.avg:.2f})\t"
+                    "Batch_Time {batch_time.val:.2f} ({batch_time.avg:.2f})\t"
+                    "Sup {sup_loss.val:.3f} ({sup_loss.avg:.3f})\t"
+                    "Uns {uns_loss.val:.3f} ({uns_loss.avg:.3f})\t"
+                    #"Con {con_loss.val:.3f} ({con_loss.avg:.3f})\t"
+                    "LR {lr.val:.5f}".format(
+                        cfg["dataset"]["p_sup"],
+                        #contra_flag,
+                        i_iter,
+                        cfg["trainer"]["epochs"] * max_length,
+                        data_time=data_times,
+                        batch_time=batch_times,
+                        sup_loss=sup_losses,
+                        uns_loss=uns_losses,
+                        #con_loss=con_losses,
+                        lr=learning_rates,
+                    )
                 )
-            )
+        else:
+            if i_iter % 10 == 0:
+                logger.info(
+                    "[Semi-Supervised]"
+                    "Iter [{}/{}]\t"
+                    "Data_Time {data_time.val:.2f} ({data_time.avg:.2f})\t"
+                    "Batch_Time {batch_time.val:.2f} ({batch_time.avg:.2f})\t"
+                    "Sup {sup_loss.val:.3f} ({sup_loss.avg:.3f})\t"
+                    "Uns {uns_loss.val:.3f} ({uns_loss.avg:.3f})\t"
+                    "LR {lr.val:.5f}".format(
+                        i_iter,
+                        cfg["trainer"]["epochs"] * max_length,
+                        data_time=data_times,
+                        batch_time=batch_times,
+                        sup_loss=sup_losses,
+                        uns_loss=uns_losses,
+                        lr=learning_rates,
+                    )
+                )
 
             tb_logger.add_scalar("lr", learning_rates.val, i_iter)
             tb_logger.add_scalar("Sup Loss", sup_losses.val, i_iter)
             tb_logger.add_scalar("Uns Loss", uns_losses.val, i_iter)
-            #tb_logger.add_scalar("Con Loss", con_losses.val, i_iter)
 
 def validate(
     model,

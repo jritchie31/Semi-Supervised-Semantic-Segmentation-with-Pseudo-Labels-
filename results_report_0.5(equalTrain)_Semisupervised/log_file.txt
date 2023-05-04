@@ -1,0 +1,23 @@
+[2023-05-04 13:32:50,022 INFO eval.py line 112 25088] Namespace(base_size=2048, scales=[1.0], config='/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/experiments/data_crack/ours/config_local.yaml', model_path='/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/checkpoints/ckpt_best.pth', save_folder='/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/checkpoints/results/', crop=False, distributed=False)
+[2023-05-04 13:32:50,024 INFO eval.py line 143 25088] => creating model from '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/checkpoints/ckpt_best.pth' ...
+[2023-05-04 13:32:51,042 INFO eval.py line 149 25088] => load checkpoint[teacher_state]
+[2023-05-04 13:32:51,240 INFO eval.py line 154 25088] Load Model Done!
+[2023-05-04 13:32:51,240 INFO eval.py line 257 25088] >>>>>>>>>>>>>>>> Start Evaluation >>>>>>>>>>>>>>>>
+[2023-05-04 13:32:54,359 INFO eval.py line 306 25088] Test: [10/80] Data_Time 0.011 (0.009) Batch_Time 0.272 (0.312).
+[2023-05-04 13:32:57,088 INFO eval.py line 306 25088] Test: [20/80] Data_Time 0.009 (0.010) Batch_Time 0.275 (0.292).
+[2023-05-04 13:32:59,824 INFO eval.py line 306 25088] Test: [30/80] Data_Time 0.010 (0.010) Batch_Time 0.271 (0.286).
+[2023-05-04 13:33:02,563 INFO eval.py line 306 25088] Test: [40/80] Data_Time 0.011 (0.010) Batch_Time 0.275 (0.283).
+[2023-05-04 13:33:05,279 INFO eval.py line 306 25088] Test: [50/80] Data_Time 0.009 (0.010) Batch_Time 0.269 (0.281).
+[2023-05-04 13:33:08,034 INFO eval.py line 306 25088] Test: [60/80] Data_Time 0.011 (0.010) Batch_Time 0.279 (0.280).
+[2023-05-04 13:33:10,760 INFO eval.py line 306 25088] Test: [70/80] Data_Time 0.009 (0.010) Batch_Time 0.269 (0.279).
+[2023-05-04 13:33:13,495 INFO eval.py line 306 25088] Test: [80/80] Data_Time 0.011 (0.010) Batch_Time 0.277 (0.278).
+[2023-05-04 13:33:13,505 INFO eval.py line 330 25088]  * class [0] IoU 98.88
+[2023-05-04 13:33:13,505 INFO eval.py line 330 25088]  * class [1] IoU 26.38
+[2023-05-04 13:33:13,506 INFO eval.py line 331 25088]  * mIoU 62.63
+[2023-05-04 13:33:14,464 INFO eval.py line 169 25088] Precision: 0.4403
+[2023-05-04 13:33:14,464 INFO eval.py line 170 25088] Recall: 0.4555
+[2023-05-04 13:33:14,465 INFO eval.py line 171 25088] F1-Score: 0.4478
+[2023-05-04 13:33:14,465 INFO eval.py line 172 25088] Average True Positive Portion: 0.2885
+[2023-05-04 13:33:14,465 INFO eval.py line 173 25088] Average False Positive Portion: 0.3667
+[2023-05-04 13:33:14,465 INFO eval.py line 174 25088] Average False Negative Portion: 0.3448
+[2023-05-04 13:33:14,465 INFO eval.py line 175 25088] <<<<<<<<<<<<<<<<< End  Evaluation <<<<<<<<<<<<<<<<<

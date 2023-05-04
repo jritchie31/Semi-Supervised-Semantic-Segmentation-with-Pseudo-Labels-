@@ -82,3 +82,11 @@ to_kestrel/
 *.tar
 to_kestrel.yaml
 *petreloss*.conf
+experiments/cityscapes/744/ours/log/events_seg/20230415_173334/events.out.tfevents.1681580014.ip-172-31-20-160
+experiments/cityscapes/744/ours/log/events_seg/20230415_181422/events.out.tfevents.1681582462.ip-172-31-20-160
+experiments/cityscapes/744/ours/log/events_seg/20230415_182845/events.out.tfevents.1681583325.ip-172-31-20-160
+experiments/cityscapes/744/ours/log/events_seg/20230415_183258/events.out.tfevents.1681583578.ip-172-31-20-160
+experiments/cityscapes/744/ours/log/events_seg/20230415_183503/events.out.tfevents.1681583703.ip-172-31-20-160
+experiments/cityscapes/744/ours/log/events_seg/20230416_000725/events.out.tfevents.1681603645.ip-172-31-20-160
+experiments/cityscapes/744/ours/log/events_seg/20230416_000845/events.out.tfevents.1681603725.ip-172-31-20-160
+experiments/cityscapes/744/ours/log/events_seg/20230416_001401/events.out.tfevents.1681604041.ip-172-31-20-160

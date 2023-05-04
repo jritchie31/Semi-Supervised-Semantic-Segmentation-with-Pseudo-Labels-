@@ -419,10 +419,26 @@ def main():
         result_dir = osp.join(ckpt_dir, f"results")
         # Create the result_dir folder if it doesn't exist
         os.makedirs(result_dir, exist_ok=True)
-        pred_teacher_filepath = osp.join(result_dir, f"annotation_queue.txt")
+        pred_teacher_filepath = osp.join(result_dir, f"annotation_needed_queue.txt")
 
         with open(pred_teacher_filepath, "w") as pred_teacher_file:
             pred_teacher_file.write(filenames_string)
+        
+        # Read the content of the annotation data list file
+        with open(cfg["dataset"]["train"]["ann_data_list"], "r") as ann_data_file:
+            ann_data_list_content = ann_data_file.read()
+
+        # Read the content of the annotation_needed_queue.txt file
+        with open(pred_teacher_filepath, "r") as pred_teacher_file:
+            annotation_needed_queue_content = pred_teacher_file.read()
+
+        # Combine the contents of both files
+        combined_content = ann_data_list_content + "\n" + annotation_needed_queue_content
+
+        # Save the combined content to a new file called annotation_queue.txt
+        with open(osp.join(result_dir, "annotation_queue.txt"), "w") as annotation_queue_file:
+            annotation_queue_file.write(combined_content)
+
 
 def extract_features(model, dataloader, device, logger):
     model.eval()

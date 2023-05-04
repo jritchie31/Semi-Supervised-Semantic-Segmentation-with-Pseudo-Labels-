@@ -52,7 +52,7 @@ def select_diverse_samples(n_clusters, n_samples_per_cluster, n_lines=None):
     selected_paths = [paths[i] for i in selected_samples]
 
     # Save the selected paths to a file
-    with open(os.path.join(file_dir, "annotation_queue.txt"), 'w') as f:
+    with open(os.path.join(file_dir, "annotation_start_queue.txt"), 'w') as f:
         for path in selected_paths:
             f.write(f"{path}\n")
 

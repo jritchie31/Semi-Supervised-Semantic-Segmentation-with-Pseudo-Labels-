@@ -59,12 +59,6 @@ def get_parser():
         default=osp.join(current_dir, r"checkpoints/results/"),
         help="results save folder",
     )
-    """parser.add_argument(
-        "--names_path",
-        type=str,
-        default="../../vis_meta/cityscapes/cityscapesnames.mat",
-        help="path of dataset category names",
-    )"""
     parser.add_argument(
         "--crop", action="store_true", default=False, help="whether use crop evaluation"
     )

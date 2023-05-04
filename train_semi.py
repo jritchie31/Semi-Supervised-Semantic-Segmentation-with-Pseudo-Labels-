@@ -412,10 +412,15 @@ def main():
             # Return the list of filenames.
             for idx in top_entropy_indices:
                 annotation_needed_filenames.append(image_filenames[idx])
-
         # Save the list of filenames as a .txt file in the checkpoints folder
         filenames_string = "\n".join(annotation_needed_filenames)
-        pred_teacher_filepath = osp.join(cfg["saver"]["snapshot_dir"], f"results/annotation_queue.txt")
+
+        ckpt_dir = osp.join(current_dir, cfg["saver"]["snapshot_dir"])
+        result_dir = osp.join(ckpt_dir, f"results")
+        # Create the result_dir folder if it doesn't exist
+        os.makedirs(result_dir, exist_ok=True)
+        pred_teacher_filepath = osp.join(result_dir, f"annotation_queue.txt")
+
         with open(pred_teacher_filepath, "w") as pred_teacher_file:
             pred_teacher_file.write(filenames_string)
 

@@ -277,10 +277,15 @@ def main():
     if cfg["dataset"]["p_sup"] == 0:
         lr_scheduler = get_scheduler(
             cfg_trainer, len(train_loader_unsup), optimizer_start, start_epoch=last_epoch
-                )        
-    else:
+                )       
+    elif cfg["dataset"]["p_sup"] == 1:
         lr_scheduler = get_scheduler(
             cfg_trainer, len(train_loader_sup), optimizer_start, start_epoch=last_epoch
+                ) 
+    else:
+        max_length = max(len(train_loader_sup), len(train_loader_unsup))
+        lr_scheduler = get_scheduler(
+            cfg_trainer, max_length, optimizer_start, start_epoch=last_epoch
                 )
 
     # build prototype
@@ -408,11 +413,9 @@ def main():
             for idx in top_entropy_indices:
                 annotation_needed_filenames.append(image_filenames[idx])
 
-        logger.info("Most annotation-needed images' filenames: {}".format(annotation_needed_filenames))
-
         # Save the list of filenames as a .txt file in the checkpoints folder
         filenames_string = "\n".join(annotation_needed_filenames)
-        pred_teacher_filepath = osp.join(cfg["saver"]["snapshot_dir"], f"annotation_queue.txt")
+        pred_teacher_filepath = osp.join(cfg["saver"]["snapshot_dir"], f"results/annotation_queue.txt")
         with open(pred_teacher_filepath, "w") as pred_teacher_file:
             pred_teacher_file.write(filenames_string)
 
@@ -721,7 +724,12 @@ def train(
                     )
                     * cfg["trainer"]["unsupervised"].get("loss_weight", 1)
             )
-       
+
+            
+        if not sup_loss.requires_grad:
+            sup_loss.requires_grad_(True)
+        if not unsup_loss.requires_grad:
+            unsup_loss.requires_grad_(True)
         #loss = sup_loss + unsup_loss + contra_loss
         loss = sup_loss + unsup_loss #+ contra_loss
         

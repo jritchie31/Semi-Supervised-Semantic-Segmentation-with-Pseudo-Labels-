@@ -23901,3 +23901,503 @@
 [2023-05-04 17:07:05,174][    INFO] [Semi-Supervised]Iter [0/1000]	Data_Time 0.00 (0.00)	Batch_Time 10.26 (10.26)	Sup 0.796 (0.796)	Uns 1.012 (1.012)	LR 0.00200
 [2023-05-04 17:08:20,920][    INFO] [Semi-Supervised]Iter [10/1000]	Data_Time 0.00 (0.01)	Batch_Time 5.81 (7.57)	Sup 0.849 (0.797)	Uns 0.576 (0.822)	LR 0.00198
 [2023-05-04 17:09:35,073][    INFO] [Semi-Supervised]Iter [20/1000]	Data_Time 0.00 (0.00)	Batch_Time 7.16 (7.41)	Sup 0.855 (0.953)	Uns 0.554 (0.698)	LR 0.00197
+[2023-05-04 17:17:30,894][    INFO] {'criterion': {'kwargs': {'min_kept': 100000, 'thresh': 0.7}, 'type': 'ohem'},
+ 'dataset': {'batch_size': 4,
+             'mean': [125.5],
+             'noise_std': 0.1,
+             'std': [6],
+             'train': {'GaussianBlur': False,
+                       'ann_data_list': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/results_report_0.0_Unsupervised/annotation_start_queue.txt',
+                       'crop': {'size': [400, 400], 'type': 'rand'},
+                       'data_list': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data/Crack_Dataset/data_crack/Data_train/split_1/labeled.txt',
+                       'data_root': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data',
+                       'flip': True,
+                       'rand_rotation': [-10.0, 10.0],
+                       'seed': 27},
+             'type': 'crack_semi_active',
+             'val': {'crop': {'size': [400, 400], 'type': 'rand'},
+                     'data_list': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data/Crack_Dataset/data_crack/Data_test/val_data/val_label.txt',
+                     'data_root': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data'},
+             'workers': 2},
+ 'exp_path': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/experiments/data_crack/ours',
+ 'net': {'aux_loss': {'aux_plane': 1024, 'loss_weight': 0.4},
+         'decoder': {'kwargs': {'dilations': [12, 24, 36], 'inner_planes': 256},
+                     'type': 'u2pl.models.decoder.dec_deeplabv3_plus'},
+         'ema_decay': 0.99,
+         'encoder': {'kwargs': {'fpn': True,
+                                'multi_grid': True,
+                                'replace_stride_with_dilation': [False,
+                                                                 True,
+                                                                 True],
+                                'zero_init_residual': True},
+                     'type': 'u2pl.models.resnet.resnet50'},
+         'num_classes': 2,
+         'sync_bn': True},
+ 'save_path': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/experiments/data_crack/ours/checkpoints',
+ 'saver': {'auto_resume': True, 'pretrain': '', 'snapshot_dir': 'checkpoints'},
+ 'trainer': {'contrastive': {'current_class_negative_threshold': 1,
+                             'current_class_threshold': 0.3,
+                             'high_rank': 20,
+                             'low_entropy_threshold': 20,
+                             'low_rank': 3,
+                             'negative_high_entropy': False,
+                             'num_negatives': 50,
+                             'num_queries': 256,
+                             'temperature': 0.5,
+                             'unsupervised_entropy_ignore': 80},
+             'epochs': 5,
+             'eval_on': True,
+             'lr_scheduler': {'kwargs': {'power': 0.9}, 'mode': 'poly'},
+             'optimizer': {'kwargs': {'lr': 0.002,
+                                      'momentum': 0.9,
+                                      'weight_decay': 0.0005},
+                           'type': 'SGD'},
+             'sup_only_epoch': 0,
+             'unsupervised': {'TTA': True,
+                              'apply_aug': 'cutmix',
+                              'drop_percent': 80,
+                              'enable': True}}}
+[2023-05-04 17:17:31,581][    INFO] # usable_samples: 80
+[2023-05-04 17:17:31,581][    INFO] # num_samples: 80
+[2023-05-04 17:17:31,582][    INFO] # usable_samples: 331
+[2023-05-04 17:17:31,582][    INFO] # num_samples: 331
+[2023-05-04 17:17:31,583][    INFO] # usable_samples: 801
+[2023-05-04 17:17:31,584][    INFO] # num_samples: 801
+[2023-05-04 17:17:31,589][    INFO] # usable_samples: 80
+[2023-05-04 17:17:31,589][    INFO] # num_samples: 80
+[2023-05-04 17:17:31,590][    INFO] # usable_samples: 331
+[2023-05-04 17:17:31,590][    INFO] # num_samples: 331
+[2023-05-04 17:17:31,590][    INFO] Get loader Done...
+[2023-05-04 17:17:32,150][    INFO] The kwargs for lr scheduler: 0.9
+[2023-05-04 17:17:59,440][    INFO] [Semi-Supervised]Iter [0/1000]	Data_Time 0.00 (0.00)	Batch_Time 11.70 (11.70)	Sup 0.801 (0.801)	Uns 0.951 (0.951)	LR 0.00200
+[2023-05-04 17:19:15,622][    INFO] [Semi-Supervised]Iter [10/1000]	Data_Time 0.00 (0.02)	Batch_Time 7.38 (7.60)	Sup 0.884 (0.847)	Uns 0.641 (0.917)	LR 0.00198
+[2023-05-04 17:20:32,960][    INFO] [Semi-Supervised]Iter [20/1000]	Data_Time 0.00 (0.00)	Batch_Time 7.87 (7.73)	Sup 0.879 (0.900)	Uns 0.823 (0.638)	LR 0.00197
+[2023-05-04 17:21:53,690][    INFO] [Semi-Supervised]Iter [30/1000]	Data_Time 0.00 (0.00)	Batch_Time 8.05 (8.07)	Sup 0.601 (0.811)	Uns 0.441 (0.582)	LR 0.00195
+[2023-05-04 17:23:11,641][    INFO] [Semi-Supervised]Iter [40/1000]	Data_Time 0.00 (0.00)	Batch_Time 7.39 (7.79)	Sup 0.823 (0.765)	Uns 0.649 (0.686)	LR 0.00193
+[2023-05-04 17:24:25,853][    INFO] [Semi-Supervised]Iter [50/1000]	Data_Time 0.00 (0.00)	Batch_Time 7.26 (7.42)	Sup 0.598 (0.694)	Uns 0.446 (0.588)	LR 0.00191
+[2023-05-04 17:25:43,380][    INFO] [Semi-Supervised]Iter [60/1000]	Data_Time 0.00 (0.00)	Batch_Time 7.65 (7.75)	Sup 0.240 (0.415)	Uns 0.315 (0.373)	LR 0.00189
+[2023-05-04 17:27:00,419][    INFO] [Semi-Supervised]Iter [70/1000]	Data_Time 0.00 (0.00)	Batch_Time 7.55 (7.70)	Sup 0.293 (0.316)	Uns 0.268 (0.296)	LR 0.00188
+[2023-05-04 17:28:16,242][    INFO] [Semi-Supervised]Iter [80/1000]	Data_Time 0.00 (0.00)	Batch_Time 7.62 (7.58)	Sup 0.231 (0.233)	Uns 0.283 (0.285)	LR 0.00186
+[2023-05-04 17:29:38,909][    INFO] [Semi-Supervised]Iter [90/1000]	Data_Time 0.00 (0.00)	Batch_Time 8.05 (8.27)	Sup 0.130 (0.181)	Uns 0.285 (0.286)	LR 0.00184
+[2023-05-04 17:30:56,993][    INFO] [Semi-Supervised]Iter [100/1000]	Data_Time 0.00 (0.00)	Batch_Time 7.28 (7.81)	Sup 0.232 (0.229)	Uns 0.280 (0.276)	LR 0.00182
+[2023-05-04 17:32:13,525][    INFO] [Semi-Supervised]Iter [110/1000]	Data_Time 0.00 (0.00)	Batch_Time 7.71 (7.65)	Sup 0.192 (0.186)	Uns 0.280 (0.273)	LR 0.00180
+[2023-05-04 17:33:27,677][    INFO] [Semi-Supervised]Iter [120/1000]	Data_Time 0.00 (0.00)	Batch_Time 7.74 (7.41)	Sup 0.180 (0.262)	Uns 0.281 (0.280)	LR 0.00178
+[2023-05-04 17:34:43,926][    INFO] [Semi-Supervised]Iter [130/1000]	Data_Time 0.00 (0.00)	Batch_Time 7.82 (7.62)	Sup 0.172 (0.239)	Uns 0.285 (0.266)	LR 0.00177
+[2023-05-04 17:36:00,075][    INFO] [Semi-Supervised]Iter [140/1000]	Data_Time 0.00 (0.00)	Batch_Time 7.31 (7.61)	Sup 0.256 (0.198)	Uns 0.243 (0.264)	LR 0.00175
+[2023-05-04 17:37:17,618][    INFO] [Semi-Supervised]Iter [150/1000]	Data_Time 0.00 (0.00)	Batch_Time 7.89 (7.75)	Sup 0.157 (0.215)	Uns 0.283 (0.274)	LR 0.00173
+[2023-05-04 17:38:34,171][    INFO] [Semi-Supervised]Iter [160/1000]	Data_Time 0.00 (0.00)	Batch_Time 7.72 (7.65)	Sup 0.179 (0.200)	Uns 0.254 (0.264)	LR 0.00171
+[2023-05-04 17:39:49,945][    INFO] [Semi-Supervised]Iter [170/1000]	Data_Time 0.00 (0.00)	Batch_Time 7.53 (7.58)	Sup 0.141 (0.164)	Uns 0.218 (0.267)	LR 0.00169
+[2023-05-04 17:41:07,932][    INFO] [Semi-Supervised]Iter [180/1000]	Data_Time 0.01 (0.00)	Batch_Time 7.84 (7.80)	Sup 0.301 (0.202)	Uns 0.257 (0.264)	LR 0.00167
+[2023-05-04 17:42:23,783][    INFO] [Semi-Supervised]Iter [190/1000]	Data_Time 0.00 (0.00)	Batch_Time 7.48 (7.58)	Sup 0.181 (0.173)	Uns 0.280 (0.265)	LR 0.00166
+[2023-05-04 17:43:37,123][    INFO] start evaluation
+[2023-05-04 17:43:53,497][    INFO]  * class [0] IoU 98.90
+[2023-05-04 17:43:53,498][    INFO]  * class [1] IoU 20.81
+[2023-05-04 17:43:53,498][    INFO]  * epoch 0 mIoU 59.86
+[2023-05-04 17:43:55,935][    INFO] [31m * Currently, the best val result is: 59.86[0m
+[2023-05-04 17:44:23,616][    INFO] [Semi-Supervised]Iter [200/1000]	Data_Time 0.00 (0.00)	Batch_Time 12.43 (12.43)	Sup 0.119 (0.119)	Uns 0.275 (0.275)	LR 0.00164
+[2023-05-04 17:45:57,876][    INFO] [Semi-Supervised]Iter [210/1000]	Data_Time 0.00 (0.00)	Batch_Time 8.60 (9.42)	Sup 0.134 (0.216)	Uns 0.277 (0.270)	LR 0.00162
+[2023-05-04 17:47:32,087][    INFO] [Semi-Supervised]Iter [220/1000]	Data_Time 0.01 (0.00)	Batch_Time 8.95 (9.42)	Sup 0.137 (0.212)	Uns 0.266 (0.270)	LR 0.00160
+[2023-05-04 17:49:05,865][    INFO] [Semi-Supervised]Iter [230/1000]	Data_Time 0.00 (0.00)	Batch_Time 9.18 (9.38)	Sup 0.141 (0.181)	Uns 0.274 (0.270)	LR 0.00158
+[2023-05-04 17:51:00,658][    INFO] [Semi-Supervised]Iter [240/1000]	Data_Time 0.01 (0.01)	Batch_Time 9.12 (11.47)	Sup 0.114 (0.193)	Uns 0.271 (0.267)	LR 0.00156
+[2023-05-04 17:52:38,117][    INFO] [Semi-Supervised]Iter [250/1000]	Data_Time 0.00 (0.00)	Batch_Time 10.00 (9.74)	Sup 0.147 (0.164)	Uns 0.271 (0.271)	LR 0.00155
+[2023-05-04 17:54:09,255][    INFO] [Semi-Supervised]Iter [260/1000]	Data_Time 0.00 (0.00)	Batch_Time 9.67 (9.11)	Sup 0.169 (0.160)	Uns 0.251 (0.261)	LR 0.00153
+[2023-05-04 17:55:39,003][    INFO] [Semi-Supervised]Iter [270/1000]	Data_Time 0.00 (0.00)	Batch_Time 9.06 (8.97)	Sup 0.190 (0.197)	Uns 0.258 (0.265)	LR 0.00151
+[2023-05-04 17:57:10,632][    INFO] [Semi-Supervised]Iter [280/1000]	Data_Time 0.00 (0.00)	Batch_Time 9.36 (9.16)	Sup 0.098 (0.128)	Uns 0.275 (0.264)	LR 0.00149
+[2023-05-04 17:58:40,973][    INFO] [Semi-Supervised]Iter [290/1000]	Data_Time 0.00 (0.00)	Batch_Time 9.44 (9.03)	Sup 0.144 (0.166)	Uns 0.274 (0.267)	LR 0.00147
+[2023-05-04 18:00:09,027][    INFO] [Semi-Supervised]Iter [300/1000]	Data_Time 0.00 (0.00)	Batch_Time 9.37 (8.80)	Sup 0.142 (0.194)	Uns 0.228 (0.260)	LR 0.00145
+[2023-05-04 18:01:43,549][    INFO] [Semi-Supervised]Iter [310/1000]	Data_Time 0.00 (0.00)	Batch_Time 8.53 (9.45)	Sup 0.163 (0.147)	Uns 0.256 (0.269)	LR 0.00143
+[2023-05-04 18:03:14,463][    INFO] [Semi-Supervised]Iter [320/1000]	Data_Time 0.00 (0.00)	Batch_Time 8.86 (9.09)	Sup 0.084 (0.204)	Uns 0.272 (0.260)	LR 0.00142
+[2023-05-04 18:04:45,746][    INFO] [Semi-Supervised]Iter [330/1000]	Data_Time 0.00 (0.00)	Batch_Time 9.32 (9.13)	Sup 0.215 (0.148)	Uns 0.251 (0.269)	LR 0.00140
+[2023-05-04 18:06:14,722][    INFO] [Semi-Supervised]Iter [340/1000]	Data_Time 0.00 (0.00)	Batch_Time 8.44 (8.90)	Sup 0.103 (0.166)	Uns 0.271 (0.256)	LR 0.00138
+[2023-05-04 18:07:41,594][    INFO] [Semi-Supervised]Iter [350/1000]	Data_Time 0.00 (0.00)	Batch_Time 9.99 (8.69)	Sup 0.139 (0.181)	Uns 0.270 (0.263)	LR 0.00136
+[2023-05-04 18:09:11,982][    INFO] [Semi-Supervised]Iter [360/1000]	Data_Time 0.00 (0.00)	Batch_Time 8.93 (9.04)	Sup 0.250 (0.135)	Uns 0.274 (0.265)	LR 0.00134
+[2023-05-04 18:10:44,173][    INFO] [Semi-Supervised]Iter [370/1000]	Data_Time 0.00 (0.00)	Batch_Time 9.15 (9.22)	Sup 0.320 (0.173)	Uns 0.261 (0.263)	LR 0.00132
+[2023-05-04 18:12:15,746][    INFO] [Semi-Supervised]Iter [380/1000]	Data_Time 0.00 (0.00)	Batch_Time 9.11 (9.16)	Sup 0.270 (0.187)	Uns 0.272 (0.266)	LR 0.00130
+[2023-05-04 18:13:41,272][    INFO] [Semi-Supervised]Iter [390/1000]	Data_Time 0.00 (0.00)	Batch_Time 8.64 (8.55)	Sup 0.123 (0.142)	Uns 0.267 (0.260)	LR 0.00128
+[2023-05-04 18:15:07,298][    INFO] start evaluation
+[2023-05-04 18:15:31,343][    INFO]  * class [0] IoU 98.85
+[2023-05-04 18:15:31,345][    INFO]  * class [1] IoU 23.42
+[2023-05-04 18:15:31,345][    INFO]  * epoch 1 mIoU 61.13
+[2023-05-04 18:15:34,558][    INFO] [31m * Currently, the best val result is: 61.13[0m
+[2023-05-04 18:16:08,747][    INFO] [Semi-Supervised]Iter [400/1000]	Data_Time 0.00 (0.00)	Batch_Time 17.97 (17.97)	Sup 0.191 (0.191)	Uns 0.265 (0.265)	LR 0.00126
+[2023-05-04 18:17:49,505][    INFO] [Semi-Supervised]Iter [410/1000]	Data_Time 0.02 (0.01)	Batch_Time 9.70 (10.07)	Sup 0.048 (0.136)	Uns 0.262 (0.261)	LR 0.00125
+[2023-05-04 18:19:21,729][    INFO] [Semi-Supervised]Iter [420/1000]	Data_Time 0.00 (0.00)	Batch_Time 8.61 (9.22)	Sup 0.173 (0.183)	Uns 0.266 (0.252)	LR 0.00123
+[2023-05-04 18:20:59,785][    INFO] [Semi-Supervised]Iter [430/1000]	Data_Time 0.00 (0.00)	Batch_Time 8.88 (9.80)	Sup 0.139 (0.184)	Uns 0.270 (0.257)	LR 0.00121
+[2023-05-04 18:22:29,136][    INFO] [Semi-Supervised]Iter [440/1000]	Data_Time 0.00 (0.00)	Batch_Time 8.69 (8.93)	Sup 0.069 (0.151)	Uns 0.267 (0.261)	LR 0.00119
+[2023-05-04 18:24:00,596][    INFO] [Semi-Supervised]Iter [450/1000]	Data_Time 0.00 (0.01)	Batch_Time 8.86 (9.14)	Sup 0.103 (0.204)	Uns 0.267 (0.250)	LR 0.00117
+[2023-05-04 18:25:28,661][    INFO] [Semi-Supervised]Iter [460/1000]	Data_Time 0.00 (0.00)	Batch_Time 9.61 (8.80)	Sup 0.203 (0.184)	Uns 0.266 (0.256)	LR 0.00115
+[2023-05-04 18:27:00,234][    INFO] [Semi-Supervised]Iter [470/1000]	Data_Time 0.00 (0.00)	Batch_Time 8.57 (9.15)	Sup 0.065 (0.155)	Uns 0.266 (0.253)	LR 0.00113
+[2023-05-04 18:28:30,965][    INFO] [Semi-Supervised]Iter [480/1000]	Data_Time 0.00 (0.00)	Batch_Time 8.47 (9.07)	Sup 0.108 (0.190)	Uns 0.259 (0.258)	LR 0.00111
+[2023-05-04 18:30:04,787][    INFO] [Semi-Supervised]Iter [490/1000]	Data_Time 0.00 (0.01)	Batch_Time 8.77 (9.38)	Sup 0.091 (0.127)	Uns 0.262 (0.256)	LR 0.00109
+[2023-05-04 18:31:36,762][    INFO] [Semi-Supervised]Iter [500/1000]	Data_Time 0.00 (0.00)	Batch_Time 8.91 (9.19)	Sup 0.196 (0.134)	Uns 0.247 (0.249)	LR 0.00107
+[2023-05-04 18:33:05,896][    INFO] [Semi-Supervised]Iter [510/1000]	Data_Time 0.00 (0.00)	Batch_Time 8.79 (8.91)	Sup 0.091 (0.203)	Uns 0.265 (0.252)	LR 0.00105
+[2023-05-04 18:34:33,534][    INFO] [Semi-Supervised]Iter [520/1000]	Data_Time 0.00 (0.00)	Batch_Time 8.57 (8.76)	Sup 0.102 (0.146)	Uns 0.266 (0.255)	LR 0.00104
+[2023-05-04 18:36:04,697][    INFO] [Semi-Supervised]Iter [530/1000]	Data_Time 0.00 (0.00)	Batch_Time 8.84 (9.11)	Sup 0.139 (0.167)	Uns 0.263 (0.246)	LR 0.00102
+[2023-05-04 18:37:33,245][    INFO] [Semi-Supervised]Iter [540/1000]	Data_Time 0.00 (0.00)	Batch_Time 8.78 (8.85)	Sup 0.304 (0.194)	Uns 0.268 (0.252)	LR 0.00100
+[2023-05-04 18:39:03,611][    INFO] [Semi-Supervised]Iter [550/1000]	Data_Time 0.00 (0.00)	Batch_Time 8.15 (9.03)	Sup 0.098 (0.165)	Uns 0.261 (0.262)	LR 0.00098
+[2023-05-04 18:40:34,387][    INFO] [Semi-Supervised]Iter [560/1000]	Data_Time 0.00 (0.00)	Batch_Time 9.12 (9.08)	Sup 0.198 (0.152)	Uns 0.265 (0.256)	LR 0.00096
+[2023-05-04 18:42:08,177][    INFO] [Semi-Supervised]Iter [570/1000]	Data_Time 0.05 (0.01)	Batch_Time 10.50 (9.37)	Sup 0.278 (0.153)	Uns 0.253 (0.263)	LR 0.00094
+[2023-05-04 18:43:42,938][    INFO] [Semi-Supervised]Iter [580/1000]	Data_Time 0.00 (0.00)	Batch_Time 10.75 (9.47)	Sup 0.076 (0.119)	Uns 0.264 (0.258)	LR 0.00092
+[2023-05-04 18:45:13,033][    INFO] [Semi-Supervised]Iter [590/1000]	Data_Time 0.00 (0.01)	Batch_Time 8.53 (9.01)	Sup 0.170 (0.190)	Uns 0.262 (0.254)	LR 0.00090
+[2023-05-04 18:46:38,575][    INFO] start evaluation
+[2023-05-04 18:46:59,005][    INFO]  * class [0] IoU 98.81
+[2023-05-04 18:46:59,006][    INFO]  * class [1] IoU 22.79
+[2023-05-04 18:46:59,006][    INFO]  * epoch 2 mIoU 60.80
+[2023-05-04 18:47:00,386][    INFO] [31m * Currently, the best val result is: 61.13[0m
+[2023-05-04 18:47:36,212][    INFO] [Semi-Supervised]Iter [600/1000]	Data_Time 0.00 (0.00)	Batch_Time 20.67 (20.67)	Sup 0.134 (0.134)	Uns 0.251 (0.251)	LR 0.00088
+[2023-05-04 18:49:11,234][    INFO] [Semi-Supervised]Iter [610/1000]	Data_Time 0.00 (0.00)	Batch_Time 9.47 (9.50)	Sup 0.077 (0.139)	Uns 0.259 (0.256)	LR 0.00086
+[2023-05-04 18:50:49,465][    INFO] [Semi-Supervised]Iter [620/1000]	Data_Time 0.01 (0.00)	Batch_Time 9.16 (9.82)	Sup 0.313 (0.183)	Uns 0.261 (0.250)	LR 0.00084
+[2023-05-04 18:52:25,133][    INFO] [Semi-Supervised]Iter [630/1000]	Data_Time 0.00 (0.00)	Batch_Time 9.55 (9.56)	Sup 0.063 (0.179)	Uns 0.258 (0.240)	LR 0.00082
+[2023-05-04 18:54:34,533][    INFO] [Semi-Supervised]Iter [640/1000]	Data_Time 0.01 (0.01)	Batch_Time 15.57 (12.93)	Sup 0.098 (0.139)	Uns 0.252 (0.251)	LR 0.00080
+[2023-05-04 18:56:37,303][    INFO] [Semi-Supervised]Iter [650/1000]	Data_Time 0.00 (0.01)	Batch_Time 9.45 (12.27)	Sup 0.092 (0.132)	Uns 0.260 (0.257)	LR 0.00078
+[2023-05-04 18:58:33,091][    INFO] [Semi-Supervised]Iter [660/1000]	Data_Time 0.00 (0.01)	Batch_Time 9.60 (11.57)	Sup 0.129 (0.135)	Uns 0.261 (0.254)	LR 0.00076
+[2023-05-04 19:00:13,963][    INFO] [Semi-Supervised]Iter [670/1000]	Data_Time 0.00 (0.00)	Batch_Time 8.95 (10.08)	Sup 0.243 (0.188)	Uns 0.222 (0.243)	LR 0.00074
+[2023-05-04 19:01:51,419][    INFO] [Semi-Supervised]Iter [680/1000]	Data_Time 0.00 (0.00)	Batch_Time 9.28 (9.74)	Sup 0.152 (0.186)	Uns 0.254 (0.249)	LR 0.00072
+[2023-05-04 19:03:28,383][    INFO] [Semi-Supervised]Iter [690/1000]	Data_Time 0.00 (0.00)	Batch_Time 9.70 (9.69)	Sup 0.124 (0.129)	Uns 0.261 (0.248)	LR 0.00070
+[2023-05-04 19:05:02,784][    INFO] [Semi-Supervised]Iter [700/1000]	Data_Time 0.00 (0.00)	Batch_Time 10.10 (9.44)	Sup 0.281 (0.169)	Uns 0.260 (0.253)	LR 0.00068
+[2023-05-04 19:06:39,464][    INFO] [Semi-Supervised]Iter [710/1000]	Data_Time 0.00 (0.00)	Batch_Time 9.24 (9.67)	Sup 0.353 (0.194)	Uns 0.256 (0.253)	LR 0.00066
+[2023-05-04 19:08:15,503][    INFO] [Semi-Supervised]Iter [720/1000]	Data_Time 0.00 (0.00)	Batch_Time 9.41 (9.60)	Sup 0.224 (0.137)	Uns 0.261 (0.256)	LR 0.00064
+[2023-05-04 19:09:51,137][    INFO] [Semi-Supervised]Iter [730/1000]	Data_Time 0.00 (0.00)	Batch_Time 8.84 (9.56)	Sup 0.077 (0.118)	Uns 0.243 (0.246)	LR 0.00062
+[2023-05-04 19:11:24,199][    INFO] [Semi-Supervised]Iter [740/1000]	Data_Time 0.00 (0.00)	Batch_Time 9.14 (9.30)	Sup 0.142 (0.132)	Uns 0.258 (0.256)	LR 0.00060
+[2023-05-04 19:12:58,993][    INFO] [Semi-Supervised]Iter [750/1000]	Data_Time 0.00 (0.00)	Batch_Time 10.46 (9.48)	Sup 0.220 (0.163)	Uns 0.260 (0.251)	LR 0.00058
+[2023-05-04 19:14:32,788][    INFO] [Semi-Supervised]Iter [760/1000]	Data_Time 0.00 (0.01)	Batch_Time 8.48 (9.37)	Sup 0.145 (0.184)	Uns 0.258 (0.243)	LR 0.00056
+[2023-05-04 19:16:13,317][    INFO] [Semi-Supervised]Iter [770/1000]	Data_Time 0.00 (0.00)	Batch_Time 16.76 (10.05)	Sup 0.104 (0.122)	Uns 0.260 (0.257)	LR 0.00053
+[2023-05-04 19:17:47,977][    INFO] [Semi-Supervised]Iter [780/1000]	Data_Time 0.00 (0.00)	Batch_Time 9.87 (9.46)	Sup 0.114 (0.155)	Uns 0.241 (0.246)	LR 0.00051
+[2023-05-04 19:19:23,067][    INFO] [Semi-Supervised]Iter [790/1000]	Data_Time 0.00 (0.00)	Batch_Time 9.68 (9.51)	Sup 0.081 (0.183)	Uns 0.246 (0.253)	LR 0.00049
+[2023-05-04 19:20:57,135][    INFO] start evaluation
+[2023-05-04 19:21:18,210][    INFO]  * class [0] IoU 98.87
+[2023-05-04 19:21:18,214][    INFO]  * class [1] IoU 24.36
+[2023-05-04 19:21:18,214][    INFO]  * epoch 3 mIoU 61.61
+[2023-05-04 19:21:20,868][    INFO] [31m * Currently, the best val result is: 61.61[0m
+[2023-05-04 19:21:55,678][    INFO] [Semi-Supervised]Iter [800/1000]	Data_Time 0.00 (0.00)	Batch_Time 18.37 (18.37)	Sup 0.112 (0.112)	Uns 0.255 (0.255)	LR 0.00047
+[2023-05-04 19:23:30,859][    INFO] [Semi-Supervised]Iter [810/1000]	Data_Time 0.00 (0.00)	Batch_Time 9.47 (9.51)	Sup 0.132 (0.128)	Uns 0.255 (0.240)	LR 0.00045
+[2023-05-04 19:25:02,170][    INFO] [Semi-Supervised]Iter [820/1000]	Data_Time 0.00 (0.00)	Batch_Time 9.05 (9.13)	Sup 0.065 (0.187)	Uns 0.219 (0.243)	LR 0.00043
+[2023-05-04 19:26:38,537][    INFO] [Semi-Supervised]Iter [830/1000]	Data_Time 0.00 (0.00)	Batch_Time 9.62 (9.63)	Sup 0.201 (0.171)	Uns 0.246 (0.246)	LR 0.00041
+[2023-05-04 19:28:13,452][    INFO] [Semi-Supervised]Iter [840/1000]	Data_Time 0.00 (0.00)	Batch_Time 9.91 (9.49)	Sup 0.133 (0.119)	Uns 0.255 (0.252)	LR 0.00039
+[2023-05-04 19:29:51,185][    INFO] [Semi-Supervised]Iter [850/1000]	Data_Time 0.00 (0.00)	Batch_Time 9.86 (9.77)	Sup 0.090 (0.156)	Uns 0.255 (0.240)	LR 0.00036
+[2023-05-04 19:31:25,862][    INFO] [Semi-Supervised]Iter [860/1000]	Data_Time 0.00 (0.00)	Batch_Time 9.58 (9.47)	Sup 0.137 (0.150)	Uns 0.246 (0.245)	LR 0.00034
+[2023-05-04 19:32:59,297][    INFO] [Semi-Supervised]Iter [870/1000]	Data_Time 0.00 (0.00)	Batch_Time 9.35 (9.34)	Sup 0.120 (0.119)	Uns 0.229 (0.242)	LR 0.00032
+[2023-05-04 19:34:33,756][    INFO] [Semi-Supervised]Iter [880/1000]	Data_Time 0.00 (0.00)	Batch_Time 9.11 (9.44)	Sup 0.091 (0.128)	Uns 0.246 (0.246)	LR 0.00030
+[2023-05-04 19:36:15,651][    INFO] [Semi-Supervised]Iter [890/1000]	Data_Time 0.00 (0.00)	Batch_Time 10.58 (10.19)	Sup 0.093 (0.137)	Uns 0.255 (0.245)	LR 0.00028
+[2023-05-04 19:37:52,266][    INFO] [Semi-Supervised]Iter [900/1000]	Data_Time 0.02 (0.00)	Batch_Time 10.18 (9.66)	Sup 0.146 (0.175)	Uns 0.252 (0.246)	LR 0.00025
+[2023-05-04 19:39:30,612][    INFO] [Semi-Supervised]Iter [910/1000]	Data_Time 0.00 (0.00)	Batch_Time 10.38 (9.83)	Sup 0.096 (0.174)	Uns 0.223 (0.234)	LR 0.00023
+[2023-05-04 19:41:02,374][    INFO] [Semi-Supervised]Iter [920/1000]	Data_Time 0.00 (0.00)	Batch_Time 9.03 (9.17)	Sup 0.112 (0.125)	Uns 0.255 (0.246)	LR 0.00021
+[2023-05-04 19:42:33,323][    INFO] [Semi-Supervised]Iter [930/1000]	Data_Time 0.00 (0.00)	Batch_Time 8.75 (9.09)	Sup 0.104 (0.160)	Uns 0.246 (0.244)	LR 0.00018
+[2023-05-04 19:44:07,468][    INFO] [Semi-Supervised]Iter [940/1000]	Data_Time 0.00 (0.00)	Batch_Time 9.29 (9.41)	Sup 0.083 (0.123)	Uns 0.255 (0.245)	LR 0.00016
+[2023-05-04 19:45:38,022][    INFO] [Semi-Supervised]Iter [950/1000]	Data_Time 0.00 (0.00)	Batch_Time 9.24 (9.05)	Sup 0.140 (0.156)	Uns 0.221 (0.246)	LR 0.00014
+[2023-05-04 19:47:13,432][    INFO] [Semi-Supervised]Iter [960/1000]	Data_Time 0.00 (0.00)	Batch_Time 9.17 (9.54)	Sup 0.104 (0.127)	Uns 0.255 (0.254)	LR 0.00011
+[2023-05-04 19:48:47,883][    INFO] [Semi-Supervised]Iter [970/1000]	Data_Time 0.00 (0.00)	Batch_Time 9.71 (9.44)	Sup 0.186 (0.137)	Uns 0.255 (0.254)	LR 0.00009
+[2023-05-04 19:50:21,537][    INFO] [Semi-Supervised]Iter [980/1000]	Data_Time 0.01 (0.00)	Batch_Time 9.12 (9.36)	Sup 0.164 (0.163)	Uns 0.229 (0.240)	LR 0.00006
+[2023-05-04 19:51:54,978][    INFO] [Semi-Supervised]Iter [990/1000]	Data_Time 0.00 (0.00)	Batch_Time 8.82 (9.34)	Sup 0.149 (0.150)	Uns 0.256 (0.234)	LR 0.00003
+[2023-05-04 19:53:24,952][    INFO] start evaluation
+[2023-05-04 19:53:44,562][    INFO]  * class [0] IoU 98.87
+[2023-05-04 19:53:44,563][    INFO]  * class [1] IoU 23.43
+[2023-05-04 19:53:44,563][    INFO]  * epoch 4 mIoU 61.15
+[2023-05-04 19:53:46,282][    INFO] [31m * Currently, the best val result is: 61.61[0m
+[2023-05-04 19:53:55,831][    INFO] [Evaluating Unlabeled Data]Num [0/200]	
+[2023-05-04 19:54:00,480][    INFO] [Evaluating Unlabeled Data]Num [10/200]	
+[2023-05-04 19:54:05,100][    INFO] [Evaluating Unlabeled Data]Num [20/200]	
+[2023-05-04 19:54:09,731][    INFO] [Evaluating Unlabeled Data]Num [30/200]	
+[2023-05-04 19:54:14,365][    INFO] [Evaluating Unlabeled Data]Num [40/200]	
+[2023-05-04 19:54:18,995][    INFO] [Evaluating Unlabeled Data]Num [50/200]	
+[2023-05-04 19:54:23,615][    INFO] [Evaluating Unlabeled Data]Num [60/200]	
+[2023-05-04 19:54:28,241][    INFO] [Evaluating Unlabeled Data]Num [70/200]	
+[2023-05-04 19:54:32,886][    INFO] [Evaluating Unlabeled Data]Num [80/200]	
+[2023-05-04 19:54:37,518][    INFO] [Evaluating Unlabeled Data]Num [90/200]	
+[2023-05-04 19:54:42,165][    INFO] [Evaluating Unlabeled Data]Num [100/200]	
+[2023-05-04 19:54:46,801][    INFO] [Evaluating Unlabeled Data]Num [110/200]	
+[2023-05-04 19:54:51,417][    INFO] [Evaluating Unlabeled Data]Num [120/200]	
+[2023-05-04 19:54:56,038][    INFO] [Evaluating Unlabeled Data]Num [130/200]	
+[2023-05-04 19:55:00,664][    INFO] [Evaluating Unlabeled Data]Num [140/200]	
+[2023-05-04 19:55:05,299][    INFO] [Evaluating Unlabeled Data]Num [150/200]	
+[2023-05-04 19:55:09,929][    INFO] [Evaluating Unlabeled Data]Num [160/200]	
+[2023-05-04 19:55:14,574][    INFO] [Evaluating Unlabeled Data]Num [170/200]	
+[2023-05-04 19:55:19,198][    INFO] [Evaluating Unlabeled Data]Num [180/200]	
+[2023-05-04 19:55:23,820][    INFO] [Evaluating Unlabeled Data]Num [190/200]	
+[2023-05-04 20:09:08,498][    INFO] {'criterion': {'kwargs': {'min_kept': 100000, 'thresh': 0.7}, 'type': 'ohem'},
+ 'dataset': {'batch_size': 4,
+             'mean': [125.5],
+             'noise_std': 0.1,
+             'std': [6],
+             'train': {'GaussianBlur': False,
+                       'ann_data_list': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/results_report_0.3_Active_Semi/annotation_queue.txt',
+                       'crop': {'size': [400, 400], 'type': 'rand'},
+                       'data_list': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data/Crack_Dataset/data_crack/Data_train/split_1/labeled.txt',
+                       'data_root': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data',
+                       'flip': True,
+                       'rand_rotation': [-10.0, 10.0],
+                       'seed': 27},
+             'type': 'crack_semi_active',
+             'val': {'crop': {'size': [400, 400], 'type': 'rand'},
+                     'data_list': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data/Crack_Dataset/data_crack/Data_test/val_data/val_label.txt',
+                     'data_root': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data'},
+             'workers': 2},
+ 'exp_path': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/experiments/data_crack/ours',
+ 'net': {'aux_loss': {'aux_plane': 1024, 'loss_weight': 0.4},
+         'decoder': {'kwargs': {'dilations': [12, 24, 36], 'inner_planes': 256},
+                     'type': 'u2pl.models.decoder.dec_deeplabv3_plus'},
+         'ema_decay': 0.99,
+         'encoder': {'kwargs': {'fpn': True,
+                                'multi_grid': True,
+                                'replace_stride_with_dilation': [False,
+                                                                 True,
+                                                                 True],
+                                'zero_init_residual': True},
+                     'type': 'u2pl.models.resnet.resnet50'},
+         'num_classes': 2,
+         'sync_bn': True},
+ 'save_path': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/experiments/data_crack/ours/checkpoints',
+ 'saver': {'auto_resume': True, 'pretrain': '', 'snapshot_dir': 'checkpoints'},
+ 'trainer': {'contrastive': {'current_class_negative_threshold': 1,
+                             'current_class_threshold': 0.3,
+                             'high_rank': 20,
+                             'low_entropy_threshold': 20,
+                             'low_rank': 3,
+                             'negative_high_entropy': False,
+                             'num_negatives': 50,
+                             'num_queries': 256,
+                             'temperature': 0.5,
+                             'unsupervised_entropy_ignore': 80},
+             'epochs': 5,
+             'eval_on': True,
+             'lr_scheduler': {'kwargs': {'power': 0.9}, 'mode': 'poly'},
+             'optimizer': {'kwargs': {'lr': 0.002,
+                                      'momentum': 0.9,
+                                      'weight_decay': 0.0005},
+                           'type': 'SGD'},
+             'sup_only_epoch': 0,
+             'unsupervised': {'TTA': True,
+                              'apply_aug': 'cutmix',
+                              'drop_percent': 80,
+                              'enable': True}}}
+[2023-05-04 20:09:09,184][    INFO] # usable_samples: 80
+[2023-05-04 20:09:09,184][    INFO] # num_samples: 80
+[2023-05-04 20:09:09,185][    INFO] # usable_samples: 561
+[2023-05-04 20:09:09,185][    INFO] # num_samples: 561
+[2023-05-04 20:09:09,186][    INFO] # usable_samples: 571
+[2023-05-04 20:09:09,187][    INFO] # num_samples: 571
+[2023-05-04 20:09:09,192][    INFO] # usable_samples: 80
+[2023-05-04 20:09:09,193][    INFO] # num_samples: 80
+[2023-05-04 20:09:09,193][    INFO] # usable_samples: 561
+[2023-05-04 20:09:09,193][    INFO] # num_samples: 561
+[2023-05-04 20:09:09,193][    INFO] Get loader Done...
+[2023-05-04 20:09:09,761][    INFO] The kwargs for lr scheduler: 0.9
+[2023-05-04 20:09:28,010][    INFO] [Semi-Supervised]Iter [0/710]	Data_Time 0.00 (0.00)	Batch_Time 14.81 (14.81)	Sup 0.801 (0.801)	Uns 1.089 (1.089)	LR 0.00200
+[2023-05-04 20:09:53,087][    INFO] {'criterion': {'kwargs': {'min_kept': 100000, 'thresh': 0.7}, 'type': 'ohem'},
+ 'dataset': {'batch_size': 4,
+             'mean': [125.5],
+             'noise_std': 0.1,
+             'std': [6],
+             'train': {'GaussianBlur': False,
+                       'ann_data_list': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/results_report_0.3_Active_Semi/annotation_queue.txt',
+                       'crop': {'size': [400, 400], 'type': 'rand'},
+                       'data_list': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data/Crack_Dataset/data_crack/Data_train/split_1/labeled.txt',
+                       'data_root': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data',
+                       'flip': True,
+                       'rand_rotation': [-10.0, 10.0],
+                       'seed': 27},
+             'type': 'crack_semi_active',
+             'val': {'crop': {'size': [400, 400], 'type': 'rand'},
+                     'data_list': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data/Crack_Dataset/data_crack/Data_test/val_data/val_label.txt',
+                     'data_root': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data'},
+             'workers': 2},
+ 'exp_path': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/experiments/data_crack/ours',
+ 'net': {'aux_loss': {'aux_plane': 1024, 'loss_weight': 0.4},
+         'decoder': {'kwargs': {'dilations': [12, 24, 36], 'inner_planes': 256},
+                     'type': 'u2pl.models.decoder.dec_deeplabv3_plus'},
+         'ema_decay': 0.99,
+         'encoder': {'kwargs': {'fpn': True,
+                                'multi_grid': True,
+                                'replace_stride_with_dilation': [False,
+                                                                 True,
+                                                                 True],
+                                'zero_init_residual': True},
+                     'type': 'u2pl.models.resnet.resnet50'},
+         'num_classes': 2,
+         'sync_bn': True},
+ 'save_path': '/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/experiments/data_crack/ours/checkpoints',
+ 'saver': {'auto_resume': True, 'pretrain': '', 'snapshot_dir': 'checkpoints'},
+ 'trainer': {'contrastive': {'current_class_negative_threshold': 1,
+                             'current_class_threshold': 0.3,
+                             'high_rank': 20,
+                             'low_entropy_threshold': 20,
+                             'low_rank': 3,
+                             'negative_high_entropy': False,
+                             'num_negatives': 50,
+                             'num_queries': 256,
+                             'temperature': 0.5,
+                             'unsupervised_entropy_ignore': 80},
+             'epochs': 7,
+             'eval_on': True,
+             'lr_scheduler': {'kwargs': {'power': 0.9}, 'mode': 'poly'},
+             'optimizer': {'kwargs': {'lr': 0.002,
+                                      'momentum': 0.9,
+                                      'weight_decay': 0.0005},
+                           'type': 'SGD'},
+             'sup_only_epoch': 0,
+             'unsupervised': {'TTA': True,
+                              'apply_aug': 'cutmix',
+                              'drop_percent': 80,
+                              'enable': True}}}
+[2023-05-04 20:09:53,765][    INFO] # usable_samples: 80
+[2023-05-04 20:09:53,765][    INFO] # num_samples: 80
+[2023-05-04 20:09:53,766][    INFO] # usable_samples: 561
+[2023-05-04 20:09:53,767][    INFO] # num_samples: 561
+[2023-05-04 20:09:53,767][    INFO] # usable_samples: 571
+[2023-05-04 20:09:53,768][    INFO] # num_samples: 571
+[2023-05-04 20:09:53,774][    INFO] # usable_samples: 80
+[2023-05-04 20:09:53,774][    INFO] # num_samples: 80
+[2023-05-04 20:09:53,774][    INFO] # usable_samples: 561
+[2023-05-04 20:09:53,774][    INFO] # num_samples: 561
+[2023-05-04 20:09:53,775][    INFO] Get loader Done...
+[2023-05-04 20:09:54,331][    INFO] The kwargs for lr scheduler: 0.9
+[2023-05-04 20:10:11,054][    INFO] [Semi-Supervised]Iter [0/994]	Data_Time 0.00 (0.00)	Batch_Time 13.37 (13.37)	Sup 0.787 (0.787)	Uns 1.053 (1.053)	LR 0.00200
+[2023-05-04 20:11:28,541][    INFO] [Semi-Supervised]Iter [10/994]	Data_Time 0.00 (0.03)	Batch_Time 7.81 (7.73)	Sup 0.803 (0.768)	Uns 0.474 (0.687)	LR 0.00198
+[2023-05-04 20:12:50,724][    INFO] [Semi-Supervised]Iter [20/994]	Data_Time 0.00 (0.00)	Batch_Time 9.13 (8.22)	Sup 0.680 (0.768)	Uns 0.604 (0.531)	LR 0.00197
+[2023-05-04 20:14:11,626][    INFO] [Semi-Supervised]Iter [30/994]	Data_Time 0.00 (0.00)	Batch_Time 7.36 (8.09)	Sup 0.670 (0.680)	Uns 0.569 (0.615)	LR 0.00195
+[2023-05-04 20:15:31,610][    INFO] [Semi-Supervised]Iter [40/994]	Data_Time 0.00 (0.00)	Batch_Time 7.94 (8.00)	Sup 0.468 (0.601)	Uns 0.461 (0.579)	LR 0.00193
+[2023-05-04 20:16:51,845][    INFO] [Semi-Supervised]Iter [50/994]	Data_Time 0.00 (0.00)	Batch_Time 7.79 (8.02)	Sup 0.722 (0.786)	Uns 0.473 (0.510)	LR 0.00191
+[2023-05-04 20:18:09,138][    INFO] [Semi-Supervised]Iter [60/994]	Data_Time 0.00 (0.00)	Batch_Time 7.47 (7.73)	Sup 1.016 (0.698)	Uns 0.443 (0.601)	LR 0.00189
+[2023-05-04 20:19:25,899][    INFO] [Semi-Supervised]Iter [70/994]	Data_Time 0.00 (0.00)	Batch_Time 7.93 (7.67)	Sup 0.483 (0.643)	Uns 0.594 (0.553)	LR 0.00187
+[2023-05-04 20:20:42,707][    INFO] [Semi-Supervised]Iter [80/994]	Data_Time 0.00 (0.00)	Batch_Time 8.07 (7.68)	Sup 0.379 (0.573)	Uns 0.395 (0.524)	LR 0.00186
+[2023-05-04 20:22:00,256][    INFO] [Semi-Supervised]Iter [90/994]	Data_Time 0.00 (0.00)	Batch_Time 7.47 (7.75)	Sup 0.692 (0.612)	Uns 0.660 (0.593)	LR 0.00184
+[2023-05-04 20:23:13,322][    INFO] [Semi-Supervised]Iter [100/994]	Data_Time 0.00 (0.00)	Batch_Time 7.15 (7.31)	Sup 0.392 (0.496)	Uns 0.695 (0.576)	LR 0.00182
+[2023-05-04 20:24:28,235][    INFO] [Semi-Supervised]Iter [110/994]	Data_Time 0.00 (0.00)	Batch_Time 7.14 (7.49)	Sup 0.403 (0.511)	Uns 0.457 (0.746)	LR 0.00180
+[2023-05-04 20:25:45,101][    INFO] [Semi-Supervised]Iter [120/994]	Data_Time 0.00 (0.00)	Batch_Time 7.36 (7.69)	Sup 0.409 (0.505)	Uns 0.348 (0.569)	LR 0.00178
+[2023-05-04 20:27:02,583][    INFO] [Semi-Supervised]Iter [130/994]	Data_Time 0.00 (0.00)	Batch_Time 8.03 (7.75)	Sup 0.506 (0.450)	Uns 0.360 (0.406)	LR 0.00176
+[2023-05-04 20:28:22,288][    INFO] [Semi-Supervised]Iter [140/994]	Data_Time 0.00 (0.00)	Batch_Time 10.35 (7.97)	Sup 0.343 (0.578)	Uns 0.282 (0.573)	LR 0.00175
+[2023-05-04 20:28:34,439][    INFO] start evaluation
+[2023-05-04 20:28:50,934][    INFO]  * class [0] IoU 91.29
+[2023-05-04 20:28:50,935][    INFO]  * class [1] IoU 1.12
+[2023-05-04 20:28:50,935][    INFO]  * epoch 0 mIoU 46.20
+[2023-05-04 20:28:53,247][    INFO] [31m * Currently, the best val result is: 46.20[0m
+[2023-05-04 20:30:28,669][    INFO] [Semi-Supervised]Iter [150/994]	Data_Time 0.00 (0.00)	Batch_Time 10.28 (10.23)	Sup 0.481 (0.553)	Uns 0.773 (0.609)	LR 0.00173
+[2023-05-04 20:31:59,495][    INFO] [Semi-Supervised]Iter [160/994]	Data_Time 0.00 (0.00)	Batch_Time 8.53 (9.08)	Sup 0.441 (0.534)	Uns 0.698 (0.572)	LR 0.00171
+[2023-05-04 20:33:32,869][    INFO] [Semi-Supervised]Iter [170/994]	Data_Time 0.00 (0.00)	Batch_Time 8.90 (9.33)	Sup 0.486 (0.328)	Uns 0.688 (0.584)	LR 0.00169
+[2023-05-04 20:35:04,379][    INFO] [Semi-Supervised]Iter [180/994]	Data_Time 0.01 (0.00)	Batch_Time 9.70 (9.15)	Sup 0.545 (0.405)	Uns 0.424 (0.604)	LR 0.00167
+[2023-05-04 20:36:34,771][    INFO] [Semi-Supervised]Iter [190/994]	Data_Time 0.00 (0.00)	Batch_Time 9.23 (9.03)	Sup 0.367 (0.461)	Uns 0.716 (0.663)	LR 0.00165
+[2023-05-04 20:38:02,905][    INFO] [Semi-Supervised]Iter [200/994]	Data_Time 0.00 (0.00)	Batch_Time 8.37 (8.81)	Sup 0.315 (0.436)	Uns 0.666 (0.694)	LR 0.00164
+[2023-05-04 20:39:33,592][    INFO] [Semi-Supervised]Iter [210/994]	Data_Time 0.00 (0.00)	Batch_Time 8.70 (9.07)	Sup 0.319 (0.387)	Uns 0.516 (0.569)	LR 0.00162
+[2023-05-04 20:41:02,088][    INFO] [Semi-Supervised]Iter [220/994]	Data_Time 0.00 (0.00)	Batch_Time 9.19 (8.85)	Sup 0.459 (0.444)	Uns 0.724 (0.659)	LR 0.00160
+[2023-05-04 20:42:32,593][    INFO] [Semi-Supervised]Iter [230/994]	Data_Time 0.00 (0.00)	Batch_Time 8.01 (9.05)	Sup 0.316 (0.344)	Uns 0.566 (0.633)	LR 0.00158
+[2023-05-04 20:44:03,918][    INFO] [Semi-Supervised]Iter [240/994]	Data_Time 0.00 (0.00)	Batch_Time 7.60 (9.13)	Sup 0.454 (0.452)	Uns 0.749 (0.685)	LR 0.00156
+[2023-05-04 20:45:34,030][    INFO] [Semi-Supervised]Iter [250/994]	Data_Time 0.00 (0.00)	Batch_Time 8.18 (9.01)	Sup 0.403 (0.441)	Uns 0.629 (0.607)	LR 0.00154
+[2023-05-04 20:47:08,785][    INFO] [Semi-Supervised]Iter [260/994]	Data_Time 0.00 (0.00)	Batch_Time 9.32 (9.47)	Sup 0.590 (0.501)	Uns 0.661 (0.521)	LR 0.00152
+[2023-05-04 20:48:41,003][    INFO] [Semi-Supervised]Iter [270/994]	Data_Time 0.00 (0.00)	Batch_Time 8.77 (9.22)	Sup 0.542 (0.375)	Uns 0.456 (0.500)	LR 0.00151
+[2023-05-04 20:50:16,235][    INFO] [Semi-Supervised]Iter [280/994]	Data_Time 0.00 (0.00)	Batch_Time 12.16 (9.52)	Sup 0.235 (0.426)	Uns 0.555 (0.617)	LR 0.00149
+[2023-05-04 20:50:56,512][    INFO] start evaluation
+[2023-05-04 20:51:15,894][    INFO]  * class [0] IoU 93.94
+[2023-05-04 20:51:15,894][    INFO]  * class [1] IoU 3.47
+[2023-05-04 20:51:15,895][    INFO]  * epoch 1 mIoU 48.71
+[2023-05-04 20:51:18,452][    INFO] [31m * Currently, the best val result is: 48.71[0m
+[2023-05-04 20:52:44,949][    INFO] [Semi-Supervised]Iter [290/994]	Data_Time 0.00 (0.00)	Batch_Time 9.19 (11.88)	Sup 0.378 (0.367)	Uns 0.601 (0.564)	LR 0.00147
+[2023-05-04 20:54:17,636][    INFO] [Semi-Supervised]Iter [300/994]	Data_Time 0.00 (0.00)	Batch_Time 9.71 (9.27)	Sup 0.300 (0.425)	Uns 0.644 (0.574)	LR 0.00145
+[2023-05-04 20:56:12,932][    INFO] [Semi-Supervised]Iter [310/994]	Data_Time 0.00 (0.01)	Batch_Time 10.22 (11.52)	Sup 0.477 (0.444)	Uns 0.482 (0.625)	LR 0.00143
+[2023-05-04 20:58:05,893][    INFO] [Semi-Supervised]Iter [320/994]	Data_Time 0.00 (0.00)	Batch_Time 9.20 (11.29)	Sup 0.489 (0.448)	Uns 0.367 (0.594)	LR 0.00141
+[2023-05-04 21:00:24,919][    INFO] [Semi-Supervised]Iter [330/994]	Data_Time 0.01 (0.01)	Batch_Time 22.56 (13.90)	Sup 0.264 (0.411)	Uns 0.509 (0.553)	LR 0.00139
+[2023-05-04 21:03:34,958][    INFO] [Semi-Supervised]Iter [340/994]	Data_Time 0.01 (0.01)	Batch_Time 20.24 (18.99)	Sup 0.233 (0.464)	Uns 0.631 (0.610)	LR 0.00137
+[2023-05-04 21:05:37,618][    INFO] [Semi-Supervised]Iter [350/994]	Data_Time 0.01 (0.01)	Batch_Time 8.64 (12.26)	Sup 0.450 (0.393)	Uns 0.481 (0.724)	LR 0.00136
+[2023-05-04 21:07:12,789][    INFO] [Semi-Supervised]Iter [360/994]	Data_Time 0.00 (0.01)	Batch_Time 8.49 (9.51)	Sup 0.217 (0.337)	Uns 0.625 (0.572)	LR 0.00134
+[2023-05-04 21:08:46,818][    INFO] [Semi-Supervised]Iter [370/994]	Data_Time 0.00 (0.00)	Batch_Time 8.83 (9.40)	Sup 0.470 (0.346)	Uns 0.370 (0.601)	LR 0.00132
+[2023-05-04 21:10:28,899][    INFO] [Semi-Supervised]Iter [380/994]	Data_Time 0.00 (0.00)	Batch_Time 9.30 (10.20)	Sup 0.681 (0.403)	Uns 1.001 (0.554)	LR 0.00130
+[2023-05-04 21:11:59,312][    INFO] [Semi-Supervised]Iter [390/994]	Data_Time 0.01 (0.00)	Batch_Time 8.67 (9.04)	Sup 0.224 (0.348)	Uns 0.811 (0.681)	LR 0.00128
+[2023-05-04 21:13:32,740][    INFO] [Semi-Supervised]Iter [400/994]	Data_Time 0.00 (0.00)	Batch_Time 8.65 (9.34)	Sup 0.269 (0.352)	Uns 0.645 (0.513)	LR 0.00126
+[2023-05-04 21:15:10,486][    INFO] [Semi-Supervised]Iter [410/994]	Data_Time 0.00 (0.00)	Batch_Time 8.42 (9.77)	Sup 0.547 (0.366)	Uns 0.677 (0.583)	LR 0.00124
+[2023-05-04 21:16:45,027][    INFO] [Semi-Supervised]Iter [420/994]	Data_Time 0.00 (0.00)	Batch_Time 8.91 (9.45)	Sup 0.501 (0.382)	Uns 0.792 (0.671)	LR 0.00122
+[2023-05-04 21:17:40,944][    INFO] start evaluation
+[2023-05-04 21:18:03,323][    INFO]  * class [0] IoU 98.78
+[2023-05-04 21:18:03,326][    INFO]  * class [1] IoU 18.29
+[2023-05-04 21:18:03,326][    INFO]  * epoch 2 mIoU 58.54
+[2023-05-04 21:18:06,143][    INFO] [31m * Currently, the best val result is: 58.54[0m
+[2023-05-04 21:19:06,593][    INFO] [Semi-Supervised]Iter [430/994]	Data_Time 0.00 (0.00)	Batch_Time 8.84 (11.41)	Sup 0.339 (0.384)	Uns 0.687 (0.507)	LR 0.00120
+[2023-05-04 21:20:58,691][    INFO] [Semi-Supervised]Iter [440/994]	Data_Time 0.00 (0.01)	Batch_Time 10.68 (11.20)	Sup 0.407 (0.442)	Uns 0.666 (0.518)	LR 0.00118
+[2023-05-04 21:22:42,842][    INFO] [Semi-Supervised]Iter [450/994]	Data_Time 0.00 (0.00)	Batch_Time 11.67 (10.41)	Sup 0.452 (0.431)	Uns 0.691 (0.527)	LR 0.00116
+[2023-05-04 21:24:34,225][    INFO] [Semi-Supervised]Iter [460/994]	Data_Time 0.01 (0.01)	Batch_Time 8.76 (11.13)	Sup 0.517 (0.367)	Uns 0.290 (0.626)	LR 0.00115
+[2023-05-04 21:26:13,306][    INFO] [Semi-Supervised]Iter [470/994]	Data_Time 0.00 (0.00)	Batch_Time 9.27 (9.90)	Sup 0.356 (0.298)	Uns 0.599 (0.523)	LR 0.00113
+[2023-05-04 21:27:50,090][    INFO] [Semi-Supervised]Iter [480/994]	Data_Time 0.00 (0.01)	Batch_Time 8.34 (9.67)	Sup 0.337 (0.379)	Uns 0.404 (0.589)	LR 0.00111
+[2023-05-04 21:29:23,873][    INFO] [Semi-Supervised]Iter [490/994]	Data_Time 0.00 (0.01)	Batch_Time 9.47 (9.37)	Sup 0.333 (0.370)	Uns 0.339 (0.548)	LR 0.00109
+[2023-05-04 21:30:57,937][    INFO] [Semi-Supervised]Iter [500/994]	Data_Time 0.00 (0.00)	Batch_Time 10.25 (9.40)	Sup 0.315 (0.374)	Uns 0.729 (0.544)	LR 0.00107
+[2023-05-04 21:32:24,791][    INFO] [Semi-Supervised]Iter [510/994]	Data_Time 0.00 (0.00)	Batch_Time 7.83 (8.68)	Sup 0.463 (0.419)	Uns 0.581 (0.534)	LR 0.00105
+[2023-05-04 21:33:54,317][    INFO] [Semi-Supervised]Iter [520/994]	Data_Time 0.00 (0.00)	Batch_Time 12.30 (8.95)	Sup 0.665 (0.396)	Uns 1.265 (0.523)	LR 0.00103
+[2023-05-04 21:35:23,911][    INFO] [Semi-Supervised]Iter [530/994]	Data_Time 0.00 (0.00)	Batch_Time 8.86 (8.95)	Sup 0.371 (0.343)	Uns 0.425 (0.489)	LR 0.00101
+[2023-05-04 21:36:54,798][    INFO] [Semi-Supervised]Iter [540/994]	Data_Time 0.00 (0.02)	Batch_Time 9.43 (9.07)	Sup 0.460 (0.384)	Uns 0.570 (0.508)	LR 0.00099
+[2023-05-04 21:38:27,752][    INFO] [Semi-Supervised]Iter [550/994]	Data_Time 0.00 (0.00)	Batch_Time 9.05 (9.29)	Sup 0.244 (0.299)	Uns 0.372 (0.545)	LR 0.00097
+[2023-05-04 21:40:06,075][    INFO] [Semi-Supervised]Iter [560/994]	Data_Time 0.00 (0.00)	Batch_Time 9.31 (9.83)	Sup 0.371 (0.291)	Uns 0.582 (0.575)	LR 0.00095
+[2023-05-04 21:41:19,480][    INFO] start evaluation
+[2023-05-04 21:41:38,530][    INFO]  * class [0] IoU 98.76
+[2023-05-04 21:41:38,532][    INFO]  * class [1] IoU 22.95
+[2023-05-04 21:41:38,532][    INFO]  * epoch 3 mIoU 60.85
+[2023-05-04 21:41:41,172][    INFO] [31m * Currently, the best val result is: 60.85[0m
+[2023-05-04 21:42:28,634][    INFO] [Semi-Supervised]Iter [570/994]	Data_Time 0.00 (0.00)	Batch_Time 8.79 (14.63)	Sup 0.518 (0.451)	Uns 0.626 (0.530)	LR 0.00093
+[2023-05-04 21:44:08,303][    INFO] [Semi-Supervised]Iter [580/994]	Data_Time 0.00 (0.01)	Batch_Time 9.11 (9.96)	Sup 0.504 (0.408)	Uns 0.611 (0.483)	LR 0.00091
+[2023-05-04 21:45:42,577][    INFO] [Semi-Supervised]Iter [590/994]	Data_Time 0.00 (0.00)	Batch_Time 8.32 (9.43)	Sup 0.474 (0.409)	Uns 0.469 (0.508)	LR 0.00089
+[2023-05-04 21:47:18,473][    INFO] [Semi-Supervised]Iter [600/994]	Data_Time 0.00 (0.00)	Batch_Time 9.25 (9.59)	Sup 0.181 (0.342)	Uns 0.650 (0.492)	LR 0.00087
+[2023-05-04 21:48:54,640][    INFO] [Semi-Supervised]Iter [610/994]	Data_Time 0.00 (0.00)	Batch_Time 11.78 (9.61)	Sup 0.180 (0.241)	Uns 0.573 (0.562)	LR 0.00085
+[2023-05-04 21:50:28,158][    INFO] [Semi-Supervised]Iter [620/994]	Data_Time 0.00 (0.00)	Batch_Time 8.91 (9.35)	Sup 0.480 (0.420)	Uns 0.335 (0.500)	LR 0.00083
+[2023-05-04 21:52:02,416][    INFO] [Semi-Supervised]Iter [630/994]	Data_Time 0.00 (0.00)	Batch_Time 9.57 (9.42)	Sup 0.352 (0.312)	Uns 0.794 (0.489)	LR 0.00081
+[2023-05-04 21:53:40,997][    INFO] [Semi-Supervised]Iter [640/994]	Data_Time 0.00 (0.01)	Batch_Time 8.96 (9.85)	Sup 0.402 (0.268)	Uns 0.354 (0.440)	LR 0.00079
+[2023-05-04 21:55:16,542][    INFO] [Semi-Supervised]Iter [650/994]	Data_Time 0.00 (0.01)	Batch_Time 9.57 (9.55)	Sup 0.117 (0.287)	Uns 0.604 (0.450)	LR 0.00077
+[2023-05-04 21:56:52,751][    INFO] [Semi-Supervised]Iter [660/994]	Data_Time 0.00 (0.01)	Batch_Time 10.05 (9.62)	Sup 0.578 (0.380)	Uns 0.321 (0.477)	LR 0.00075
+[2023-05-04 21:58:31,582][    INFO] [Semi-Supervised]Iter [670/994]	Data_Time 0.00 (0.00)	Batch_Time 9.76 (9.88)	Sup 0.308 (0.299)	Uns 0.343 (0.459)	LR 0.00073
+[2023-05-04 22:00:05,405][    INFO] [Semi-Supervised]Iter [680/994]	Data_Time 0.00 (0.00)	Batch_Time 11.03 (9.38)	Sup 0.097 (0.290)	Uns 0.443 (0.507)	LR 0.00071
+[2023-05-04 22:01:38,233][    INFO] [Semi-Supervised]Iter [690/994]	Data_Time 0.00 (0.00)	Batch_Time 8.92 (9.28)	Sup 0.099 (0.240)	Uns 0.354 (0.453)	LR 0.00069
+[2023-05-04 22:03:14,068][    INFO] [Semi-Supervised]Iter [700/994]	Data_Time 0.00 (0.00)	Batch_Time 8.01 (9.58)	Sup 0.373 (0.324)	Uns 0.460 (0.457)	LR 0.00067
+[2023-05-04 22:04:49,995][    INFO] start evaluation
+[2023-05-04 22:05:11,749][    INFO]  * class [0] IoU 98.64
+[2023-05-04 22:05:11,751][    INFO]  * class [1] IoU 23.65
+[2023-05-04 22:05:11,751][    INFO]  * epoch 4 mIoU 61.14
+[2023-05-04 22:05:14,675][    INFO] [31m * Currently, the best val result is: 61.14[0m
+[2023-05-04 22:05:41,217][    INFO] [Semi-Supervised]Iter [710/994]	Data_Time 0.00 (0.00)	Batch_Time 23.12 (23.12)	Sup 0.131 (0.131)	Uns 0.319 (0.319)	LR 0.00065
+[2023-05-04 22:07:16,820][    INFO] [Semi-Supervised]Iter [720/994]	Data_Time 0.00 (0.01)	Batch_Time 7.88 (9.55)	Sup 0.230 (0.272)	Uns 0.457 (0.459)	LR 0.00063
+[2023-05-04 22:10:13,784][    INFO] [Semi-Supervised]Iter [730/994]	Data_Time 0.01 (0.01)	Batch_Time 12.69 (17.68)	Sup 0.226 (0.342)	Uns 0.651 (0.431)	LR 0.00061
+[2023-05-04 22:13:25,329][    INFO] [Semi-Supervised]Iter [740/994]	Data_Time 0.01 (0.01)	Batch_Time 9.71 (19.14)	Sup 0.305 (0.265)	Uns 0.527 (0.524)	LR 0.00059
+[2023-05-04 22:15:16,196][    INFO] [Semi-Supervised]Iter [750/994]	Data_Time 0.01 (0.01)	Batch_Time 15.68 (11.08)	Sup 0.155 (0.339)	Uns 0.379 (0.482)	LR 0.00057
+[2023-05-04 22:17:41,906][    INFO] [Semi-Supervised]Iter [760/994]	Data_Time 0.00 (0.01)	Batch_Time 10.70 (14.56)	Sup 0.167 (0.248)	Uns 0.334 (0.477)	LR 0.00055
+[2023-05-04 22:19:18,077][    INFO] [Semi-Supervised]Iter [770/994]	Data_Time 0.00 (0.00)	Batch_Time 8.77 (9.61)	Sup 0.221 (0.280)	Uns 0.783 (0.565)	LR 0.00053
+[2023-05-04 22:20:50,040][    INFO] [Semi-Supervised]Iter [780/994]	Data_Time 0.00 (0.00)	Batch_Time 8.27 (9.19)	Sup 0.436 (0.297)	Uns 0.460 (0.455)	LR 0.00050
+[2023-05-04 22:22:33,699][    INFO] [Semi-Supervised]Iter [790/994]	Data_Time 0.00 (0.01)	Batch_Time 10.36 (10.36)	Sup 0.300 (0.336)	Uns 0.731 (0.415)	LR 0.00048
+[2023-05-04 22:24:04,292][    INFO] [Semi-Supervised]Iter [800/994]	Data_Time 0.00 (0.00)	Batch_Time 10.02 (9.06)	Sup 0.084 (0.309)	Uns 0.385 (0.434)	LR 0.00046
+[2023-05-04 22:25:34,566][    INFO] [Semi-Supervised]Iter [810/994]	Data_Time 0.00 (0.00)	Batch_Time 8.62 (9.02)	Sup 0.194 (0.255)	Uns 0.516 (0.421)	LR 0.00044
+[2023-05-04 22:27:08,038][    INFO] [Semi-Supervised]Iter [820/994]	Data_Time 0.01 (0.00)	Batch_Time 9.49 (9.34)	Sup 0.436 (0.273)	Uns 0.350 (0.416)	LR 0.00042
+[2023-05-04 22:29:08,826][    INFO] [Semi-Supervised]Iter [830/994]	Data_Time 0.01 (0.01)	Batch_Time 11.69 (12.07)	Sup 0.364 (0.293)	Uns 0.496 (0.376)	LR 0.00040
+[2023-05-04 22:30:39,068][    INFO] [Semi-Supervised]Iter [840/994]	Data_Time 0.00 (0.00)	Batch_Time 9.14 (9.02)	Sup 0.427 (0.268)	Uns 0.289 (0.394)	LR 0.00038
+[2023-05-04 22:32:09,443][    INFO] [Semi-Supervised]Iter [850/994]	Data_Time 0.00 (0.00)	Batch_Time 13.81 (9.03)	Sup 0.119 (0.254)	Uns 0.366 (0.473)	LR 0.00035
+[2023-05-04 22:32:23,101][    INFO] start evaluation
+[2023-05-04 22:32:42,157][    INFO]  * class [0] IoU 98.81
+[2023-05-04 22:32:42,158][    INFO]  * class [1] IoU 26.44
+[2023-05-04 22:32:42,159][    INFO]  * epoch 5 mIoU 62.62
+[2023-05-04 22:32:44,565][    INFO] [31m * Currently, the best val result is: 62.62[0m
+[2023-05-04 22:34:32,447][    INFO] [Semi-Supervised]Iter [860/994]	Data_Time 0.00 (0.00)	Batch_Time 8.92 (11.63)	Sup 0.139 (0.288)	Uns 0.427 (0.364)	LR 0.00033
+[2023-05-04 22:36:08,931][    INFO] [Semi-Supervised]Iter [870/994]	Data_Time 0.01 (0.00)	Batch_Time 10.71 (9.64)	Sup 0.323 (0.213)	Uns 0.266 (0.343)	LR 0.00031
+[2023-05-04 22:37:52,765][    INFO] [Semi-Supervised]Iter [880/994]	Data_Time 0.00 (0.00)	Batch_Time 9.92 (10.38)	Sup 0.273 (0.164)	Uns 0.379 (0.433)	LR 0.00029
+[2023-05-04 22:39:24,079][    INFO] [Semi-Supervised]Iter [890/994]	Data_Time 0.00 (0.00)	Batch_Time 7.95 (9.13)	Sup 0.274 (0.243)	Uns 0.398 (0.400)	LR 0.00026
+[2023-05-04 22:41:03,599][    INFO] [Semi-Supervised]Iter [900/994]	Data_Time 0.00 (0.00)	Batch_Time 11.58 (9.95)	Sup 0.360 (0.265)	Uns 0.642 (0.373)	LR 0.00024
+[2023-05-04 22:42:43,932][    INFO] [Semi-Supervised]Iter [910/994]	Data_Time 0.00 (0.01)	Batch_Time 9.12 (10.03)	Sup 0.268 (0.220)	Uns 0.288 (0.304)	LR 0.00022
+[2023-05-04 22:44:23,106][    INFO] [Semi-Supervised]Iter [920/994]	Data_Time 0.01 (0.00)	Batch_Time 9.24 (9.91)	Sup 0.242 (0.192)	Uns 0.304 (0.299)	LR 0.00020
+[2023-05-04 22:46:02,674][    INFO] [Semi-Supervised]Iter [930/994]	Data_Time 0.00 (0.00)	Batch_Time 10.29 (9.96)	Sup 0.157 (0.192)	Uns 0.285 (0.291)	LR 0.00017
+[2023-05-04 22:47:45,419][    INFO] [Semi-Supervised]Iter [940/994]	Data_Time 0.00 (0.00)	Batch_Time 10.50 (10.27)	Sup 0.181 (0.180)	Uns 0.317 (0.294)	LR 0.00015
+[2023-05-04 22:49:25,495][    INFO] [Semi-Supervised]Iter [950/994]	Data_Time 0.00 (0.00)	Batch_Time 9.58 (10.00)	Sup 0.182 (0.199)	Uns 0.270 (0.272)	LR 0.00012
+[2023-05-04 22:51:15,721][    INFO] [Semi-Supervised]Iter [960/994]	Data_Time 0.00 (0.00)	Batch_Time 10.82 (11.02)	Sup 0.299 (0.192)	Uns 0.262 (0.261)	LR 0.00010
+[2023-05-04 22:53:00,210][    INFO] [Semi-Supervised]Iter [970/994]	Data_Time 0.00 (0.00)	Batch_Time 10.07 (10.45)	Sup 0.174 (0.191)	Uns 0.282 (0.288)	LR 0.00007
+[2023-05-04 22:54:42,804][    INFO] [Semi-Supervised]Iter [980/994]	Data_Time 0.00 (0.00)	Batch_Time 10.40 (10.26)	Sup 0.076 (0.156)	Uns 0.269 (0.268)	LR 0.00005
+[2023-05-04 22:56:28,658][    INFO] [Semi-Supervised]Iter [990/994]	Data_Time 0.01 (0.00)	Batch_Time 10.13 (10.58)	Sup 0.377 (0.228)	Uns 0.284 (0.275)	LR 0.00002
+[2023-05-04 22:57:10,882][    INFO] start evaluation
+[2023-05-04 22:57:29,627][    INFO]  * class [0] IoU 98.57
+[2023-05-04 22:57:29,627][    INFO]  * class [1] IoU 27.68
+[2023-05-04 22:57:29,627][    INFO]  * epoch 6 mIoU 63.12
+[2023-05-04 22:57:32,681][    INFO] [31m * Currently, the best val result is: 63.12[0m
+[2023-05-04 22:57:40,024][    INFO] [Evaluating Unlabeled Data]Num [0/142]	
+[2023-05-04 22:57:45,083][    INFO] [Evaluating Unlabeled Data]Num [10/142]	
+[2023-05-04 22:57:49,699][    INFO] [Evaluating Unlabeled Data]Num [20/142]	
+[2023-05-04 22:57:54,311][    INFO] [Evaluating Unlabeled Data]Num [30/142]	
+[2023-05-04 22:57:58,942][    INFO] [Evaluating Unlabeled Data]Num [40/142]	
+[2023-05-04 22:58:03,567][    INFO] [Evaluating Unlabeled Data]Num [50/142]	
+[2023-05-04 22:58:08,185][    INFO] [Evaluating Unlabeled Data]Num [60/142]	
+[2023-05-04 22:58:12,799][    INFO] [Evaluating Unlabeled Data]Num [70/142]	
+[2023-05-04 22:58:17,417][    INFO] [Evaluating Unlabeled Data]Num [80/142]	
+[2023-05-04 22:58:22,036][    INFO] [Evaluating Unlabeled Data]Num [90/142]	
+[2023-05-04 22:58:26,658][    INFO] [Evaluating Unlabeled Data]Num [100/142]	
+[2023-05-04 22:58:31,275][    INFO] [Evaluating Unlabeled Data]Num [110/142]	
+[2023-05-04 22:58:35,892][    INFO] [Evaluating Unlabeled Data]Num [120/142]	
+[2023-05-04 22:58:40,515][    INFO] [Evaluating Unlabeled Data]Num [130/142]	
+[2023-05-04 22:58:45,137][    INFO] [Evaluating Unlabeled Data]Num [140/142]	

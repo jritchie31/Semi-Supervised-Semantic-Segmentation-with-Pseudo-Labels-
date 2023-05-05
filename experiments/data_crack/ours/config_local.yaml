@@ -61,7 +61,7 @@ trainer: # Required.
     temperature: 0.5
 
 saver:
-  auto_resume: True
+  auto_resume: False
   snapshot_dir: checkpoints
   pretrain: ''
 

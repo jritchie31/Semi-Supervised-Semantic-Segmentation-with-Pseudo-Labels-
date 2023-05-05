@@ -1,0 +1,93 @@
+#File used to specify hyper parameters and other settings for the model training process, will be refereneced as cfg
+dataset: # Required.
+  type: crack_semi_active #crack_semi #Semi-supervised dataset can change this to crack
+  train: # 50 labeled images with data augmentation (flip, random resize, random crop) from split 1
+    data_root: "/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data"
+    data_list: "/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data/Crack_Dataset/data_crack/Data_train/split_1/labeled.txt"
+    ann_data_list: "/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/results_report_0.3_Active_Semi/annotation_queue.txt"
+    seed: 27
+    flip: True
+    GaussianBlur: False
+    #rand_resize: [0.5, 2.0]
+    rand_rotation: [-10.0, 10.0]
+    crop:
+      type: rand
+      size: [400, 400] # random crop image with HxW size
+  val:
+    data_root: "/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data"
+    data_list: "/Users/think327/Desktop/王灏林/GitHub/CEE8813-23S/U2PL-8813/data/Crack_Dataset/data_crack/Data_test/val_data/val_label.txt"
+    crop:
+      type: rand
+      size: [400, 400] # central crop image with HxW size
+  batch_size: 4
+  #n_sup: 566 #1132
+  #p_sup: 0.3
+  noise_std: 0.1 # Standard deviation of Gaussian noise added
+  workers: 2 # Data loading workers
+  # Normalization: mean and standard deviation values provided
+  mean: [125.5] # 1
+  std: [6] # 1
+
+trainer: # Required.
+  epochs: 7 #5 #200
+  eval_on: True
+  sup_only_epoch: 0 # warm up epoch is helpful
+  optimizer:
+    type: SGD # stochastic gradient descent
+    kwargs:
+      lr: 0.002  # 0.01 8GPUs
+      momentum: 0.9
+      weight_decay: 0.0005
+  lr_scheduler:
+    mode: poly # polynomial decay
+    kwargs:
+      power: 0.9
+  unsupervised:
+    enable: True  # Add this line to enable/disable the unsupervised mode
+    TTA: True
+    drop_percent: 80
+    apply_aug: cutmix
+  # Various parameters for contralling the selection of positive and negative examples
+  contrastive:
+    negative_high_entropy: False
+    low_rank: 3
+    high_rank: 20
+    current_class_threshold: 0.3
+    current_class_negative_threshold: 1
+    unsupervised_entropy_ignore: 80
+    low_entropy_threshold: 20
+    num_negatives: 50
+    num_queries: 256
+    temperature: 0.5
+
+saver:
+  auto_resume: True
+  snapshot_dir: checkpoints
+  pretrain: ''
+
+# Loss function configuration
+criterion:
+  type: ohem
+  kwargs:
+    thresh: 0.7
+    min_kept: 100000
+
+net: # Required.
+  num_classes: 2
+  sync_bn: True
+  ema_decay: 0.99
+  aux_loss:
+    aux_plane: 1024
+    loss_weight: 0.4
+  encoder:
+    type: u2pl.models.resnet.resnet50
+    kwargs:
+      multi_grid: True
+      zero_init_residual: True
+      fpn: True
+      replace_stride_with_dilation: [False, True, True]  #layer0...1 is fixed, layer2...4
+  decoder:
+    type: u2pl.models.decoder.dec_deeplabv3_plus
+    kwargs:
+      inner_planes: 256
+      dilations: [12, 24, 36]

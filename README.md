@@ -1,26 +1,18 @@
-# Using Unreliable Pseudo Labels
+# Semi-Automatic Crack Annotation for Semantic Segmentation using Semi-Supervised Learning
 
-Official PyTorch implementation of [Semi-Supervised Semantic Segmentation Using Unreliable Pseudo Labels](https://arxiv.org/abs/2203.03884), CVPR 2022.
+Background Paper: [Semi-Supervised Semantic Segmentation Using Unreliable Pseudo Labels](https://arxiv.org/abs/2203.03884), CVPR 2022.
 
 Please refer to our **[project page](https://haochen-wang409.github.io/U2PL/)** for qualitative results.
 
-[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/semi-supervised-semantic-segmentation-using-2/semi-supervised-semantic-segmentation-on-21)](https://paperswithcode.com/sota/semi-supervised-semantic-segmentation-on-21?p=semi-supervised-semantic-segmentation-using-2)
-[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/semi-supervised-semantic-segmentation-using-2/semi-supervised-semantic-segmentation-on-4)](https://paperswithcode.com/sota/semi-supervised-semantic-segmentation-on-4?p=semi-supervised-semantic-segmentation-using-2)
-[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/semi-supervised-semantic-segmentation-using-2/semi-supervised-semantic-segmentation-on-9)](https://paperswithcode.com/sota/semi-supervised-semantic-segmentation-on-9?p=semi-supervised-semantic-segmentation-using-2)
-[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/semi-supervised-semantic-segmentation-using-2/semi-supervised-semantic-segmentation-on-15)](https://paperswithcode.com/sota/semi-supervised-semantic-segmentation-on-15?p=semi-supervised-semantic-segmentation-using-2)
+> **Abstract.**
+> The detection of surface cracks is essential for ensuring the safety and serviceability of civil engineering infrastructure. Cracks often serve as early indicators of degradation, and their detection allows for the implementation of preventative measures. Regular inspections and maintenance of aging facilities are crucial in order to reduce the risk of structural deterioration. Traditional crack detection, however, primarily relies on manual inspection, which is heavily dependent on professionals and can be both inefficient and costly. With the advancement of computer vision and image processing techniques, automatic crack detection methods have gradually replaced conventional manual inspection, providing more efficient and objective results.
+To utilize machine learning approaches for automatic crack detection, large and diverse datasets are required to train accurate deep learning models. Data annotation is necessary to identify relevant features that provide meaning to the computer. Within the framework of automatic crack detection, semantic segmentation is one of the most common and promising data annotation techniques. Deep learning models using semantic segmentation have demonstrated excellent performance in crack detection tasks. However, obtaining the best performance from these models typically requires fully supervised segmentation methods with large amounts of annotated data, which can be both time-consuming and labor-intensive.
+To address this challenge, in this project, we introduce a semi-supervised semantic segmentation network for crack detection that uses a small number of labeled samples and a large number of unlabeled samples. Our aim is to identify the most informative samples for model training, thereby reducing overhead annotation costs while maintaining sufficient accuracy levels. Furthermore, an active learning module is employed to guide the annotation order and determine the optimal ratio of unlabeled to labeled images.
 
+> A semi-supervised learning module with an active module is designed to validate the proposed active module's ability to guide annotation order and determine the optimal ratio between labeled and unlabeled data. The module is comprised of a student model and a teacher model, with both models employing a U-Net architecture using a ResNet encoder and a DeepLabV3+ decoder. The active module is incorporated to provide annotation guidance throughout the learning process.
+The loss function used for all models, except the fully supervised baseline model, is a combination of supervised loss and unsupervised loss with equal weights. Both supervised and unsupervised losses are composed of cross-entropy loss and DICE loss, addressing the unbiased ratio between class[0] (pavement background) and class[1] (crack). DICE loss tackles data imbalance and measures similarities between two images, while cross-entropy measures the difference between two probability distributions for a variable.
+Evaluation results indicate that the best performance is achieved using supervised learning. And the active module does not show significant improvement in the annotation process under insufficient training circumstances, and the active criterion may not be appropriately chosen. I
 
-> **Abstract.** 
-> The crux of semi-supervised semantic segmentation is to assign adequate pseudo-labels to the pixels of unlabeled images. 
-> A common practice is to select the highly confident predictions as the pseudo ground-truth, but it leads to a problem that most pixels may be left unused due to their unreliability. 
-> We argue that every pixel matters to the model training, even its prediction is ambiguous. 
-> Intuitively, an unreliable prediction may get confused among the top classes (*i.e*., those with the highest probabilities), 
-> however, it should be confident about the pixel not belonging to the remaining classes. 
-> Hence, such a pixel can be convincingly treated as a negative sample to those most unlikely categories. 
-> Based on this insight, we develop an effective pipeline to make sufficient use of unlabeled data. 
-> Concretely, we separate reliable and unreliable pixels via the entropy of predictions, push each unreliable pixel to a category-wise queue that consists of negative samples, and manage to train the model with all candidate pixels. 
-> Considering the training evolution, where the prediction becomes more and more accurate, we adaptively adjust the threshold for the reliable-unreliable partition. 
-> Experimental results on various benchmarks and training settings demonstrate the superiority of our approach over the state-of-the-art alternatives.
 
 ![](./img/pipeline.png)
 

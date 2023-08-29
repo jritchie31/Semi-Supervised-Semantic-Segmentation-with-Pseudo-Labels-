@@ -16,41 +16,6 @@ Evaluation results indicate that the best performance is achieved using supervis
 
 ![](./img/pipeline.png)
 
-## Results
-### PASCAL VOC 2012
-
-Labeled images are selected from the ```train``` set of original VOC, ```1,464``` images in total. 
-And the remaining ```9,118``` images are all considered as unlabeled ones.
-
-For instance, ```1/2 (732)``` represents ```732``` labeled images 
-and remaining ```9,850 (9,118 + 732)``` are unlabeled.
-
-| Method                      | 1/16 (92) | 1/8 (183) | 1/4 (366) | 1/2 (732) | Full (1464) |
-| --------------------------- | --------- | --------- | --------- | --------- | ----------- |
-| SupOnly                     | 45.77     | 54.92     | 65.88     | 71.69     | 72.50       |
-| U<sup>2</sup>PL (w/ CutMix) | 67.98     | 69.15     | 73.66     | 76.16     | 79.49       |
-
-Labeled images are selected from the ```train``` set of augmented VOC, ```10,582``` images in total.
-
-Following results are all trained under our own splits.
-Training a model on different splits is recommended to measure the performance of a method.
-You can train our U<sup>2</sup>PL on splits provided by [CPS](https://github.com/charlesCXK/TorchSemiSeg/tree/main/DATA/pascal_voc/subset_train_aug) or [ST++](https://github.com/LiheYoung/ST-PlusPlus/tree/master/dataset/splits/pascal).
-
-| Method                      | 1/16 (662) | 1/8 (1323) | 1/4 (2646) | 1/2 (5291) |
-| --------------------------- | ---------- | ---------- | ---------- | ---------- |
-| SupOnly                     | 67.87      | 71.55      | 75.80      | 77.13      |
-| U<sup>2</sup>PL (w/ CutMix) | 77.21      | 79.01      | 79.30      | 80.50      |
-
-### Cityscapes
-
-Labeled images are selected from the ```train``` set, ```2,975``` images in total. 
-
-| Method                      | 1/16 (186) | 1/8 (372) | 1/4 (744) | 1/2 (1488) |
-| --------------------------- | ---------- | --------- | --------- | ---------- |
-| SupOnly                     | 65.74      | 72.53     | 74.43     | 77.83      |
-| U<sup>2</sup>PL (w/ CutMix) | 70.30      | 74.37     | 76.47     | 79.05      |
-| U<sup>2</sup>PL (w/ AEL)    | 74.90      | 76.48     | 78.51     | 79.12      |
-
 ## Checkpoints
 
 - Models on PASCAL VOC 2012 (ResNet101-DeepLabv3+) can be found [here](https://drive.google.com/drive/folders/1_BcixhrEqJEMo3lzKTKPJ_7gCWEjUBWp).
@@ -250,47 +215,15 @@ After training, the model should be evaluated by
 sh eval.sh
 ```
 
-### Train a Semi-Supervised Model on Cityscapes with AEL
-
-First, you should switch the branch:
-```bash
-git checkout with_AEL
-```
-Then, we can train a model supervised by ```744``` labeled data and ```2231``` unlabeled data by:
-```bash
-cd experiments/city_744
-# use torch.distributed.launch
-sh train.sh <num_gpu> <port>
-
-# or use slurm
-# sh slurm_train.sh <num_gpu> <port> <partition>
-```
-After training, the model should be evaluated by
-```bash
-sh eval.sh
-```
-
 ### Note
 ```<num_gpu>``` means the number of GPUs for training.
 
-To reproduce our results, we recommend you follow the settings:
+To reproduce  results,  recommend you follow the settings:
 - Cityscapes: ```4 * V100 (32G)``` for SupOnly and ```8 * V100 (32G)``` for Semi-Supervised
 - PASCAL VOC 2012: ```2 * V100 (32G)``` for SupOnly and ```4 * V100 (32G)``` for Semi-Supervised
-
-If you got ```CUDA Out of Memory``` error, please try training our method in [fp16](https://github.com/NVIDIA/apex) mode.
-Or, change the ```lr``` in ```config.yaml``` in a linear manner (*e.g.*, if you want to train a SupOnly model on Cityscapes with 8 GPUs, 
-you are recommended to change the ```lr``` to ```0.02```).
-
-If you want to train a model on other split, you need to modify ```data_list``` and ```n_sup``` in ```config.yaml```.
-
-Due to the randomness of function ```torch.nn.functional.interpolate``` when ```mode="bilinear"```, 
-the results of semantic segmentation will not be the same EVEN IF a fixed random seed is set.
-
 Therefore, we recommend you run 3 times and get the average performance.
 
-## License
 
-This project is released under the [Apache 2.0](LICENSE) license.
 
 ## Acknowledgement
 
@@ -300,7 +233,7 @@ We reproduce our U<sup>2</sup>PL based on **AEL** on branch ```with_AEL```.
 - ReCo: https://github.com/lorenmt/reco
 - AEL: https://github.com/hzhupku/SemiSeg-AEL
 
-Thanks a lot for their great work!
+
 
 ## Citation
 ```bibtex
